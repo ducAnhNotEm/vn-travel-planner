@@ -7,11 +7,19 @@ app = FastAPI(
     version="1.0.0"
 )
 
+import os
+from fastapi.responses import FileResponse
+
 app.include_router(planner_router.router)
+
+FRONTEND_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "index.html")
 
 @app.get("/")
 def root():
+    if os.path.exists(FRONTEND_PATH):
+        return FileResponse(FRONTEND_PATH)
     return {
         "message": "Welcome to Vietnam Travel Planner API!",
         "docs_url": "/docs"
     }
+

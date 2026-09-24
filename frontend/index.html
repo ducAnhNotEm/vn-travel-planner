@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VNTravel AI - Nền tảng Lập Kế Hoạch Du Lịch Việt Nam</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              blue: '#0F294D',
+              deep: '#0B1F38',
+              orange: '#FF5E1F',
+              orangeHover: '#E54F14',
+              surface: '#F8FAFC',
+              card: '#FFFFFF',
+              border: '#E2E8F0',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .screen-view { display: none; }
+    .screen-view.active { display: block; }
+    .timeline-dot::before {
+      content: '';
+      position: absolute;
+      left: -29px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 3px solid #0F294D;
+      background: white;
+    }
+  </style>
+</head>
+<body class="bg-brand-surface text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- NAVIGATION BAR (Traveloka style: Deep Blue - Production Header) -->
+  <header class="bg-brand-blue text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="#" onclick="switchScreen('home')" class="flex items-center gap-2.5 group">
+          <div class="w-9 h-9 rounded-xl bg-brand-orange flex items-center justify-center text-white font-black text-lg shadow-md group-hover:scale-105 transition">V</div>
+          <span class="font-extrabold text-xl tracking-tight text-white">VNTravel <span class="text-brand-orange">AI</span></span>
+        </a>
+        <nav class="hidden md:flex items-center gap-1.5 text-sm font-semibold">
+          <button onclick="switchScreen('home')" id="nav-home" class="nav-btn px-3.5 py-1.5 rounded-lg text-white bg-white/10 transition">Khám phá</button>
+          <button onclick="switchScreen('planner')" id="nav-planner" class="nav-btn px-3.5 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Lập lịch trình</button>
+          <button onclick="switchScreen('itinerary')" id="nav-itinerary" class="nav-btn px-3.5 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Lịch trình mẫu</button>
+          <button onclick="switchScreen('explore')" id="nav-explore" class="nav-btn px-3.5 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Điểm đến</button>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4 text-sm font-medium">
+        <div class="hidden sm:flex items-center gap-1.5 text-slate-300 bg-slate-800/60 px-2.5 py-1 rounded-full border border-slate-700/60">
+          <img src="https://flagcdn.com/w20/vn.png" alt="VN" class="w-4 h-3 rounded-sm object-cover">
+          <span>VND</span>
+        </div>
+        <button onclick="switchScreen('planner')" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-4 py-2 rounded-xl font-bold shadow-md hover:shadow-orange-500/20 transition flex items-center gap-2">
+          <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+          <span>Lên kế hoạch</span>
+        </button>
+        <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-slate-200 cursor-pointer">
+          <i class="fa-regular fa-user text-sm"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- SCREEN 1: HOME SCREEN -->
+  <!-- ========================================================================= -->
+  <main id="screen-home" class="screen-view active flex-1">
+    <!-- Hero Search Section -->
+    <section class="relative bg-brand-blue text-white pt-12 pb-24 px-4 overflow-hidden">
+      <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#FF5E1F_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      <div class="max-w-7xl mx-auto relative z-10 text-center">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-semibold text-brand-orange mb-4">
+          <i class="fa-solid fa-bolt text-xs"></i> Công nghệ Lập Lịch Trình Tối Ưu Hóa Dữ Liệu
+        </span>
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 max-w-3xl mx-auto leading-tight">
+          Khám phá Việt Nam thông minh theo <span class="text-brand-orange">nhịp sống thật</span>
+        </h1>
+        <p class="text-slate-300 text-base max-w-2xl mx-auto mb-8">
+          Tối ưu hóa đường đi ngắn nhất, phân bổ giờ ăn - nghỉ chuẩn sinh học, tự động tính chi phí và đề xuất đổi khách sạn thông minh.
+        </p>
+
+        <!-- Province Selector Bar (Chọn tỉnh trước, lấy dữ liệu địa điểm tỉnh đó) -->
+        <div class="max-w-2xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-3 border border-slate-100 flex flex-col sm:flex-row items-center gap-3 text-left">
+          <div class="flex-1 flex items-center gap-3 px-3 py-1 w-full text-slate-800">
+            <div class="w-10 h-10 rounded-xl bg-orange-100 text-brand-orange flex items-center justify-center text-lg flex-shrink-0">
+              <i class="fa-solid fa-map-pin"></i>
+            </div>
+            <div class="w-full">
+              <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">Khám phá theo Tỉnh / Thành phố</label>
+              <select class="w-full bg-transparent font-extrabold text-brand-blue text-base focus:outline-none cursor-pointer">
+                <optgroup label="── Thành phố trực thuộc Trung ương ──">
+                  <option value="1">Thành phố Hà Nội</option>
+                  <option value="79">Thành phố Hồ Chí Minh</option>
+                  <option value="48">Thành phố Đà Nẵng</option>
+                  <option value="31">Thành phố Hải Phòng</option>
+                  <option value="92">Thành phố Cần Thơ</option>
+                  <option value="46">Thành phố Huế</option>
+                </optgroup>
+                <optgroup label="── Các Tỉnh ──">
+                  <option selected value="24">Tỉnh Bắc Ninh</option>
+                  <option value="91">Tỉnh An Giang</option>
+                  <option value="96">Tỉnh Cà Mau</option>
+                  <option value="4">Tỉnh Cao Bằng</option>
+                  <option value="66">Tỉnh Đắk Lắk</option>
+                  <option value="11">Tỉnh Điện Biên</option>
+                  <option value="75">Tỉnh Đồng Nai</option>
+                  <option value="82">Tỉnh Đồng Tháp</option>
+                  <option value="52">Tỉnh Gia Lai</option>
+                  <option value="42">Tỉnh Hà Tĩnh</option>
+                  <option value="33">Tỉnh Hưng Yên</option>
+                  <option value="56">Tỉnh Khánh Hòa</option>
+                  <option value="12">Tỉnh Lai Châu</option>
+                  <option value="68">Tỉnh Lâm Đồng</option>
+                  <option value="20">Tỉnh Lạng Sơn</option>
+                  <option value="15">Tỉnh Lào Cai</option>
+                  <option value="40">Tỉnh Nghệ An</option>
+                  <option value="37">Tỉnh Ninh Bình</option>
+                  <option value="25">Tỉnh Phú Thọ</option>
+                  <option value="51">Tỉnh Quảng Ngãi</option>
+                  <option value="22">Tỉnh Quảng Ninh</option>
+                  <option value="44">Tỉnh Quảng Trị</option>
+                  <option value="14">Tỉnh Sơn La</option>
+                  <option value="80">Tỉnh Tây Ninh</option>
+                  <option value="19">Tỉnh Thái Nguyên</option>
+                  <option value="38">Tỉnh Thanh Hóa</option>
+                  <option value="8">Tỉnh Tuyên Quang</option>
+                  <option value="86">Tỉnh Vĩnh Long</option>
+                </optgroup>
+              </select>
+
+            </div>
+          </div>
+          <button onclick="switchScreen('explore')" class="w-full sm:w-auto bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-3.5 rounded-xl font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-orange-500/30 transition flex-shrink-0">
+            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+            <span>Tìm kiếm</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SECTION 1: CHÙA, ĐỀN & DI TÍCH LỊCH SỬ -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 mb-14">
+      <div class="flex items-end justify-between mb-5 border-b border-slate-200/80 pb-3">
+        <div>
+          <span class="text-xs font-bold text-brand-orange uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-gopuram"></i> Tâm linh & Văn hóa
+          </span>
+          <h2 class="text-xl md:text-2xl font-extrabold text-brand-blue mt-0.5">Chùa, Đền & Di Tích Lịch Sử Bắc Ninh</h2>
+        </div>
+        <span class="text-xs text-slate-500 font-semibold hidden sm:inline">5 địa điểm tiêu biểu</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Chùa Dâu -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=600&q=80" alt="Chùa Dâu" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-brand-blue/80 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Chùa Cổ Nhất VN</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.6 (2.9k)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Chùa Dâu</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> Lạc Long Quân, Trí Quả, Thuận Thành
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded">Miễn phí vé vào</span>
+              <span class="text-slate-400">Mở 24/7</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chùa Phật Tích -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80" alt="Chùa Phật Tích" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-brand-blue/80 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Di Tích Quốc Gia</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.6 (3.0k)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Chùa Phật Tích</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> Sườn núi Phật Tích, Tiên Du
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded">Miễn phí vé vào</span>
+              <span class="text-slate-400">Tượng Phật A Di Đà</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chùa Bút Tháp -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=600&q=80" alt="Chùa Bút Tháp" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-brand-blue/80 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Kiến Trúc Độc Đáo</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.7 (500)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Chùa Bút Tháp</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> Thôn Bút Tháp, Trí Quả, Thuận Thành
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded">Miễn phí vé vào</span>
+              <span class="text-slate-400">Tháp Báo Nghiêm</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chùa Tiêu -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1509024644558-2f56ce76c490?auto=format&fit=crop&w=600&q=80" alt="Chùa Tiêu" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-brand-blue/80 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Thiền Tự Cổ</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.6 (676)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Chùa Tiêu (Thiên Tâm Tự)</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> Tiêu Thượng, Tam Sơn, Từ Sơn
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded">Miễn phí vé vào</span>
+              <span class="text-slate-400">Nơi nuôi dưỡng Lý Công Uẩn</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: KHÁCH SẠN & RESORT LƯU TRÚ -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
+      <div class="flex items-end justify-between mb-5 border-b border-slate-200/80 pb-3">
+        <div>
+          <span class="text-xs font-bold text-brand-orange uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-hotel"></i> Lưu Trú & Nghỉ Dưỡng
+          </span>
+          <h2 class="text-xl md:text-2xl font-extrabold text-brand-blue mt-0.5">Khách Sạn & Resort Tiêu Biểu Bắc Ninh</h2>
+        </div>
+        <span class="text-xs text-slate-500 font-semibold hidden sm:inline">Giá thực tế từ Database</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Hotel 1 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" alt="Grand Phoenix Hotel" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-amber-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">5 Sao</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.7 (1.9k)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Grand Phoenix Hotel</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> 25 Đ. Lý Thái Tổ, Võ Cường, Bắc Ninh
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-brand-orange font-bold">$67 - $95 / đêm</span>
+              <span class="text-slate-400">Hồ bơi & Spa</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hotel 2 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80" alt="Mường Thanh Luxury" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-amber-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">5 Sao</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.2 (1.5k)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Mường Thanh Luxury</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> 395 Ngô Gia Tự, Kinh Bắc, Bắc Ninh
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-brand-orange font-bold">$40 - $73 / đêm</span>
+              <span class="text-slate-400">Casino & Bar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hotel 3 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=600&q=80" alt="Phoenix Resort" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-blue-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Resort 4 Sao</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.3 (1.2k)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Phoenix Resort Bac Ninh</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> Đồi Pháo Thủ, Vũ Ninh, Bắc Ninh
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-brand-orange font-bold">$20 - $54 / đêm</span>
+              <span class="text-slate-400">Sân Golf & Hồ bơi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hotel 4 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=600&q=80" alt="Mandala Hotel" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-blue-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">4 Sao Cao Cấp</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.4 (438)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Mandala Hotel & Spa</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> Kinh Dương Vương, Vũ Ninh, Bắc Ninh
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-brand-orange font-bold">$73 - $146 / đêm</span>
+              <span class="text-slate-400">Hồ bơi vô cực</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: NHÀ HÀNG & ẨM THỰC ĐẶC SẢN -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
+      <div class="flex items-end justify-between mb-5 border-b border-slate-200/80 pb-3">
+        <div>
+          <span class="text-xs font-bold text-brand-orange uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-utensils"></i> Ẩm Thực Vùng Kinh Bắc
+          </span>
+          <h2 class="text-xl md:text-2xl font-extrabold text-brand-blue mt-0.5">Nhà Hàng & Đặc Sản Bắc Ninh</h2>
+        </div>
+        <span class="text-xs text-slate-500 font-semibold hidden sm:inline">Ẩm thực địa phương</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Food 1 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Tân Lương Sơn" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Ẩm Thực Dân Gian</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.1 (483)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Tân Lương Sơn Bắc Ninh</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> 90 Lý Nhân Tông, Kinh Bắc
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-slate-700 font-bold">~150.000đ / người</span>
+              <span class="text-slate-400">Mở 08:30 - 22:30</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food 2 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80" alt="Hải sản Dung Cua" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-blue-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Hải Sản Tươi Sống</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.2 (764)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Nhà Hàng Dung Cua</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> 21C4 Trần Quốc Toản, Kinh Bắc
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-slate-700 font-bold">~200.000đ / người</span>
+              <span class="text-slate-400">Mở 09:00 - 22:30</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food 3 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80" alt="Bánh Canh Ghẹ MM" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-orange-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Món Ngon Đường Phố</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.1 (356)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Bánh Canh Ghẹ MM</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> 60 Nguyễn Gia Thiều, Kinh Bắc
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-slate-700 font-bold">~65.000đ / bát</span>
+              <span class="text-slate-400">Đặc sản ghẹ tươi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food 4 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="Hoa Rô Sang Huê" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-red-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Korean BBQ Buffet</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.9 (1.2k)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Hoa Rô Sang Huê BBQ</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> 29N7 Đ. Ngô Tất Tố, Võ Cường
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-slate-700 font-bold">~250.000đ / người</span>
+              <span class="text-slate-400">Thịt nướng Hàn Quốc</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: CHỢ & MUA SẮM DÂN SINH -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <div class="flex items-end justify-between mb-5 border-b border-slate-200/80 pb-3">
+        <div>
+          <span class="text-xs font-bold text-brand-orange uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-shop"></i> Mua Sắm & Dạo Phố
+          </span>
+          <h2 class="text-xl md:text-2xl font-extrabold text-brand-blue mt-0.5">Chợ Truyền Thống & Dân Sinh Bắc Ninh</h2>
+        </div>
+        <span class="text-xs text-slate-500 font-semibold hidden sm:inline">Trải nghiệm đời sống địa phương</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Market 1 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Chợ Suối Hoa" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Chợ Sầm Uất</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.0 (488)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Chợ Suối Hoa</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> Lê Văn Thịnh, Kinh Bắc, Bắc Ninh
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded">Vào cửa tự do</span>
+              <span class="text-slate-400">Mở 06:00 - 22:00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Market 2 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=600&q=80" alt="Chợ Hòa Đình" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Chợ Lâu Đời</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.1 (472)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Chợ Hòa Đình</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> Nguyễn Văn Cừ, Võ Cường, Bắc Ninh
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded">Vào cửa tự do</span>
+              <span class="text-slate-400">Mở cả ngày 24/7</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Market 3 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1543083477-4f785aeafaa9?auto=format&fit=crop&w=600&q=80" alt="Chợ Phố Mới" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Nông Sản & Đặc Sản</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.3 (380)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Chợ Phố Mới</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> Quế Võ, Tỉnh Bắc Ninh
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded">Vào cửa tự do</span>
+              <span class="text-slate-400">Mở 05:00 - 20:00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Market 4 -->
+        <div onclick="switchScreen('details')" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+          <div class="relative h-44 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=600&q=80" alt="Chợ Mao Dộc" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Chợ Đêm & Đồ Ăn</span>
+            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> 4.0 (606)
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-base text-brand-blue group-hover:text-brand-orange transition">Chợ Mao Dộc</h3>
+            <p class="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
+              <i class="fa-solid fa-location-dot text-slate-400"></i> Phương Liễu, Quế Võ, Bắc Ninh
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded">Vào cửa tự do</span>
+              <span class="text-slate-400">Mở 24/7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- SCREEN 2: TRIP PLANNER -->
+  <!-- ========================================================================= -->
+  <main id="screen-planner" class="screen-view flex-1 py-8 px-4 max-w-7xl mx-auto w-full">
+    <div class="mb-8 text-center max-w-2xl mx-auto">
+      <span class="text-xs font-bold text-brand-orange uppercase tracking-wide">Trợ Lý Thông Minh</span>
+      <h2 class="text-2xl md:text-4xl font-extrabold text-brand-blue mt-1">Lập Kế Hoạch Chuyến Đi</h2>
+      <p class="text-sm text-slate-500 mt-2">Chọn địa điểm bạn muốn đến, hệ thống sẽ tự động ghép đường đi và hoàn thiện lịch trình theo nhịp sống thật.</p>
+    </div>
+
+    <!-- Parameter Config Card -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div>
+          <label class="block text-xs font-bold text-slate-600 mb-1.5">Tỉnh / Thành phố</label>
+          <select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-brand-blue focus:outline-none focus:border-brand-orange">
+            <optgroup label="── Thành phố trực thuộc Trung ương ──">
+              <option value="1">Thành phố Hà Nội</option>
+              <option value="79">Thành phố Hồ Chí Minh</option>
+              <option value="48">Thành phố Đà Nẵng</option>
+              <option value="31">Thành phố Hải Phòng</option>
+              <option value="92">Thành phố Cần Thơ</option>
+              <option value="46">Thành phố Huế</option>
+            </optgroup>
+            <optgroup label="── Các Tỉnh ──">
+              <option selected value="24">Tỉnh Bắc Ninh</option>
+              <option value="91">Tỉnh An Giang</option>
+              <option value="96">Tỉnh Cà Mau</option>
+              <option value="4">Tỉnh Cao Bằng</option>
+              <option value="66">Tỉnh Đắk Lắk</option>
+              <option value="11">Tỉnh Điện Biên</option>
+              <option value="75">Tỉnh Đồng Nai</option>
+              <option value="82">Tỉnh Đồng Tháp</option>
+              <option value="52">Tỉnh Gia Lai</option>
+              <option value="42">Tỉnh Hà Tĩnh</option>
+              <option value="33">Tỉnh Hưng Yên</option>
+              <option value="56">Tỉnh Khánh Hòa</option>
+              <option value="12">Tỉnh Lai Châu</option>
+              <option value="68">Tỉnh Lâm Đồng</option>
+              <option value="20">Tỉnh Lạng Sơn</option>
+              <option value="15">Tỉnh Lào Cai</option>
+              <option value="40">Tỉnh Nghệ An</option>
+              <option value="37">Tỉnh Ninh Bình</option>
+              <option value="25">Tỉnh Phú Thọ</option>
+              <option value="51">Tỉnh Quảng Ngãi</option>
+              <option value="22">Tỉnh Quảng Ninh</option>
+              <option value="44">Tỉnh Quảng Trị</option>
+              <option value="14">Tỉnh Sơn La</option>
+              <option value="80">Tỉnh Tây Ninh</option>
+              <option value="19">Tỉnh Thái Nguyên</option>
+              <option value="38">Tỉnh Thanh Hóa</option>
+              <option value="8">Tỉnh Tuyên Quang</option>
+              <option value="86">Tỉnh Vĩnh Long</option>
+            </optgroup>
+          </select>
+
+
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-600 mb-1.5">Thời gian chuyến đi</label>
+          <select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-brand-blue focus:outline-none focus:border-brand-orange cursor-pointer">
+            <option value="1">1 Ngày (Đi về trong ngày)</option>
+            <option value="2">2 Ngày 1 Đêm</option>
+            <option value="3" selected>3 Ngày 2 Đêm (Khuyên dùng)</option>
+            <option value="4">4 Ngày 3 Đêm</option>
+            <option value="5">5 Ngày 4 Đêm</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-600 mb-1.5">Số lượng khách & Phòng</label>
+          <select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-brand-blue focus:outline-none focus:border-brand-orange cursor-pointer">
+            <option value="1">1 Người (1 phòng đơn)</option>
+            <option value="2">2 Người (1 phòng đôi)</option>
+            <option value="3">3 Người (2 phòng)</option>
+            <option value="4" selected>4 Người (2 phòng đôi)</option>
+            <option value="5">5 Người (3 phòng)</option>
+            <option value="6">6 Người (3 phòng đôi)</option>
+            <option value="8">Đoàn 8 Người (4 phòng)</option>
+            <option value="10">Đoàn 10+ Người (Xe 16 chỗ)</option>
+          </select>
+        </div>
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="block text-xs font-bold text-slate-600">Điểm xuất phát</label>
+            <button type="button" id="btn-get-location" onclick="getCurrentLocation()" class="text-[11px] text-brand-orange hover:text-brand-orangeHover font-extrabold flex items-center gap-1 transition">
+              <i class="fa-solid fa-crosshairs text-[10px]"></i>
+              <span>Vị trí hiện tại</span>
+            </button>
+          </div>
+          <div class="relative">
+            <input type="text" id="start-location-input" value="Trung tâm Hà Nội" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-3 pr-8 py-2.5 text-sm font-bold text-brand-blue focus:outline-none focus:border-brand-orange">
+            <i class="fa-solid fa-location-dot absolute right-3 top-3 text-slate-400 text-xs pointer-events-none"></i>
+          </div>
+          <div id="location-hint" class="text-[11px] mt-1.5 hidden transition"></div>
+        </div>
+      </div>
+
+
+      <!-- Vehicle Selection -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <label class="block text-xs font-bold text-slate-600">Phương tiện di chuyển</label>
+          <span class="text-[11px] text-slate-400">Chọn 1 phương tiện để tính chi phí & thời gian chuẩn</span>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <!-- Option 1: Car (Selected by default) -->
+          <div onclick="selectVehicleCard(this)" class="vehicle-card border-2 border-brand-orange bg-gradient-to-br from-orange-50/80 via-white to-orange-50/30 shadow-md shadow-orange-500/10 ring-2 ring-brand-orange/20 rounded-2xl p-3 flex items-center gap-3 cursor-pointer transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] select-none group">
+            <input type="radio" name="vehicle" value="car" checked class="hidden">
+            <div class="vehicle-icon w-10 h-10 rounded-xl bg-brand-orange text-white flex items-center justify-center text-base shadow-sm transition-all duration-200 flex-shrink-0">
+              <i class="fa-solid fa-car"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="vehicle-title text-sm font-extrabold text-brand-orange truncate transition-colors">Ô tô cá nhân</div>
+              <div class="text-[11px] text-slate-500 font-medium">1.800đ/km + gửi xe</div>
+            </div>
+            <div class="vehicle-check w-5 h-5 rounded-full border border-brand-orange bg-brand-orange text-white flex items-center justify-center text-[10px] transition-all flex-shrink-0">
+              <i class="fa-solid fa-check"></i>
+            </div>
+          </div>
+
+          <!-- Option 2: Van -->
+          <div onclick="selectVehicleCard(this)" class="vehicle-card border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50/60 shadow-sm rounded-2xl p-3 flex items-center gap-3 cursor-pointer transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] select-none group">
+            <input type="radio" name="vehicle" value="van" class="hidden">
+            <div class="vehicle-icon w-10 h-10 rounded-xl bg-slate-100 text-slate-500 group-hover:text-brand-blue group-hover:bg-slate-200/70 flex items-center justify-center text-base shadow-sm transition-all duration-200 flex-shrink-0">
+              <i class="fa-solid fa-van-shuttle"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="vehicle-title text-sm font-bold text-brand-blue truncate transition-colors">Thuê xe riêng (7-16c)</div>
+              <div class="text-[11px] text-slate-400 font-medium">Trọn gói kèm tài xế</div>
+            </div>
+            <div class="vehicle-check w-5 h-5 rounded-full border border-slate-300 bg-white text-transparent flex items-center justify-center text-[10px] transition-all flex-shrink-0">
+              <i class="fa-solid fa-check"></i>
+            </div>
+          </div>
+
+          <!-- Option 3: Taxi -->
+          <div onclick="selectVehicleCard(this)" class="vehicle-card border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50/60 shadow-sm rounded-2xl p-3 flex items-center gap-3 cursor-pointer transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] select-none group">
+            <input type="radio" name="vehicle" value="taxi" class="hidden">
+            <div class="vehicle-icon w-10 h-10 rounded-xl bg-slate-100 text-slate-500 group-hover:text-brand-blue group-hover:bg-slate-200/70 flex items-center justify-center text-base shadow-sm transition-all duration-200 flex-shrink-0">
+              <i class="fa-solid fa-taxi"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="vehicle-title text-sm font-bold text-brand-blue truncate transition-colors">Taxi / GrabCar</div>
+              <div class="text-[11px] text-slate-400 font-medium">~14.000đ/km</div>
+            </div>
+            <div class="vehicle-check w-5 h-5 rounded-full border border-slate-300 bg-white text-transparent flex items-center justify-center text-[10px] transition-all flex-shrink-0">
+              <i class="fa-solid fa-check"></i>
+            </div>
+          </div>
+
+          <!-- Option 4: Motorbike -->
+          <div onclick="selectVehicleCard(this)" class="vehicle-card border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50/60 shadow-sm rounded-2xl p-3 flex items-center gap-3 cursor-pointer transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] select-none group">
+            <input type="radio" name="vehicle" value="motorbike" class="hidden">
+            <div class="vehicle-icon w-10 h-10 rounded-xl bg-slate-100 text-slate-500 group-hover:text-brand-blue group-hover:bg-slate-200/70 flex items-center justify-center text-base shadow-sm transition-all duration-200 flex-shrink-0">
+              <i class="fa-solid fa-motorcycle"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="vehicle-title text-sm font-bold text-brand-blue truncate transition-colors">Xe máy</div>
+              <div class="text-[11px] text-slate-400 font-medium">~600đ/km xăng</div>
+            </div>
+            <div class="vehicle-check w-5 h-5 rounded-full border border-slate-300 bg-white text-transparent flex items-center justify-center text-[10px] transition-all flex-shrink-0">
+              <i class="fa-solid fa-check"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Place Selection Grid -->
+    <div class="mb-5 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h3 class="font-extrabold text-xl text-brand-blue flex items-center gap-2">
+          <span>Chọn địa điểm muốn ghé thăm</span>
+          <span class="text-xs font-semibold text-brand-orange bg-orange-50 border border-orange-200 px-2.5 py-0.5 rounded-full">Bắc Ninh</span>
+        </h3>
+        <p class="text-xs text-slate-500 mt-0.5">Bấm vào từng thẻ để thêm hoặc bỏ chọn. Hệ thống AI sẽ tự động phân bổ đường đi tối ưu theo nhịp sinh học.</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button type="button" onclick="selectAllPlaces(true)" class="text-xs text-brand-blue hover:text-brand-orange font-bold transition">Chọn tất cả</button>
+        <span class="text-slate-300">|</span>
+        <button type="button" onclick="selectAllPlaces(false)" class="text-xs text-slate-400 hover:text-rose-500 font-semibold transition">Bỏ chọn hết</button>
+        <span class="text-xs font-bold text-slate-700 bg-white px-3 py-1.5 rounded-xl border border-slate-200 flex items-center gap-1.5 shadow-sm">
+          <span>Đã chọn:</span>
+          <span id="selected-places-count" class="text-brand-orange font-black text-sm">3</span>
+          <span class="text-slate-400">điểm</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-24">
+      <!-- Place 1: Chùa Dâu (Selected) -->
+      <div onclick="togglePlaceCard(this)" class="place-select-card selected bg-gradient-to-b from-orange-50/40 via-white to-white rounded-2xl p-3.5 border-2 border-brand-orange shadow-lg shadow-orange-500/10 ring-2 ring-brand-orange/20 relative cursor-pointer transition-all duration-200 hover:-translate-y-1 group select-none">
+        <div class="place-badge absolute top-3 right-3 w-7 h-7 rounded-full bg-brand-orange text-white flex items-center justify-center text-xs shadow-md shadow-orange-500/30 scale-100 transition-all duration-200 z-10">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="relative overflow-hidden rounded-xl mb-2.5">
+          <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover group-hover:scale-105 transition duration-300">
+        </div>
+        <span class="text-[10px] font-bold text-brand-blue bg-blue-50 px-2 py-0.5 rounded">CHÙA & DI TÍCH</span>
+        <h4 class="font-bold text-sm text-brand-blue mt-1 group-hover:text-brand-orange transition">Chùa Dâu</h4>
+        <p class="text-xs text-slate-500 truncate">Thuận Thành, Bắc Ninh</p>
+        <div class="mt-2 text-xs font-bold text-emerald-600 flex items-center gap-1">
+          <i class="fa-solid fa-ticket text-[10px]"></i> Miễn phí vé vào
+        </div>
+      </div>
+
+      <!-- Place 2: Chùa Phật Tích (Selected) -->
+      <div onclick="togglePlaceCard(this)" class="place-select-card selected bg-gradient-to-b from-orange-50/40 via-white to-white rounded-2xl p-3.5 border-2 border-brand-orange shadow-lg shadow-orange-500/10 ring-2 ring-brand-orange/20 relative cursor-pointer transition-all duration-200 hover:-translate-y-1 group select-none">
+        <div class="place-badge absolute top-3 right-3 w-7 h-7 rounded-full bg-brand-orange text-white flex items-center justify-center text-xs shadow-md shadow-orange-500/30 scale-100 transition-all duration-200 z-10">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="relative overflow-hidden rounded-xl mb-2.5">
+          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover group-hover:scale-105 transition duration-300">
+        </div>
+        <span class="text-[10px] font-bold text-brand-blue bg-blue-50 px-2 py-0.5 rounded">CHÙA & DI TÍCH</span>
+        <h4 class="font-bold text-sm text-brand-blue mt-1 group-hover:text-brand-orange transition">Chùa Phật Tích</h4>
+        <p class="text-xs text-slate-500 truncate">Tiên Du, Bắc Ninh</p>
+        <div class="mt-2 text-xs font-bold text-emerald-600 flex items-center gap-1">
+          <i class="fa-solid fa-ticket text-[10px]"></i> Miễn phí vé vào
+        </div>
+      </div>
+
+      <!-- Place 3: Grand Phoenix Hotel (Selected) -->
+      <div onclick="togglePlaceCard(this)" class="place-select-card selected bg-gradient-to-b from-orange-50/40 via-white to-white rounded-2xl p-3.5 border-2 border-brand-orange shadow-lg shadow-orange-500/10 ring-2 ring-brand-orange/20 relative cursor-pointer transition-all duration-200 hover:-translate-y-1 group select-none">
+        <div class="place-badge absolute top-3 right-3 w-7 h-7 rounded-full bg-brand-orange text-white flex items-center justify-center text-xs shadow-md shadow-orange-500/30 scale-100 transition-all duration-200 z-10">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="relative overflow-hidden rounded-xl mb-2.5">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover group-hover:scale-105 transition duration-300">
+        </div>
+        <span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">KHÁCH SẠN 5 SAO</span>
+        <h4 class="font-bold text-sm text-brand-blue mt-1 group-hover:text-brand-orange transition">Grand Phoenix Hotel</h4>
+        <p class="text-xs text-slate-500 truncate">Võ Cường, Bắc Ninh</p>
+        <div class="mt-2 text-xs font-bold text-brand-orange flex items-center gap-1">
+          <i class="fa-solid fa-bed text-[10px]"></i> 1.675.000đ / đêm
+        </div>
+      </div>
+
+      <!-- Place 4: Đền Đô (Unselected) -->
+      <div onclick="togglePlaceCard(this)" class="place-select-card bg-white rounded-2xl p-3.5 border border-slate-200 hover:border-slate-300 hover:shadow-md relative cursor-pointer transition-all duration-200 hover:-translate-y-1 group select-none">
+        <div class="place-badge absolute top-3 right-3 w-7 h-7 rounded-full bg-white/90 backdrop-blur-md border-2 border-slate-300 text-slate-400 group-hover:border-brand-orange group-hover:text-brand-orange flex items-center justify-center text-xs shadow-sm scale-95 transition-all duration-200 z-10">
+          <i class="fa-solid fa-plus text-[10px] group-hover:scale-110 transition"></i>
+        </div>
+        <div class="relative overflow-hidden rounded-xl mb-2.5">
+          <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover group-hover:scale-105 transition duration-300">
+        </div>
+        <span class="text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">DI TÍCH LỊCH SỬ</span>
+        <h4 class="font-bold text-sm text-brand-blue mt-1 group-hover:text-brand-orange transition">Đền Đô</h4>
+        <p class="text-xs text-slate-500 truncate">Đình Bảng, Từ Sơn, Bắc Ninh</p>
+        <div class="mt-2 text-xs font-bold text-slate-600 flex items-center gap-1">
+          <i class="fa-solid fa-ticket text-[10px]"></i> 20.000đ vé vào
+        </div>
+      </div>
+
+      <!-- Place 5: Mường Thanh Luxury (Unselected) -->
+      <div onclick="togglePlaceCard(this)" class="place-select-card bg-white rounded-2xl p-3.5 border border-slate-200 hover:border-slate-300 hover:shadow-md relative cursor-pointer transition-all duration-200 hover:-translate-y-1 group select-none">
+        <div class="place-badge absolute top-3 right-3 w-7 h-7 rounded-full bg-white/90 backdrop-blur-md border-2 border-slate-300 text-slate-400 group-hover:border-brand-orange group-hover:text-brand-orange flex items-center justify-center text-xs shadow-sm scale-95 transition-all duration-200 z-10">
+          <i class="fa-solid fa-plus text-[10px] group-hover:scale-110 transition"></i>
+        </div>
+        <div class="relative overflow-hidden rounded-xl mb-2.5">
+          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover group-hover:scale-105 transition duration-300">
+        </div>
+        <span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">KHÁCH SẠN 5 SAO</span>
+        <h4 class="font-bold text-sm text-brand-blue mt-1 group-hover:text-brand-orange transition">Mường Thanh Luxury</h4>
+        <p class="text-xs text-slate-500 truncate">Tiền An, Bắc Ninh</p>
+        <div class="mt-2 text-xs font-bold text-brand-orange flex items-center gap-1">
+          <i class="fa-solid fa-bed text-[10px]"></i> 1.250.000đ / đêm
+        </div>
+      </div>
+
+      <!-- Place 6: Tân Lương Sơn (Unselected) -->
+      <div onclick="togglePlaceCard(this)" class="place-select-card bg-white rounded-2xl p-3.5 border border-slate-200 hover:border-slate-300 hover:shadow-md relative cursor-pointer transition-all duration-200 hover:-translate-y-1 group select-none">
+        <div class="place-badge absolute top-3 right-3 w-7 h-7 rounded-full bg-white/90 backdrop-blur-md border-2 border-slate-300 text-slate-400 group-hover:border-brand-orange group-hover:text-brand-orange flex items-center justify-center text-xs shadow-sm scale-95 transition-all duration-200 z-10">
+          <i class="fa-solid fa-plus text-[10px] group-hover:scale-110 transition"></i>
+        </div>
+        <div class="relative overflow-hidden rounded-xl mb-2.5">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover group-hover:scale-105 transition duration-300">
+        </div>
+        <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">NHÀ HÀNG</span>
+        <h4 class="font-bold text-sm text-brand-blue mt-1 group-hover:text-brand-orange transition">Tân Lương Sơn</h4>
+        <p class="text-xs text-slate-500 truncate">Kinh Bắc, Bắc Ninh</p>
+        <div class="mt-2 text-xs font-bold text-slate-600 flex items-center gap-1">
+          <i class="fa-solid fa-utensils text-[10px]"></i> ~150.000đ / người
+        </div>
+      </div>
+
+      <!-- Place 7: Bún Cá Cay Ngự Uyển (Unselected) -->
+      <div onclick="togglePlaceCard(this)" class="place-select-card bg-white rounded-2xl p-3.5 border border-slate-200 hover:border-slate-300 hover:shadow-md relative cursor-pointer transition-all duration-200 hover:-translate-y-1 group select-none">
+        <div class="place-badge absolute top-3 right-3 w-7 h-7 rounded-full bg-white/90 backdrop-blur-md border-2 border-slate-300 text-slate-400 group-hover:border-brand-orange group-hover:text-brand-orange flex items-center justify-center text-xs shadow-sm scale-95 transition-all duration-200 z-10">
+          <i class="fa-solid fa-plus text-[10px] group-hover:scale-110 transition"></i>
+        </div>
+        <div class="relative overflow-hidden rounded-xl mb-2.5">
+          <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover group-hover:scale-105 transition duration-300">
+        </div>
+        <span class="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded">ẨM THỰC ĐẶC SẢN</span>
+        <h4 class="font-bold text-sm text-brand-blue mt-1 group-hover:text-brand-orange transition">Bún Cá Cay Ngự Uyển</h4>
+        <p class="text-xs text-slate-500 truncate">Võ Cường, Bắc Ninh</p>
+        <div class="mt-2 text-xs font-bold text-slate-600 flex items-center gap-1">
+          <i class="fa-solid fa-bowl-food text-[10px]"></i> ~45.000đ / phần
+        </div>
+      </div>
+
+      <!-- Place 8: Chợ Giàu (Unselected) -->
+      <div onclick="togglePlaceCard(this)" class="place-select-card bg-white rounded-2xl p-3.5 border border-slate-200 hover:border-slate-300 hover:shadow-md relative cursor-pointer transition-all duration-200 hover:-translate-y-1 group select-none">
+        <div class="place-badge absolute top-3 right-3 w-7 h-7 rounded-full bg-white/90 backdrop-blur-md border-2 border-slate-300 text-slate-400 group-hover:border-brand-orange group-hover:text-brand-orange flex items-center justify-center text-xs shadow-sm scale-95 transition-all duration-200 z-10">
+          <i class="fa-solid fa-plus text-[10px] group-hover:scale-110 transition"></i>
+        </div>
+        <div class="relative overflow-hidden rounded-xl mb-2.5">
+          <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover group-hover:scale-105 transition duration-300">
+        </div>
+        <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">CHỢ TRUYỀN THỐNG</span>
+        <h4 class="font-bold text-sm text-brand-blue mt-1 group-hover:text-brand-orange transition">Chợ Giàu</h4>
+        <p class="text-xs text-slate-500 truncate">Phù Khê, Từ Sơn, Bắc Ninh</p>
+        <div class="mt-2 text-xs font-bold text-emerald-600 flex items-center gap-1">
+          <i class="fa-solid fa-door-open text-[10px]"></i> Vào cửa tự do
+        </div>
+      </div>
+    </div>
+
+    <!-- Sticky Bottom Generation Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 py-3.5 px-4 z-40 shadow-xl">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span id="bottom-bar-count" class="w-8 h-8 rounded-full bg-orange-100 text-brand-orange flex items-center justify-center font-extrabold text-sm transition-transform duration-200">3</span>
+          <div>
+            <div id="bottom-bar-text" class="text-xs font-bold text-brand-blue transition-colors">Đã chọn 3 địa điểm Must-visit</div>
+            <div class="text-[11px] text-slate-500 hidden sm:block">Hệ thống sẽ tự động ghép thêm quán ăn & cà phê lân cận</div>
+          </div>
+        </div>
+        <button id="btn-generate-itinerary" onclick="switchScreen('itinerary')" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-orange-500/30 transition flex items-center gap-2 text-sm active:scale-95">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span>Tạo Lịch Trình Tự Động (AI + Thuật toán)</span>
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- SCREEN 3: ITINERARY SCREEN (HUMAN RHYTHM TIMELINE & LIVE MAP) -->
+  <!-- ========================================================================= -->
+  <main id="screen-itinerary" class="screen-view flex-1 py-6 px-4 max-w-7xl mx-auto w-full">
+    <!-- Header Info -->
+    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wide">
+          <span>Kế hoạch chuyến đi</span>
+          <i class="fa-solid fa-circle text-[4px]"></i>
+          <span class="text-brand-orange">Đã tối ưu hóa đường đi</span>
+        </div>
+        <h2 class="text-xl md:text-2xl font-extrabold text-brand-blue mt-0.5">Bắc Ninh Cổ Kính & Thanh Bình (3N2Đ)</h2>
+        <p class="text-xs text-slate-500 mt-1 flex items-center gap-3">
+          <span><i class="fa-solid fa-users text-slate-400"></i> 4 Người (2 phòng)</span>
+          <span><i class="fa-solid fa-car text-slate-400"></i> Ô tô cá nhân (63k xăng/ngày)</span>
+          <span><i class="fa-solid fa-wallet text-slate-400"></i> Dự tính: 3.450.000đ</span>
+        </p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="bg-slate-100 hover:bg-slate-200 text-brand-blue px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-pen-to-square"></i> Sửa điểm
+        </button>
+        <button class="bg-brand-orange text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md hover:bg-brand-orangeHover transition flex items-center gap-1.5">
+          <i class="fa-solid fa-share-nodes"></i> Chia sẻ
+        </button>
+      </div>
+    </div>
+
+    <!-- Day Tabs -->
+    <div class="flex items-center gap-2 border-b border-slate-200 mb-6">
+      <button class="px-4 py-2.5 font-extrabold text-sm border-b-2 border-brand-orange text-brand-orange flex items-center gap-2">
+        <span>Ngày 1: Chùa Dâu & Cổ Tự</span>
+        <span class="bg-orange-100 text-brand-orange text-[10px] px-1.5 py-0.5 rounded-full">18.2 km</span>
+      </button>
+      <button class="px-4 py-2.5 font-bold text-sm text-slate-500 hover:text-brand-blue transition">
+        <span>Ngày 2: Tiên Du & Phật Tích</span>
+      </button>
+      <button class="px-4 py-2.5 font-bold text-sm text-slate-500 hover:text-brand-blue transition">
+        <span>Ngày 3: Ẩm thực & Chợ Suối Hoa</span>
+      </button>
+    </div>
+
+    <!-- Split Screen: 60% Timeline + 40% Map -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <!-- Left: Timeline (Strictly Human Travel Rhythm) -->
+      <div class="lg:col-span-7 space-y-4">
+        
+        <!-- Step 1: Start -->
+        <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
+          <div class="bg-slate-100 rounded-xl p-3 border border-slate-200 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2 font-bold text-slate-700">
+              <i class="fa-solid fa-flag-checkered text-brand-orange"></i>
+              <span>08:00 - Xuất phát từ Trung tâm Hà Nội</span>
+            </div>
+            <span class="text-slate-400">🚗 25 km (35 phút)</span>
+          </div>
+        </div>
+
+        <!-- Step 2: Chùa Dâu -->
+        <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
+          <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:border-brand-orange/40 transition">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex gap-3">
+                <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=150&q=80" class="w-16 h-16 rounded-xl object-cover">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="bg-blue-50 text-brand-blue text-[10px] font-bold px-2 py-0.5 rounded">08:45 - 10:15 (1h30m)</span>
+                    <span class="bg-orange-50 text-brand-orange text-[10px] font-bold px-2 py-0.5 rounded">Must-visit</span>
+                  </div>
+                  <h4 class="font-bold text-base text-brand-blue mt-1">Chùa Dâu</h4>
+                  <p class="text-xs text-slate-500">Xã Trí Quả, Thuận Thành</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">Miễn phí vé</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Gap-Filled Cafe -->
+        <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
+          <div class="bg-white rounded-2xl p-4 border border-dashed border-slate-300 bg-slate-50/50">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
+                  <i class="fa-solid fa-mug-saucer"></i>
+                </div>
+                <div>
+                  <div class="text-[10px] font-bold text-purple-700 uppercase tracking-wide">10:15 - 11:00 (Nghỉ chân 45m)</div>
+                  <h4 class="font-bold text-sm text-brand-blue">Cà Phê Gốm Dâu Village <span class="text-[11px] font-normal text-slate-400">(Hệ thống tự gợi ý)</span></h4>
+                </div>
+              </div>
+              <span class="text-xs text-slate-500 font-bold">~35.000đ/ly</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Lunch (Nhịp sinh học ăn trưa) -->
+        <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
+          <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex gap-3">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=150&q=80" class="w-16 h-16 rounded-xl object-cover">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded">11:30 - 12:45 (Ăn trưa 1h15m)</span>
+                  </div>
+                  <h4 class="font-bold text-base text-brand-blue mt-1">Nhà hàng Tân Lương Sơn</h4>
+                  <p class="text-xs text-slate-500">90 Lý Nhân Tông, Kinh Bắc</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-slate-700">~150.000đ / người</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Hotel Midday Rest (Nhịp sinh học nghỉ trưa) -->
+        <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
+          <div class="bg-blue-50/50 rounded-2xl p-4 border border-brand-blue/20">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex gap-3">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=150&q=80" class="w-16 h-16 rounded-xl object-cover">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="bg-brand-blue text-white text-[10px] font-bold px-2 py-0.5 rounded">13:00 - 14:45 (Nghỉ trưa & Check-in)</span>
+                  </div>
+                  <h4 class="font-bold text-base text-brand-blue mt-1">Grand Phoenix Hotel Bac Ninh</h4>
+                  <p class="text-xs text-slate-500">Nghỉ ngơi tránh nắng trưa trước khi đi chùa chiều</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-brand-orange">1.675.000đ / đêm</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DYNAMIC HOTEL SWITCHING WARNING CARD (Tính năng đặc biệt) -->
+        <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 shadow-sm my-6">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center text-base flex-shrink-0">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-bold text-sm text-amber-900">Cảnh Báo Tối Ưu Quãng Đường Di Chuyển</h4>
+                <span class="bg-amber-200 text-amber-800 text-[10px] font-extrabold px-2 py-0.5 rounded">Thuật toán phát hiện</span>
+              </div>
+              <p class="text-xs text-amber-800 mt-1 leading-relaxed">
+                Khách sạn hiện tại (Grand Phoenix) cách điểm tham quan đầu tiên của Ngày 3 tới <strong class="text-red-700">38 km</strong> (mất hơn 1 tiếng đi xe). Đề xuất đổi sang khách sạn ở Quế Võ để tối ưu.
+              </p>
+              
+              <!-- Comparison -->
+              <div class="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-amber-200 text-xs">
+                <div class="bg-white/80 p-2.5 rounded-lg border border-amber-200">
+                  <div class="font-semibold text-slate-500">Khách sạn cũ:</div>
+                  <div class="font-bold text-brand-blue">Grand Phoenix (38 km)</div>
+                  <div class="text-[11px] text-red-600 mt-0.5">Tốn thêm 1h15p di chuyển</div>
+                </div>
+                <div class="bg-white p-2.5 rounded-lg border-2 border-emerald-500 shadow-sm">
+                  <div class="font-semibold text-emerald-700">Đề xuất đổi:</div>
+                  <div class="font-bold text-brand-blue">Phoenix Resort (4 km)</div>
+                  <div class="text-[11px] text-emerald-600 mt-0.5 font-bold">Tiết kiệm 34 km & 1h15p</div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2 mt-3">
+                <button class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition shadow-sm">
+                  ✓ Chấp nhận đổi khách sạn (Khuyên dùng)
+                </button>
+                <button class="bg-white hover:bg-slate-100 text-slate-600 border border-slate-300 text-xs font-bold px-3 py-1.5 rounded-lg transition">
+                  Giữ khách sạn cũ
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Interactive Map Preview -->
+      <div class="lg:col-span-5 sticky top-28 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-3.5 border-b border-slate-100 flex items-center justify-between text-xs font-bold">
+          <span class="text-brand-blue flex items-center gap-2">
+            <i class="fa-solid fa-map-location-dot text-brand-orange"></i>
+            <span>Bản đồ lộ trình Ngày 1</span>
+          </span>
+          <span class="text-slate-400">Thuật toán Haversine</span>
+        </div>
+        <div class="h-96 bg-slate-100 relative flex items-center justify-center overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-60">
+          <div class="absolute inset-0 bg-slate-900/10"></div>
+          
+          <!-- Mock Map Markers -->
+          <div class="absolute top-1/4 left-1/3 bg-brand-orange text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white">1</div>
+          <div class="absolute top-1/2 left-1/2 bg-brand-blue text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white">2</div>
+          <div class="absolute bottom-1/4 right-1/3 bg-emerald-600 text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white">3</div>
+
+          <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md p-3 rounded-xl shadow-lg border border-slate-100 text-xs">
+            <div class="font-bold text-brand-blue mb-1">Cung đường tối ưu ngày 1:</div>
+            <div class="text-slate-600 flex items-center gap-2 text-[11px]">
+              <span>Hà Nội</span> $\rightarrow$ <span>Chùa Dâu</span> $\rightarrow$ <span>Tân Lương Sơn</span> $\rightarrow$ <span>Grand Phoenix</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- SCREEN 4: PLACE DETAILS SCREEN -->
+  <!-- ========================================================================= -->
+  <main id="screen-details" class="screen-view flex-1 py-8 px-4 max-w-6xl mx-auto w-full">
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+      <!-- Hero Image -->
+      <div class="relative h-80 md:h-96">
+        <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 right-6 text-white flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="bg-brand-orange text-white text-xs font-bold px-3 py-1 rounded-full">Di tích Lịch sử Quốc gia</span>
+              <span class="bg-black/50 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-full">
+                <i class="fa-solid fa-star text-amber-400"></i> 4.6 (2,954 đánh giá)
+              </span>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold">Chùa Dâu (Cổ Châu Tự)</h1>
+            <p class="text-xs text-slate-300 mt-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-location-dot text-brand-orange"></i> Xã Trí Quả, Huyện Thuận Thành, Tỉnh Bắc Ninh
+            </p>
+          </div>
+          <button class="bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg transition">
+            + Thêm vào chuyến đi
+          </button>
+        </div>
+      </div>
+
+      <!-- Content Grid -->
+      <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="md:col-span-2 space-y-6">
+          <div>
+            <h3 class="font-extrabold text-lg text-brand-blue mb-2">Giới thiệu tổng quan</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Chùa Dâu (tên chữ là Diên Ứng tự, Pháp Vân tự hay Cổ Châu tự) là ngôi chùa cổ nhất Việt Nam, được khởi dựng vào thế kỷ thứ II sau Công nguyên. Đây là trung tâm Phật giáo đầu tiên của người Việt thời kỳ đầu Công nguyên và là cái nôi của tín ngưỡng Tứ Pháp linh thiêng.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+              <span class="text-slate-400 block font-semibold mb-1">Giờ mở cửa:</span>
+              <span class="font-bold text-brand-blue text-sm">Mở cửa 24/7 (Cả tuần)</span>
+            </div>
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+              <span class="text-slate-400 block font-semibold mb-1">Giá vé tham quan:</span>
+              <span class="font-bold text-emerald-600 text-sm">Miễn phí vé vào cửa</span>
+            </div>
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+              <span class="text-slate-400 block font-semibold mb-1">Thời gian khuyến nghị:</span>
+              <span class="font-bold text-brand-blue text-sm">1 tiếng 30 phút</span>
+            </div>
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+              <span class="text-slate-400 block font-semibold mb-1">Trang phục:</span>
+              <span class="font-bold text-brand-blue text-sm">Lịch sự, trang nghiêm</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Details -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <h4 class="font-bold text-sm text-brand-blue mb-3">Điểm đến lân cận (trong 10km)</h4>
+            <div class="space-y-3 text-xs">
+              <div class="flex items-center gap-2.5">
+                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=80&q=80" class="w-10 h-10 rounded-lg object-cover">
+                <div>
+                  <div class="font-bold text-brand-blue">Chùa Bút Tháp</div>
+                  <div class="text-slate-400">Cách 3.8 km</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=80&q=80" class="w-10 h-10 rounded-lg object-cover">
+                <div>
+                  <div class="font-bold text-brand-blue">Tân Lương Sơn</div>
+                  <div class="text-slate-400">Cách 8.5 km</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- SCREEN 5: SEARCH & EXPLORE -->
+  <!-- ========================================================================= -->
+  <main id="screen-explore" class="screen-view flex-1 py-8 px-4 max-w-7xl mx-auto w-full">
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h2 class="text-2xl font-extrabold text-brand-blue">Khám phá Địa điểm Bắc Ninh</h2>
+        <p class="text-xs text-slate-500">20 địa điểm đã được kiểm chứng tọa độ và khoảng giá thực tế</p>
+      </div>
+      <div class="w-full sm:w-80 relative">
+        <input type="text" placeholder="Tìm chùa, nhà hàng, khách sạn..." class="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-sm focus:outline-none focus:border-brand-orange">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap items-center gap-2 mb-6">
+      <button class="bg-brand-blue text-white px-3.5 py-1.5 rounded-full text-xs font-bold">Tất cả (20)</button>
+      <button class="bg-white border border-slate-200 hover:border-slate-300 px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-700">⛩️ Chùa & Đền (5)</button>
+      <button class="bg-white border border-slate-200 hover:border-slate-300 px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-700">🍴 Nhà hàng ẩm thực (5)</button>
+      <button class="bg-white border border-slate-200 hover:border-slate-300 px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-700">🏨 Khách sạn lưu trú (5)</button>
+      <button class="bg-white border border-slate-200 hover:border-slate-300 px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-700">🛒 Chợ truyền thống (5)</button>
+    </div>
+
+    <!-- List layout -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm flex gap-4 hover:border-brand-orange transition">
+        <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=200&q=80" class="w-28 h-28 rounded-xl object-cover">
+        <div class="flex-1">
+          <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">CHÙA & DI TÍCH</span>
+          <h4 class="font-bold text-base text-brand-blue mt-1">Chùa Dâu</h4>
+          <p class="text-xs text-slate-500">22PV+628, Lạc Long Quân, Đại Tự, Trí Quả</p>
+          <div class="mt-2 flex items-center justify-between text-xs">
+            <span class="font-bold text-emerald-600">Miễn phí vé vào</span>
+            <span class="text-slate-400">★ 4.6 (2,954)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm flex gap-4 hover:border-brand-orange transition">
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=200&q=80" class="w-28 h-28 rounded-xl object-cover">
+        <div class="flex-1">
+          <span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">KHÁCH SẠN 5 SAO</span>
+          <h4 class="font-bold text-base text-brand-blue mt-1">Grand Phoenix Hotel</h4>
+          <p class="text-xs text-slate-500">25 Đ. Lý Thái Tổ, Võ Cường, Bắc Ninh</p>
+          <div class="mt-2 flex items-center justify-between text-xs">
+            <span class="font-bold text-brand-orange">1.675.000đ / đêm</span>
+            <span class="text-slate-400">★ 4.7 (1,941)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-deep text-slate-400 text-xs py-8 border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <span class="font-extrabold text-white text-base">VNTravel <span class="text-brand-orange">AI</span></span>
+        <p class="text-[11px] text-slate-500 mt-1">Hệ thống lập lịch trình du lịch ứng dụng AI Sandwich & Thuật toán Tối ưu hóa</p>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="#" class="hover:text-white transition">Về dự án</a>
+        <a href="#" class="hover:text-white transition">Dữ liệu 34 tỉnh thành</a>
+        <a href="#" class="hover:text-white transition">Điều khoản sử dụng</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function switchScreen(screenId) {
+      // Ẩn tất cả các màn hình
+      document.querySelectorAll('.screen-view').forEach(el => el.classList.remove('active'));
+      // Bỏ active của các nút navigation
+      document.querySelectorAll('.nav-btn').forEach(el => {
+        el.classList.remove('bg-white/10', 'text-white');
+        el.classList.add('text-slate-300');
+      });
+
+      // Bật màn hình được chọn
+      const targetScreen = document.getElementById('screen-' + screenId);
+      if (targetScreen) targetScreen.classList.add('active');
+
+      // Bật active cho nút nav tương ứng trên Header
+      const targetNav = document.getElementById('nav-' + screenId);
+      if (targetNav) {
+        targetNav.classList.remove('text-slate-300');
+        targetNav.classList.add('bg-white/10', 'text-white');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // TÍCH HỢP ĐỊNH VỊ VỊ TRÍ HIỆN TẠI (HYBRID GPS + IP FALLBACK)
+    async function getCurrentLocation() {
+      const input = document.getElementById('start-location-input');
+      const hint = document.getElementById('location-hint');
+      const btn = document.getElementById('btn-get-location');
+      if (!input) return;
+
+      if (btn) btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-[10px]"></i><span>Đang tìm...</span>';
+      input.value = "⏳ Đang xác định vị trí...";
+      if (hint) {
+        hint.className = "text-[11px] mt-1.5 transition text-slate-500 flex items-center gap-1.5";
+        hint.innerHTML = '<i class="fa-solid fa-satellite-dish animate-pulse text-brand-orange"></i><span>Đang dò tìm tọa độ GPS / mạng...</span>';
+      }
+
+      // Hàm Fallback định vị qua IP mạng (Hoạt động tốt 100% trên PC/Laptop không có chip GPS)
+      const fallbackToIP = async (reason) => {
+        try {
+          if (hint) {
+            hint.className = "text-[11px] mt-1.5 transition text-blue-600 flex items-center gap-1.5";
+            hint.innerHTML = '<i class="fa-solid fa-wifi animate-pulse"></i><span>Chuyển sang định vị qua địa chỉ mạng IP...</span>';
+          }
+
+          // Gọi API BigDataCloud miễn phí (CORS mở, hỗ trợ tiếng Việt)
+          const res = await fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?localityLanguage=vi');
+          if (!res.ok) throw new Error("BigDataCloud request failed");
+          const data = await res.json();
+
+          const lat = data.latitude ? Number(data.latitude).toFixed(4) : "21.0300";
+          const lng = data.longitude ? Number(data.longitude).toFixed(4) : "105.8200";
+          const locality = data.locality || '';
+          const city = data.city || data.principalSubdivision || 'Hà Nội';
+          const name = locality ? `${locality}, ${city}` : city;
+
+          input.value = `🎯 ${name} (${lat}, ${lng})`;
+          input.dataset.lat = lat;
+          input.dataset.lng = lng;
+          input.dataset.mode = 'ip';
+
+          if (hint) {
+            hint.className = "text-[11px] mt-1.5 transition text-emerald-600 font-semibold flex items-center gap-1.5";
+            hint.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>Đã định vị theo mạng IP (${name})</span>`;
+          }
+        } catch (e1) {
+          // Thử tiếp fallback 2 qua ipwho.is
+          try {
+            const res2 = await fetch('https://ipwho.is/');
+            const data2 = await res2.json();
+            if (data2 && data2.success) {
+              const name2 = `${data2.city || ''}, ${data2.region || ''}`.trim().replace(/^,|,$/g, '');
+              const lat2 = Number(data2.latitude).toFixed(4);
+              const lng2 = Number(data2.longitude).toFixed(4);
+              input.value = `🎯 ${name2 || 'Hà Nội'} (${lat2}, ${lng2})`;
+              input.dataset.lat = lat2;
+              input.dataset.lng = lng2;
+              input.dataset.mode = 'ip';
+              if (hint) {
+                hint.className = "text-[11px] mt-1.5 transition text-emerald-600 font-semibold flex items-center gap-1.5";
+                hint.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>Đã xác định vị trí qua IP mạng (${name2})</span>`;
+              }
+              return;
+            }
+          } catch (e2) {}
+
+          // Fallback mặc định an toàn tuyệt đối
+          input.value = "🎯 Trung tâm Hà Nội (Vị trí mặc định)";
+          input.dataset.lat = "21.0285";
+          input.dataset.lng = "105.8542";
+          if (hint) {
+            hint.className = "text-[11px] mt-1.5 transition text-amber-600 flex items-center gap-1.5";
+            hint.innerHTML = '<i class="fa-solid fa-circle-info"></i><span>Không tìm thấy GPS/IP, đã đặt Trung tâm Hà Nội làm mặc định</span>';
+          }
+        } finally {
+          if (btn) btn.innerHTML = '<i class="fa-solid fa-crosshairs text-[10px]"></i><span>Vị trí hiện tại</span>';
+        }
+      };
+
+      // Nếu trình duyệt không hỗ trợ Geolocation
+      if (!navigator.geolocation) {
+        await fallbackToIP("Trình duyệt không hỗ trợ Geolocation");
+        return;
+      }
+
+      // Đặt timeout 3.5 giây cho GPS trước khi tự động kích hoạt IP Fallback
+      let isResolved = false;
+      const timer = setTimeout(() => {
+        if (!isResolved) {
+          isResolved = true;
+          fallbackToIP("GPS Timeout");
+        }
+      }, 3500);
+
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          if (isResolved) return;
+          isResolved = true;
+          clearTimeout(timer);
+
+          const lat = position.coords.latitude.toFixed(4);
+          const lng = position.coords.longitude.toFixed(4);
+          input.dataset.lat = lat;
+          input.dataset.lng = lng;
+          input.dataset.mode = 'gps';
+
+          try {
+            // Lấy địa chỉ tiếng Việt từ BigDataCloud
+            const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=vi`);
+            const data = await res.json();
+            const locality = data.locality || '';
+            const city = data.city || data.principalSubdivision || '';
+            const readableAddr = [locality, city].filter(Boolean).join(', ');
+
+            if (readableAddr) {
+              input.value = `🎯 ${readableAddr} (${lat}, ${lng})`;
+            } else {
+              input.value = `🎯 Tọa độ GPS: (${lat}, ${lng})`;
+            }
+
+            if (hint) {
+              hint.className = "text-[11px] mt-1.5 transition text-emerald-600 font-semibold flex items-center gap-1.5";
+              hint.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>Đã xác định vị trí GPS chuẩn xác (${lat}, ${lng})</span>`;
+            }
+          } catch (err) {
+            input.value = `🎯 Tọa độ GPS: (${lat}, ${lng})`;
+            if (hint) {
+              hint.className = "text-[11px] mt-1.5 transition text-emerald-600 font-semibold flex items-center gap-1.5";
+              hint.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>Đã xác định tọa độ GPS (${lat}, ${lng})</span>`;
+            }
+          } finally {
+            if (btn) btn.innerHTML = '<i class="fa-solid fa-crosshairs text-[10px]"></i><span>Vị trí hiện tại</span>';
+          }
+        },
+        async (error) => {
+          if (isResolved) return;
+          isResolved = true;
+          clearTimeout(timer);
+          // Thiết bị bàn (PC) không có chip GPS hoặc chặn file:// -> chuyển mượt sang IP fallback không ném alert
+          await fallbackToIP("Lỗi GPS: " + error.message);
+        },
+        { enableHighAccuracy: false, timeout: 3500, maximumAge: 60000 }
+      );
+    }
+
+    // ==========================================
+    // TƯƠNG TÁC CHỌN PHƯƠNG TIỆN DI CHUYỂN
+    // ==========================================
+    function selectVehicleCard(cardElement) {
+      if (!cardElement) return;
+
+      // Xóa active trên tất cả vehicle cards
+      document.querySelectorAll('.vehicle-card').forEach(el => {
+        el.className = "vehicle-card border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50/60 shadow-sm rounded-2xl p-3 flex items-center gap-3 cursor-pointer transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] select-none group";
+        
+        const icon = el.querySelector('.vehicle-icon');
+        if (icon) icon.className = "vehicle-icon w-10 h-10 rounded-xl bg-slate-100 text-slate-500 group-hover:text-brand-blue group-hover:bg-slate-200/70 flex items-center justify-center text-base shadow-sm transition-all duration-200 flex-shrink-0";
+        
+        const title = el.querySelector('.vehicle-title');
+        if (title) title.className = "vehicle-title text-sm font-bold text-brand-blue truncate transition-colors";
+        
+        const check = el.querySelector('.vehicle-check');
+        if (check) check.className = "vehicle-check w-5 h-5 rounded-full border border-slate-300 bg-white text-transparent flex items-center justify-center text-[10px] transition-all flex-shrink-0";
+        
+        const radio = el.querySelector('input[type="radio"]');
+        if (radio) radio.checked = false;
+      });
+
+      // Kích hoạt card được click
+      cardElement.className = "vehicle-card border-2 border-brand-orange bg-gradient-to-br from-orange-50/80 via-white to-orange-50/30 shadow-md shadow-orange-500/10 ring-2 ring-brand-orange/20 rounded-2xl p-3 flex items-center gap-3 cursor-pointer transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] select-none group";
+      
+      const activeIcon = cardElement.querySelector('.vehicle-icon');
+      if (activeIcon) activeIcon.className = "vehicle-icon w-10 h-10 rounded-xl bg-brand-orange text-white flex items-center justify-center text-base shadow-sm transition-all duration-200 flex-shrink-0";
+      
+      const activeTitle = cardElement.querySelector('.vehicle-title');
+      if (activeTitle) activeTitle.className = "vehicle-title text-sm font-extrabold text-brand-orange truncate transition-colors";
+      
+      const activeCheck = cardElement.querySelector('.vehicle-check');
+      if (activeCheck) activeCheck.className = "vehicle-check w-5 h-5 rounded-full border border-brand-orange bg-brand-orange text-white flex items-center justify-center text-[10px] transition-all flex-shrink-0";
+      
+      const activeRadio = cardElement.querySelector('input[type="radio"]');
+      if (activeRadio) activeRadio.checked = true;
+    }
+
+    // ==========================================
+    // TƯƠNG TÁC CHỌN ĐỊA ĐIỂM DU LỊCH (TRIP PLANNER)
+    // ==========================================
+    function togglePlaceCard(card) {
+      if (!card) return;
+      const isSelected = card.classList.contains('selected');
+      const badge = card.querySelector('.place-badge');
+
+      if (isSelected) {
+        // Đang chọn -> Bỏ chọn
+        card.classList.remove('selected', 'border-2', 'border-brand-orange', 'bg-gradient-to-b', 'from-orange-50/40', 'via-white', 'to-white', 'shadow-lg', 'shadow-orange-500/10', 'ring-2', 'ring-brand-orange/20');
+        card.classList.add('border', 'border-slate-200', 'bg-white', 'hover:border-slate-300', 'hover:shadow-md');
+        if (badge) {
+          badge.className = "place-badge absolute top-3 right-3 w-7 h-7 rounded-full bg-white/90 backdrop-blur-md border-2 border-slate-300 text-slate-400 group-hover:border-brand-orange group-hover:text-brand-orange flex items-center justify-center text-xs shadow-sm scale-95 transition-all duration-200 z-10";
+          badge.innerHTML = '<i class="fa-solid fa-plus text-[10px] group-hover:scale-110 transition"></i>';
+        }
+      } else {
+        // Chưa chọn -> Chọn
+        card.classList.remove('border', 'border-slate-200', 'bg-white', 'hover:border-slate-300', 'hover:shadow-md');
+        card.classList.add('selected', 'border-2', 'border-brand-orange', 'bg-gradient-to-b', 'from-orange-50/40', 'via-white', 'to-white', 'shadow-lg', 'shadow-orange-500/10', 'ring-2', 'ring-brand-orange/20');
+        if (badge) {
+          badge.className = "place-badge absolute top-3 right-3 w-7 h-7 rounded-full bg-brand-orange text-white flex items-center justify-center text-xs shadow-md shadow-orange-500/30 scale-100 transition-all duration-200 z-10";
+          badge.innerHTML = '<i class="fa-solid fa-check"></i>';
+        }
+      }
+
+      updateSelectedCount();
+    }
+
+    function updateSelectedCount() {
+      const count = document.querySelectorAll('.place-select-card.selected').length;
+      const countEl = document.getElementById('selected-places-count');
+      const bottomCountEl = document.getElementById('bottom-bar-count');
+      const bottomTextEl = document.getElementById('bottom-bar-text');
+      const generateBtn = document.getElementById('btn-generate-itinerary');
+
+      if (countEl) countEl.innerText = count;
+      if (bottomCountEl) {
+        bottomCountEl.innerText = count;
+        bottomCountEl.classList.add('scale-125');
+        setTimeout(() => bottomCountEl.classList.remove('scale-125'), 200);
+      }
+
+      if (bottomTextEl) {
+        if (count === 0) {
+          bottomTextEl.innerText = "Chưa chọn địa điểm nào (Vui lòng chọn ít nhất 1 điểm)";
+        } else {
+          bottomTextEl.innerText = `Đã chọn ${count} địa điểm Must-visit`;
+        }
+      }
+
+      if (generateBtn) {
+        if (count === 0) {
+          generateBtn.classList.add('opacity-50', 'pointer-events-none');
+        } else {
+          generateBtn.classList.remove('opacity-50', 'pointer-events-none');
+        }
+      }
+    }
+
+    function selectAllPlaces(shouldSelect) {
+      document.querySelectorAll('.place-select-card').forEach(card => {
+        const isSelected = card.classList.contains('selected');
+        if (shouldSelect && !isSelected) {
+          togglePlaceCard(card);
+        } else if (!shouldSelect && isSelected) {
+          togglePlaceCard(card);
+        }
+      });
+    }
+
+  </script>
+</body>
+</html>

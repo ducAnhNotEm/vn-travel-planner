@@ -39,10 +39,10 @@ def optimize_route(places: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], 
 def calculate_transport_cost(distance_km: float, vehicle_type: str = "car") -> Dict[str, Any]:
     vehicle_type = vehicle_type.lower()
     
-    if vehicle_type == "bus":
-        num_trips = max(1, math.ceil(distance_km / 10))
-        cost = num_trips * 10000
-        desc = f"Xe Bus ({num_trips} tuyến/lượt - 10.000đ/lượt)"
+    if vehicle_type in ["chartered_van", "tour_bus", "van"]:
+        # Thuê xe du lịch riêng cả chuyến (Xe 7-16 chỗ kèm tài xế & xăng dầu)
+        cost = 1000000 + (distance_km * 2500)
+        desc = f"Thuê xe du lịch riêng (Xe 7-16 chỗ trọn gói cả xe)"
     elif vehicle_type == "motorbike":
         cost = distance_km * 600 + 10000  # 600đ/km xăng + 10k gửi xe
         desc = f"Xe máy cá nhân (~600đ/km + gửi xe)"
@@ -58,6 +58,7 @@ def calculate_transport_cost(distance_km: float, vehicle_type: str = "car") -> D
         "distance_km": distance_km,
         "estimated_cost_vnd": round(cost, -3)
     }
+
 
 # 4. Lấy Giá ĐỊA ĐIỂM Trực tiếp từ CƠ SỞ DỮ LIỆU (Database)
 def format_place_price(category: str, price_range_db: str, prices_json_db: str) -> Dict[str, Any]:
