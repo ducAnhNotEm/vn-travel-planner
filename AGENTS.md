@@ -1,5 +1,36 @@
 # TRAVEL AI - PROJECT RULES & AGENT GOVERNANCE
 
+## 0. Coding Philosophy — Lazy Senior Dev (Ponytail)
+
+> **"The best code is the code never written."**  
+> Inspired by [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) — adapted for this project.
+
+Before writing **any** code, stop at the first rung of this ladder that holds:
+
+```
+1. Does this need to exist at all?          → No: skip it, say so. (YAGNI)
+2. Already in this codebase?               → Reuse — check app/services/ first.
+3. Standard library / Python built-in?     → Use it.
+4. Already-installed dependency?           → Use it. Never add a new dep for what
+                                             a few lines can do.
+5. Can it be one line?                     → One line.
+6. Only then: write the minimum that works.
+```
+
+**The ladder runs AFTER understanding the problem**, not instead of it.  
+Read the task, trace the real code flow end-to-end, then climb.
+
+### 🔒 Safety Override — These rules ALWAYS win over the ladder:
+- Validation, error handling, data-loss guards → **NEVER cut**
+- Haversine / distance calculations → **ALWAYS use deterministic engine** (not mental math)
+- Ground truth from `travel_db.db` → **NEVER invent or guess**
+- API key security (backend-only) → **NEVER expose to frontend**
+
+*Deletion over addition. Boring over clever. Fewest files possible.*  
+*But: the smallest change in the wrong place is a second bug, not a fix.*
+
+---
+
 ## 1. Mandatory Workflow for Coding Agents
 
 Before modifying or creating any code, the AI Agent MUST strictly execute this pipeline:
@@ -53,6 +84,9 @@ TASK ASSIGNED
 ## 3. Data Integrity & Pacing Rules
 
 - **No Hallucinated Places**: Every location in an itinerary MUST exist in `travel_db.db`.
+- **Photo Authenticity & Ground Truth (Chân thật 100% về hình ảnh)**:
+  - ❌ **TUYỆT ĐỐI KHÔNG DÙNG ẢNH GIẢ HOẶC COPY LINK STOCK MINH HỌA LẶP LẠI**: Mọi địa điểm danh thắng, chùa chiền, đền miếu, di tích lịch sử khi đưa vào database hoặc lịch trình **bắt buộc phải lấy ảnh chụp thực tế 100% từ Wikipedia / Wikimedia Commons** (thông qua API hoặc script kiểm tra).
+  - Đối với Khách sạn, Nhà hàng, Chợ: Nếu chưa có ảnh xác thực riêng thì tạm thời để null hoặc tính sau theo nguồn xác thực riêng, **nghiêm cấm hành vi tái sử dụng một link ảnh cho nhiều khách sạn/địa điểm khác nhau để làm giả dữ liệu**.
 - **Missing Data Fallback**: When `typical_time_spent` or `price_range` is null in the database, use the explicit heuristic fallbacks defined in `PROJECT_CONTEXT.md`. NEVER invent random arbitrary numbers.
 - **Human Travel Rhythm (Bắt buộc theo nhịp sinh học)**:
   $$\text{Tham quan sáng} \rightarrow \text{Ăn trưa} \rightarrow \text{Nghỉ trưa / Check-in} \rightarrow \text{Tham quan chiều} \rightarrow \text{Cà phê} \rightarrow \text{Ăn tối} \rightarrow \text{Chợ đêm / Nghỉ ngơi}$$

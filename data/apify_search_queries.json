@@ -1,0 +1,6050 @@
+[
+  {
+    "id": 1001,
+    "name": "Hoàng thành Thăng Long",
+    "province": "Hà Nội",
+    "query": "Hoàng thành Thăng Long Hà Nội",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1002,
+    "name": "Văn Miếu – Quốc Tử Giám",
+    "province": "Hà Nội",
+    "query": "Văn Miếu – Quốc Tử Giám Hà Nội",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1003,
+    "name": "Hồ Hoàn Kiếm và Đền Ngọc Sơn",
+    "province": "Hà Nội",
+    "query": "Hồ Hoàn Kiếm và Đền Ngọc Sơn Hà Nội",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1004,
+    "name": "Chùa Một Cột",
+    "province": "Hà Nội",
+    "query": "Chùa Một Cột Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1005,
+    "name": "Chùa Trấn Quốc",
+    "province": "Hà Nội",
+    "query": "Chùa Trấn Quốc Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1006,
+    "name": "Chùa Nành",
+    "province": "Hà Nội",
+    "query": "Chùa Nành Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1007,
+    "name": "Chùa Bối Khê",
+    "province": "Hà Nội",
+    "query": "Chùa Bối Khê Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1008,
+    "name": "Chùa Bà Đá",
+    "province": "Hà Nội",
+    "query": "Chùa Bà Đá Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1009,
+    "name": "Bưu điện Hà Nội",
+    "province": "Hà Nội",
+    "query": "Bưu điện Hà Nội Hà Nội",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1010,
+    "name": "Chùa Keo",
+    "province": "Hà Nội",
+    "query": "Chùa Keo Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1011,
+    "name": "Chùa Kim Sơn",
+    "province": "Hà Nội",
+    "query": "Chùa Kim Sơn Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1012,
+    "name": "Chùa Quán Sứ",
+    "province": "Hà Nội",
+    "query": "Chùa Quán Sứ Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1013,
+    "name": "Chùa Báo Ân",
+    "province": "Hà Nội",
+    "query": "Chùa Báo Ân Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1014,
+    "name": "Chùa Hà",
+    "province": "Hà Nội",
+    "query": "Chùa Hà Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1015,
+    "name": "Chùa Bát Tháp",
+    "province": "Hà Nội",
+    "query": "Chùa Bát Tháp Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1016,
+    "name": "Chùa Láng",
+    "province": "Hà Nội",
+    "query": "Chùa Láng Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1017,
+    "name": "Chùa Quang Hoa",
+    "province": "Hà Nội",
+    "query": "Chùa Quang Hoa Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1018,
+    "name": "Chùa Sải",
+    "province": "Hà Nội",
+    "query": "Chùa Sải Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1019,
+    "name": "Chùa Ngũ Xã",
+    "province": "Hà Nội",
+    "query": "Chùa Ngũ Xã Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1020,
+    "name": "Chùa Mía",
+    "province": "Hà Nội",
+    "query": "Chùa Mía Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1021,
+    "name": "Chùa Kim Liên",
+    "province": "Hà Nội",
+    "query": "Chùa Kim Liên Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1022,
+    "name": "Chùa Thiên Niên",
+    "province": "Hà Nội",
+    "query": "Chùa Thiên Niên Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1023,
+    "name": "Chùa Tư Khánh",
+    "province": "Hà Nội",
+    "query": "Chùa Tư Khánh Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1024,
+    "name": "Chùa Tảo Sách",
+    "province": "Hà Nội",
+    "query": "Chùa Tảo Sách Hà Nội",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1025,
+    "name": "Quần đảo Cát Bà",
+    "province": "Hải Phòng",
+    "query": "Quần đảo Cát Bà Hải Phòng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1026,
+    "name": "Bãi biển Đồ Sơn",
+    "province": "Hải Phòng",
+    "query": "Bãi biển Đồ Sơn Hải Phòng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1027,
+    "name": "Đền Nghè (Thờ Nữ tướng Lê Chân)",
+    "province": "Hải Phòng",
+    "query": "Đền Nghè (Thờ Nữ tướng Lê Chân) Hải Phòng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1028,
+    "name": "Chùa Dư Hàng",
+    "province": "Hải Phòng",
+    "query": "Chùa Dư Hàng Hải Phòng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1029,
+    "name": "Nhà hát Lớn Hải Phòng",
+    "province": "Hải Phòng",
+    "query": "Nhà hát Lớn Hải Phòng Hải Phòng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1030,
+    "name": "Chùa Đót Sơn",
+    "province": "Hải Phòng",
+    "query": "Chùa Đót Sơn Hải Phòng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1031,
+    "name": "Cát Hải",
+    "province": "Hải Phòng",
+    "query": "Cát Hải Hải Phòng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1032,
+    "name": "Danh lam thắng cảnh Bàn Than – Hòn Mang – Hòn Dứa",
+    "province": "Hải Phòng",
+    "query": "Danh lam thắng cảnh Bàn Than – Hòn Mang – Hòn Dứa Hải Phòng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1033,
+    "name": "Cái Bèo",
+    "province": "Hải Phòng",
+    "query": "Cái Bèo Hải Phòng",
+    "category": "BEACH"
+  },
+  {
+    "id": 1034,
+    "name": "Duyên hải Nam Trung Bộ và Tây Nguyên",
+    "province": "Hải Phòng",
+    "query": "Duyên hải Nam Trung Bộ và Tây Nguyên Hải Phòng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1035,
+    "name": "Quốc lộ 10",
+    "province": "Hải Phòng",
+    "query": "Quốc lộ 10 Hải Phòng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1036,
+    "name": "Quốc lộ 38",
+    "province": "Hải Phòng",
+    "query": "Quốc lộ 38 Hải Phòng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1037,
+    "name": "Ga Hải Phòng",
+    "province": "Hải Phòng",
+    "query": "Ga Hải Phòng Hải Phòng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1038,
+    "name": "Sông Bạch Đằng",
+    "province": "Hải Phòng",
+    "query": "Sông Bạch Đằng Hải Phòng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1039,
+    "name": "Đông Hải, Hải Phòng",
+    "province": "Hải Phòng",
+    "query": "Đông Hải, Hải Phòng Hải Phòng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1040,
+    "name": "Quang Thắng",
+    "province": "Hải Phòng",
+    "query": "Quang Thắng Hải Phòng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1041,
+    "name": "Chùa Phúc Lâm",
+    "province": "Hải Phòng",
+    "query": "Chùa Phúc Lâm Hải Phòng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1042,
+    "name": "Cột cờ Lũng Cú",
+    "province": "Hà Giang",
+    "query": "Cột cờ Lũng Cú Hà Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1043,
+    "name": "Đèo Mã Pí Lèng & Hẻm Tu Sản",
+    "province": "Hà Giang",
+    "query": "Đèo Mã Pí Lèng & Hẻm Tu Sản Hà Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1044,
+    "name": "Dinh thự họ Vương (Nhà Vua Mèo)",
+    "province": "Hà Giang",
+    "query": "Dinh thự họ Vương (Nhà Vua Mèo) Hà Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1045,
+    "name": "Phố cổ Đồng Văn",
+    "province": "Hà Giang",
+    "query": "Phố cổ Đồng Văn Hà Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1046,
+    "name": "Chùa Sùng Khánh",
+    "province": "Hà Giang",
+    "query": "Chùa Sùng Khánh Hà Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1047,
+    "name": "Chùa Phù Dung",
+    "province": "Hà Giang",
+    "query": "Chùa Phù Dung Hà Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1048,
+    "name": "Chùa Bổ Đà",
+    "province": "Hà Giang",
+    "query": "Chùa Bổ Đà Hà Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1049,
+    "name": "Đèo Mã Pí Lèng",
+    "province": "Hà Giang",
+    "query": "Đèo Mã Pí Lèng Hà Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1050,
+    "name": "Đô thị tại An Giang",
+    "province": "Hà Giang",
+    "query": "Đô thị tại An Giang Hà Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1051,
+    "name": "Lam Ngọc",
+    "province": "Hà Giang",
+    "query": "Lam Ngọc Hà Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1052,
+    "name": "Bạch Đằng giang phú",
+    "province": "Hà Giang",
+    "query": "Bạch Đằng giang phú Hà Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1053,
+    "name": "Thác Bản Giốc",
+    "province": "Cao Bằng",
+    "query": "Thác Bản Giốc Cao Bằng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1054,
+    "name": "Khu di tích Quốc gia Đặc biệt Pác Bó",
+    "province": "Cao Bằng",
+    "query": "Khu di tích Quốc gia Đặc biệt Pác Bó Cao Bằng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1055,
+    "name": "Động Ngườm Ngao",
+    "province": "Cao Bằng",
+    "query": "Động Ngườm Ngao Cao Bằng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1056,
+    "name": "Chùa Phật Tích Trúc Lâm Bản Giốc",
+    "province": "Cao Bằng",
+    "query": "Chùa Phật Tích Trúc Lâm Bản Giốc Cao Bằng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1057,
+    "name": "Đèo Mã Phục",
+    "province": "Cao Bằng",
+    "query": "Đèo Mã Phục Cao Bằng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1058,
+    "name": "Chiến khu Tân Trào",
+    "province": "Cao Bằng",
+    "query": "Chiến khu Tân Trào Cao Bằng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1059,
+    "name": "Chùa Đất Sét",
+    "province": "Cao Bằng",
+    "query": "Chùa Đất Sét Cao Bằng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1060,
+    "name": "Chùa Dạm",
+    "province": "Cao Bằng",
+    "query": "Chùa Dạm Cao Bằng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1061,
+    "name": "Chùa Đồng",
+    "province": "Cao Bằng",
+    "query": "Chùa Đồng Cao Bằng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1062,
+    "name": "Chùa Xà Tón",
+    "province": "Cao Bằng",
+    "query": "Chùa Xà Tón Cao Bằng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1063,
+    "name": "Đá Ba Chồng",
+    "province": "Cao Bằng",
+    "query": "Đá Ba Chồng Cao Bằng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1064,
+    "name": "Thành Nà Lữ",
+    "province": "Cao Bằng",
+    "query": "Thành Nà Lữ Cao Bằng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1065,
+    "name": "Thành Bản Phủ",
+    "province": "Cao Bằng",
+    "query": "Thành Bản Phủ Cao Bằng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1066,
+    "name": "Hồ Ba Bể",
+    "province": "Bắc Kạn",
+    "query": "Hồ Ba Bể Bắc Kạn",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1067,
+    "name": "Động Puông",
+    "province": "Bắc Kạn",
+    "query": "Động Puông Bắc Kạn",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1068,
+    "name": "Thác Đầu Đẳng",
+    "province": "Bắc Kạn",
+    "query": "Thác Đầu Đẳng Bắc Kạn",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1069,
+    "name": "Khu di tích lịch sử ATK Chợ Đồn",
+    "province": "Bắc Kạn",
+    "query": "Khu di tích lịch sử ATK Chợ Đồn Bắc Kạn",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1070,
+    "name": "Chùa Thạch Long",
+    "province": "Bắc Kạn",
+    "query": "Chùa Thạch Long Bắc Kạn",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1071,
+    "name": "Di tích về thời Đinh",
+    "province": "Bắc Kạn",
+    "query": "Di tích về thời Đinh Bắc Kạn",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1072,
+    "name": "Hai Bà Trưng",
+    "province": "Bắc Kạn",
+    "query": "Hai Bà Trưng Bắc Kạn",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1073,
+    "name": "Hà Nội",
+    "province": "Bắc Kạn",
+    "query": "Hà Nội Bắc Kạn",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1074,
+    "name": "Chùa Thầy",
+    "province": "Bắc Kạn",
+    "query": "Chùa Thầy Bắc Kạn",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1075,
+    "name": "Chùa Ngọc Hoàng",
+    "province": "Bắc Kạn",
+    "query": "Chùa Ngọc Hoàng Bắc Kạn",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1076,
+    "name": "Sóc Sơn",
+    "province": "Bắc Kạn",
+    "query": "Sóc Sơn Bắc Kạn",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1077,
+    "name": "Nhà thờ Lớn Hà Nội",
+    "province": "Bắc Kạn",
+    "query": "Nhà thờ Lớn Hà Nội Bắc Kạn",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1078,
+    "name": "Hoàng thành Thăng Long",
+    "province": "Bắc Kạn",
+    "query": "Hoàng thành Thăng Long Bắc Kạn",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1079,
+    "name": "Thái Nguyên",
+    "province": "Bắc Kạn",
+    "query": "Thái Nguyên Bắc Kạn",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1080,
+    "name": "Khu di tích Quốc gia Đặc biệt Tân Trào",
+    "province": "Tuyên Quang",
+    "query": "Khu di tích Quốc gia Đặc biệt Tân Trào Tuyên Quang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1081,
+    "name": "Hồ thủy điện Na Hang - Lâm Bình",
+    "province": "Tuyên Quang",
+    "query": "Hồ thủy điện Na Hang - Lâm Bình Tuyên Quang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1082,
+    "name": "Suối khoáng nóng Mỹ Lâm",
+    "province": "Tuyên Quang",
+    "query": "Suối khoáng nóng Mỹ Lâm Tuyên Quang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1083,
+    "name": "Đền Hạ Tuyên Quang",
+    "province": "Tuyên Quang",
+    "query": "Đền Hạ Tuyên Quang Tuyên Quang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1084,
+    "name": "Chùa An Vinh",
+    "province": "Tuyên Quang",
+    "query": "Chùa An Vinh Tuyên Quang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1085,
+    "name": "Chùa Dâu",
+    "province": "Tuyên Quang",
+    "query": "Chùa Dâu Tuyên Quang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1086,
+    "name": "Chùa Ấn Quang",
+    "province": "Tuyên Quang",
+    "query": "Chùa Ấn Quang Tuyên Quang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1087,
+    "name": "Dinh thự họ Vương",
+    "province": "Tuyên Quang",
+    "query": "Dinh thự họ Vương Tuyên Quang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1088,
+    "name": "Chùa Cổ Lễ",
+    "province": "Tuyên Quang",
+    "query": "Chùa Cổ Lễ Tuyên Quang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1089,
+    "name": "Chùa Ba Vàng",
+    "province": "Tuyên Quang",
+    "query": "Chùa Ba Vàng Tuyên Quang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1090,
+    "name": "Thích Trí Tịnh",
+    "province": "Tuyên Quang",
+    "query": "Thích Trí Tịnh Tuyên Quang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1091,
+    "name": "Sơn Tây",
+    "province": "Tuyên Quang",
+    "query": "Sơn Tây Tuyên Quang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1092,
+    "name": "Thành cổ Tuyên Quang",
+    "province": "Tuyên Quang",
+    "query": "Thành cổ Tuyên Quang Tuyên Quang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1093,
+    "name": "Na Hang",
+    "province": "Tuyên Quang",
+    "query": "Na Hang Tuyên Quang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1094,
+    "name": "Quang Trung",
+    "province": "Tuyên Quang",
+    "query": "Quang Trung Tuyên Quang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1095,
+    "name": "Đỉnh Fansipan - Nóc nhà Đông Dương",
+    "province": "Lào Cai",
+    "query": "Đỉnh Fansipan - Nóc nhà Đông Dương Lào Cai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1096,
+    "name": "Thị xã Sa Pa mù sương",
+    "province": "Lào Cai",
+    "query": "Thị xã Sa Pa mù sương Lào Cai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1097,
+    "name": "Bản Cát Cát",
+    "province": "Lào Cai",
+    "query": "Bản Cát Cát Lào Cai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1098,
+    "name": "Nhà thờ Đá Sa Pa",
+    "province": "Lào Cai",
+    "query": "Nhà thờ Đá Sa Pa Lào Cai",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1099,
+    "name": "Đền Bảo Hà (Đền Ông Hoàng Bảy)",
+    "province": "Lào Cai",
+    "query": "Đền Bảo Hà (Đền Ông Hoàng Bảy) Lào Cai",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1100,
+    "name": "Dinh Hoàng A Tưởng",
+    "province": "Lào Cai",
+    "query": "Dinh Hoàng A Tưởng Lào Cai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1101,
+    "name": "Luang Prabang",
+    "province": "Lào Cai",
+    "query": "Luang Prabang Lào Cai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1102,
+    "name": "Sa Pa",
+    "province": "Lào Cai",
+    "query": "Sa Pa Lào Cai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1103,
+    "name": "Đền Mẫu Lào Cai",
+    "province": "Lào Cai",
+    "query": "Đền Mẫu Lào Cai Lào Cai",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1104,
+    "name": "Y Tý",
+    "province": "Lào Cai",
+    "query": "Y Tý Lào Cai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1105,
+    "name": "Đèo Ô Quý Hồ",
+    "province": "Lào Cai",
+    "query": "Đèo Ô Quý Hồ Lào Cai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1106,
+    "name": "Viêng Chăn",
+    "province": "Lào Cai",
+    "query": "Viêng Chăn Lào Cai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1107,
+    "name": "Đền Cấm",
+    "province": "Lào Cai",
+    "query": "Đền Cấm Lào Cai",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1108,
+    "name": "Tả Van",
+    "province": "Lào Cai",
+    "query": "Tả Van Lào Cai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1109,
+    "name": "Quần thể Di tích Chiến trường Điện Biên Phủ",
+    "province": "Điện Biên",
+    "query": "Quần thể Di tích Chiến trường Điện Biên Phủ Điện Biên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1110,
+    "name": "Đồi A1",
+    "province": "Điện Biên",
+    "query": "Đồi A1 Điện Biên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1111,
+    "name": "Hầm Chỉ huy De Castries",
+    "province": "Điện Biên",
+    "query": "Hầm Chỉ huy De Castries Điện Biên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1112,
+    "name": "Tượng đài Chiến thắng Điện Biên Phủ",
+    "province": "Điện Biên",
+    "query": "Tượng đài Chiến thắng Điện Biên Phủ Điện Biên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1113,
+    "name": "Bảo tàng Chiến thắng Lịch sử Điện Biên Phủ",
+    "province": "Điện Biên",
+    "query": "Bảo tàng Chiến thắng Lịch sử Điện Biên Phủ Điện Biên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1114,
+    "name": "Sở chỉ huy Chiến dịch Điện Biên Phủ Mường Phăng",
+    "province": "Điện Biên",
+    "query": "Sở chỉ huy Chiến dịch Điện Biên Phủ Mường Phăng Điện Biên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1115,
+    "name": "Đèo Pha Đin",
+    "province": "Điện Biên",
+    "query": "Đèo Pha Đin Điện Biên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1116,
+    "name": "Hồ Pá Khoang",
+    "province": "Điện Biên",
+    "query": "Hồ Pá Khoang Điện Biên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1117,
+    "name": "Cực Tây A Pa Chải",
+    "province": "Điện Biên",
+    "query": "Cực Tây A Pa Chải Điện Biên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1118,
+    "name": "Khu di tích Thành Bản Phủ & Đền thờ Hoàng Công Chất",
+    "province": "Điện Biên",
+    "query": "Khu di tích Thành Bản Phủ & Đền thờ Hoàng Công Chất Điện Biên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1119,
+    "name": "Chùa Linh Ứng Điện Biên (Chùa Linh Quang)",
+    "province": "Điện Biên",
+    "query": "Chùa Linh Ứng Điện Biên (Chùa Linh Quang) Điện Biên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1120,
+    "name": "Chiến dịch Điện Biên Phủ",
+    "province": "Điện Biên",
+    "query": "Chiến dịch Điện Biên Phủ Điện Biên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1121,
+    "name": "Chùa Vĩnh Nghiêm",
+    "province": "Điện Biên",
+    "query": "Chùa Vĩnh Nghiêm Điện Biên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1122,
+    "name": "Lê Văn Duyệt",
+    "province": "Điện Biên",
+    "query": "Lê Văn Duyệt Điện Biên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1123,
+    "name": "Đèo Ô Quy Hồ (Cổng trời Lai Châu)",
+    "province": "Lai Châu",
+    "query": "Đèo Ô Quy Hồ (Cổng trời Lai Châu) Lai Châu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1124,
+    "name": "Bản Sin Suối Hồ",
+    "province": "Lai Châu",
+    "query": "Bản Sin Suối Hồ Lai Châu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1125,
+    "name": "Đỉnh Pu Si Lung",
+    "province": "Lai Châu",
+    "query": "Đỉnh Pu Si Lung Lai Châu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1126,
+    "name": "Khu di tích Vua Thái Đèo Văn Long",
+    "province": "Lai Châu",
+    "query": "Khu di tích Vua Thái Đèo Văn Long Lai Châu",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1127,
+    "name": "Chùa Linh Ứng Lai Châu",
+    "province": "Lai Châu",
+    "query": "Chùa Linh Ứng Lai Châu Lai Châu",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1128,
+    "name": "Chùa Phi Lai",
+    "province": "Lai Châu",
+    "query": "Chùa Phi Lai Lai Châu",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1129,
+    "name": "Hoài Nhơn",
+    "province": "Lai Châu",
+    "query": "Hoài Nhơn Lai Châu",
+    "category": "BEACH"
+  },
+  {
+    "id": 1130,
+    "name": "Hồng Hà, Vân Nam",
+    "province": "Lai Châu",
+    "query": "Hồng Hà, Vân Nam Lai Châu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1131,
+    "name": "Linh Ẩn tự",
+    "province": "Lai Châu",
+    "query": "Linh Ẩn tự Lai Châu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1132,
+    "name": "Lai Vung",
+    "province": "Lai Châu",
+    "query": "Lai Vung Lai Châu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1133,
+    "name": "Pu Si Lung",
+    "province": "Lai Châu",
+    "query": "Pu Si Lung Lai Châu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1134,
+    "name": "Thích Nhật Từ",
+    "province": "Lai Châu",
+    "query": "Thích Nhật Từ Lai Châu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1135,
+    "name": "Đô thị Việt Nam",
+    "province": "Lai Châu",
+    "query": "Đô thị Việt Nam Lai Châu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1136,
+    "name": "Duyên hải Nam Trung Bộ và Tây Nguyên",
+    "province": "Lai Châu",
+    "query": "Duyên hải Nam Trung Bộ và Tây Nguyên Lai Châu",
+    "category": "BEACH"
+  },
+  {
+    "id": 1137,
+    "name": "Cao nguyên Mộc Châu & Rừng thông Bản Áng",
+    "province": "Sơn La",
+    "query": "Cao nguyên Mộc Châu & Rừng thông Bản Áng Sơn La",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1138,
+    "name": "Thác Dải Yếm Mộc Châu",
+    "province": "Sơn La",
+    "query": "Thác Dải Yếm Mộc Châu Sơn La",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1139,
+    "name": "Nhà tù Sơn La & Cây đào Tô Hiệu",
+    "province": "Sơn La",
+    "query": "Nhà tù Sơn La & Cây đào Tô Hiệu Sơn La",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1140,
+    "name": "Cầu kính Bạch Long (Mộc Châu Island)",
+    "province": "Sơn La",
+    "query": "Cầu kính Bạch Long (Mộc Châu Island) Sơn La",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1141,
+    "name": "Đền Thờ Vua Lê Thái Tông (Quế Lâm Ngự Chế)",
+    "province": "Sơn La",
+    "query": "Đền Thờ Vua Lê Thái Tông (Quế Lâm Ngự Chế) Sơn La",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1142,
+    "name": "Chùa Vĩnh Nghiêm",
+    "province": "Sơn La",
+    "query": "Chùa Vĩnh Nghiêm Sơn La",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1143,
+    "name": "Chùa Linh Sơn",
+    "province": "Sơn La",
+    "query": "Chùa Linh Sơn Sơn La",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1144,
+    "name": "Chùa Vạn Niên",
+    "province": "Sơn La",
+    "query": "Chùa Vạn Niên Sơn La",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1145,
+    "name": "Chùa Phụng Sơn",
+    "province": "Sơn La",
+    "query": "Chùa Phụng Sơn Sơn La",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1146,
+    "name": "Nhà máy thủy điện Sơn La",
+    "province": "Sơn La",
+    "query": "Nhà máy thủy điện Sơn La Sơn La",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1147,
+    "name": "Thanh Hóa",
+    "province": "Sơn La",
+    "query": "Thanh Hóa Sơn La",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1148,
+    "name": "Thác Dải Yếm",
+    "province": "Sơn La",
+    "query": "Thác Dải Yếm Sơn La",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1149,
+    "name": "Khu di tích chiến thắng Rạch Gầm – Xoài Mút",
+    "province": "Sơn La",
+    "query": "Khu di tích chiến thắng Rạch Gầm – Xoài Mút Sơn La",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1150,
+    "name": "Mường La",
+    "province": "Sơn La",
+    "query": "Mường La Sơn La",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1151,
+    "name": "Nhà tù Sơn La",
+    "province": "Sơn La",
+    "query": "Nhà tù Sơn La Sơn La",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1152,
+    "name": "Ruộng bậc thang Mù Cang Chải",
+    "province": "Yên Bái",
+    "query": "Ruộng bậc thang Mù Cang Chải Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1153,
+    "name": "Đèo Khau Phạ",
+    "province": "Yên Bái",
+    "query": "Đèo Khau Phạ Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1154,
+    "name": "Hồ Thác Bà",
+    "province": "Yên Bái",
+    "query": "Hồ Thác Bà Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1155,
+    "name": "Khu bảo tồn thiên nhiên Nà Hẩu",
+    "province": "Yên Bái",
+    "query": "Khu bảo tồn thiên nhiên Nà Hẩu Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1156,
+    "name": "Đền Đông Cuông",
+    "province": "Yên Bái",
+    "query": "Đền Đông Cuông Yên Bái",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1157,
+    "name": "Chiến khu Vần",
+    "province": "Yên Bái",
+    "query": "Chiến khu Vần Yên Bái",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1158,
+    "name": "Du lịch Ninh Bình",
+    "province": "Yên Bái",
+    "query": "Du lịch Ninh Bình Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1159,
+    "name": "Bắc Ninh",
+    "province": "Yên Bái",
+    "query": "Bắc Ninh Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1160,
+    "name": "Khởi nghĩa Yên Bái",
+    "province": "Yên Bái",
+    "query": "Khởi nghĩa Yên Bái Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1161,
+    "name": "Lào Cai",
+    "province": "Yên Bái",
+    "query": "Lào Cai Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1162,
+    "name": "Lý Quốc Sư",
+    "province": "Yên Bái",
+    "query": "Lý Quốc Sư Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1163,
+    "name": "Hán Cao Tổ",
+    "province": "Yên Bái",
+    "query": "Hán Cao Tổ Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1164,
+    "name": "Nguyễn Thái Học",
+    "province": "Yên Bái",
+    "query": "Nguyễn Thái Học Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1165,
+    "name": "Đoàn Chèo Yên Bái",
+    "province": "Yên Bái",
+    "query": "Đoàn Chèo Yên Bái Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1166,
+    "name": "Yên Bình",
+    "province": "Yên Bái",
+    "query": "Yên Bình Yên Bái",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1167,
+    "name": "Thung lũng Mai Châu (Bản Lác)",
+    "province": "Hòa Bình",
+    "query": "Thung lũng Mai Châu (Bản Lác) Hòa Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1168,
+    "name": "Hồ thủy điện Hòa Bình",
+    "province": "Hòa Bình",
+    "query": "Hồ thủy điện Hòa Bình Hòa Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1169,
+    "name": "Nhà máy Thủy điện Hòa Bình",
+    "province": "Hòa Bình",
+    "query": "Nhà máy Thủy điện Hòa Bình Hòa Bình",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1170,
+    "name": "Động Thác Bờ",
+    "province": "Hòa Bình",
+    "query": "Động Thác Bờ Hòa Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1171,
+    "name": "Đền Chúa Thác Bờ",
+    "province": "Hòa Bình",
+    "query": "Đền Chúa Thác Bờ Hòa Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1172,
+    "name": "Chùa Long Sơn",
+    "province": "Hòa Bình",
+    "query": "Chùa Long Sơn Hòa Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1173,
+    "name": "Bắc Bình",
+    "province": "Hòa Bình",
+    "query": "Bắc Bình Hòa Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1174,
+    "name": "Di tích ở Ninh Bình",
+    "province": "Hòa Bình",
+    "query": "Di tích ở Ninh Bình Hòa Bình",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1175,
+    "name": "Bình Ngô đại cáo",
+    "province": "Hòa Bình",
+    "query": "Bình Ngô đại cáo Hòa Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1176,
+    "name": "Yên Thắng",
+    "province": "Hòa Bình",
+    "query": "Yên Thắng Hòa Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1177,
+    "name": "Thảm sát Bình Hòa",
+    "province": "Hòa Bình",
+    "query": "Thảm sát Bình Hòa Hòa Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1178,
+    "name": "Việt Nam Quốc Tự",
+    "province": "Hòa Bình",
+    "query": "Việt Nam Quốc Tự Hòa Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1179,
+    "name": "Khu di tích Quốc gia Đặc biệt ATK Định Hóa",
+    "province": "Thái Nguyên",
+    "query": "Khu di tích Quốc gia Đặc biệt ATK Định Hóa Thái Nguyên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1180,
+    "name": "Hồ Núi Cốc",
+    "province": "Thái Nguyên",
+    "query": "Hồ Núi Cốc Thái Nguyên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1181,
+    "name": "Bảo tàng Văn hóa các Dân tộc Việt Nam",
+    "province": "Thái Nguyên",
+    "query": "Bảo tàng Văn hóa các Dân tộc Việt Nam Thái Nguyên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1182,
+    "name": "Đồi chè Tân Cương",
+    "province": "Thái Nguyên",
+    "query": "Đồi chè Tân Cương Thái Nguyên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1183,
+    "name": "Chùa Đôi Cao",
+    "province": "Thái Nguyên",
+    "query": "Chùa Đôi Cao Thái Nguyên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1184,
+    "name": "Chùa Hang",
+    "province": "Thái Nguyên",
+    "query": "Chùa Hang Thái Nguyên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1185,
+    "name": "Phan Đình Phùng",
+    "province": "Thái Nguyên",
+    "query": "Phan Đình Phùng Thái Nguyên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1186,
+    "name": "Trần Nguyên Hãn",
+    "province": "Thái Nguyên",
+    "query": "Trần Nguyên Hãn Thái Nguyên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1187,
+    "name": "Động Nhị Thanh - Chùa Tam Thanh",
+    "province": "Lạng Sơn",
+    "query": "Động Nhị Thanh - Chùa Tam Thanh Lạng Sơn",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1188,
+    "name": "Ải Chi Lăng",
+    "province": "Lạng Sơn",
+    "query": "Ải Chi Lăng Lạng Sơn",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1189,
+    "name": "Đỉnh Mẫu Sơn",
+    "province": "Lạng Sơn",
+    "query": "Đỉnh Mẫu Sơn Lạng Sơn",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1190,
+    "name": "Thành nhà Mạc Lạng Sơn",
+    "province": "Lạng Sơn",
+    "query": "Thành nhà Mạc Lạng Sơn Lạng Sơn",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1191,
+    "name": "Đền Mẫu Đồng Đăng",
+    "province": "Lạng Sơn",
+    "query": "Đền Mẫu Đồng Đăng Lạng Sơn",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1192,
+    "name": "Chùa Thành",
+    "province": "Lạng Sơn",
+    "query": "Chùa Thành Lạng Sơn",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1193,
+    "name": "Lương Văn Tri",
+    "province": "Lạng Sơn",
+    "query": "Lương Văn Tri Lạng Sơn",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1194,
+    "name": "Bến đá Kỳ Cùng",
+    "province": "Lạng Sơn",
+    "query": "Bến đá Kỳ Cùng Lạng Sơn",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1195,
+    "name": "Chùa Côn Sơn",
+    "province": "Lạng Sơn",
+    "query": "Chùa Côn Sơn Lạng Sơn",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1196,
+    "name": "Đền Công Đồng Bắc Lệ",
+    "province": "Lạng Sơn",
+    "query": "Đền Công Đồng Bắc Lệ Lạng Sơn",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1197,
+    "name": "Nhà Tây Sơn",
+    "province": "Lạng Sơn",
+    "query": "Nhà Tây Sơn Lạng Sơn",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1198,
+    "name": "Đền Kỳ Cùng",
+    "province": "Lạng Sơn",
+    "query": "Đền Kỳ Cùng Lạng Sơn",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1199,
+    "name": "Tam Thanh",
+    "province": "Lạng Sơn",
+    "query": "Tam Thanh Lạng Sơn",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1200,
+    "name": "Chi Lăng",
+    "province": "Lạng Sơn",
+    "query": "Chi Lăng Lạng Sơn",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1201,
+    "name": "Vịnh Hạ Long",
+    "province": "Quảng Ninh",
+    "query": "Vịnh Hạ Long Quảng Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1202,
+    "name": "Khu di tích Danh thắng Yên Tử",
+    "province": "Quảng Ninh",
+    "query": "Khu di tích Danh thắng Yên Tử Quảng Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1203,
+    "name": "Bảo tàng Quảng Ninh",
+    "province": "Quảng Ninh",
+    "query": "Bảo tàng Quảng Ninh Quảng Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1204,
+    "name": "Đảo Cô Tô",
+    "province": "Quảng Ninh",
+    "query": "Đảo Cô Tô Quảng Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1205,
+    "name": "Đền Cửa Ông",
+    "province": "Quảng Ninh",
+    "query": "Đền Cửa Ông Quảng Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1206,
+    "name": "Chùa Quỳnh Lâm",
+    "province": "Quảng Ninh",
+    "query": "Chùa Quỳnh Lâm Quảng Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1207,
+    "name": "Chùa Hồ Thiên",
+    "province": "Quảng Ninh",
+    "query": "Chùa Hồ Thiên Quảng Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1208,
+    "name": "Mạo Khê",
+    "province": "Quảng Ninh",
+    "query": "Mạo Khê Quảng Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1209,
+    "name": "Ninh Châu",
+    "province": "Quảng Ninh",
+    "query": "Ninh Châu Quảng Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1210,
+    "name": "Khu di tích nhà Trần tại Đông Triều",
+    "province": "Quảng Ninh",
+    "query": "Khu di tích nhà Trần tại Đông Triều Quảng Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1211,
+    "name": "Quốc lộ",
+    "province": "Quảng Ninh",
+    "query": "Quốc lộ Quảng Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1212,
+    "name": "Quần thể di tích và danh thắng Yên Tử – Vĩnh Nghiêm – Côn Sơn, Kiếp Bạc",
+    "province": "Quảng Ninh",
+    "query": "Quần thể di tích và danh thắng Yên Tử – Vĩnh Nghiêm – Côn Sơn, Kiếp Bạc Quảng Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1213,
+    "name": "Du lịch Ninh Bình",
+    "province": "Quảng Ninh",
+    "query": "Du lịch Ninh Bình Quảng Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1214,
+    "name": "Chùa Lôi Âm",
+    "province": "Quảng Ninh",
+    "query": "Chùa Lôi Âm Quảng Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1215,
+    "name": "Di tích ở Ninh Bình",
+    "province": "Quảng Ninh",
+    "query": "Di tích ở Ninh Bình Quảng Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1216,
+    "name": "Chùa Đồng",
+    "province": "Quảng Ninh",
+    "query": "Chùa Đồng Quảng Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1217,
+    "name": "Chùa Vĩnh Nghiêm (Bắc Giang)",
+    "province": "Bắc Giang",
+    "query": "Chùa Vĩnh Nghiêm (Bắc Giang) Bắc Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1218,
+    "name": "Chùa Bổ Đà",
+    "province": "Bắc Giang",
+    "query": "Chùa Bổ Đà Bắc Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1219,
+    "name": "Khu di tích khởi nghĩa Yên Thế",
+    "province": "Bắc Giang",
+    "query": "Khu di tích khởi nghĩa Yên Thế Bắc Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1220,
+    "name": "Khu di tích lịch sử Chiến thắng Xương Giang",
+    "province": "Bắc Giang",
+    "query": "Khu di tích lịch sử Chiến thắng Xương Giang Bắc Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1221,
+    "name": "Khu du lịch tâm linh Tây Yên Tử",
+    "province": "Bắc Giang",
+    "query": "Khu du lịch tâm linh Tây Yên Tử Bắc Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1222,
+    "name": "Khu du lịch sinh thái Suối Mỡ",
+    "province": "Bắc Giang",
+    "query": "Khu du lịch sinh thái Suối Mỡ Bắc Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1223,
+    "name": "Hồ Cấm Sơn",
+    "province": "Bắc Giang",
+    "query": "Hồ Cấm Sơn Bắc Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1224,
+    "name": "Rừng nguyên sinh Khe Rỗ",
+    "province": "Bắc Giang",
+    "query": "Rừng nguyên sinh Khe Rỗ Bắc Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1225,
+    "name": "Làng gốm cổ Thổ Hà",
+    "province": "Bắc Giang",
+    "query": "Làng gốm cổ Thổ Hà Bắc Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1226,
+    "name": "Chùa Tây An",
+    "province": "Bắc Giang",
+    "query": "Chùa Tây An Bắc Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1227,
+    "name": "Ô Trấn",
+    "province": "Bắc Giang",
+    "query": "Ô Trấn Bắc Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1228,
+    "name": "Khởi nghĩa Yên Thế",
+    "province": "Bắc Giang",
+    "query": "Khởi nghĩa Yên Thế Bắc Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1229,
+    "name": "Đa Phúc",
+    "province": "Bắc Giang",
+    "query": "Đa Phúc Bắc Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1230,
+    "name": "Chùa Vĩnh Nghiêm",
+    "province": "Bắc Giang",
+    "query": "Chùa Vĩnh Nghiêm Bắc Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1231,
+    "name": "Khu di tích Lịch sử Đền Hùng",
+    "province": "Phú Thọ",
+    "query": "Khu di tích Lịch sử Đền Hùng Phú Thọ",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1232,
+    "name": "Vườn quốc gia Xuân Sơn",
+    "province": "Phú Thọ",
+    "query": "Vườn quốc gia Xuân Sơn Phú Thọ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1233,
+    "name": "Đồi chè Long Cốc",
+    "province": "Phú Thọ",
+    "query": "Đồi chè Long Cốc Phú Thọ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1234,
+    "name": "Đền Quốc Mẫu Âu Cơ",
+    "province": "Phú Thọ",
+    "query": "Đền Quốc Mẫu Âu Cơ Phú Thọ",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1235,
+    "name": "Chùa Phúc Thánh",
+    "province": "Phú Thọ",
+    "query": "Chùa Phúc Thánh Phú Thọ",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1236,
+    "name": "Hạc Thành",
+    "province": "Phú Thọ",
+    "query": "Hạc Thành Phú Thọ",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1237,
+    "name": "Bình Nguyên, Phú Thọ",
+    "province": "Phú Thọ",
+    "query": "Bình Nguyên, Phú Thọ Phú Thọ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1238,
+    "name": "Phú Thọ Hòa",
+    "province": "Phú Thọ",
+    "query": "Phú Thọ Hòa Phú Thọ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1239,
+    "name": "Nhà thi đấu Phú Thọ",
+    "province": "Phú Thọ",
+    "query": "Nhà thi đấu Phú Thọ Phú Thọ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1240,
+    "name": "Khu di tích và danh thắng Tây Thiên",
+    "province": "Phú Thọ",
+    "query": "Khu di tích và danh thắng Tây Thiên Phú Thọ",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1241,
+    "name": "Vĩnh Yên",
+    "province": "Phú Thọ",
+    "query": "Vĩnh Yên Phú Thọ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1242,
+    "name": "Đình Nông Trang",
+    "province": "Phú Thọ",
+    "query": "Đình Nông Trang Phú Thọ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1243,
+    "name": "Đền Hùng",
+    "province": "Phú Thọ",
+    "query": "Đền Hùng Phú Thọ",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1244,
+    "name": "Vĩnh Phúc",
+    "province": "Phú Thọ",
+    "query": "Vĩnh Phúc Phú Thọ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1245,
+    "name": "Đền Mẫu Âu Cơ",
+    "province": "Phú Thọ",
+    "query": "Đền Mẫu Âu Cơ Phú Thọ",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1246,
+    "name": "Thị trấn mù sương Tam Đảo",
+    "province": "Vĩnh Phúc",
+    "query": "Thị trấn mù sương Tam Đảo Vĩnh Phúc",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1247,
+    "name": "Thiền viện Trúc Lâm Tây Thiên",
+    "province": "Vĩnh Phúc",
+    "query": "Thiền viện Trúc Lâm Tây Thiên Vĩnh Phúc",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1248,
+    "name": "Đền Thờ Quốc Mẫu Tây Thiên",
+    "province": "Vĩnh Phúc",
+    "query": "Đền Thờ Quốc Mẫu Tây Thiên Vĩnh Phúc",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1249,
+    "name": "Hồ Đại Lải",
+    "province": "Vĩnh Phúc",
+    "query": "Hồ Đại Lải Vĩnh Phúc",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1250,
+    "name": "Tháp Bình Sơn",
+    "province": "Vĩnh Phúc",
+    "query": "Tháp Bình Sơn Vĩnh Phúc",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1251,
+    "name": "Sông Lô",
+    "province": "Vĩnh Phúc",
+    "query": "Sông Lô Vĩnh Phúc",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1252,
+    "name": "Lập Thạch",
+    "province": "Vĩnh Phúc",
+    "query": "Lập Thạch Vĩnh Phúc",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1253,
+    "name": "Lưu Vĩnh Phúc",
+    "province": "Vĩnh Phúc",
+    "query": "Lưu Vĩnh Phúc Vĩnh Phúc",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1254,
+    "name": "Đình Thổ Tang",
+    "province": "Vĩnh Phúc",
+    "query": "Đình Thổ Tang Vĩnh Phúc",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1255,
+    "name": "Thành Thái",
+    "province": "Vĩnh Phúc",
+    "query": "Thành Thái Vĩnh Phúc",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1256,
+    "name": "Yves Claude Vĩnh San",
+    "province": "Vĩnh Phúc",
+    "query": "Yves Claude Vĩnh San Vĩnh Phúc",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1257,
+    "name": "Thăng Long",
+    "province": "Vĩnh Phúc",
+    "query": "Thăng Long Vĩnh Phúc",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1258,
+    "name": "Đàm Vĩnh Hưng",
+    "province": "Vĩnh Phúc",
+    "query": "Đàm Vĩnh Hưng Vĩnh Phúc",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1259,
+    "name": "Khu di tích Đền Gia Loan – Chùa Biện Sơn",
+    "province": "Vĩnh Phúc",
+    "query": "Khu di tích Đền Gia Loan – Chùa Biện Sơn Vĩnh Phúc",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1260,
+    "name": "Phúc Yên",
+    "province": "Vĩnh Phúc",
+    "query": "Phúc Yên Vĩnh Phúc",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1261,
+    "name": "Chùa Phật Tích",
+    "province": "Bắc Ninh",
+    "query": "Chùa Phật Tích Bắc Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1262,
+    "name": "Chùa Dâu",
+    "province": "Bắc Ninh",
+    "query": "Chùa Dâu Bắc Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1263,
+    "name": "Chùa Bút Tháp",
+    "province": "Bắc Ninh",
+    "query": "Chùa Bút Tháp Bắc Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1264,
+    "name": "Đền Đô (Đền Lý Bát Đế)",
+    "province": "Bắc Ninh",
+    "query": "Đền Đô (Đền Lý Bát Đế) Bắc Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1265,
+    "name": "Làng tranh Đông Hồ",
+    "province": "Bắc Ninh",
+    "query": "Làng tranh Đông Hồ Bắc Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1266,
+    "name": "Làng gốm Phù Lãng",
+    "province": "Bắc Ninh",
+    "query": "Làng gốm Phù Lãng Bắc Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1267,
+    "name": "An toàn khu II",
+    "province": "Bắc Ninh",
+    "query": "An toàn khu II Bắc Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1268,
+    "name": "Chùa Trẻ",
+    "province": "Bắc Ninh",
+    "query": "Chùa Trẻ Bắc Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1269,
+    "name": "Chùa Kim Đài",
+    "province": "Bắc Ninh",
+    "query": "Chùa Kim Đài Bắc Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1270,
+    "name": "Chùa Đậu",
+    "province": "Bắc Ninh",
+    "query": "Chùa Đậu Bắc Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1271,
+    "name": "Chùa Dận",
+    "province": "Bắc Ninh",
+    "query": "Chùa Dận Bắc Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1272,
+    "name": "Bến Ninh Kiều",
+    "province": "Bắc Ninh",
+    "query": "Bến Ninh Kiều Bắc Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1273,
+    "name": "Kinh Bắc",
+    "province": "Bắc Ninh",
+    "query": "Kinh Bắc Bắc Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1274,
+    "name": "Phật Tích",
+    "province": "Bắc Ninh",
+    "query": "Phật Tích Bắc Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1275,
+    "name": "Quảng Ninh",
+    "province": "Bắc Ninh",
+    "query": "Quảng Ninh Bắc Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1276,
+    "name": "Đền Bà Chúa Kho",
+    "province": "Bắc Ninh",
+    "query": "Đền Bà Chúa Kho Bắc Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1277,
+    "name": "Thành cổ Bắc Ninh",
+    "province": "Bắc Ninh",
+    "query": "Thành cổ Bắc Ninh Bắc Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1278,
+    "name": "Hoa Khê Tự",
+    "province": "Bắc Ninh",
+    "query": "Hoa Khê Tự Bắc Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1279,
+    "name": "Chùa Bổ Đà",
+    "province": "Bắc Ninh",
+    "query": "Chùa Bổ Đà Bắc Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1280,
+    "name": "Khu di tích Côn Sơn – Kiếp Bạc",
+    "province": "Hải Dương",
+    "query": "Khu di tích Côn Sơn – Kiếp Bạc Hải Dương",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1281,
+    "name": "Đền Tranh (Ninh Giang)",
+    "province": "Hải Dương",
+    "query": "Đền Tranh (Ninh Giang) Hải Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1282,
+    "name": "Đảo Cò Chi Lăng Nam",
+    "province": "Hải Dương",
+    "query": "Đảo Cò Chi Lăng Nam Hải Dương",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1283,
+    "name": "Chùa Thanh Mai",
+    "province": "Hải Dương",
+    "query": "Chùa Thanh Mai Hải Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1284,
+    "name": "Văn Miếu Mao Điền",
+    "province": "Hải Dương",
+    "query": "Văn Miếu Mao Điền Hải Dương",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1285,
+    "name": "Chùa An Ninh",
+    "province": "Hải Dương",
+    "query": "Chùa An Ninh Hải Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1286,
+    "name": "Đại Thắng Minh Hoàng hậu",
+    "province": "Hải Dương",
+    "query": "Đại Thắng Minh Hoàng hậu Hải Dương",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1287,
+    "name": "Tiên Dung",
+    "province": "Hải Dương",
+    "query": "Tiên Dung Hải Dương",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1288,
+    "name": "Đền Kiếp Bạc",
+    "province": "Hải Dương",
+    "query": "Đền Kiếp Bạc Hải Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1289,
+    "name": "Đường Hải Thượng Lãn Ông, Thành phố Hồ Chí Minh",
+    "province": "Hải Dương",
+    "query": "Đường Hải Thượng Lãn Ông, Thành phố Hồ Chí Minh Hải Dương",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1290,
+    "name": "Chùa Giám",
+    "province": "Hải Dương",
+    "query": "Chùa Giám Hải Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1291,
+    "name": "Chùa Bạch Hào",
+    "province": "Hải Dương",
+    "query": "Chùa Bạch Hào Hải Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1292,
+    "name": "Danh lam thắng cảnh Bàn Than – Hòn Mang – Hòn Dứa",
+    "province": "Hải Dương",
+    "query": "Danh lam thắng cảnh Bàn Than – Hòn Mang – Hòn Dứa Hải Dương",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1293,
+    "name": "Chùa Đồng Ngọ",
+    "province": "Hải Dương",
+    "query": "Chùa Đồng Ngọ Hải Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1294,
+    "name": "Quần thể Phố Hiến",
+    "province": "Hưng Yên",
+    "query": "Quần thể Phố Hiến Hưng Yên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1295,
+    "name": "Đền Chử Đồng Tử - Tiên Dung",
+    "province": "Hưng Yên",
+    "query": "Đền Chử Đồng Tử - Tiên Dung Hưng Yên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1296,
+    "name": "Chùa Chuông (Phố Hiến)",
+    "province": "Hưng Yên",
+    "query": "Chùa Chuông (Phố Hiến) Hưng Yên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1297,
+    "name": "Đền Mẫu Hưng Yên",
+    "province": "Hưng Yên",
+    "query": "Đền Mẫu Hưng Yên Hưng Yên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1298,
+    "name": "Làng gốm Bát Tràng Hưng Yên (Khu đô thị Ecopark)",
+    "province": "Hưng Yên",
+    "query": "Làng gốm Bát Tràng Hưng Yên (Khu đô thị Ecopark) Hưng Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1299,
+    "name": "Chùa Keo Thái Bình",
+    "province": "Hưng Yên",
+    "query": "Chùa Keo Thái Bình Hưng Yên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1300,
+    "name": "Khoái Châu",
+    "province": "Hưng Yên",
+    "query": "Khoái Châu Hưng Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1301,
+    "name": "Long Hưng, Hưng Yên",
+    "province": "Hưng Yên",
+    "query": "Long Hưng, Hưng Yên Hưng Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1302,
+    "name": "Mễ Sở",
+    "province": "Hưng Yên",
+    "query": "Mễ Sở Hưng Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1303,
+    "name": "Phạm Quang Ngọc",
+    "province": "Hưng Yên",
+    "query": "Phạm Quang Ngọc Hưng Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1304,
+    "name": "Sơn Nam",
+    "province": "Hưng Yên",
+    "query": "Sơn Nam Hưng Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1305,
+    "name": "Tiên Hưng",
+    "province": "Hưng Yên",
+    "query": "Tiên Hưng Hưng Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1306,
+    "name": "Đại Đồng, Hưng Yên",
+    "province": "Hưng Yên",
+    "query": "Đại Đồng, Hưng Yên Hưng Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1307,
+    "name": "Trần Lãm",
+    "province": "Hưng Yên",
+    "query": "Trần Lãm Hưng Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1308,
+    "name": "Trà Lý",
+    "province": "Hưng Yên",
+    "query": "Trà Lý Hưng Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1309,
+    "name": "Chùa Keo Thái Bình",
+    "province": "Thái Bình",
+    "query": "Chùa Keo Thái Bình Thái Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1310,
+    "name": "Khu di tích Đền Trần Thái Bình",
+    "province": "Thái Bình",
+    "query": "Khu di tích Đền Trần Thái Bình Thái Bình",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1311,
+    "name": "Bãi biển Đồng Châu",
+    "province": "Thái Bình",
+    "query": "Bãi biển Đồng Châu Thái Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1312,
+    "name": "Khu du lịch sinh thái Cồn Vành",
+    "province": "Thái Bình",
+    "query": "Khu du lịch sinh thái Cồn Vành Thái Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1313,
+    "name": "Khu du lịch sinh thái Cồn Đen",
+    "province": "Thái Bình",
+    "query": "Khu du lịch sinh thái Cồn Đen Thái Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1314,
+    "name": "Đền Đồng Bằng",
+    "province": "Thái Bình",
+    "query": "Đền Đồng Bằng Thái Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1315,
+    "name": "Đền Tiên La",
+    "province": "Thái Bình",
+    "query": "Đền Tiên La Thái Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1316,
+    "name": "Đền A Sào",
+    "province": "Thái Bình",
+    "query": "Đền A Sào Thái Bình",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1317,
+    "name": "Làng chạm bạc Đồng Xâm",
+    "province": "Thái Bình",
+    "query": "Làng chạm bạc Đồng Xâm Thái Bình",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1318,
+    "name": "Làng chiếu Tân Lễ",
+    "province": "Thái Bình",
+    "query": "Làng chiếu Tân Lễ Thái Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1319,
+    "name": "Phạm Văn Quyến",
+    "province": "Thái Bình",
+    "query": "Phạm Văn Quyến Thái Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1320,
+    "name": "Đền Vua Rộc",
+    "province": "Thái Bình",
+    "query": "Đền Vua Rộc Thái Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1321,
+    "name": "Đền Đồng Xâm",
+    "province": "Thái Bình",
+    "query": "Đền Đồng Xâm Thái Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1322,
+    "name": "Thái Bình lâu",
+    "province": "Thái Bình",
+    "query": "Thái Bình lâu Thái Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1323,
+    "name": "Lê Công Vinh",
+    "province": "Thái Bình",
+    "query": "Lê Công Vinh Thái Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1324,
+    "name": "Quần thể Chùa Tam Chúc",
+    "province": "Hà Nam",
+    "query": "Quần thể Chùa Tam Chúc Hà Nam",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1325,
+    "name": "Chùa Bà Đanh",
+    "province": "Hà Nam",
+    "query": "Chùa Bà Đanh Hà Nam",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1326,
+    "name": "Đền Trúc - Ngũ Động Thi Sơn",
+    "province": "Hà Nam",
+    "query": "Đền Trúc - Ngũ Động Thi Sơn Hà Nam",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1327,
+    "name": "Chùa Long Đọi Sơn",
+    "province": "Hà Nam",
+    "query": "Chùa Long Đọi Sơn Hà Nam",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1328,
+    "name": "Nhà tưởng niệm Nam Cao & Làng Vũ Đại",
+    "province": "Hà Nam",
+    "query": "Nhà tưởng niệm Nam Cao & Làng Vũ Đại Hà Nam",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1329,
+    "name": "Khu du lịch sinh thái Kẽm Trống",
+    "province": "Hà Nam",
+    "query": "Khu du lịch sinh thái Kẽm Trống Hà Nam",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1330,
+    "name": "Đền Trần Thương",
+    "province": "Hà Nam",
+    "query": "Đền Trần Thương Hà Nam",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1331,
+    "name": "Đền Lảnh Giang",
+    "province": "Hà Nam",
+    "query": "Đền Lảnh Giang Hà Nam",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1332,
+    "name": "Bát Cảnh Sơn",
+    "province": "Hà Nam",
+    "query": "Bát Cảnh Sơn Hà Nam",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1333,
+    "name": "Chùa Tiên (Hà Nam)",
+    "province": "Hà Nam",
+    "query": "Chùa Tiên (Hà Nam) Hà Nam",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1334,
+    "name": "Làng nghề trống Đọi Tam",
+    "province": "Hà Nam",
+    "query": "Làng nghề trống Đọi Tam Hà Nam",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1335,
+    "name": "Làng lụa Nha Xá",
+    "province": "Hà Nam",
+    "query": "Làng lụa Nha Xá Hà Nam",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1336,
+    "name": "Nhà Đấu xảo Hà Nội",
+    "province": "Hà Nam",
+    "query": "Nhà Đấu xảo Hà Nội Hà Nam",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1337,
+    "name": "Khu di tích Đền Trần Nam Định",
+    "province": "Nam Định",
+    "query": "Khu di tích Đền Trần Nam Định Nam Định",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1338,
+    "name": "Chùa Cổ Lễ",
+    "province": "Nam Định",
+    "query": "Chùa Cổ Lễ Nam Định",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1339,
+    "name": "Chùa Keo Hành Thiện",
+    "province": "Nam Định",
+    "query": "Chùa Keo Hành Thiện Nam Định",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1340,
+    "name": "Chùa Phổ Minh & Tháp Phổ Minh",
+    "province": "Nam Định",
+    "query": "Chùa Phổ Minh & Tháp Phổ Minh Nam Định",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1341,
+    "name": "Vương cung thánh đường Phú Nhai",
+    "province": "Nam Định",
+    "query": "Vương cung thánh đường Phú Nhai Nam Định",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1342,
+    "name": "Nhà thờ Lớn Nam Định",
+    "province": "Nam Định",
+    "query": "Nhà thờ Lớn Nam Định Nam Định",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1343,
+    "name": "Nhà thờ Đổ Hải Lý",
+    "province": "Nam Định",
+    "query": "Nhà thờ Đổ Hải Lý Nam Định",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1344,
+    "name": "Vườn quốc gia Xuân Thủy",
+    "province": "Nam Định",
+    "query": "Vườn quốc gia Xuân Thủy Nam Định",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1345,
+    "name": "Cầu ngói Chùa Lương",
+    "province": "Nam Định",
+    "query": "Cầu ngói Chùa Lương Nam Định",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1346,
+    "name": "Đền Bảo Lộc",
+    "province": "Nam Định",
+    "query": "Đền Bảo Lộc Nam Định",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1347,
+    "name": "Bãi biển Quất Lâm",
+    "province": "Nam Định",
+    "query": "Bãi biển Quất Lâm Nam Định",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1348,
+    "name": "Bãi biển Thịnh Long",
+    "province": "Nam Định",
+    "query": "Bãi biển Thịnh Long Nam Định",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1349,
+    "name": "Đền Trần",
+    "province": "Nam Định",
+    "query": "Đền Trần Nam Định",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1350,
+    "name": "Quần thể danh thắng Tràng An",
+    "province": "Ninh Bình",
+    "query": "Quần thể danh thắng Tràng An Ninh Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1351,
+    "name": "Chùa Bái Đính",
+    "province": "Ninh Bình",
+    "query": "Chùa Bái Đính Ninh Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1352,
+    "name": "Cố đô Hoa Lư",
+    "province": "Ninh Bình",
+    "query": "Cố đô Hoa Lư Ninh Bình",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1353,
+    "name": "Tam Cốc – Bích Động",
+    "province": "Ninh Bình",
+    "query": "Tam Cốc – Bích Động Ninh Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1354,
+    "name": "Hang Múa",
+    "province": "Ninh Bình",
+    "query": "Hang Múa Ninh Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1355,
+    "name": "Chùa Duyên Ninh",
+    "province": "Ninh Bình",
+    "query": "Chùa Duyên Ninh Ninh Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1356,
+    "name": "Chùa Keo Hành Thiện",
+    "province": "Ninh Bình",
+    "query": "Chùa Keo Hành Thiện Ninh Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1357,
+    "name": "Chùa Nhất Trụ",
+    "province": "Ninh Bình",
+    "query": "Chùa Nhất Trụ Ninh Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1358,
+    "name": "Chùa Phổ Minh",
+    "province": "Ninh Bình",
+    "query": "Chùa Phổ Minh Ninh Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1359,
+    "name": "Lăng phát tích nhà Đinh",
+    "province": "Ninh Bình",
+    "query": "Lăng phát tích nhà Đinh Ninh Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1360,
+    "name": "Kẽm Trống",
+    "province": "Ninh Bình",
+    "query": "Kẽm Trống Ninh Bình",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1361,
+    "name": "Chùa Bà Ngô",
+    "province": "Ninh Bình",
+    "query": "Chùa Bà Ngô Ninh Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1362,
+    "name": "Chiến khu Quỳnh Lưu",
+    "province": "Ninh Bình",
+    "query": "Chiến khu Quỳnh Lưu Ninh Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1363,
+    "name": "Cầu ngói Phát Diệm",
+    "province": "Ninh Bình",
+    "query": "Cầu ngói Phát Diệm Ninh Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1364,
+    "name": "Chùa Địch Lộng",
+    "province": "Ninh Bình",
+    "query": "Chùa Địch Lộng Ninh Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1365,
+    "name": "Chùa Non Nước",
+    "province": "Ninh Bình",
+    "query": "Chùa Non Nước Ninh Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1366,
+    "name": "Chùa Đùng",
+    "province": "Ninh Bình",
+    "query": "Chùa Đùng Ninh Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1367,
+    "name": "Hoa Lư",
+    "province": "Ninh Bình",
+    "query": "Hoa Lư Ninh Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1368,
+    "name": "Gián Khẩu",
+    "province": "Ninh Bình",
+    "query": "Gián Khẩu Ninh Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1369,
+    "name": "Cửa biển Thần Phù",
+    "province": "Ninh Bình",
+    "query": "Cửa biển Thần Phù Ninh Bình",
+    "category": "BEACH"
+  },
+  {
+    "id": 1370,
+    "name": "Đền Đuổm",
+    "province": "Thái Nguyên",
+    "query": "Đền Đuổm Thái Nguyên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1371,
+    "name": "Hang Phượng Hoàng và Suối Mỏ Gà",
+    "province": "Thái Nguyên",
+    "query": "Hang Phượng Hoàng và Suối Mỏ Gà Thái Nguyên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1372,
+    "name": "Chùa Hang (Kim Sơn Tự)",
+    "province": "Thái Nguyên",
+    "query": "Chùa Hang (Kim Sơn Tự) Thái Nguyên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1373,
+    "name": "Thành nhà Hồ",
+    "province": "Thanh Hóa",
+    "query": "Thành nhà Hồ Thanh Hóa",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1374,
+    "name": "Khu di tích Lam Kinh",
+    "province": "Thanh Hóa",
+    "query": "Khu di tích Lam Kinh Thanh Hóa",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1375,
+    "name": "Khu di tích Bà Triệu",
+    "province": "Thanh Hóa",
+    "query": "Khu di tích Bà Triệu Thanh Hóa",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1376,
+    "name": "Cầu Hàm Rồng",
+    "province": "Thanh Hóa",
+    "query": "Cầu Hàm Rồng Thanh Hóa",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1377,
+    "name": "Đền Độc Cước",
+    "province": "Thanh Hóa",
+    "query": "Đền Độc Cước Thanh Hóa",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1378,
+    "name": "Chùa Sùng Nghiêm Diên Thánh",
+    "province": "Thanh Hóa",
+    "query": "Chùa Sùng Nghiêm Diên Thánh Thanh Hóa",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1379,
+    "name": "Bãi biển Sầm Sơn",
+    "province": "Thanh Hóa",
+    "query": "Bãi biển Sầm Sơn Thanh Hóa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1380,
+    "name": "Khu bảo tồn thiên nhiên Pù Luông",
+    "province": "Thanh Hóa",
+    "query": "Khu bảo tồn thiên nhiên Pù Luông Thanh Hóa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1381,
+    "name": "Bãi biển Hải Tiến",
+    "province": "Thanh Hóa",
+    "query": "Bãi biển Hải Tiến Thanh Hóa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1382,
+    "name": "Suối cá thần Cẩm Lương",
+    "province": "Thanh Hóa",
+    "query": "Suối cá thần Cẩm Lương Thanh Hóa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1383,
+    "name": "Hòn Trống Mái Sầm Sơn",
+    "province": "Thanh Hóa",
+    "query": "Hòn Trống Mái Sầm Sơn Thanh Hóa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1384,
+    "name": "Vườn quốc gia Bến En",
+    "province": "Thanh Hóa",
+    "query": "Vườn quốc gia Bến En Thanh Hóa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1385,
+    "name": "Khu di tích Quốc gia Đặc biệt Kim Liên (Quê Bác)",
+    "province": "Nghệ An",
+    "query": "Khu di tích Quốc gia Đặc biệt Kim Liên (Quê Bác) Nghệ An",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1386,
+    "name": "Khu di tích Truông Bồn",
+    "province": "Nghệ An",
+    "query": "Khu di tích Truông Bồn Nghệ An",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1387,
+    "name": "Thành cổ Vinh",
+    "province": "Nghệ An",
+    "query": "Thành cổ Vinh Nghệ An",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1388,
+    "name": "Đền Cuông (Thờ Thục Phán An Dương Vương)",
+    "province": "Nghệ An",
+    "query": "Đền Cuông (Thờ Thục Phán An Dương Vương) Nghệ An",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1389,
+    "name": "Đền Ông Hoàng Mười (Mỏ Hạc Linh Từ)",
+    "province": "Nghệ An",
+    "query": "Đền Ông Hoàng Mười (Mỏ Hạc Linh Từ) Nghệ An",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1390,
+    "name": "Đền Cờn",
+    "province": "Nghệ An",
+    "query": "Đền Cờn Nghệ An",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1391,
+    "name": "Chùa Đại Tuệ",
+    "province": "Nghệ An",
+    "query": "Chùa Đại Tuệ Nghệ An",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1392,
+    "name": "Bãi biển Cửa Lò",
+    "province": "Nghệ An",
+    "query": "Bãi biển Cửa Lò Nghệ An",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1393,
+    "name": "Vườn quốc gia Pù Mát",
+    "province": "Nghệ An",
+    "query": "Vườn quốc gia Pù Mát Nghệ An",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1394,
+    "name": "Đồi chè Thanh Chương",
+    "province": "Nghệ An",
+    "query": "Đồi chè Thanh Chương Nghệ An",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1395,
+    "name": "Cánh đồng hoa hướng dương Nghĩa Đàn",
+    "province": "Nghệ An",
+    "query": "Cánh đồng hoa hướng dương Nghĩa Đàn Nghệ An",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1396,
+    "name": "Khu di tích Đại thi hào Nguyễn Du",
+    "province": "Hà Tĩnh",
+    "query": "Khu di tích Đại thi hào Nguyễn Du Hà Tĩnh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1397,
+    "name": "Khu di tích Ngã ba Đồng Lộc",
+    "province": "Hà Tĩnh",
+    "query": "Khu di tích Ngã ba Đồng Lộc Hà Tĩnh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1398,
+    "name": "Khu di tích Tổng bí thư Trần Phú",
+    "province": "Hà Tĩnh",
+    "query": "Khu di tích Tổng bí thư Trần Phú Hà Tĩnh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1399,
+    "name": "Chùa Hương Tích (Hà Tĩnh)",
+    "province": "Hà Tĩnh",
+    "query": "Chùa Hương Tích (Hà Tĩnh) Hà Tĩnh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1400,
+    "name": "Đền Chợ Củi (Đền Quan Hoàng Mười)",
+    "province": "Hà Tĩnh",
+    "query": "Đền Chợ Củi (Đền Quan Hoàng Mười) Hà Tĩnh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1401,
+    "name": "Đền thờ Chiêu Trưng Đại vương Lê Khôi",
+    "province": "Hà Tĩnh",
+    "query": "Đền thờ Chiêu Trưng Đại vương Lê Khôi Hà Tĩnh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1402,
+    "name": "Bãi biển Thiên Cầm",
+    "province": "Hà Tĩnh",
+    "query": "Bãi biển Thiên Cầm Hà Tĩnh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1403,
+    "name": "Hồ Kẻ Gỗ",
+    "province": "Hà Tĩnh",
+    "query": "Hồ Kẻ Gỗ Hà Tĩnh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1404,
+    "name": "Dãy núi Hồng Lĩnh",
+    "province": "Hà Tĩnh",
+    "query": "Dãy núi Hồng Lĩnh Hà Tĩnh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1405,
+    "name": "Bãi biển Xuân Thành",
+    "province": "Hà Tĩnh",
+    "query": "Bãi biển Xuân Thành Hà Tĩnh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1406,
+    "name": "Suối khoáng nóng Sơn Kim",
+    "province": "Hà Tĩnh",
+    "query": "Suối khoáng nóng Sơn Kim Hà Tĩnh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1407,
+    "name": "Vườn quốc gia Phong Nha – Kẻ Bàng",
+    "province": "Quảng Bình",
+    "query": "Vườn quốc gia Phong Nha – Kẻ Bàng Quảng Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1408,
+    "name": "Động Phong Nha",
+    "province": "Quảng Bình",
+    "query": "Động Phong Nha Quảng Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1409,
+    "name": "Động Thiên Đường",
+    "province": "Quảng Bình",
+    "query": "Động Thiên Đường Quảng Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1410,
+    "name": "Hang Sơn Đoòng",
+    "province": "Quảng Bình",
+    "query": "Hang Sơn Đoòng Quảng Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1411,
+    "name": "Động Tiên Sơn (Quảng Bình)",
+    "province": "Quảng Bình",
+    "query": "Động Tiên Sơn (Quảng Bình) Quảng Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1412,
+    "name": "Suối Nước Moọc",
+    "province": "Quảng Bình",
+    "query": "Suối Nước Moọc Quảng Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1413,
+    "name": "Bãi biển Nhật Lệ",
+    "province": "Quảng Bình",
+    "query": "Bãi biển Nhật Lệ Quảng Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1414,
+    "name": "Bãi Đá Nhảy Quảng Bình",
+    "province": "Quảng Bình",
+    "query": "Bãi Đá Nhảy Quảng Bình Quảng Bình",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1415,
+    "name": "Khu lăng mộ Đại tướng Võ Nguyên Giáp",
+    "province": "Quảng Bình",
+    "query": "Khu lăng mộ Đại tướng Võ Nguyên Giáp Quảng Bình",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1416,
+    "name": "Quảng Bình quan",
+    "province": "Quảng Bình",
+    "query": "Quảng Bình quan Quảng Bình",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1417,
+    "name": "Thành Đồng Hới",
+    "province": "Quảng Bình",
+    "query": "Thành Đồng Hới Quảng Bình",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1418,
+    "name": "Chùa Hoằng Phúc",
+    "province": "Quảng Bình",
+    "query": "Chùa Hoằng Phúc Quảng Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1419,
+    "name": "Chùa Đại Giác Quảng Bình",
+    "province": "Quảng Bình",
+    "query": "Chùa Đại Giác Quảng Bình Quảng Bình",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1420,
+    "name": "Thành cổ Quảng Trị",
+    "province": "Quảng Trị",
+    "query": "Thành cổ Quảng Trị Quảng Trị",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1421,
+    "name": "Địa đạo Vịnh Mốc",
+    "province": "Quảng Trị",
+    "query": "Địa đạo Vịnh Mốc Quảng Trị",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1422,
+    "name": "Cầu Hiền Lương - Sông Bến Hải (Vĩ tuyến 17)",
+    "province": "Quảng Trị",
+    "query": "Cầu Hiền Lương - Sông Bến Hải (Vĩ tuyến 17) Quảng Trị",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1423,
+    "name": "Nghĩa trang Liệt sĩ Quốc gia Trường Sơn",
+    "province": "Quảng Trị",
+    "query": "Nghĩa trang Liệt sĩ Quốc gia Trường Sơn Quảng Trị",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1424,
+    "name": "Nghĩa trang Liệt sĩ Quốc gia Đường 9",
+    "province": "Quảng Trị",
+    "query": "Nghĩa trang Liệt sĩ Quốc gia Đường 9 Quảng Trị",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1425,
+    "name": "Sân bay Tà Cơn & Căn cứ Khe Sanh",
+    "province": "Quảng Trị",
+    "query": "Sân bay Tà Cơn & Căn cứ Khe Sanh Quảng Trị",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1426,
+    "name": "Thánh địa La Vang",
+    "province": "Quảng Trị",
+    "query": "Thánh địa La Vang Quảng Trị",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1427,
+    "name": "Chùa Sắc Tứ Tịnh Quang",
+    "province": "Quảng Trị",
+    "query": "Chùa Sắc Tứ Tịnh Quang Quảng Trị",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1428,
+    "name": "Đảo Cồn Cỏ",
+    "province": "Quảng Trị",
+    "query": "Đảo Cồn Cỏ Quảng Trị",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1429,
+    "name": "Bãi biển Cửa Tùng",
+    "province": "Quảng Trị",
+    "query": "Bãi biển Cửa Tùng Quảng Trị",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1430,
+    "name": "Bãi biển Cửa Việt",
+    "province": "Quảng Trị",
+    "query": "Bãi biển Cửa Việt Quảng Trị",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1431,
+    "name": "Suối nước nóng Klu",
+    "province": "Quảng Trị",
+    "query": "Suối nước nóng Klu Quảng Trị",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1432,
+    "name": "Quần thể di tích Cố đô Huế",
+    "province": "Thừa Thiên Huế",
+    "query": "Quần thể di tích Cố đô Huế Thừa Thiên Huế",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1433,
+    "name": "Đại Nội Huế (Hoàng thành & Tử Cấm Thành)",
+    "province": "Thừa Thiên Huế",
+    "query": "Đại Nội Huế (Hoàng thành & Tử Cấm Thành) Thừa Thiên Huế",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1434,
+    "name": "Lăng Khải Định (Ứng Lăng)",
+    "province": "Thừa Thiên Huế",
+    "query": "Lăng Khải Định (Ứng Lăng) Thừa Thiên Huế",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1435,
+    "name": "Lăng Tự Đức (Khiêm Lăng)",
+    "province": "Thừa Thiên Huế",
+    "query": "Lăng Tự Đức (Khiêm Lăng) Thừa Thiên Huế",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1436,
+    "name": "Lăng Minh Mạng (Hiếu Lăng)",
+    "province": "Thừa Thiên Huế",
+    "query": "Lăng Minh Mạng (Hiếu Lăng) Thừa Thiên Huế",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1437,
+    "name": "Chùa Thiên Mụ",
+    "province": "Thừa Thiên Huế",
+    "query": "Chùa Thiên Mụ Thừa Thiên Huế",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1438,
+    "name": "Chùa Từ Đàm",
+    "province": "Thừa Thiên Huế",
+    "query": "Chùa Từ Đàm Thừa Thiên Huế",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1439,
+    "name": "Chùa Huyền Không Sơn Thượng",
+    "province": "Thừa Thiên Huế",
+    "query": "Chùa Huyền Không Sơn Thượng Thừa Thiên Huế",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1440,
+    "name": "Sông Hương & Cầu Tràng Tiền",
+    "province": "Thừa Thiên Huế",
+    "query": "Sông Hương & Cầu Tràng Tiền Thừa Thiên Huế",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1441,
+    "name": "Đồi Vọng Cảnh",
+    "province": "Thừa Thiên Huế",
+    "query": "Đồi Vọng Cảnh Thừa Thiên Huế",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1442,
+    "name": "Vườn quốc gia Bạch Mã",
+    "province": "Thừa Thiên Huế",
+    "query": "Vườn quốc gia Bạch Mã Thừa Thiên Huế",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1443,
+    "name": "Vịnh Lăng Cô",
+    "province": "Thừa Thiên Huế",
+    "query": "Vịnh Lăng Cô Thừa Thiên Huế",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1444,
+    "name": "Phá Tam Giang",
+    "province": "Thừa Thiên Huế",
+    "query": "Phá Tam Giang Thừa Thiên Huế",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1445,
+    "name": "Danh thắng Ngũ Hành Sơn",
+    "province": "Đà Nẵng",
+    "query": "Danh thắng Ngũ Hành Sơn Đà Nẵng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1446,
+    "name": "Bảo tàng Điêu khắc Chăm Đà Nẵng",
+    "province": "Đà Nẵng",
+    "query": "Bảo tàng Điêu khắc Chăm Đà Nẵng Đà Nẵng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1447,
+    "name": "Thành Điện Hải",
+    "province": "Đà Nẵng",
+    "query": "Thành Điện Hải Đà Nẵng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1448,
+    "name": "Chùa Linh Ứng Bãi Bụt (Sơn Trà)",
+    "province": "Đà Nẵng",
+    "query": "Chùa Linh Ứng Bãi Bụt (Sơn Trà) Đà Nẵng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1449,
+    "name": "Chùa Tam Thai (Ngũ Hành Sơn)",
+    "province": "Đà Nẵng",
+    "query": "Chùa Tam Thai (Ngũ Hành Sơn) Đà Nẵng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1450,
+    "name": "Chùa Pháp Lâm Đà Nẵng",
+    "province": "Đà Nẵng",
+    "query": "Chùa Pháp Lâm Đà Nẵng Đà Nẵng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1451,
+    "name": "Bà Nà Hills & Cầu Vàng",
+    "province": "Đà Nẵng",
+    "query": "Bà Nà Hills & Cầu Vàng Đà Nẵng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1452,
+    "name": "Bãi biển Mỹ Khê",
+    "province": "Đà Nẵng",
+    "query": "Bãi biển Mỹ Khê Đà Nẵng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1453,
+    "name": "Cầu Rồng Đà Nẵng",
+    "province": "Đà Nẵng",
+    "query": "Cầu Rồng Đà Nẵng Đà Nẵng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1454,
+    "name": "Bán đảo Sơn Trà & Đỉnh Bàn Cờ",
+    "province": "Đà Nẵng",
+    "query": "Bán đảo Sơn Trà & Đỉnh Bàn Cờ Đà Nẵng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1455,
+    "name": "Cầu Sông Hàn",
+    "province": "Đà Nẵng",
+    "query": "Cầu Sông Hàn Đà Nẵng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1456,
+    "name": "Đèo Hải Vân",
+    "province": "Đà Nẵng",
+    "query": "Đèo Hải Vân Đà Nẵng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1457,
+    "name": "Suối khoáng nóng Núi Thần Tài",
+    "province": "Đà Nẵng",
+    "query": "Suối khoáng nóng Núi Thần Tài Đà Nẵng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1458,
+    "name": "Phố cổ Hội An",
+    "province": "Quảng Nam",
+    "query": "Phố cổ Hội An Quảng Nam",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1459,
+    "name": "Thánh địa Mỹ Sơn",
+    "province": "Quảng Nam",
+    "query": "Thánh địa Mỹ Sơn Quảng Nam",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1460,
+    "name": "Chùa Cầu Hội An (Lai Viễn Kiều)",
+    "province": "Quảng Nam",
+    "query": "Chùa Cầu Hội An (Lai Viễn Kiều) Quảng Nam",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1461,
+    "name": "Tượng đài Mẹ Thứ",
+    "province": "Quảng Nam",
+    "query": "Tượng đài Mẹ Thứ Quảng Nam",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1462,
+    "name": "Cù Lao Chàm",
+    "province": "Quảng Nam",
+    "query": "Cù Lao Chàm Quảng Nam",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1463,
+    "name": "Hồ Phú Ninh",
+    "province": "Quảng Nam",
+    "query": "Hồ Phú Ninh Quảng Nam",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1464,
+    "name": "Làng gốm Thanh Hà",
+    "province": "Quảng Nam",
+    "query": "Làng gốm Thanh Hà Quảng Nam",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1465,
+    "name": "Làng rau Trà Quế",
+    "province": "Quảng Nam",
+    "query": "Làng rau Trà Quế Quảng Nam",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1466,
+    "name": "Rừng dừa Bảy Mẫu Cẩm Thanh",
+    "province": "Quảng Nam",
+    "query": "Rừng dừa Bảy Mẫu Cẩm Thanh Quảng Nam",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1467,
+    "name": "Bãi biển An Bàng",
+    "province": "Quảng Nam",
+    "query": "Bãi biển An Bàng Quảng Nam",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1468,
+    "name": "Đỉnh Quế Tây Giang",
+    "province": "Quảng Nam",
+    "query": "Đỉnh Quế Tây Giang Quảng Nam",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1469,
+    "name": "Chùa Chúc Thánh Hội An",
+    "province": "Quảng Nam",
+    "query": "Chùa Chúc Thánh Hội An Quảng Nam",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1470,
+    "name": "Chùa Vạn Đức Hội An",
+    "province": "Quảng Nam",
+    "query": "Chùa Vạn Đức Hội An Quảng Nam",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1471,
+    "name": "Khu chứng tích Sơn Mỹ (Thảm sát Mỹ Lai)",
+    "province": "Quảng Ngãi",
+    "query": "Khu chứng tích Sơn Mỹ (Thảm sát Mỹ Lai) Quảng Ngãi",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1472,
+    "name": "Bệnh xá Đặng Thùy Trâm",
+    "province": "Quảng Ngãi",
+    "query": "Bệnh xá Đặng Thùy Trâm Quảng Ngãi",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1473,
+    "name": "Khu di tích Khởi nghĩa Ba Tơ",
+    "province": "Quảng Ngãi",
+    "query": "Khu di tích Khởi nghĩa Ba Tơ Quảng Ngãi",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1474,
+    "name": "Chùa Thiên Ấn & Mộ cụ Huỳnh Thúc Kháng",
+    "province": "Quảng Ngãi",
+    "query": "Chùa Thiên Ấn & Mộ cụ Huỳnh Thúc Kháng Quảng Ngãi",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1475,
+    "name": "Chùa Hang Lý Sơn (Thiên Khổng Thạch Tự)",
+    "province": "Quảng Ngãi",
+    "query": "Chùa Hang Lý Sơn (Thiên Khổng Thạch Tự) Quảng Ngãi",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1476,
+    "name": "Đảo Lý Sơn (Vương quốc Tỏi)",
+    "province": "Quảng Ngãi",
+    "query": "Đảo Lý Sơn (Vương quốc Tỏi) Quảng Ngãi",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1477,
+    "name": "Đỉnh Thới Lới & Cổng Tò Vò Lý Sơn",
+    "province": "Quảng Ngãi",
+    "query": "Đỉnh Thới Lới & Cổng Tò Vò Lý Sơn Quảng Ngãi",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1478,
+    "name": "Đảo Bé An Bình (Lý Sơn)",
+    "province": "Quảng Ngãi",
+    "query": "Đảo Bé An Bình (Lý Sơn) Quảng Ngãi",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1479,
+    "name": "Bãi biển Mỹ Khê Quảng Ngãi",
+    "province": "Quảng Ngãi",
+    "query": "Bãi biển Mỹ Khê Quảng Ngãi Quảng Ngãi",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1480,
+    "name": "Đèo Vi Ô Lắc",
+    "province": "Quảng Ngãi",
+    "query": "Đèo Vi Ô Lắc Quảng Ngãi",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1481,
+    "name": "Thác Trắng Minh Long",
+    "province": "Quảng Ngãi",
+    "query": "Thác Trắng Minh Long Quảng Ngãi",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1482,
+    "name": "Tháp Đôi",
+    "province": "Bình Định",
+    "query": "Tháp Đôi Bình Định",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1483,
+    "name": "Tháp Bánh Ít",
+    "province": "Bình Định",
+    "query": "Tháp Bánh Ít Bình Định",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1484,
+    "name": "Tháp Dương Long",
+    "province": "Bình Định",
+    "query": "Tháp Dương Long Bình Định",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1485,
+    "name": "Thành Hoàng Đế",
+    "province": "Bình Định",
+    "query": "Thành Hoàng Đế Bình Định",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1486,
+    "name": "Bảo tàng Quang Trung & Đền thờ Tây Sơn Tam Kiệt",
+    "province": "Bình Định",
+    "query": "Bảo tàng Quang Trung & Đền thờ Tây Sơn Tam Kiệt Bình Định",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1487,
+    "name": "Tiểu chủng viện Làng Sông",
+    "province": "Bình Định",
+    "query": "Tiểu chủng viện Làng Sông Bình Định",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1488,
+    "name": "Chùa Thiên Hưng (Bình Định)",
+    "province": "Bình Định",
+    "query": "Chùa Thiên Hưng (Bình Định) Bình Định",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1489,
+    "name": "Chùa Long Khánh Quy Nhơn",
+    "province": "Bình Định",
+    "query": "Chùa Long Khánh Quy Nhơn Bình Định",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1490,
+    "name": "Kỳ Co – Eo Gió (Quy Nhơn)",
+    "province": "Bình Định",
+    "query": "Kỳ Co – Eo Gió (Quy Nhơn) Bình Định",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1491,
+    "name": "Ghềnh Ráng Tiên Sa & Mộ thi sĩ Hàn Mặc Tử",
+    "province": "Bình Định",
+    "query": "Ghềnh Ráng Tiên Sa & Mộ thi sĩ Hàn Mặc Tử Bình Định",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1492,
+    "name": "Hòn Khô (Nhơn Hải)",
+    "province": "Bình Định",
+    "query": "Hòn Khô (Nhơn Hải) Bình Định",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1493,
+    "name": "Cù Lao Xanh",
+    "province": "Bình Định",
+    "query": "Cù Lao Xanh Bình Định",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1494,
+    "name": "Đầm Thị Nại & Cầu Thị Nại",
+    "province": "Bình Định",
+    "query": "Đầm Thị Nại & Cầu Thị Nại Bình Định",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1495,
+    "name": "Gành Đá Đĩa",
+    "province": "Phú Yên",
+    "query": "Gành Đá Đĩa Phú Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1496,
+    "name": "Mũi Điện (Mũi Đại Lãnh - Bãi Môn)",
+    "province": "Phú Yên",
+    "query": "Mũi Điện (Mũi Đại Lãnh - Bãi Môn) Phú Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1497,
+    "name": "Bãi Xép - Gành Ông (Hoa vàng trên cỏ xanh)",
+    "province": "Phú Yên",
+    "query": "Bãi Xép - Gành Ông (Hoa vàng trên cỏ xanh) Phú Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1498,
+    "name": "Đầm Ô Loan",
+    "province": "Phú Yên",
+    "query": "Đầm Ô Loan Phú Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1499,
+    "name": "Vịnh Vũng Rô & Di tích Tàu Không Số",
+    "province": "Phú Yên",
+    "query": "Vịnh Vũng Rô & Di tích Tàu Không Số Phú Yên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1500,
+    "name": "Tháp Nhạn Tuy Hòa",
+    "province": "Phú Yên",
+    "query": "Tháp Nhạn Tuy Hòa Phú Yên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1501,
+    "name": "Nhà thờ Mằng Lăng",
+    "province": "Phú Yên",
+    "query": "Nhà thờ Mằng Lăng Phú Yên",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1502,
+    "name": "Cầu gỗ Ông Cọp",
+    "province": "Phú Yên",
+    "query": "Cầu gỗ Ông Cọp Phú Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1503,
+    "name": "Đảo Nhất Tự Sơn",
+    "province": "Phú Yên",
+    "query": "Đảo Nhất Tự Sơn Phú Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1504,
+    "name": "Tháp Nghinh Phong Tuy Hòa",
+    "province": "Phú Yên",
+    "query": "Tháp Nghinh Phong Tuy Hòa Phú Yên",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1505,
+    "name": "Chùa Đá Trắng (Bạch Thạch Tự)",
+    "province": "Phú Yên",
+    "query": "Chùa Đá Trắng (Bạch Thạch Tự) Phú Yên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1506,
+    "name": "Chùa Bảo Lâm Tuy Hòa",
+    "province": "Phú Yên",
+    "query": "Chùa Bảo Lâm Tuy Hòa Phú Yên",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1507,
+    "name": "Tháp Bà Ponagar",
+    "province": "Khánh Hòa",
+    "query": "Tháp Bà Ponagar Khánh Hòa",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1508,
+    "name": "Thành cổ Diên Khánh",
+    "province": "Khánh Hòa",
+    "query": "Thành cổ Diên Khánh Khánh Hòa",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1509,
+    "name": "Viện Hải dương học Nha Trang",
+    "province": "Khánh Hòa",
+    "query": "Viện Hải dương học Nha Trang Khánh Hòa",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1510,
+    "name": "Chùa Long Sơn (Chùa Phật Trắng)",
+    "province": "Khánh Hòa",
+    "query": "Chùa Long Sơn (Chùa Phật Trắng) Khánh Hòa",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1511,
+    "name": "Chùa Từ Vân (Chùa Ốc Cam Ranh)",
+    "province": "Khánh Hòa",
+    "query": "Chùa Từ Vân (Chùa Ốc Cam Ranh) Khánh Hòa",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1512,
+    "name": "Nhà thờ Núi Nha Trang (Chánh tòa)",
+    "province": "Khánh Hòa",
+    "query": "Nhà thờ Núi Nha Trang (Chánh tòa) Khánh Hòa",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1513,
+    "name": "Vịnh Nha Trang",
+    "province": "Khánh Hòa",
+    "query": "Vịnh Nha Trang Khánh Hòa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1514,
+    "name": "VinWonders Nha Trang (Hòn Tre)",
+    "province": "Khánh Hòa",
+    "query": "VinWonders Nha Trang (Hòn Tre) Khánh Hòa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1515,
+    "name": "Đảo Điệp Sơn",
+    "province": "Khánh Hòa",
+    "query": "Đảo Điệp Sơn Khánh Hòa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1516,
+    "name": "Đảo Bình Hưng",
+    "province": "Khánh Hòa",
+    "query": "Đảo Bình Hưng Khánh Hòa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1517,
+    "name": "Vịnh Vân Phong",
+    "province": "Khánh Hòa",
+    "query": "Vịnh Vân Phong Khánh Hòa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1518,
+    "name": "Bãi Dài Cam Ranh",
+    "province": "Khánh Hòa",
+    "query": "Bãi Dài Cam Ranh Khánh Hòa",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1519,
+    "name": "Tháp Po Klong Garai",
+    "province": "Ninh Thuận",
+    "query": "Tháp Po Klong Garai Ninh Thuận",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1520,
+    "name": "Tháp Po Rome",
+    "province": "Ninh Thuận",
+    "query": "Tháp Po Rome Ninh Thuận",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1521,
+    "name": "Vịnh Vĩnh Hy",
+    "province": "Ninh Thuận",
+    "query": "Vịnh Vĩnh Hy Ninh Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1522,
+    "name": "Hang Rái (Núi Chúa)",
+    "province": "Ninh Thuận",
+    "query": "Hang Rái (Núi Chúa) Ninh Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1523,
+    "name": "Đồng cừu An Hòa",
+    "province": "Ninh Thuận",
+    "query": "Đồng cừu An Hòa Ninh Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1524,
+    "name": "Đồi cát Nam Cương",
+    "province": "Ninh Thuận",
+    "query": "Đồi cát Nam Cương Ninh Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1525,
+    "name": "Vườn quốc gia Núi Chúa",
+    "province": "Ninh Thuận",
+    "query": "Vườn quốc gia Núi Chúa Ninh Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1526,
+    "name": "Bãi biển Ninh Chữ",
+    "province": "Ninh Thuận",
+    "query": "Bãi biển Ninh Chữ Ninh Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1527,
+    "name": "Vườn nho Ba Mọi",
+    "province": "Ninh Thuận",
+    "query": "Vườn nho Ba Mọi Ninh Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1528,
+    "name": "Mũi Dinh & Hải đăng Mũi Dinh",
+    "province": "Ninh Thuận",
+    "query": "Mũi Dinh & Hải đăng Mũi Dinh Ninh Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1529,
+    "name": "Thiền viện Trúc Lâm Viên Ngộ",
+    "province": "Ninh Thuận",
+    "query": "Thiền viện Trúc Lâm Viên Ngộ Ninh Thuận",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1530,
+    "name": "Chùa Trùng Khánh",
+    "province": "Ninh Thuận",
+    "query": "Chùa Trùng Khánh Ninh Thuận",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1531,
+    "name": "Hải đăng Kê Gà",
+    "province": "Bình Thuận",
+    "query": "Hải đăng Kê Gà Bình Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1532,
+    "name": "Bàu Trắng (Đồi Cát Trắng & Hồ Sen)",
+    "province": "Bình Thuận",
+    "query": "Bàu Trắng (Đồi Cát Trắng & Hồ Sen) Bình Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1533,
+    "name": "Tháp Po Sah Inư",
+    "province": "Bình Thuận",
+    "query": "Tháp Po Sah Inư Bình Thuận",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1534,
+    "name": "Trường Dục Thanh",
+    "province": "Bình Thuận",
+    "query": "Trường Dục Thanh Bình Thuận",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1535,
+    "name": "Vạn Thủy Tú",
+    "province": "Bình Thuận",
+    "query": "Vạn Thủy Tú Bình Thuận",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1536,
+    "name": "Chùa Cổ Thạch (Chùa Hang)",
+    "province": "Bình Thuận",
+    "query": "Chùa Cổ Thạch (Chùa Hang) Bình Thuận",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1537,
+    "name": "Dinh Thầy Thím",
+    "province": "Bình Thuận",
+    "query": "Dinh Thầy Thím Bình Thuận",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1538,
+    "name": "Đồi cát bay Mũi Né",
+    "province": "Bình Thuận",
+    "query": "Đồi cát bay Mũi Né Bình Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1539,
+    "name": "Suối Tiên Mũi Né",
+    "province": "Bình Thuận",
+    "query": "Suối Tiên Mũi Né Bình Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1540,
+    "name": "Đảo Phú Quý",
+    "province": "Bình Thuận",
+    "query": "Đảo Phú Quý Bình Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1541,
+    "name": "Bãi đá Cà Dược (Bãi đá 7 màu)",
+    "province": "Bình Thuận",
+    "query": "Bãi đá Cà Dược (Bãi đá 7 màu) Bình Thuận",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1542,
+    "name": "Nhà thờ Gỗ Kon Tum (Nhà thờ chính tòa)",
+    "province": "Kon Tum",
+    "query": "Nhà thờ Gỗ Kon Tum (Nhà thờ chính tòa) Kon Tum",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1543,
+    "name": "Di tích lịch sử Ngục Kon Tum",
+    "province": "Kon Tum",
+    "query": "Di tích lịch sử Ngục Kon Tum Kon Tum",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1544,
+    "name": "Chiến trường Đắk Tô – Tân Cảnh",
+    "province": "Kon Tum",
+    "query": "Chiến trường Đắk Tô – Tân Cảnh Kon Tum",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1545,
+    "name": "Chùa Bác Ái Kon Tum",
+    "province": "Kon Tum",
+    "query": "Chùa Bác Ái Kon Tum Kon Tum",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1546,
+    "name": "Tượng Đức Mẹ Măng Đen",
+    "province": "Kon Tum",
+    "query": "Tượng Đức Mẹ Măng Đen Kon Tum",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1547,
+    "name": "Cầu treo Kon Klor & Nhà rông Kon Klor",
+    "province": "Kon Tum",
+    "query": "Cầu treo Kon Klor & Nhà rông Kon Klor Kon Tum",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1548,
+    "name": "Khu du lịch sinh thái Măng Đen",
+    "province": "Kon Tum",
+    "query": "Khu du lịch sinh thái Măng Đen Kon Tum",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1549,
+    "name": "Thác Pa Sỹ Măng Đen",
+    "province": "Kon Tum",
+    "query": "Thác Pa Sỹ Măng Đen Kon Tum",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1550,
+    "name": "Hồ Đăk Ke Măng Đen",
+    "province": "Kon Tum",
+    "query": "Hồ Đăk Ke Măng Đen Kon Tum",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1551,
+    "name": "Ngã ba Đông Dương (Cửa khẩu Bờ Y)",
+    "province": "Kon Tum",
+    "query": "Ngã ba Đông Dương (Cửa khẩu Bờ Y) Kon Tum",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1552,
+    "name": "Vườn quốc gia Chư Mom Ray",
+    "province": "Kon Tum",
+    "query": "Vườn quốc gia Chư Mom Ray Kon Tum",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1553,
+    "name": "Quảng trường Đại Đoàn Kết Pleiku",
+    "province": "Gia Lai",
+    "query": "Quảng trường Đại Đoàn Kết Pleiku Gia Lai",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1554,
+    "name": "Di tích lịch sử Nhà lao Pleiku",
+    "province": "Gia Lai",
+    "query": "Di tích lịch sử Nhà lao Pleiku Gia Lai",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1555,
+    "name": "Di tích Tây Sơn Thượng Đạo (An Khê)",
+    "province": "Gia Lai",
+    "query": "Di tích Tây Sơn Thượng Đạo (An Khê) Gia Lai",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1556,
+    "name": "Chùa Minh Thành Gia Lai",
+    "province": "Gia Lai",
+    "query": "Chùa Minh Thành Gia Lai Gia Lai",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1557,
+    "name": "Chùa Bửu Minh (Đồi chè Biển Hồ)",
+    "province": "Gia Lai",
+    "query": "Chùa Bửu Minh (Đồi chè Biển Hồ) Gia Lai",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1558,
+    "name": "Biển Hồ T'Nưng (Đôi mắt Pleiku)",
+    "province": "Gia Lai",
+    "query": "Biển Hồ T'Nưng (Đôi mắt Pleiku) Gia Lai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1559,
+    "name": "Núi lửa Chư Đăng Ya",
+    "province": "Gia Lai",
+    "query": "Núi lửa Chư Đăng Ya Gia Lai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1560,
+    "name": "Thác Phú Cường",
+    "province": "Gia Lai",
+    "query": "Thác Phú Cường Gia Lai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1561,
+    "name": "Đồi chè Biển Hồ Gia Lai",
+    "province": "Gia Lai",
+    "query": "Đồi chè Biển Hồ Gia Lai Gia Lai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1562,
+    "name": "Thác K50 (Khu bảo tồn Kon Chư Răng)",
+    "province": "Gia Lai",
+    "query": "Thác K50 (Khu bảo tồn Kon Chư Răng) Gia Lai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1563,
+    "name": "Vườn quốc gia Kon Ka Kinh",
+    "province": "Gia Lai",
+    "query": "Vườn quốc gia Kon Ka Kinh Gia Lai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1564,
+    "name": "Bảo tàng Thế giới Cà phê Buôn Ma Thuột",
+    "province": "Đắk Lắk",
+    "query": "Bảo tàng Thế giới Cà phê Buôn Ma Thuột Đắk Lắk",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1565,
+    "name": "Nhà đày Buôn Ma Thuột",
+    "province": "Đắk Lắk",
+    "query": "Nhà đày Buôn Ma Thuột Đắk Lắk",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1566,
+    "name": "Biệt điện Bảo Đại Đắk Lắk",
+    "province": "Đắk Lắk",
+    "query": "Biệt điện Bảo Đại Đắk Lắk Đắk Lắk",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1567,
+    "name": "Chùa Sắc Tứ Khải Đoan",
+    "province": "Đắk Lắk",
+    "query": "Chùa Sắc Tứ Khải Đoan Đắk Lắk",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1568,
+    "name": "Chùa Hoa Nghiêm Buôn Ma Thuột",
+    "province": "Đắk Lắk",
+    "query": "Chùa Hoa Nghiêm Buôn Ma Thuột Đắk Lắk",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1569,
+    "name": "Thác Dray Nur",
+    "province": "Đắk Lắk",
+    "query": "Thác Dray Nur Đắk Lắk",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1570,
+    "name": "Thác Dray Sap",
+    "province": "Đắk Lắk",
+    "query": "Thác Dray Sap Đắk Lắk",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1571,
+    "name": "Hồ Lắk & Buôn Jun",
+    "province": "Đắk Lắk",
+    "query": "Hồ Lắk & Buôn Jun Đắk Lắk",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1572,
+    "name": "Buôn Đôn (Bản Đôn quê hương Voi)",
+    "province": "Đắk Lắk",
+    "query": "Buôn Đôn (Bản Đôn quê hương Voi) Đắk Lắk",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1573,
+    "name": "Vườn quốc gia Yok Đôn",
+    "province": "Đắk Lắk",
+    "query": "Vườn quốc gia Yok Đôn Đắk Lắk",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1574,
+    "name": "Đá Voi Mẹ Yang Tao",
+    "province": "Đắk Lắk",
+    "query": "Đá Voi Mẹ Yang Tao Đắk Lắk",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1575,
+    "name": "Nhà ngục Đăk Mil",
+    "province": "Đắk Nông",
+    "query": "Nhà ngục Đăk Mil Đắk Nông",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1576,
+    "name": "Tượng đài N'Trang Lơng Gia Nghĩa",
+    "province": "Đắk Nông",
+    "query": "Tượng đài N'Trang Lơng Gia Nghĩa Đắk Nông",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1577,
+    "name": "Chùa Pháp Hoa Đắk Nông",
+    "province": "Đắk Nông",
+    "query": "Chùa Pháp Hoa Đắk Nông Đắk Nông",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1578,
+    "name": "Chùa Hoa Nghiêm Đắk Mil",
+    "province": "Đắk Nông",
+    "query": "Chùa Hoa Nghiêm Đắk Mil Đắk Nông",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1579,
+    "name": "Công viên địa chất toàn cầu UNESCO Đắk Nông",
+    "province": "Đắk Nông",
+    "query": "Công viên địa chất toàn cầu UNESCO Đắk Nông Đắk Nông",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1580,
+    "name": "Hồ Tà Đùng (Vịnh Hạ Long của Tây Nguyên)",
+    "province": "Đắk Nông",
+    "query": "Hồ Tà Đùng (Vịnh Hạ Long của Tây Nguyên) Đắk Nông",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1581,
+    "name": "Thác Liêng Nung",
+    "province": "Đắk Nông",
+    "query": "Thác Liêng Nung Đắk Nông",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1582,
+    "name": "Thác Đray Sáp (Khu vực Đắk Nông)",
+    "province": "Đắk Nông",
+    "query": "Thác Đray Sáp (Khu vực Đắk Nông) Đắk Nông",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1583,
+    "name": "Thác Gia Long",
+    "province": "Đắk Nông",
+    "query": "Thác Gia Long Đắk Nông",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1584,
+    "name": "Thác Trinh Nữ",
+    "province": "Đắk Nông",
+    "query": "Thác Trinh Nữ Đắk Nông",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1585,
+    "name": "Hồ Tây Đắk Mil",
+    "province": "Đắk Nông",
+    "query": "Hồ Tây Đắk Mil Đắk Nông",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1586,
+    "name": "Thác Đắk G'lun",
+    "province": "Đắk Nông",
+    "query": "Thác Đắk G'lun Đắk Nông",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1587,
+    "name": "Dinh III Bảo Đại",
+    "province": "Lâm Đồng",
+    "query": "Dinh III Bảo Đại Lâm Đồng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1588,
+    "name": "Dinh I Bảo Đại (King Palace)",
+    "province": "Lâm Đồng",
+    "query": "Dinh I Bảo Đại (King Palace) Lâm Đồng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1589,
+    "name": "Ga Đà Lạt",
+    "province": "Lâm Đồng",
+    "query": "Ga Đà Lạt Lâm Đồng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1590,
+    "name": "Thiền viện Trúc Lâm Đà Lạt",
+    "province": "Lâm Đồng",
+    "query": "Thiền viện Trúc Lâm Đà Lạt Lâm Đồng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1591,
+    "name": "Chùa Linh Phước (Chùa Ve Chai)",
+    "province": "Lâm Đồng",
+    "query": "Chùa Linh Phước (Chùa Ve Chai) Lâm Đồng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1592,
+    "name": "Chùa Linh Quy Pháp Ấn (Bảo Lộc)",
+    "province": "Lâm Đồng",
+    "query": "Chùa Linh Quy Pháp Ấn (Bảo Lộc) Lâm Đồng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1593,
+    "name": "Chùa Tàu (Thiên Vương Cổ Sát)",
+    "province": "Lâm Đồng",
+    "query": "Chùa Tàu (Thiên Vương Cổ Sát) Lâm Đồng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1594,
+    "name": "Hồ Xuân Hương & Quảng trường Lâm Viên",
+    "province": "Lâm Đồng",
+    "query": "Hồ Xuân Hương & Quảng trường Lâm Viên Lâm Đồng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1595,
+    "name": "Thác Datanla",
+    "province": "Lâm Đồng",
+    "query": "Thác Datanla Lâm Đồng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1596,
+    "name": "Thác Pongour",
+    "province": "Lâm Đồng",
+    "query": "Thác Pongour Lâm Đồng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1597,
+    "name": "Thác Dambri (Bảo Lộc)",
+    "province": "Lâm Đồng",
+    "query": "Thác Dambri (Bảo Lộc) Lâm Đồng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1598,
+    "name": "Hồ Tuyền Lâm",
+    "province": "Lâm Đồng",
+    "query": "Hồ Tuyền Lâm Lâm Đồng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1599,
+    "name": "Langbiang (Đỉnh núi Bà Langbiang)",
+    "province": "Lâm Đồng",
+    "query": "Langbiang (Đỉnh núi Bà Langbiang) Lâm Đồng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1600,
+    "name": "Dinh Độc Lập (Hội trường Thống Nhất)",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Dinh Độc Lập (Hội trường Thống Nhất) TP. Hồ Chí Minh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1601,
+    "name": "Nhà thờ Đức Bà Sài Gòn",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Nhà thờ Đức Bà Sài Gòn TP. Hồ Chí Minh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1602,
+    "name": "Bưu điện Trung tâm Sài Gòn",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Bưu điện Trung tâm Sài Gòn TP. Hồ Chí Minh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1603,
+    "name": "Địa đạo Củ Chi",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Địa đạo Củ Chi TP. Hồ Chí Minh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1604,
+    "name": "Bảo tàng Chứng tích Chiến tranh",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Bảo tàng Chứng tích Chiến tranh TP. Hồ Chí Minh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1605,
+    "name": "Chùa Ngọc Hoàng (Phước Hải Tự)",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Chùa Ngọc Hoàng (Phước Hải Tự) TP. Hồ Chí Minh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1606,
+    "name": "Chùa Giác Lâm",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Chùa Giác Lâm TP. Hồ Chí Minh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1607,
+    "name": "Chùa Vĩnh Nghiêm (TP.HCM)",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Chùa Vĩnh Nghiêm (TP.HCM) TP. Hồ Chí Minh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1608,
+    "name": "Miếu Bà Thiên Hậu (Chợ Lớn)",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Miếu Bà Thiên Hậu (Chợ Lớn) TP. Hồ Chí Minh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1609,
+    "name": "Thảo Cầm Viên Sài Gòn",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Thảo Cầm Viên Sài Gòn TP. Hồ Chí Minh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1610,
+    "name": "Khu du lịch văn hóa Suối Tiên",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Khu du lịch văn hóa Suối Tiên TP. Hồ Chí Minh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1611,
+    "name": "Công viên Văn hóa Đầm Sen",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Công viên Văn hóa Đầm Sen TP. Hồ Chí Minh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1612,
+    "name": "Tòa nhà The Landmark 81",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Tòa nhà The Landmark 81 TP. Hồ Chí Minh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1613,
+    "name": "Phố đi bộ Nguyễn Huệ",
+    "province": "TP. Hồ Chí Minh",
+    "query": "Phố đi bộ Nguyễn Huệ TP. Hồ Chí Minh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1614,
+    "name": "Tượng Chúa Kitô Vua Vũng Tàu",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Tượng Chúa Kitô Vua Vũng Tàu Bà Rịa – Vũng Tàu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1615,
+    "name": "Ngọn Hải đăng Vũng Tàu",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Ngọn Hải đăng Vũng Tàu Bà Rịa – Vũng Tàu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1616,
+    "name": "Mũi Nghinh Phong & Bãi Sau",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Mũi Nghinh Phong & Bãi Sau Bà Rịa – Vũng Tàu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1617,
+    "name": "Suối khoáng nóng Bình Châu",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Suối khoáng nóng Bình Châu Bà Rịa – Vũng Tàu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1618,
+    "name": "Khu du lịch Hồ Mây Park",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Khu du lịch Hồ Mây Park Bà Rịa – Vũng Tàu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1619,
+    "name": "Bãi Trước Vũng Tàu",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Bãi Trước Vũng Tàu Bà Rịa – Vũng Tàu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1620,
+    "name": "Bạch Dinh (Villa Blanche)",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Bạch Dinh (Villa Blanche) Bà Rịa – Vũng Tàu",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1621,
+    "name": "Trận địa pháo cổ Núi Lớn",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Trận địa pháo cổ Núi Lớn Bà Rịa – Vũng Tàu",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1622,
+    "name": "Khu di tích Căn cứ Minh Đạm",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Khu di tích Căn cứ Minh Đạm Bà Rịa – Vũng Tàu",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1623,
+    "name": "Niết Bàn Tịnh Xá (Chùa Phật Nằm)",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Niết Bàn Tịnh Xá (Chùa Phật Nằm) Bà Rịa – Vũng Tàu",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1624,
+    "name": "Thích Ca Phật Đài",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Thích Ca Phật Đài Bà Rịa – Vũng Tàu",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1625,
+    "name": "Linh Sơn Cổ Tự (Vũng Tàu)",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Linh Sơn Cổ Tự (Vũng Tàu) Bà Rịa – Vũng Tàu",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1626,
+    "name": "Miếu Hòn Bà Vũng Tàu",
+    "province": "Bà Rịa – Vũng Tàu",
+    "query": "Miếu Hòn Bà Vũng Tàu Bà Rịa – Vũng Tàu",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1627,
+    "name": "Khu du lịch Lạc Cảnh Đại Nam Văn Hiến",
+    "province": "Bình Dương",
+    "query": "Khu du lịch Lạc Cảnh Đại Nam Văn Hiến Bình Dương",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1628,
+    "name": "Khu du lịch sinh thái Thủy Châu",
+    "province": "Bình Dương",
+    "query": "Khu du lịch sinh thái Thủy Châu Bình Dương",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1629,
+    "name": "Làng tre Phú An",
+    "province": "Bình Dương",
+    "query": "Làng tre Phú An Bình Dương",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1630,
+    "name": "Vườn cây ăn trái Lái Thiêu",
+    "province": "Bình Dương",
+    "query": "Vườn cây ăn trái Lái Thiêu Bình Dương",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1631,
+    "name": "Hồ Bình An (Dĩ An)",
+    "province": "Bình Dương",
+    "query": "Hồ Bình An (Dĩ An) Bình Dương",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1632,
+    "name": "Công viên Thành phố mới Bình Dương",
+    "province": "Bình Dương",
+    "query": "Công viên Thành phố mới Bình Dương Bình Dương",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1633,
+    "name": "Làng sơn mài Tương Bình Hiệp",
+    "province": "Bình Dương",
+    "query": "Làng sơn mài Tương Bình Hiệp Bình Dương",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1634,
+    "name": "Di tích Nhà tù Phú Lợi",
+    "province": "Bình Dương",
+    "query": "Di tích Nhà tù Phú Lợi Bình Dương",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1635,
+    "name": "Di tích Chiến khu Đ (Bình Dương)",
+    "province": "Bình Dương",
+    "query": "Di tích Chiến khu Đ (Bình Dương) Bình Dương",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1636,
+    "name": "Chùa Bà Thiên Hậu Bình Dương",
+    "province": "Bình Dương",
+    "query": "Chùa Bà Thiên Hậu Bình Dương Bình Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1637,
+    "name": "Chùa Châu Thới (Chùa trên núi Châu Thới)",
+    "province": "Bình Dương",
+    "query": "Chùa Châu Thới (Chùa trên núi Châu Thới) Bình Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1638,
+    "name": "Chùa Hội Khánh",
+    "province": "Bình Dương",
+    "query": "Chùa Hội Khánh Bình Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1639,
+    "name": "Chùa Tây Tạng (Thủ Dầu Một)",
+    "province": "Bình Dương",
+    "query": "Chùa Tây Tạng (Thủ Dầu Một) Bình Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1640,
+    "name": "Chùa Thái Sơn (Núi Cậu Dầu Tiếng)",
+    "province": "Bình Dương",
+    "query": "Chùa Thái Sơn (Núi Cậu Dầu Tiếng) Bình Dương",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1641,
+    "name": "Vườn quốc gia Bù Gia Mập",
+    "province": "Bình Phước",
+    "query": "Vườn quốc gia Bù Gia Mập Bình Phước",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1642,
+    "name": "Núi Bà Rá & Hồ Thác Mơ",
+    "province": "Bình Phước",
+    "query": "Núi Bà Rá & Hồ Thác Mơ Bình Phước",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1643,
+    "name": "Trảng cỏ Bù Lạch",
+    "province": "Bình Phước",
+    "query": "Trảng cỏ Bù Lạch Bình Phước",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1644,
+    "name": "Thác Đứng (Bù Đăng)",
+    "province": "Bình Phước",
+    "query": "Thác Đứng (Bù Đăng) Bình Phước",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1645,
+    "name": "Thác Voi (Bù Đăng)",
+    "province": "Bình Phước",
+    "query": "Thác Voi (Bù Đăng) Bình Phước",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1646,
+    "name": "Hồ Suối Cam (Đồng Xoài)",
+    "province": "Bình Phước",
+    "query": "Hồ Suối Cam (Đồng Xoài) Bình Phước",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1647,
+    "name": "Khu di tích Căn cứ Tà Thiết (Bộ chỉ huy Miền)",
+    "province": "Bình Phước",
+    "query": "Khu di tích Căn cứ Tà Thiết (Bộ chỉ huy Miền) Bình Phước",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1648,
+    "name": "Khu di tích Chiến thắng Đồng Xoài",
+    "province": "Bình Phước",
+    "query": "Khu di tích Chiến thắng Đồng Xoài Bình Phước",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1649,
+    "name": "Khu di tích lịch sử Phú Riềng Đỏ",
+    "province": "Bình Phước",
+    "query": "Khu di tích lịch sử Phú Riềng Đỏ Bình Phước",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1650,
+    "name": "Mộ tập thể 3.000 người Bình Long",
+    "province": "Bình Phước",
+    "query": "Mộ tập thể 3.000 người Bình Long Bình Phước",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1651,
+    "name": "Chùa Phật Quốc Vạn Thành",
+    "province": "Bình Phước",
+    "query": "Chùa Phật Quốc Vạn Thành Bình Phước",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1652,
+    "name": "Chùa Sóc Lớn (Cổ tự Khmer Chơn Thành)",
+    "province": "Bình Phước",
+    "query": "Chùa Sóc Lớn (Cổ tự Khmer Chơn Thành) Bình Phước",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1653,
+    "name": "Chùa Quang Minh (Đồng Xoài)",
+    "province": "Bình Phước",
+    "query": "Chùa Quang Minh (Đồng Xoài) Bình Phước",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1654,
+    "name": "Vườn quốc gia Cát Tiên",
+    "province": "Đồng Nai",
+    "query": "Vườn quốc gia Cát Tiên Đồng Nai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1655,
+    "name": "Khu du lịch Bửu Long",
+    "province": "Đồng Nai",
+    "query": "Khu du lịch Bửu Long Đồng Nai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1656,
+    "name": "Thác Đá Hàn (Trảng Bom)",
+    "province": "Đồng Nai",
+    "query": "Thác Đá Hàn (Trảng Bom) Đồng Nai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1657,
+    "name": "Thác Giang Điền",
+    "province": "Đồng Nai",
+    "query": "Thác Giang Điền Đồng Nai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1658,
+    "name": "Khu du lịch Suối Mơ (Đồng Nai)",
+    "province": "Đồng Nai",
+    "query": "Khu du lịch Suối Mơ (Đồng Nai) Đồng Nai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1659,
+    "name": "Hồ Trị An & Rừng Mã Đà",
+    "province": "Đồng Nai",
+    "query": "Hồ Trị An & Rừng Mã Đà Đồng Nai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1660,
+    "name": "Núi Chứa Chan (Gia Lào)",
+    "province": "Đồng Nai",
+    "query": "Núi Chứa Chan (Gia Lào) Đồng Nai",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1661,
+    "name": "Văn Miếu Trấn Biên",
+    "province": "Đồng Nai",
+    "query": "Văn Miếu Trấn Biên Đồng Nai",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1662,
+    "name": "Căn cứ Trung ương Cục miền Nam - Chiến khu Đ",
+    "province": "Đồng Nai",
+    "query": "Căn cứ Trung ương Cục miền Nam - Chiến khu Đ Đồng Nai",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1663,
+    "name": "Di tích Mộ cự thạch Hàng Gòn",
+    "province": "Đồng Nai",
+    "query": "Di tích Mộ cự thạch Hàng Gòn Đồng Nai",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1664,
+    "name": "Thành cổ Biên Hòa (Thành Kèn)",
+    "province": "Đồng Nai",
+    "query": "Thành cổ Biên Hòa (Thành Kèn) Đồng Nai",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1665,
+    "name": "Chùa Ông Trấn Biên (Thất Phủ Cổ Miếu)",
+    "province": "Đồng Nai",
+    "query": "Chùa Ông Trấn Biên (Thất Phủ Cổ Miếu) Đồng Nai",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1666,
+    "name": "Chùa Đại Giác (Cù lao Phố)",
+    "province": "Đồng Nai",
+    "query": "Chùa Đại Giác (Cù lao Phố) Đồng Nai",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1667,
+    "name": "Chùa Long Thiền",
+    "province": "Đồng Nai",
+    "query": "Chùa Long Thiền Đồng Nai",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1668,
+    "name": "Thiền viện Trúc Lâm Long Đức",
+    "province": "Đồng Nai",
+    "query": "Thiền viện Trúc Lâm Long Đức Đồng Nai",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1669,
+    "name": "Quần thể Di tích Lịch sử Núi Bà Đen",
+    "province": "Tây Ninh",
+    "query": "Quần thể Di tích Lịch sử Núi Bà Đen Tây Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1670,
+    "name": "Hồ Dầu Tiếng",
+    "province": "Tây Ninh",
+    "query": "Hồ Dầu Tiếng Tây Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1671,
+    "name": "Vườn quốc gia Lò Gò – Xa Mát",
+    "province": "Tây Ninh",
+    "query": "Vườn quốc gia Lò Gò – Xa Mát Tây Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1672,
+    "name": "Khu du lịch sinh thái Long Điền Sơn",
+    "province": "Tây Ninh",
+    "query": "Khu du lịch sinh thái Long Điền Sơn Tây Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1673,
+    "name": "Thung lũng Ma Thiên Lãnh",
+    "province": "Tây Ninh",
+    "query": "Thung lũng Ma Thiên Lãnh Tây Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1674,
+    "name": "Cửa khẩu Quốc tế Mộc Bài",
+    "province": "Tây Ninh",
+    "query": "Cửa khẩu Quốc tế Mộc Bài Tây Ninh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1675,
+    "name": "Khu di tích Căn cứ Trung ương Cục Miền Nam",
+    "province": "Tây Ninh",
+    "query": "Khu di tích Căn cứ Trung ương Cục Miền Nam Tây Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1676,
+    "name": "Tháp Cổ Chót Mạt (Văn hóa Óc Eo)",
+    "province": "Tây Ninh",
+    "query": "Tháp Cổ Chót Mạt (Văn hóa Óc Eo) Tây Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1677,
+    "name": "Tháp Bình Thạnh (Tây Ninh)",
+    "province": "Tây Ninh",
+    "query": "Tháp Bình Thạnh (Tây Ninh) Tây Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1678,
+    "name": "Căn cứ Xứ ủy Nam Bộ - Vườn Mận",
+    "province": "Tây Ninh",
+    "query": "Căn cứ Xứ ủy Nam Bộ - Vườn Mận Tây Ninh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1679,
+    "name": "Tòa Thánh Tây Ninh (Đạo Cao Đài)",
+    "province": "Tây Ninh",
+    "query": "Tòa Thánh Tây Ninh (Đạo Cao Đài) Tây Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1680,
+    "name": "Chùa Bà Tây Ninh (Linh Sơn Tiên Thạch Tự)",
+    "province": "Tây Ninh",
+    "query": "Chùa Bà Tây Ninh (Linh Sơn Tiên Thạch Tự) Tây Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1681,
+    "name": "Chùa Thiền Lâm Gò Kén",
+    "province": "Tây Ninh",
+    "query": "Chùa Thiền Lâm Gò Kén Tây Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1682,
+    "name": "Chùa Khedol (Cổ tự Khmer Tây Ninh)",
+    "province": "Tây Ninh",
+    "query": "Chùa Khedol (Cổ tự Khmer Tây Ninh) Tây Ninh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1683,
+    "name": "Khu du lịch sinh thái Làng nổi Tân Lập",
+    "province": "Long An",
+    "query": "Khu du lịch sinh thái Làng nổi Tân Lập Long An",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1684,
+    "name": "Cánh đồng bất tận (Khu dược liệu Đồng Tháp Mười)",
+    "province": "Long An",
+    "query": "Cánh đồng bất tận (Khu dược liệu Đồng Tháp Mười) Long An",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1685,
+    "name": "Khu du lịch sinh thái Cát Tường Phú Sinh",
+    "province": "Long An",
+    "query": "Khu du lịch sinh thái Cát Tường Phú Sinh Long An",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1686,
+    "name": "Vườn thú Mỹ Quỳnh Safari",
+    "province": "Long An",
+    "query": "Vườn thú Mỹ Quỳnh Safari Long An",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1687,
+    "name": "Khu bảo tồn đất ngập nước Láng Sen",
+    "province": "Long An",
+    "query": "Khu bảo tồn đất ngập nước Láng Sen Long An",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1688,
+    "name": "Khu du lịch sinh thái Chavi Garden",
+    "province": "Long An",
+    "query": "Khu du lịch sinh thái Chavi Garden Long An",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1689,
+    "name": "Khu di tích Nhà Trăm Cột",
+    "province": "Long An",
+    "query": "Khu di tích Nhà Trăm Cột Long An",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1690,
+    "name": "Khu di tích lịch sử Ngã tư Đức Hòa",
+    "province": "Long An",
+    "query": "Khu di tích lịch sử Ngã tư Đức Hòa Long An",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1691,
+    "name": "Đồn Rạch Cát",
+    "province": "Long An",
+    "query": "Đồn Rạch Cát Long An",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1692,
+    "name": "Lăng mộ Nguyễn Huỳnh Đức",
+    "province": "Long An",
+    "query": "Lăng mộ Nguyễn Huỳnh Đức Long An",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1693,
+    "name": "Chùa Tôn Thạnh",
+    "province": "Long An",
+    "query": "Chùa Tôn Thạnh Long An",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1694,
+    "name": "Chùa Nổi (Cổ Sơn Tự - Vĩnh Hưng)",
+    "province": "Long An",
+    "query": "Chùa Nổi (Cổ Sơn Tự - Vĩnh Hưng) Long An",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1695,
+    "name": "Chùa Pháp Minh (Cần Giuộc)",
+    "province": "Long An",
+    "query": "Chùa Pháp Minh (Cần Giuộc) Long An",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1696,
+    "name": "Tổ đình Linh Sơn (Tân An)",
+    "province": "Long An",
+    "query": "Tổ đình Linh Sơn (Tân An) Long An",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1697,
+    "name": "Cù lao Thới Sơn (Cồn Lân)",
+    "province": "Tiền Giang",
+    "query": "Cù lao Thới Sơn (Cồn Lân) Tiền Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1698,
+    "name": "Trại rắn Đồng Tâm",
+    "province": "Tiền Giang",
+    "query": "Trại rắn Đồng Tâm Tiền Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1699,
+    "name": "Biển Tân Thành (Gò Công)",
+    "province": "Tiền Giang",
+    "query": "Biển Tân Thành (Gò Công) Tiền Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1700,
+    "name": "Cù lao Tân Phong (Cai Lậy)",
+    "province": "Tiền Giang",
+    "query": "Cù lao Tân Phong (Cai Lậy) Tiền Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1701,
+    "name": "Miệt vườn Cái Bè",
+    "province": "Tiền Giang",
+    "query": "Miệt vườn Cái Bè Tiền Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1702,
+    "name": "Cồn Tàu (Sông Tiền)",
+    "province": "Tiền Giang",
+    "query": "Cồn Tàu (Sông Tiền) Tiền Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1703,
+    "name": "Khu di tích Chiến thắng Rạch Gầm – Xoài Mút",
+    "province": "Tiền Giang",
+    "query": "Khu di tích Chiến thắng Rạch Gầm – Xoài Mút Tiền Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1704,
+    "name": "Khu di tích Chiến thắng Ấp Bắc",
+    "province": "Tiền Giang",
+    "query": "Khu di tích Chiến thắng Ấp Bắc Tiền Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1705,
+    "name": "Lăng Hoàng Gia (Gò Công)",
+    "province": "Tiền Giang",
+    "query": "Lăng Hoàng Gia (Gò Công) Tiền Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1706,
+    "name": "Lăng Tứ Kiệt (Cai Lậy)",
+    "province": "Tiền Giang",
+    "query": "Lăng Tứ Kiệt (Cai Lậy) Tiền Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1707,
+    "name": "Chùa Vĩnh Tràng",
+    "province": "Tiền Giang",
+    "query": "Chùa Vĩnh Tràng Tiền Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1708,
+    "name": "Chùa Bửu Lâm (Mỹ Tho)",
+    "province": "Tiền Giang",
+    "query": "Chùa Bửu Lâm (Mỹ Tho) Tiền Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1709,
+    "name": "Chùa Sắc Tứ Linh Thứu",
+    "province": "Tiền Giang",
+    "query": "Chùa Sắc Tứ Linh Thứu Tiền Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1710,
+    "name": "Nhà thờ chính tòa Mỹ Tho",
+    "province": "Tiền Giang",
+    "query": "Nhà thờ chính tòa Mỹ Tho Tiền Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1711,
+    "name": "Khu du lịch Cồn Phụng (Đạo Dừa)",
+    "province": "Bến Tre",
+    "query": "Khu du lịch Cồn Phụng (Đạo Dừa) Bến Tre",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1712,
+    "name": "Khu du lịch Cồn Quy",
+    "province": "Bến Tre",
+    "query": "Khu du lịch Cồn Quy Bến Tre",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1713,
+    "name": "Sân chim Vàm Hồ",
+    "province": "Bến Tre",
+    "query": "Sân chim Vàm Hồ Bến Tre",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1714,
+    "name": "Khu du lịch sinh thái Lan Vương",
+    "province": "Bến Tre",
+    "query": "Khu du lịch sinh thái Lan Vương Bến Tre",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1715,
+    "name": "Làng hoa kiểng Cái Mơn - Chợ Lách",
+    "province": "Bến Tre",
+    "query": "Làng hoa kiểng Cái Mơn - Chợ Lách Bến Tre",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1716,
+    "name": "Bãi biển Thạnh Phú (Cồn Bửng)",
+    "province": "Bến Tre",
+    "query": "Bãi biển Thạnh Phú (Cồn Bửng) Bến Tre",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1717,
+    "name": "Khu di tích Mộ và Khu lưu niệm Nguyễn Đình Chiểu",
+    "province": "Bến Tre",
+    "query": "Khu di tích Mộ và Khu lưu niệm Nguyễn Đình Chiểu Bến Tre",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1718,
+    "name": "Khu di tích Đồng Khởi Bến Tre",
+    "province": "Bến Tre",
+    "query": "Khu di tích Đồng Khởi Bến Tre Bến Tre",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1719,
+    "name": "Khu lưu niệm Nữ tướng Nguyễn Thị Định",
+    "province": "Bến Tre",
+    "query": "Khu lưu niệm Nữ tướng Nguyễn Thị Định Bến Tre",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1720,
+    "name": "Đầu Cầu tiếp nhận vũ khí Bắc - Nam (Thạnh Phú)",
+    "province": "Bến Tre",
+    "query": "Đầu Cầu tiếp nhận vũ khí Bắc - Nam (Thạnh Phú) Bến Tre",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1721,
+    "name": "Chùa Viên Minh Bến Tre",
+    "province": "Bến Tre",
+    "query": "Chùa Viên Minh Bến Tre Bến Tre",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1722,
+    "name": "Chùa Bạch Vân Ni Tự",
+    "province": "Bến Tre",
+    "query": "Chùa Bạch Vân Ni Tự Bến Tre",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1723,
+    "name": "Chùa Vạn Phước (Bình Đại)",
+    "province": "Bến Tre",
+    "query": "Chùa Vạn Phước (Bình Đại) Bến Tre",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1724,
+    "name": "Chùa Tuyên Linh (Mỏ Cày Nam)",
+    "province": "Bến Tre",
+    "query": "Chùa Tuyên Linh (Mỏ Cày Nam) Bến Tre",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1725,
+    "name": "Danh thắng Ao Bà Om (Ao Vuông)",
+    "province": "Trà Vinh",
+    "query": "Danh thắng Ao Bà Om (Ao Vuông) Trà Vinh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1726,
+    "name": "Biển Ba Động",
+    "province": "Trà Vinh",
+    "query": "Biển Ba Động Trà Vinh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1727,
+    "name": "Cù lao Long Trị",
+    "province": "Trà Vinh",
+    "query": "Cù lao Long Trị Trà Vinh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1728,
+    "name": "Cù lao Tân Quy (Cầu Kè)",
+    "province": "Trà Vinh",
+    "query": "Cù lao Tân Quy (Cầu Kè) Trà Vinh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1729,
+    "name": "Cồn Chim (Du lịch sinh thái thuận thiên)",
+    "province": "Trà Vinh",
+    "query": "Cồn Chim (Du lịch sinh thái thuận thiên) Trà Vinh",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1730,
+    "name": "Đền thờ Bác Hồ Trà Vinh",
+    "province": "Trà Vinh",
+    "query": "Đền thờ Bác Hồ Trà Vinh Trà Vinh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1731,
+    "name": "Bảo tàng Văn hóa Dân tộc Khmer Trà Vinh",
+    "province": "Trà Vinh",
+    "query": "Bảo tàng Văn hóa Dân tộc Khmer Trà Vinh Trà Vinh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1732,
+    "name": "Bến tiếp nhận vũ khí Cồn Tàu",
+    "province": "Trà Vinh",
+    "query": "Bến tiếp nhận vũ khí Cồn Tàu Trà Vinh",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1733,
+    "name": "Chùa Âng (Wat Angkor Borei)",
+    "province": "Trà Vinh",
+    "query": "Chùa Âng (Wat Angkor Borei) Trà Vinh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1734,
+    "name": "Chùa Hang (Wat Kompong Chrây)",
+    "province": "Trà Vinh",
+    "query": "Chùa Hang (Wat Kompong Chrây) Trà Vinh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1735,
+    "name": "Chùa Cò (Chùa Nodol)",
+    "province": "Trà Vinh",
+    "query": "Chùa Cò (Chùa Nodol) Trà Vinh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1736,
+    "name": "Chùa Vàm Rây (Cổ tự Khmer lộng lẫy)",
+    "province": "Trà Vinh",
+    "query": "Chùa Vàm Rây (Cổ tự Khmer lộng lẫy) Trà Vinh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1737,
+    "name": "Chùa Ông Mẹt (Wat Bodhisalaraja)",
+    "province": "Trà Vinh",
+    "query": "Chùa Ông Mẹt (Wat Bodhisalaraja) Trà Vinh",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1738,
+    "name": "Khu du lịch Cù lao An Bình",
+    "province": "Vĩnh Long",
+    "query": "Khu du lịch Cù lao An Bình Vĩnh Long",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1739,
+    "name": "Cầu Mỹ Thuận",
+    "province": "Vĩnh Long",
+    "query": "Cầu Mỹ Thuận Vĩnh Long",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1740,
+    "name": "Khu du lịch sinh thái Vinh Sang",
+    "province": "Vĩnh Long",
+    "query": "Khu du lịch sinh thái Vinh Sang Vĩnh Long",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1741,
+    "name": "Vườn kinh Phật bằng đá (Chùa Phước Hậu)",
+    "province": "Vĩnh Long",
+    "query": "Vườn kinh Phật bằng đá (Chùa Phước Hậu) Vĩnh Long",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1742,
+    "name": "Cù lao Lục Sĩ Thành (Cù lao Mây)",
+    "province": "Vĩnh Long",
+    "query": "Cù lao Lục Sĩ Thành (Cù lao Mây) Vĩnh Long",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1743,
+    "name": "Cù lao Dài (Vũng Liêm)",
+    "province": "Vĩnh Long",
+    "query": "Cù lao Dài (Vũng Liêm) Vĩnh Long",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1744,
+    "name": "Lò gạch Mang Thít (Vương quốc Đỏ)",
+    "province": "Vĩnh Long",
+    "query": "Lò gạch Mang Thít (Vương quốc Đỏ) Vĩnh Long",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1745,
+    "name": "Văn Thánh Miếu Vĩnh Long",
+    "province": "Vĩnh Long",
+    "query": "Văn Thánh Miếu Vĩnh Long Vĩnh Long",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1746,
+    "name": "Khu lưu niệm Chủ tịch HĐBT Phạm Hùng",
+    "province": "Vĩnh Long",
+    "query": "Khu lưu niệm Chủ tịch HĐBT Phạm Hùng Vĩnh Long",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1747,
+    "name": "Khu lưu niệm Thủ tướng Võ Văn Kiệt",
+    "province": "Vĩnh Long",
+    "query": "Khu lưu niệm Thủ tướng Võ Văn Kiệt Vĩnh Long",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1748,
+    "name": "Căn cứ Tỉnh ủy Vĩnh Long (Cái Ngang)",
+    "province": "Vĩnh Long",
+    "query": "Căn cứ Tỉnh ủy Vĩnh Long (Cái Ngang) Vĩnh Long",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1749,
+    "name": "Chùa Tiên Châu",
+    "province": "Vĩnh Long",
+    "query": "Chùa Tiên Châu Vĩnh Long",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1750,
+    "name": "Chùa Phật Ngọc Xá Lợi Vĩnh Long",
+    "province": "Vĩnh Long",
+    "query": "Chùa Phật Ngọc Xá Lợi Vĩnh Long Vĩnh Long",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1751,
+    "name": "Chùa Hạnh Phúc Tăng (Wat Giai Kシーン)",
+    "province": "Vĩnh Long",
+    "query": "Chùa Hạnh Phúc Tăng (Wat Giai Kシーン) Vĩnh Long",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1752,
+    "name": "Nhà thờ chính tòa Vĩnh Long",
+    "province": "Vĩnh Long",
+    "query": "Nhà thờ chính tòa Vĩnh Long Vĩnh Long",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1753,
+    "name": "Vườn quốc gia Tràm Chim (Tam Nông)",
+    "province": "Đồng Tháp",
+    "query": "Vườn quốc gia Tràm Chim (Tam Nông) Đồng Tháp",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1754,
+    "name": "Làng hoa kiểng Sa Đéc",
+    "province": "Đồng Tháp",
+    "query": "Làng hoa kiểng Sa Đéc Đồng Tháp",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1755,
+    "name": "Khu du lịch sinh thái Gáo Giồng",
+    "province": "Đồng Tháp",
+    "query": "Khu du lịch sinh thái Gáo Giồng Đồng Tháp",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1756,
+    "name": "Đồng sen Tháp Mười",
+    "province": "Đồng Tháp",
+    "query": "Đồng sen Tháp Mười Đồng Tháp",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1757,
+    "name": "Khu du lịch sinh thái Phương Nam",
+    "province": "Đồng Tháp",
+    "query": "Khu du lịch sinh thái Phương Nam Đồng Tháp",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1758,
+    "name": "Cù lao Tây (Thanh Bình)",
+    "province": "Đồng Tháp",
+    "query": "Cù lao Tây (Thanh Bình) Đồng Tháp",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1759,
+    "name": "Khu di tích Lăng Cụ Phó bảng Nguyễn Sinh Sắc",
+    "province": "Đồng Tháp",
+    "query": "Khu di tích Lăng Cụ Phó bảng Nguyễn Sinh Sắc Đồng Tháp",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1760,
+    "name": "Nhà cổ Huỳnh Thủy Lê (Người Tình - L'Amant)",
+    "province": "Đồng Tháp",
+    "query": "Nhà cổ Huỳnh Thủy Lê (Người Tình - L'Amant) Đồng Tháp",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1761,
+    "name": "Khu di tích Xẻo Quýt",
+    "province": "Đồng Tháp",
+    "query": "Khu di tích Xẻo Quýt Đồng Tháp",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1762,
+    "name": "Khu di tích Gò Tháp (Văn hóa Óc Eo)",
+    "province": "Đồng Tháp",
+    "query": "Khu di tích Gò Tháp (Văn hóa Óc Eo) Đồng Tháp",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1763,
+    "name": "Chùa Phước Kiển (Chùa Lá Sen Vua)",
+    "province": "Đồng Tháp",
+    "query": "Chùa Phước Kiển (Chùa Lá Sen Vua) Đồng Tháp",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1764,
+    "name": "Chùa Kiến An Cung (Chùa Ông Quách)",
+    "province": "Đồng Tháp",
+    "query": "Chùa Kiến An Cung (Chùa Ông Quách) Đồng Tháp",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1765,
+    "name": "Chùa Bửu Lâm (Cao Lãnh)",
+    "province": "Đồng Tháp",
+    "query": "Chùa Bửu Lâm (Cao Lãnh) Đồng Tháp",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1766,
+    "name": "Chùa Bà Thiên Hậu Sa Đéc",
+    "province": "Đồng Tháp",
+    "query": "Chùa Bà Thiên Hậu Sa Đéc Đồng Tháp",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1767,
+    "name": "Miếu Bà Chúa Xứ Núi Sam",
+    "province": "An Giang",
+    "query": "Miếu Bà Chúa Xứ Núi Sam An Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1768,
+    "name": "Rừng tràm Trà Sư",
+    "province": "An Giang",
+    "query": "Rừng tràm Trà Sư An Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1769,
+    "name": "Khu du lịch Núi Cấm (Thiên Cấm Sơn)",
+    "province": "An Giang",
+    "query": "Khu du lịch Núi Cấm (Thiên Cấm Sơn) An Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1770,
+    "name": "Đỉnh Núi Sam (Châu Đốc)",
+    "province": "An Giang",
+    "query": "Đỉnh Núi Sam (Châu Đốc) An Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1771,
+    "name": "Đồi Tức Dụp (Ngọn đồi 2 triệu đô la)",
+    "province": "An Giang",
+    "query": "Đồi Tức Dụp (Ngọn đồi 2 triệu đô la) An Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1772,
+    "name": "Hồ Tà Pạ & Cánh đồng Tà Pạ",
+    "province": "An Giang",
+    "query": "Hồ Tà Pạ & Cánh đồng Tà Pạ An Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1773,
+    "name": "Búng Bình Thiên (Hồ nước trời)",
+    "province": "An Giang",
+    "query": "Búng Bình Thiên (Hồ nước trời) An Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1774,
+    "name": "Khu di chỉ khảo cổ Óc Eo",
+    "province": "An Giang",
+    "query": "Khu di chỉ khảo cổ Óc Eo An Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1775,
+    "name": "Khu lưu niệm Chủ tịch Tôn Đức Thắng (Cù lao Ông Hổ)",
+    "province": "An Giang",
+    "query": "Khu lưu niệm Chủ tịch Tôn Đức Thắng (Cù lao Ông Hổ) An Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1776,
+    "name": "Lăng Thoại Ngọc Hầu (Sơn Lăng)",
+    "province": "An Giang",
+    "query": "Lăng Thoại Ngọc Hầu (Sơn Lăng) An Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1777,
+    "name": "Chùa Tây An (Tây An Cổ Tự)",
+    "province": "An Giang",
+    "query": "Chùa Tây An (Tây An Cổ Tự) An Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1778,
+    "name": "Chùa Hang (Phước Điền Tự Châu Đốc)",
+    "province": "An Giang",
+    "query": "Chùa Hang (Phước Điền Tự Châu Đốc) An Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1779,
+    "name": "Chùa Lầu (Phước Lâm Tự Tri Tôn)",
+    "province": "An Giang",
+    "query": "Chùa Lầu (Phước Lâm Tự Tri Tôn) An Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1780,
+    "name": "Chùa Koh Kas (Cổng trời Tri Tôn)",
+    "province": "An Giang",
+    "query": "Chùa Koh Kas (Cổng trời Tri Tôn) An Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1781,
+    "name": "Đảo Ngọc Phú Quốc",
+    "province": "Kiên Giang",
+    "query": "Đảo Ngọc Phú Quốc Kiên Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1782,
+    "name": "Bãi Sao Phú Quốc",
+    "province": "Kiên Giang",
+    "query": "Bãi Sao Phú Quốc Kiên Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1783,
+    "name": "Quần đảo Nam Du",
+    "province": "Kiên Giang",
+    "query": "Quần đảo Nam Du Kiên Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1784,
+    "name": "Hòn Phụ Tử (Hà Tiên)",
+    "province": "Kiên Giang",
+    "query": "Hòn Phụ Tử (Hà Tiên) Kiên Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1785,
+    "name": "Thạch Động Thôn Vân (Hà Tiên)",
+    "province": "Kiên Giang",
+    "query": "Thạch Động Thôn Vân (Hà Tiên) Kiên Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1786,
+    "name": "Mũi Nai (Hà Tiên)",
+    "province": "Kiên Giang",
+    "query": "Mũi Nai (Hà Tiên) Kiên Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1787,
+    "name": "Vườn quốc gia U Minh Thượng",
+    "province": "Kiên Giang",
+    "query": "Vườn quốc gia U Minh Thượng Kiên Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1788,
+    "name": "Đền thờ Anh hùng Dân tộc Nguyễn Trung Trực (Rạch Giá)",
+    "province": "Kiên Giang",
+    "query": "Đền thờ Anh hùng Dân tộc Nguyễn Trung Trực (Rạch Giá) Kiên Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1789,
+    "name": "Di tích Lịch sử Nhà tù Phú Quốc",
+    "province": "Kiên Giang",
+    "query": "Di tích Lịch sử Nhà tù Phú Quốc Kiên Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1790,
+    "name": "Lăng Mạc Cửu (Hà Tiên)",
+    "province": "Kiên Giang",
+    "query": "Lăng Mạc Cửu (Hà Tiên) Kiên Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1791,
+    "name": "Chùa Hộ Quốc (Thiền viện Trúc Lâm Phú Quốc)",
+    "province": "Kiên Giang",
+    "query": "Chùa Hộ Quốc (Thiền viện Trúc Lâm Phú Quốc) Kiên Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1792,
+    "name": "Chùa Tam Bảo (Rạch Giá)",
+    "province": "Kiên Giang",
+    "query": "Chùa Tam Bảo (Rạch Giá) Kiên Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1793,
+    "name": "Chùa Tam Bảo (Hà Tiên)",
+    "province": "Kiên Giang",
+    "query": "Chùa Tam Bảo (Hà Tiên) Kiên Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1794,
+    "name": "Chùa Sùng Đức Cổ Tự (Hà Tiên)",
+    "province": "Kiên Giang",
+    "query": "Chùa Sùng Đức Cổ Tự (Hà Tiên) Kiên Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1795,
+    "name": "Bến Ninh Kiều & Cầu Đi Bộ Tình Yêu",
+    "province": "Cần Thơ",
+    "query": "Bến Ninh Kiều & Cầu Đi Bộ Tình Yêu Cần Thơ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1796,
+    "name": "Làng du lịch Mỹ Khánh",
+    "province": "Cần Thơ",
+    "query": "Làng du lịch Mỹ Khánh Cần Thơ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1797,
+    "name": "Cồn Sơn (Du lịch sinh thái cộng đồng sông Hậu)",
+    "province": "Cần Thơ",
+    "query": "Cồn Sơn (Du lịch sinh thái cộng đồng sông Hậu) Cần Thơ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1798,
+    "name": "Vườn cò Bằng Lăng (Thốt Nốt)",
+    "province": "Cần Thơ",
+    "query": "Vườn cò Bằng Lăng (Thốt Nốt) Cần Thơ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1799,
+    "name": "Cù lao Tân Lộc (Đảo ngọt sông Hậu)",
+    "province": "Cần Thơ",
+    "query": "Cù lao Tân Lộc (Đảo ngọt sông Hậu) Cần Thơ",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1800,
+    "name": "Nhà cổ Bình Thủy",
+    "province": "Cần Thơ",
+    "query": "Nhà cổ Bình Thủy Cần Thơ",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1801,
+    "name": "Khám Lớn Cần Thơ",
+    "province": "Cần Thơ",
+    "query": "Khám Lớn Cần Thơ Cần Thơ",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1802,
+    "name": "Đình Bình Thủy",
+    "province": "Cần Thơ",
+    "query": "Đình Bình Thủy Cần Thơ",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1803,
+    "name": "Khu tưởng niệm Thủ khoa Bùi Hữu Nghĩa",
+    "province": "Cần Thơ",
+    "query": "Khu tưởng niệm Thủ khoa Bùi Hữu Nghĩa Cần Thơ",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1804,
+    "name": "Thiền viện Trúc Lâm Phương Nam",
+    "province": "Cần Thơ",
+    "query": "Thiền viện Trúc Lâm Phương Nam Cần Thơ",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1805,
+    "name": "Chùa Ông Cần Thơ (Quảng Triệu Hội Quán)",
+    "province": "Cần Thơ",
+    "query": "Chùa Ông Cần Thơ (Quảng Triệu Hội Quán) Cần Thơ",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1806,
+    "name": "Chùa Nam Nhã",
+    "province": "Cần Thơ",
+    "query": "Chùa Nam Nhã Cần Thơ",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1807,
+    "name": "Chùa Munir Ansay (Chùa Khmer Cần Thơ)",
+    "province": "Cần Thơ",
+    "query": "Chùa Munir Ansay (Chùa Khmer Cần Thơ) Cần Thơ",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1808,
+    "name": "Khu bảo tồn thiên nhiên Lung Ngọc Hoàng",
+    "province": "Hậu Giang",
+    "query": "Khu bảo tồn thiên nhiên Lung Ngọc Hoàng Hậu Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1809,
+    "name": "Công viên Ánh Sáng Kỳ Quan Cổ Đại Kittyd & Minnied",
+    "province": "Hậu Giang",
+    "query": "Công viên Ánh Sáng Kỳ Quan Cổ Đại Kittyd & Minnied Hậu Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1810,
+    "name": "Khu du lịch sinh thái Mùa Xuân (Phụng Hiệp)",
+    "province": "Hậu Giang",
+    "query": "Khu du lịch sinh thái Mùa Xuân (Phụng Hiệp) Hậu Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1811,
+    "name": "Vườn dâu Thiên Ân (Ngã Bảy)",
+    "province": "Hậu Giang",
+    "query": "Vườn dâu Thiên Ân (Ngã Bảy) Hậu Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1812,
+    "name": "Cánh đồng khóm Cầu Đúc (Hỏa Tiến)",
+    "province": "Hậu Giang",
+    "query": "Cánh đồng khóm Cầu Đúc (Hỏa Tiến) Hậu Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1813,
+    "name": "Con đường tre Tư Sang (Khu du lịch Tre Hậu Giang)",
+    "province": "Hậu Giang",
+    "query": "Con đường tre Tư Sang (Khu du lịch Tre Hậu Giang) Hậu Giang",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1814,
+    "name": "Khu di tích Chiến thắng Chương Thiện",
+    "province": "Hậu Giang",
+    "query": "Khu di tích Chiến thắng Chương Thiện Hậu Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1815,
+    "name": "Căn cứ Tỉnh ủy Cần Thơ (Phương Bình)",
+    "province": "Hậu Giang",
+    "query": "Căn cứ Tỉnh ủy Cần Thơ (Phương Bình) Hậu Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1816,
+    "name": "Đền thờ Bác Hồ Hậu Giang (Lương Tâm)",
+    "province": "Hậu Giang",
+    "query": "Đền thờ Bác Hồ Hậu Giang (Lương Tâm) Hậu Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1817,
+    "name": "Di tích Chiến thắng Tầm Vu",
+    "province": "Hậu Giang",
+    "query": "Di tích Chiến thắng Tầm Vu Hậu Giang",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1818,
+    "name": "Thiền viện Trúc Lâm Hậu Giang",
+    "province": "Hậu Giang",
+    "query": "Thiền viện Trúc Lâm Hậu Giang Hậu Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1819,
+    "name": "Chùa Quan Âm Vị Thanh",
+    "province": "Hậu Giang",
+    "query": "Chùa Quan Âm Vị Thanh Hậu Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1820,
+    "name": "Chùa Aranhứt (Cổ tự Khmer cổ nhất Hậu Giang)",
+    "province": "Hậu Giang",
+    "query": "Chùa Aranhứt (Cổ tự Khmer cổ nhất Hậu Giang) Hậu Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1821,
+    "name": "Nhà thờ Vị Hưng (Giáo xứ Vị Hưng)",
+    "province": "Hậu Giang",
+    "query": "Nhà thờ Vị Hưng (Giáo xứ Vị Hưng) Hậu Giang",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1822,
+    "name": "Chùa Dơi (Mã Tộc Tự)",
+    "province": "Sóc Trăng",
+    "query": "Chùa Dơi (Mã Tộc Tự) Sóc Trăng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1823,
+    "name": "Chùa Chén Kiểu (Chùa Sà Lôn)",
+    "province": "Sóc Trăng",
+    "query": "Chùa Chén Kiểu (Chùa Sà Lôn) Sóc Trăng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1824,
+    "name": "Chùa Som Rong (Wat Pătum Wôngsa Som Rông)",
+    "province": "Sóc Trăng",
+    "query": "Chùa Som Rong (Wat Pătum Wôngsa Som Rông) Sóc Trăng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1825,
+    "name": "Chùa Đất Sét (Bửu Sơn Tự)",
+    "province": "Sóc Trăng",
+    "query": "Chùa Đất Sét (Bửu Sơn Tự) Sóc Trăng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1826,
+    "name": "Chùa Kh'leang (Ngôi chùa cổ nhất Sóc Trăng)",
+    "province": "Sóc Trăng",
+    "query": "Chùa Kh'leang (Ngôi chùa cổ nhất Sóc Trăng) Sóc Trăng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1827,
+    "name": "Chùa Phật Học 2 (Quan Âm Linh Ứng)",
+    "province": "Sóc Trăng",
+    "query": "Chùa Phật Học 2 (Quan Âm Linh Ứng) Sóc Trăng",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1828,
+    "name": "Khu du lịch sinh thái Hồ Bể (Vĩnh Châu)",
+    "province": "Sóc Trăng",
+    "query": "Khu du lịch sinh thái Hồ Bể (Vĩnh Châu) Sóc Trăng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1829,
+    "name": "Cồn Mỹ Phước (Kế Sách)",
+    "province": "Sóc Trăng",
+    "query": "Cồn Mỹ Phước (Kế Sách) Sóc Trăng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1830,
+    "name": "Vườn cò Tân Long (Ngã Năm)",
+    "province": "Sóc Trăng",
+    "query": "Vườn cò Tân Long (Ngã Năm) Sóc Trăng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1831,
+    "name": "Khu du lịch sinh thái Mỏ Vẹt (Cù Lao Dung)",
+    "province": "Sóc Trăng",
+    "query": "Khu du lịch sinh thái Mỏ Vẹt (Cù Lao Dung) Sóc Trăng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1832,
+    "name": "Biển Mỏ Ó (Trần Đề)",
+    "province": "Sóc Trăng",
+    "query": "Biển Mỏ Ó (Trần Đề) Sóc Trăng",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1833,
+    "name": "Lễ hội Oóc Om Bóc & Đua Ghe Ngo Sóc Trăng",
+    "province": "Sóc Trăng",
+    "query": "Lễ hội Oóc Om Bóc & Đua Ghe Ngo Sóc Trăng Sóc Trăng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1834,
+    "name": "Khu căn cứ Tỉnh ủy Sóc Trăng (Rừng tràm Mỹ Phước)",
+    "province": "Sóc Trăng",
+    "query": "Khu căn cứ Tỉnh ủy Sóc Trăng (Rừng tràm Mỹ Phước) Sóc Trăng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1835,
+    "name": "Bảo tàng Văn hóa Khmer Sóc Trăng",
+    "province": "Sóc Trăng",
+    "query": "Bảo tàng Văn hóa Khmer Sóc Trăng Sóc Trăng",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1836,
+    "name": "Cánh đồng Điện gió Bạc Liêu",
+    "province": "Bạc Liêu",
+    "query": "Cánh đồng Điện gió Bạc Liêu Bạc Liêu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1837,
+    "name": "Vườn chim Bạc Liêu",
+    "province": "Bạc Liêu",
+    "query": "Vườn chim Bạc Liêu Bạc Liêu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1838,
+    "name": "Khu du lịch sinh thái Hồ Nam",
+    "province": "Bạc Liêu",
+    "query": "Khu du lịch sinh thái Hồ Nam Bạc Liêu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1839,
+    "name": "Bãi biển nhân tạo Bạc Liêu (Nhà Mát)",
+    "province": "Bạc Liêu",
+    "query": "Bãi biển nhân tạo Bạc Liêu (Nhà Mát) Bạc Liêu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1840,
+    "name": "Vườn nhãn cổ Bạc Liêu (Trăm tuổi)",
+    "province": "Bạc Liêu",
+    "query": "Vườn nhãn cổ Bạc Liêu (Trăm tuổi) Bạc Liêu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1841,
+    "name": "Cánh đồng muối Bạc Liêu",
+    "province": "Bạc Liêu",
+    "query": "Cánh đồng muối Bạc Liêu Bạc Liêu",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1842,
+    "name": "Nhà Công tử Bạc Liêu",
+    "province": "Bạc Liêu",
+    "query": "Nhà Công tử Bạc Liêu Bạc Liêu",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1843,
+    "name": "Khu lưu niệm Nghệ thuật Đờn ca tài tử Nam Bộ và Nhạc sĩ Cao Văn Lầu",
+    "province": "Bạc Liêu",
+    "query": "Khu lưu niệm Nghệ thuật Đờn ca tài tử Nam Bộ và Nhạc sĩ Cao Văn Lầu Bạc Liêu",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1844,
+    "name": "Tháp Cổ Vĩnh Hưng",
+    "province": "Bạc Liêu",
+    "query": "Tháp Cổ Vĩnh Hưng Bạc Liêu",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1845,
+    "name": "Di tích Đồng Nọc Nạng",
+    "province": "Bạc Liêu",
+    "query": "Di tích Đồng Nọc Nạng Bạc Liêu",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1846,
+    "name": "Đền thờ Bác Hồ Bạc Liêu (Châu Thới)",
+    "province": "Bạc Liêu",
+    "query": "Đền thờ Bác Hồ Bạc Liêu (Châu Thới) Bạc Liêu",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1847,
+    "name": "Chùa Xiêm Cán",
+    "province": "Bạc Liêu",
+    "query": "Chùa Xiêm Cán Bạc Liêu",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1848,
+    "name": "Quán Âm Phật Đài (Mẹ Nam Hải Bạc Liêu)",
+    "province": "Bạc Liêu",
+    "query": "Quán Âm Phật Đài (Mẹ Nam Hải Bạc Liêu) Bạc Liêu",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1849,
+    "name": "Nhà thờ Tắc Sậy (Cha Trương Bửu Diệp)",
+    "province": "Bạc Liêu",
+    "query": "Nhà thờ Tắc Sậy (Cha Trương Bửu Diệp) Bạc Liêu",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1850,
+    "name": "Chùa Giác Hoa (Chùa Cô Hai Ngó)",
+    "province": "Bạc Liêu",
+    "query": "Chùa Giác Hoa (Chùa Cô Hai Ngó) Bạc Liêu",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1851,
+    "name": "Mốc tọa độ Quốc gia GPS 0001 & Cột cờ Hà Nội tại Mũi Cà Mau",
+    "province": "Cà Mau",
+    "query": "Mốc tọa độ Quốc gia GPS 0001 & Cột cờ Hà Nội tại Mũi Cà Mau Cà Mau",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1852,
+    "name": "Khu tưởng niệm Chủ tịch Hồ Chí Minh (Cà Mau)",
+    "province": "Cà Mau",
+    "query": "Khu tưởng niệm Chủ tịch Hồ Chí Minh (Cà Mau) Cà Mau",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1853,
+    "name": "Di tích Bến Vàm Lũng (Đường Hồ Chí Minh trên biển)",
+    "province": "Cà Mau",
+    "query": "Di tích Bến Vàm Lũng (Đường Hồ Chí Minh trên biển) Cà Mau",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1854,
+    "name": "Khu di tích Hòn Khoai (Khởi nghĩa Phan Ngọc Hiển)",
+    "province": "Cà Mau",
+    "query": "Khu di tích Hòn Khoai (Khởi nghĩa Phan Ngọc Hiển) Cà Mau",
+    "category": "HISTORICAL_SITE"
+  },
+  {
+    "id": 1855,
+    "name": "Vườn quốc gia Mũi Cà Mau",
+    "province": "Cà Mau",
+    "query": "Vườn quốc gia Mũi Cà Mau Cà Mau",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1856,
+    "name": "Vườn quốc gia U Minh Hạ",
+    "province": "Cà Mau",
+    "query": "Vườn quốc gia U Minh Hạ Cà Mau",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1857,
+    "name": "Hòn Đá Bạc",
+    "province": "Cà Mau",
+    "query": "Hòn Đá Bạc Cà Mau",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1858,
+    "name": "Đầm Thị Tường (Biển hồ ĐBSCL)",
+    "province": "Cà Mau",
+    "query": "Đầm Thị Tường (Biển hồ ĐBSCL) Cà Mau",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1859,
+    "name": "Rừng đước Năm Căn",
+    "province": "Cà Mau",
+    "query": "Rừng đước Năm Căn Cà Mau",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1860,
+    "name": "Sân chim Cà Mau (Công viên Mười Chín Tháng Năm)",
+    "province": "Cà Mau",
+    "query": "Sân chim Cà Mau (Công viên Mười Chín Tháng Năm) Cà Mau",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1861,
+    "name": "Khu du lịch sinh thái Thư Duy",
+    "province": "Cà Mau",
+    "query": "Khu du lịch sinh thái Thư Duy Cà Mau",
+    "category": "ATTRACTION"
+  },
+  {
+    "id": 1862,
+    "name": "Chùa Phật Tổ (Sắc Tứ Quan Âm Cổ Tự)",
+    "province": "Cà Mau",
+    "query": "Chùa Phật Tổ (Sắc Tứ Quan Âm Cổ Tự) Cà Mau",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1863,
+    "name": "Chùa Monivongsa Bopharam (Chùa Khmer Cà Mau)",
+    "province": "Cà Mau",
+    "query": "Chùa Monivongsa Bopharam (Chùa Khmer Cà Mau) Cà Mau",
+    "category": "TEMPLE"
+  },
+  {
+    "id": 1864,
+    "name": "Thiền viện Trúc Lâm Cà Mau",
+    "province": "Cà Mau",
+    "query": "Thiền viện Trúc Lâm Cà Mau Cà Mau",
+    "category": "TEMPLE"
+  }
+]

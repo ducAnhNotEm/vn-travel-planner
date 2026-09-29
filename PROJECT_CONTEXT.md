@@ -20,10 +20,10 @@ Build a production-grade, AI-assisted domestic travel planning system ("VNTravel
 
 ## 3. Tech Stack & Existing Codebase Structure
 - **Backend**: Python 3.10+, FastAPI (`app/main.py`), SQLAlchemy 2.0 (`app/models.py`), Pydantic.
-- **Database**: SQLite (`travel_db.db`) storing:
-  - `provinces`: 34 planned provinces/cities.
-  - `wards`: Administrative subdivisions.
-  - `places`: Attractions, temples, hotels, restaurants, cafes, markets with coordinates (`lat`, `lng`), ratings, review counts, Google Place IDs, `price_range`, and `prices` JSON.
+- **Database**: Thuần SQLite 100% (`travel_db.db`), triển khai zero-config, khởi động tức thì (loại bỏ hoàn toàn PostgreSQL & Docker). Lưu trữ:
+  - `provinces`: 34 tỉnh/thành phố quy hoạch của dự án.
+  - `wards`: 3.321 đơn vị hành chính xã/phường.
+  - `places`: Danh thắng, chùa chiền, khách sạn, nhà hàng, chợ với tọa độ chuẩn (`lat`, `lng`), đánh giá, `price_range` và `prices` JSON.
 - **Algorithms & Services**:
   - `app/services/travel_calculator.py`: Haversine distance, Nearest Neighbor TSP, vehicle transport rates, dynamic database price formatting.
   - `app/services/province_service.py`: Province querying.
@@ -53,6 +53,10 @@ Build a production-grade, AI-assisted domestic travel planning system ("VNTravel
 - **Hotels**: Pulled directly from `places.price_range` and `places.prices` (real multi-provider rates e.g., Agoda, Booking).
 - **Restaurants**: Pulled from DB if available; fallback to standard regional estimate (~100,000 - 300,000 VND / person).
 - **Temples & Public Markets**: Strictly **0 VND / Free Entry / Public**.
+
+### Photo Ground Truth & Wikipedia Standard:
+- **Danh lam thắng cảnh, Di tích, Chùa chiền, Đền miếu**: Bắt buộc lấy ảnh thực tế 100% từ **Wikipedia / Wikimedia Commons** (qua REST API hoặc Search API). Tuyệt đối không dùng ảnh minh họa giả hoặc ảnh stock lặp lại.
+- **Khách sạn, Chợ, Quán ăn**: Tạm thời để trống hoặc thu thập xác thực sau; nghiêm cấm sao chép nhân bản 1 link ảnh cho nhiều cơ sở khác nhau.
 
 ---
 

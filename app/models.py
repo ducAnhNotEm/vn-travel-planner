@@ -83,6 +83,8 @@ class Place(Base):
     price_range = Column(String(100), nullable=True)           # "$67 - $95" hoặc "500.000đ - 1.800.000đ"
     prices = Column(JSON, nullable=True)                       # Danh sách các mức giá chi tiết từ các bên
     tags = Column(JSON, nullable=True)                         # Mảng thẻ tag ["van_hoa", "checkin"]
+    phone_number = Column(String(50), nullable=True)           # Số điện thoại liên hệ (Hotline / Lễ tân)
+    website = Column(String(500), nullable=True)                # Website / Trang đặt chỗ / Fanpage
 
 
     # Quan hệ ngược về Tỉnh và Xã

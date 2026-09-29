@@ -5,7 +5,8 @@ Ensure ground truth data integrity in SQLite `travel_db.db`, enforce schema comp
 
 ## Database Location & Engine
 - SQLite Path: `d:\vn-travel-planner\travel_db.db`
-- Connection: SQLAlchemy `SessionLocal` from `app.database` or raw Python `sqlite3.connect()`.
+- Engine: Pure Standalone SQLite 100% (SQLAlchemy `SessionLocal` from `app.database` or raw Python `sqlite3.connect()`).
+- Note: Loại bỏ hoàn toàn PostgreSQL và Docker để đạt hiệu năng khởi động tức thì (0ms) và triển khai zero-config.
 
 ## Core Tables & Fields
 1. `provinces`: `code` (PK), `name`, `codename`, `city_name`, `division_type`, `is_in_project`, `province_type`, `has_sea`, `scrape_limit`.
@@ -38,3 +39,6 @@ When adding 10-20 places per category from Google Places API:
    - `market`, `shopping_mall` $\rightarrow$ `MARKET`
 3. Parse `prices` array if available; compute human-readable `price_range`.
 4. Ensure valid `lat` and `lng` floats; never insert null coordinates.
+5. **Photo Ground Truth**:
+   - Đối với danh lam thắng cảnh, chùa, đền, di tích lịch sử: Bắt buộc truy vấn ảnh thực tế 100% từ **Wikipedia / Wikimedia Commons** (dùng `scripts/test_wiki_photos.py` hoặc Wikipedia API). Tuyệt đối không dùng ảnh minh họa giả.
+   - Đối với khách sạn, chợ, nhà hàng: Nếu chưa có ảnh xác thực riêng thì để `null`, nghiêm cấm tái sử dụng trùng lặp link ảnh.

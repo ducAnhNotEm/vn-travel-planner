@@ -97,7 +97,7 @@ def generate_trip_plan(prompt_keywords: List[str], vehicle_type: str = "car", db
     matched_places = []
     for kw in prompt_keywords:
         c.execute("""
-            SELECT id, name, category, lat, lng, address, rating, price_range, prices 
+            SELECT id, name, category, lat, lng, address, rating, price_range, prices, phone_number, website, image_url 
             FROM places 
             WHERE name LIKE ? OR address LIKE ?
             LIMIT 1
@@ -113,7 +113,10 @@ def generate_trip_plan(prompt_keywords: List[str], vehicle_type: str = "car", db
                 "address": row[5],
                 "rating": row[6],
                 "price_range_db": row[7],
-                "prices_json_db": row[8]
+                "prices_json_db": row[8],
+                "phone_number": row[9],
+                "website": row[10],
+                "image_url": row[11]
             })
     
     conn.close()
@@ -136,6 +139,10 @@ def generate_trip_plan(prompt_keywords: List[str], vehicle_type: str = "car", db
             "name": place["name"],
             "category": place["category"],
             "address": place["address"],
+            "rating": place.get("rating"),
+            "image_url": place.get("image_url"),
+            "phone_number": place.get("phone_number"),
+            "website": place.get("website"),
             "price_display": price_info["display"],
             "price_info": price_info
         })
