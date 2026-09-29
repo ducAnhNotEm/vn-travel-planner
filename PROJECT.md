@@ -68,7 +68,8 @@ Every requirement from ORIGINAL_REQUEST.md and the Survey phase is mapped below:
 - Table: `places`
 - Field mappings:
   - `photo_url` -> `image_url`
-  - `address`: synthesized from place `name`, `target_province` (e.g. `f"{name}, {target_province}, Việt Nam"`)
+  - `address`: 100% verified postal/street address from Google Places or administrative record (e.g. street, ward, district, province). Synthesized/placeholder addresses are strictly forbidden.
+  - `google_maps_url`: direct authentic URL from Google Places scraper or verified place_id (`https://www.google.com/maps/place/?q=place_id:{google_place_id}`). Strictly forbidden to fabricate or invent search URLs. NULL if unverified.
   - `province_code`: `target_province_code`
   - `ward_code`: `target_ward_code` (nullable)
   - `category`: `PlaceCategory` enum string

@@ -84,8 +84,19 @@ TASK ASSIGNED
 ## 3. Data Integrity & Pacing Rules
 
 - **No Hallucinated Places**: Every location in an itinerary MUST exist in `travel_db.db`.
+- **Real Address Ground Truth (Địa chỉ thực tế 100% — Cấm địa chỉ giả mạo)**:
+  - ❌ **TUYỆT ĐỐI CẤM ĐỊA CHỈ PLACEHOLDER**: Nghiêm cấm tạo hoặc trả về địa chỉ tự chế dạng `"{name}, {province}, Việt Nam"`.
+  - Mọi địa chỉ trả về qua API phải là **địa chỉ bưu chính/thực địa có thật 100%** (số nhà, tên đường/phố, thôn/ấp, xã/phường, quận/huyện, tỉnh/thành phố) được lấy từ Google Maps `formatted_address` hoặc cấu trúc hành chính thực tế.
+  - Đối với danh thắng tự nhiên xa khu dân cư (thác nước, đỉnh núi), địa chỉ phải ghi rõ thôn/xã/huyện thực tế (ví dụ: `Xã Tam Thanh, Huyện Quan Sơn, Thanh Hóa`), tuyệt đối không bịa đặt số nhà hay tên đường không có thật.
+- **Zero URL Fabrication & Anti-Hallucination (Tuyệt đối không chế URL — Cấm tạo ảo giác)**:
+  - ❌ **NGHIÊM CẤM TỰ Ý TẠO URL TÌM KIẾM GIẢ**: Không được tự sinh URL tìm kiếm chung chung như `https://www.google.com/maps/search/?api=1&query=...` để tạo ảo giác là địa điểm nào cũng có link. Việc này cực kỳ nguy hiểm vì query text có thể dẫn người dùng đến sai địa điểm, sai cổng vào, hoặc một quán trùng tên ở tỉnh khác.
+  - ✅ **QUY CHUẨN URL THẬT (Ground-Truth Only)**:
+    - `google_maps_url` **CHỈ ĐƯỢC PHÉP CÓ GIÁ TRỊ** khi:
+      1. Trích xuất trực tiếp từ trường `url` của Google Maps Scraper có kiểm định, HOẶC
+      2. Gắn liền với Google Place ID xác thực chuẩn Google (`https://www.google.com/maps/place/?q=place_id:{google_place_id}` với `google_place_id` bắt đầu bằng `ChIJ...`).
+    - Nếu một địa điểm **CHƯA CÓ Place ID hoặc URL xác thực**, trường `google_maps_url` **BẮT BUỘC ĐỂ `NULL`**. Thà để `NULL` để frontend ẩn nút ghim, còn hơn vẽ ra link giả làm người dùng đi lạc đường.
 - **Photo Authenticity & Ground Truth (Chân thật 100% về hình ảnh)**:
-  - ❌ **TUYỆT ĐỐI KHÔNG DÙNG ẢNH GIẢ HOẶC COPY LINK STOCK MINH HỌA LẶP LẠI**: Mọi địa điểm danh thắng, chùa chiền, đền miếu, di tích lịch sử khi đưa vào database hoặc lịch trình **bắt buộc phải lấy ảnh chụp thực tế 100% từ Wikipedia / Wikimedia Commons** (thông qua API hoặc script kiểm tra).
+  - ❌ **TUYỆT ĐỐI KHÔNG DÙNG ẢNH GIẢ HOẶC COPY LINK STOCK MINH HỌA LẶP LẠI**: Mọi địa điểm danh thắng, chùa chiền, đền miếu, di tích lịch sử khi đưa vào database hoặc lịch trình **bắt buộc phải lấy ảnh chụp thực tế 100% từ Wikipedia / Wikimedia Commons** (thông qua API hoặc script kiểm tra) hoặc ảnh thực tế Google CDN.
   - Đối với Khách sạn, Nhà hàng, Chợ: Nếu chưa có ảnh xác thực riêng thì tạm thời để null hoặc tính sau theo nguồn xác thực riêng, **nghiêm cấm hành vi tái sử dụng một link ảnh cho nhiều khách sạn/địa điểm khác nhau để làm giả dữ liệu**.
 - **Missing Data Fallback**: When `typical_time_spent` or `price_range` is null in the database, use the explicit heuristic fallbacks defined in `PROJECT_CONTEXT.md`. NEVER invent random arbitrary numbers.
 - **Human Travel Rhythm (Bắt buộc theo nhịp sinh học)**:

@@ -32,6 +32,20 @@ Tài liệu này đóng vai trò là kim chỉ nam và quy chuẩn kỹ thuật 
 Mọi địa điểm khi được xếp vào lịch trình phải tuân thủ nghiêm ngặt nhịp sinh học:
 $$\text{Tham quan sáng (Attraction/Temple)} \rightarrow \text{Ăn trưa (Specialty Food)} \rightarrow \text{Nghỉ trưa/Check-in (Hotel)} \rightarrow \text{Tham quan chiều (Historical Site)} \rightarrow \text{Cà phê/Thư giãn} \rightarrow \text{Ăn tối} \rightarrow \text{Chợ đêm/Phố đi bộ}$$
 
+### 1.4. Tiêu Chuẩn Địa Chỉ Thực Tế 100% (Real Address Ground Truth)
+- **100% địa chỉ lưu trong Database và trả về qua API phải là địa chỉ thực địa bưu chính có thật**:
+  - Gồm đầy đủ số nhà, tên đường/phố, thôn/xóm/ấp, xã/phường, quận/huyện, tỉnh/thành phố (lấy trực tiếp từ Google Maps `formatted_address` hoặc hồ sơ phân cấp hành chính).
+  - ❌ **TUYỆT ĐỐI NGHIÊM CẤM**: Tự chế địa chỉ placeholder dạng `"{name}, {province}, Việt Nam"`.
+  - Đối với các danh thắng tự nhiên xa khu dân cư (hang động, thác nước, đỉnh đèo): Phải ghi chính xác địa danh hành chính cấp thôn/xã/huyện thực địa (ví dụ: `Đèo Ô Quy Hồ, Xã Sơn Bình, Huyện Tam Đường, Lai Châu`), nghiêm cấm bịa đặt số nhà hay tên đường giả.
+
+### 1.5. Quy Chuẩn Ghim Bản Đồ & Cấm Tự Ý Chế Tạo URL (Zero URL Fabrication & Anti-Hallucination)
+- **Mục đích của Icon Ghim Vị Trí (📍)**: Khi người dùng xem địa điểm trên lịch trình, icon ghim cho phép mở đúng **Google Business Profile / Place Page** để xem cổng vào chính, số điện thoại, đánh giá và dẫn đường Google Navigation (tránh rủi ro bị lệch vị trí nếu chỉ dùng tọa độ GPS).
+- ❌ **NGHIÊM CẤM TỰ Ý TẠO URL TÌM KIẾM GIẢ**: Tuyệt đối không tự ghép chuỗi `https://www.google.com/maps/search/?api=1&query=...` khi không có `place_id` thực tế. Link query search tự sinh tạo ảo giác sai lệch, có thể dẫn người dùng sang địa điểm trùng tên ở tỉnh khác, làm hỏng hoàn toàn chuyến đi.
+- ✅ **Quy Chuẩn Duy Nhất Cho `google_maps_url`**:
+  1. URL trực tiếp từ Google Maps crawler / Google Places API đã qua thẩm định địa chỉ.
+  2. HOẶC URL gắn liền với `google_place_id` xác thực chuẩn Google: `https://www.google.com/maps/place/?q=place_id:{google_place_id}` (`google_place_id` bắt đầu bằng `ChIJ...`).
+  3. **Nếu địa điểm chưa có Google Place ID hoặc URL xác thực**: Trường này **BẮT BUỘC ĐỂ `NULL`**. Tuyệt đối không "vẽ" ra URL để làm đẹp dữ liệu hoặc đánh lừa người dùng.
+
 ---
 
 ## 2. Chuẩn Dữ Liệu Hành Chính OpenAPI (Vietnam Provinces Online API)
@@ -197,9 +211,11 @@ File dữ liệu sinh ra (`data/places_63_to_34.json`) bắt buộc phải tuân
 - `original_province`: Tên tỉnh thành trước sáp nhập trong số 63 tỉnh thành.
 - `target_province_code`: Mã số tỉnh thành mới (1 đến 96) trong `travel_db.db` / `provinces_v2.json`.
 - `target_province_name`: Tên đơn vị hành chính cấp tỉnh mới sau quy hoạch.
+- `address`: Địa chỉ bưu chính/thực địa có thật 100% (Số nhà, đường, phường/xã, quận/huyện, tỉnh thành). Cấm placeholder.
 - `lat`, `lng`: Tọa độ địa lý GPS thực tế phục vụ thuật toán Nearest Neighbor TSP.
-- `photo_url`: URL ảnh thực tế trích xuất từ Wikipedia/Wikimedia Commons.
-- `photo_source`: Đánh dấu nguồn gốc xác thực ảnh (Wiki Commons).
+- `photo_url`: URL ảnh thực tế trích xuất từ Wikipedia/Wikimedia Commons hoặc Google CDN.
+- `photo_source`: Đánh dấu nguồn gốc xác thực ảnh (Wiki Commons / Google Maps CDN).
+- `google_maps_url`: URL mở trực tiếp Google Business Profile / Place Page (qua `google_place_id` hoặc URL cào thực tế). Tuyệt đối cấm tạo URL tìm kiếm giả; nếu chưa có thì để `NULL`.
 
 ---
 

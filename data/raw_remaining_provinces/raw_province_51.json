@@ -1,0 +1,6077 @@
+[
+  {
+    "title": "Đền thờ Trương Định",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": null,
+    "price": null,
+    "categoryName": "Đài tưởng niệm",
+    "address": "5VF9+6JH, Tịnh Khê, Quảng Ngãi, Việt Nam",
+    "neighborhood": "Tịnh Khê",
+    "street": "5VF9+6JH",
+    "city": "Quảng Ngãi",
+    "postalCode": null,
+    "state": "Tịnh Khê, Quảng Ngãi",
+    "countryCode": "VN",
+    "phone": "+84 906 846 093",
+    "phoneUnformatted": "+84906846093",
+    "claimThisBusiness": true,
+    "location": {
+      "lat": 15.1730609,
+      "lng": 108.8690953
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": null,
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.5,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJI3df0JdNaDERwlxrhFj037k",
+    "categories": [
+      "Đài tưởng niệm",
+      "Điểm thu hút khách du lịch"
+    ],
+    "fid": "0x31684d97d05f7723:0xb9dff458846b5cc2",
+    "cid": "13393692477839072450",
+    "reviewsCount": 140,
+    "reviewsDistribution": {
+      "oneStar": 4,
+      "twoStar": 3,
+      "threeStar": 14,
+      "fourStar": 20,
+      "fiveStar": 99
+    },
+    "imagesCount": 693,
+    "imageCategories": [
+      "Tất cả",
+      "Video"
+    ],
+    "scrapedAt": "2026-09-29T13:32:45.472Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": "Không quá đông đúc",
+    "popularTimesLivePercent": 49,
+    "popularTimesHistogram": {
+      "Su": [
+        {
+          "hour": 4,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 65
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 72
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 25
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 25
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 17
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 34
+        }
+      ],
+      "Mo": [
+        {
+          "hour": 4,
+          "occupancyPercent": 14
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 23
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 25
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 14
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 19
+        }
+      ],
+      "Tu": [
+        {
+          "hour": 4,
+          "occupancyPercent": 14
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 17
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 25
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 23
+        }
+      ],
+      "We": [
+        {
+          "hour": 4,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 23
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 25
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 25
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 34
+        }
+      ],
+      "Th": [
+        {
+          "hour": 4,
+          "occupancyPercent": 17
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 23
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 25
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 19
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 21
+        }
+      ],
+      "Fr": [
+        {
+          "hour": 4,
+          "occupancyPercent": 14
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 23
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 23
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 23
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 12
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 12
+        }
+      ],
+      "Sa": [
+        {
+          "hour": 4,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 78
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 100
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 80
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 65
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 68
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 34
+        }
+      ]
+    },
+    "openingHours": [
+      {
+        "day": "Thứ Ba",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Tư",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Năm",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Sáu",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Bảy",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Chủ Nhật",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Hai",
+        "hours": "Mở cửa cả ngày"
+      }
+    ],
+    "wasOpenAtScrapeTime": true,
+    "peopleAlsoSearch": [
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "DINH ÔNG TIẾN",
+        "reviewsCount": 0,
+        "totalScore": 0
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Di tích Chiến thắng Đình Cương",
+        "reviewsCount": 9,
+        "totalScore": 3.9
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "NHÀ THỜ HỌ TRƯƠNG",
+        "reviewsCount": 4,
+        "totalScore": 3.5
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "TRẦN TỰ ĐƯỜNG",
+        "reviewsCount": 0,
+        "totalScore": 0
+      }
+    ],
+    "placesTags": [],
+    "reviewsTags": [],
+    "additionalInfo": {
+      "Phù hợp cho người khuyết tật": [
+        {
+          "Nhà vệ sinh cho xe lăn": true
+        }
+      ]
+    },
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=%C4%90%E1%BB%81n%20th%E1%BB%9D%20Tr%C6%B0%C6%A1ng%20%C4%90%E1%BB%8Bnh&query_place_id=ChIJI3df0JdNaDERwlxrhFj037k",
+    "searchPageUrl": "https://www.google.com/maps/search/%C4%90%E1%BB%81n%20Trinh%20Ngh%C4%A9a%20Qu%E1%BA%A3ng%20Ng%C3%A3i/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Đền Trinh Nghĩa Quảng Ngãi",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/grass-cs/AABkmLecB63S9PmuVKxAEIxdrFfR-IKQMGVWpmfjayCseP4MNMWJ3Ck2EpB76mHFIe3uM_-IlvaeeOqhn_jwKPbWcgxZWRJ1-Mr3GUzNJplnJ0O5ORT4bpslS9Ah05tlnkFUKXgUEHBM5Q=w408-h272-k-no",
+    "kgmid": "/g/11c1s0v9vl",
+    "businessProfileId": null,
+    "questionsAndAnswers": [],
+    "updatesFromCustomers": {
+      "text": "Đường vào khu đền thờ anh hùng Trương Định",
+      "language": "vi",
+      "postDate": "3 năm trước",
+      "postedBy": {
+        "name": "Anh Pham",
+        "url": "https://www.google.com/maps/contrib/111721021327608604271?hl=vi",
+        "title": "Local Guide",
+        "totalReviews": 125
+      },
+      "media": [
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPHBBHldjAJYBMiqT8uKz9CRh2z20M1P0zry2D03zB4cUU1Od3OGxSCfHy4CAK5ItTUDdodiJbZrk79kE5uc7rp_ST29Xt_ESh3Zryvo_i2wjr---hlhu2oKtM16--6875HEkg6zA=k-no",
+          "postDate": "3 năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmNdQZfUhP7XpwtVQGClsXNJHl0NS_30VOvaIMpm2Q5SAGeszggO-wzANWaSCKOObJA2gBlUyCKa-QChRCaoG-5QhSZKAq_ADWqG8QN6NvApUjo1IWXkGJDRSkVvhwEoFwPGy72-=k-no",
+          "postDate": "3 năm trước"
+        }
+      ]
+    },
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [],
+    "phones": [],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/grass-cs/AABkmLecB63S9PmuVKxAEIxdrFfR-IKQMGVWpmfjayCseP4MNMWJ3Ck2EpB76mHFIe3uM_-IlvaeeOqhn_jwKPbWcgxZWRJ1-Mr3GUzNJplnJ0O5ORT4bpslS9Ah05tlnkFUKXgUEHBM5Q=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "CHỢ KONTUM",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": null,
+    "price": null,
+    "categoryName": "Chợ",
+    "address": "82X3+P6G, Kon Tum, Quảng Ngãi, Việt Nam",
+    "neighborhood": "Kon Tum",
+    "street": "82X3+P6G",
+    "city": "Quảng Ngãi",
+    "postalCode": null,
+    "state": "Kon Tum, Quảng Ngãi",
+    "countryCode": "VN",
+    "phone": "",
+    "phoneUnformatted": "",
+    "claimThisBusiness": true,
+    "location": {
+      "lat": 14.3493136,
+      "lng": 108.0030872
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": null,
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.4,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJLXGLNgD_azERizpq2B15GyU",
+    "categories": [
+      "Chợ"
+    ],
+    "fid": "0x316bff00368b712d:0x251b791dd86a3a8b",
+    "cid": "2673863972866374283",
+    "reviewsCount": 30,
+    "reviewsDistribution": {
+      "oneStar": 0,
+      "twoStar": 1,
+      "threeStar": 4,
+      "fourStar": 7,
+      "fiveStar": 18
+    },
+    "imagesCount": 63,
+    "imageCategories": [],
+    "scrapedAt": "2026-09-29T13:32:49.018Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {},
+    "openingHours": [],
+    "wasOpenAtScrapeTime": null,
+    "peopleAlsoSearch": [],
+    "placesTags": [
+      {
+        "title": "Thực phẩm và đồ uống",
+        "count": 1
+      },
+      {
+        "title": "Khác",
+        "count": 1
+      }
+    ],
+    "reviewsTags": [],
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=CH%E1%BB%A2%20KONTUM&query_place_id=ChIJLXGLNgD_azERizpq2B15GyU",
+    "searchPageUrl": "https://www.google.com/maps/search/Ch%E1%BB%A3%20%C4%90%C6%B0%E1%BB%9Dng%20H%C6%B0%C6%A1ng%20Kon%20Tum/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Chợ Đường Hương Kon Tum",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/grass-cs/ACvplmM4XEXIz1U9YhzMu6lH_QrqYudhqKsR-Aa5NSdw3Q1V9GoUf3nfSS1oNKP79wV3CWMQbVTNFw-Ghba0FjSF81BE9tHatN67AWtBwHS2xya3kZNJsBtkrunPH8v73qeq4MXDyaeUJ1lktdnS=w426-h240-k-no",
+    "kgmid": "/g/11w2wf1v0r",
+    "businessProfileId": null,
+    "questionsAndAnswers": [],
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [],
+    "phones": [],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/grass-cs/ACvplmM4XEXIz1U9YhzMu6lH_QrqYudhqKsR-Aa5NSdw3Q1V9GoUf3nfSS1oNKP79wV3CWMQbVTNFw-Ghba0FjSF81BE9tHatN67AWtBwHS2xya3kZNJsBtkrunPH8v73qeq4MXDyaeUJ1lktdnS=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Suối khoáng nóng Thạch Trụ (Hot mineral spring Thach Tru)",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": null,
+    "price": null,
+    "categoryName": "Điểm thu hút khách du lịch",
+    "address": "VWP6+2HX, Thạch Trụ Tây, Lân Phong, Quảng Ngãi, Việt Nam",
+    "neighborhood": "Thạch Trụ Tây, Lân Phong",
+    "street": "VWP6+2HX",
+    "city": "Quảng Ngãi",
+    "postalCode": null,
+    "state": "Lân Phong, Quảng Ngãi",
+    "countryCode": "VN",
+    "phone": "+84 908 677 785",
+    "phoneUnformatted": "+84908677785",
+    "claimThisBusiness": true,
+    "location": {
+      "lat": 14.8851028,
+      "lng": 108.9114964
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": null,
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.6,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJ3xrsZCv5aDERQs9GHhG6bp4",
+    "categories": [
+      "Điểm thu hút khách du lịch"
+    ],
+    "fid": "0x3168f92b64ec1adf:0x9e6eba111e46cf42",
+    "cid": "11416266688115953474",
+    "reviewsCount": 84,
+    "reviewsDistribution": {
+      "oneStar": 2,
+      "twoStar": 1,
+      "threeStar": 6,
+      "fourStar": 12,
+      "fiveStar": 63
+    },
+    "imagesCount": 158,
+    "imageCategories": [
+      "Tất cả",
+      "Chế độ xem Phố và 360°",
+      "Video"
+    ],
+    "scrapedAt": "2026-09-29T13:33:03.117Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {},
+    "openingHours": [],
+    "wasOpenAtScrapeTime": null,
+    "peopleAlsoSearch": [
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Suối khoáng nóng Nghĩa Thuận",
+        "reviewsCount": 24,
+        "totalScore": 4.2
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "SUỐI KHOÁNG NÓNG TÚ SƠN",
+        "reviewsCount": 5,
+        "totalScore": 5
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Khu DU LỊCH SINH THÁI Suối Chí",
+        "reviewsCount": 344,
+        "totalScore": 3.7
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Cổng chào Khu du lịch Suối Chí.",
+        "reviewsCount": 57,
+        "totalScore": 3.6
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Hồ nước khoáng nóng",
+        "reviewsCount": 0,
+        "totalScore": 0
+      }
+    ],
+    "placesTags": [],
+    "reviewsTags": [],
+    "additionalInfo": {
+      "Trẻ em": [
+        {
+          "Phù hợp cho trẻ em": true
+        }
+      ]
+    },
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Su%C3%B4%CC%81i%20khoa%CC%81ng%20no%CC%81ng%20Tha%CC%A3ch%20Tru%CC%A3%20(Hot%20mineral%20spring%20Thach%20Tru)&query_place_id=ChIJ3xrsZCv5aDERQs9GHhG6bp4",
+    "searchPageUrl": "https://www.google.com/maps/search/Su%E1%BB%91i%20kho%C3%A1ng%20N%C3%BAi%20L%C6%B0%20Qu%E1%BA%A3ng%20Ng%C3%A3i/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Suối khoáng Núi Lư Quảng Ngãi",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnOcqvJCIE0rbvTdrv9ASBvQN2KshgUWGJoibWxu02_nkcw0_oPNz05-fggK-3qASlzo80Cflx_eDp3pzJ_QmOwm3mnL45Aqav9OsSjEJWOM72UH1cJ8LWNreNLseWweGda6MC2pobHxx4=w408-h306-k-no",
+    "kgmid": "/g/11h_6_z715",
+    "businessProfileId": null,
+    "questionsAndAnswers": [],
+    "updatesFromCustomers": {
+      "text": "Thiên nhiên thật tuyệt vời, giếng nước nóng phun trào quanh năm, người dân địa phương luộc trứng, tắm nước nóng, ngâm chân thoả thích.",
+      "language": "vi",
+      "postDate": "một năm trước",
+      "postedBy": {
+        "name": "Kevin Tinh",
+        "url": "https://www.google.com/maps/contrib/115423776473958806548?hl=vi",
+        "title": "Local Guide",
+        "totalReviews": 762
+      },
+      "media": [
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPxNpx2eCAMarovCZavjYopq_B_ZsG5tf2bO_OWVxxwX7UQcaCxEQ01TlO8_yQKSthGJDMbWZo0z-uul_4RN70XQ4bUszxVTFqWMahXw1-_H8dGUiorB3TTv0Bs5hHfeAnffh4YIA=k-no",
+          "postDate": "một năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmP3DkspJnVXl9uar5BMXqOr3T_PHpNbnkRiDgWINvNsYgR7tJWdkzLsjdZBUIyr4Zc5rdWuytUf5lPwepIKpnulhjQq3QHZFdBytjRmSFj5wWYfbhBjk3fBNNHGuzPCRxF1sZqL=k-no",
+          "postDate": "một năm trước"
+        }
+      ]
+    },
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [],
+    "phones": [],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnOcqvJCIE0rbvTdrv9ASBvQN2KshgUWGJoibWxu02_nkcw0_oPNz05-fggK-3qASlzo80Cflx_eDp3pzJ_QmOwm3mnL45Aqav9OsSjEJWOM72UH1cJ8LWNreNLseWweGda6MC2pobHxx4=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Chợ gốm Bảo Lộc",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": "cửa hàng kinh doanh vật tư cây cảnh, sân vườn",
+    "price": null,
+    "categoryName": "Cửa hàng đồ gốm",
+    "address": "94 Nguyễn Thị Minh Khai, B'Lao, Lâm Đồng 66458, Việt Nam",
+    "neighborhood": "B'Lao",
+    "street": "94 Nguyễn Thị Minh Khai",
+    "city": "Lâm Đồng",
+    "postalCode": "66458",
+    "state": "B'Lao, Lâm Đồng",
+    "countryCode": "VN",
+    "phone": "",
+    "phoneUnformatted": "",
+    "claimThisBusiness": false,
+    "location": {
+      "lat": 11.5418464,
+      "lng": 107.8042066
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": "GRR3+PM B'Lao, Lâm Đồng, Việt Nam",
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.5,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJCSf8u9L3czERCDnVgJmLEM8",
+    "categories": [
+      "Cửa hàng đồ gốm"
+    ],
+    "fid": "0x3173f7d2bbfc2709:0xcf108b9980d53908",
+    "cid": "14920579056886167816",
+    "reviewsCount": 4,
+    "reviewsDistribution": {
+      "oneStar": 0,
+      "twoStar": 0,
+      "threeStar": 0,
+      "fourStar": 2,
+      "fiveStar": 2
+    },
+    "imagesCount": 29,
+    "imageCategories": [],
+    "scrapedAt": "2026-09-29T13:33:10.250Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {},
+    "openingHours": [
+      {
+        "day": "Thứ Ba",
+        "hours": "07:30 to 17:00"
+      },
+      {
+        "day": "Thứ Tư",
+        "hours": "07:30 to 17:00"
+      },
+      {
+        "day": "Thứ Năm",
+        "hours": "07:30 to 17:00"
+      },
+      {
+        "day": "Thứ Sáu",
+        "hours": "07:30 to 17:00"
+      },
+      {
+        "day": "Thứ Bảy",
+        "hours": "07:30 to 17:00"
+      },
+      {
+        "day": "Chủ Nhật",
+        "hours": "07:30 to 17:00"
+      },
+      {
+        "day": "Thứ Hai",
+        "hours": "07:30 to 17:00"
+      }
+    ],
+    "wasOpenAtScrapeTime": false,
+    "peopleAlsoSearch": [],
+    "placesTags": [],
+    "reviewsTags": [],
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ch%E1%BB%A3%20g%E1%BB%91m%20B%E1%BA%A3o%20L%E1%BB%99c&query_place_id=ChIJCSf8u9L3czERCDnVgJmLEM8",
+    "searchPageUrl": "https://www.google.com/maps/search/L%C3%A0ng%20g%E1%BB%91m%20B%E1%BA%A3o%20L%E1%BB%99c%20Kon%20Tum/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Làng gốm Bảo Lộc Kon Tum",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmXGB0PpU-KnZzzRrjVhEEKr7CikxfxDfvqd-IiM0UZqYHcHrDZN31FKHr6ye7Uy6PwCccyAFM0z6KVykHNXmDqzK3iC4pRh53rvjxxIVOj9UIdiNu0qDKH5KXdlsa0UaXi0hBaRA=w408-h306-k-no",
+    "kgmid": "/g/11y3d5t5_r",
+    "businessProfileId": "10763251996645046677",
+    "questionsAndAnswers": [],
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [],
+    "phones": [],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmXGB0PpU-KnZzzRrjVhEEKr7CikxfxDfvqd-IiM0UZqYHcHrDZN31FKHr6ye7Uy6PwCccyAFM0z6KVykHNXmDqzK3iC4pRh53rvjxxIVOj9UIdiNu0qDKH5KXdlsa0UaXi0hBaRA=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Ô Bún chả - Quảng Ngãi",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": "Bún chả – đặc sản Hà Nội\nBún chả là món ăn truyền thống nổi tiếng của Hà Nội, gồm bún tươi, thịt nướng than hoa, ăn kèm nước chấm chua ngọt và rau sống. Ngoài ra, quán còn phục vụ các món ăn kèm hấp dẫn như bánh tôm, nem cua bể và nem rán, mang đến trải nghiệm ẩm thực đậm đà hương vị Hà Nội.",
+    "price": null,
+    "categoryName": "Nhà hàng châu Á",
+    "address": "89 Lê Lợi, Cẩm Thành, Quảng Ngãi, Việt Nam",
+    "neighborhood": "Cẩm Thành",
+    "street": "89 Lê Lợi",
+    "city": "Quảng Ngãi",
+    "postalCode": null,
+    "state": "Cẩm Thành, Quảng Ngãi",
+    "countryCode": "VN",
+    "phone": "+84 704 977 788",
+    "phoneUnformatted": "+84704977788",
+    "claimThisBusiness": false,
+    "location": {
+      "lat": 15.113435,
+      "lng": 108.8046854
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": "4R73+9V Cẩm Thành, Quảng Ngãi, Việt Nam",
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.6,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJ6bqkaQCtaTER0rq6ldmO0XQ",
+    "categories": [
+      "Nhà hàng châu Á"
+    ],
+    "fid": "0x3169ad0069a4bae9:0x74d18ed995babad2",
+    "cid": "8417666243703257810",
+    "reviewsCount": 40,
+    "reviewsDistribution": {
+      "oneStar": 1,
+      "twoStar": 2,
+      "threeStar": 2,
+      "fourStar": 1,
+      "fiveStar": 34
+    },
+    "imagesCount": 61,
+    "imageCategories": [],
+    "scrapedAt": "2026-09-29T13:33:17.822Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {},
+    "openingHours": [
+      {
+        "day": "Thứ Ba",
+        "hours": "06:15 to 13:00, 16:00 to 21:00"
+      },
+      {
+        "day": "Thứ Tư",
+        "hours": "06:15 to 13:00, 16:00 to 21:00"
+      },
+      {
+        "day": "Thứ Năm",
+        "hours": "06:15 to 13:00, 16:00 to 21:00"
+      },
+      {
+        "day": "Thứ Sáu",
+        "hours": "06:15 to 13:00, 16:00 to 21:00"
+      },
+      {
+        "day": "Thứ Bảy",
+        "hours": "06:15 to 13:00, 16:00 to 21:00"
+      },
+      {
+        "day": "Chủ Nhật",
+        "hours": "06:15 to 13:00, 16:00 to 21:00"
+      },
+      {
+        "day": "Thứ Hai",
+        "hours": "06:15 to 13:00, 16:00 to 21:00"
+      }
+    ],
+    "wasOpenAtScrapeTime": true,
+    "peopleAlsoSearch": [],
+    "placesTags": [],
+    "reviewsTags": [],
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=%C3%94%20B%C3%BAn%20ch%E1%BA%A3%20-%20Qu%E1%BA%A3ng%20Ng%C3%A3i&query_place_id=ChIJ6bqkaQCtaTER0rq6ldmO0XQ",
+    "searchPageUrl": "https://www.google.com/maps/search/Qu%C3%A1n%20B%C3%BAn%20Ch%E1%BA%A3%20C%C3%A1%20M%E1%BB%A1%20N%C6%B0%E1%BB%9Bng%20Qu%E1%BA%A3ng%20Ng%C3%A3i/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Quán Bún Chả Cá Mỡ Nướng Quảng Ngãi",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/grass-cs/AABkmLfFGchoJe47aKAPe7zPL4Oua2Uc2iPON_JHs_DN7sIkARgSFyRRiLdu5a0WN9rk9Tk3xQ4HrokJBDvceFTNhfaMYWj6yI42YBrArl09w-tcg0PQsdA6-xrQR5EXmTZGNNALQ0qieFOzTl68=w425-h240-k-no",
+    "kgmid": "/g/11z47klqmr",
+    "businessProfileId": "5840314667375783496",
+    "questionsAndAnswers": [],
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [
+      {
+        "text": "🌿 THỨ 2 ĐẦU TUẦN, ĂN GÌ CHO CÓ NĂNG LƯỢNG?\n\nMột suất bún chả Hà Nội nóng hổi là đủ để khởi động tuần mới rồi! 🔥🥢 Hôm nay Ô Bún Chả lại vui hơn khi được đón những vị khách ghé thưởng thức bún chả kẹp tre nướng than hoa, cùng nem và những món ngon mang đậm hương vị Việt.\nghé Ô Bún Chả nạp năng lượng cho cả tuần thôi! ❤️",
+        "buttonText": null,
+        "buttonLink": null,
+        "date": "2026-09-28T07:06:41.000Z",
+        "imageUrl": "https://lh3.googleusercontent.com/geougc/AF1QipPdeMam7Y9x53Ta-6PZY4qSuBncb3AHD_a7Nfi0=h400-no"
+      },
+      {
+        "text": "🍂 MỘT CHÚT THU HÀ NỘI, MỘT CHÚT HƯƠNG BÚN CHẢ\nHà Nội vào thu, trời dịu hơn một chút, nắng vàng hơn một chút…\nVà tự nhiên người ta lại thèm một hương vị rất Hà Nội — bún chả. 🍂\nMột chút thơm nức của thịt nướng trên than hồng,\nmột chút đậm đà của bát nước chấm,\nmột chút thanh mát của rau xanh,\ncùng những sợi bún trắng mềm…\nTất cả hòa quyện thành một món ăn giản dị nhưng đủ khiến người ta nhớ mãi về Hà Nội.\nMột chút thu Hà Nội.\nMột chút hương bún chả.\nMột chút thương nhớ gửi trong từng miếng ngon. ❤️\n📍 Ghé Ô Bún Chả để thưởng thức một chút hương vị Hà Nội nhé!",
+        "buttonText": null,
+        "buttonLink": null,
+        "date": "2026-09-26T07:27:30.000Z",
+        "imageUrl": "https://lh3.googleusercontent.com/geougc/AF1QipP97YXCTMhXrv9zfox4p46DDIsOQzbqT2gSN-qf=h400-no"
+      }
+    ],
+    "emails": [],
+    "phones": [],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/grass-cs/AABkmLfFGchoJe47aKAPe7zPL4Oua2Uc2iPON_JHs_DN7sIkARgSFyRRiLdu5a0WN9rk9Tk3xQ4HrokJBDvceFTNhfaMYWj6yI42YBrArl09w-tcg0PQsdA6-xrQR5EXmTZGNNALQ0qieFOzTl68=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Khách sạn Sao Mai",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": null,
+    "price": null,
+    "categoryName": "Khách sạn",
+    "address": "QL24, Lân Phong, Quảng Ngãi, Việt Nam",
+    "neighborhood": "Lân Phong",
+    "street": "QL24",
+    "city": "Quảng Ngãi",
+    "postalCode": null,
+    "state": "Lân Phong, Quảng Ngãi",
+    "countryCode": "VN",
+    "phone": "+84 909 700 979",
+    "phoneUnformatted": "+84909700979",
+    "claimThisBusiness": false,
+    "location": {
+      "lat": 14.8833356,
+      "lng": 108.9135537
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": "VWM7+8C Lân Phong, Quảng Ngãi, Việt Nam",
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.5,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJMaBnOMT5aDER8g-XDAw_cN8",
+    "categories": [
+      "Khách sạn",
+      "Dịch vụ taxi"
+    ],
+    "fid": "0x3168f9c43867a031:0xdf703f0c0c970ff2",
+    "cid": "16100437988832907250",
+    "reviewsCount": 85,
+    "reviewsDistribution": {
+      "oneStar": 5,
+      "twoStar": 2,
+      "threeStar": 6,
+      "fourStar": 5,
+      "fiveStar": 67
+    },
+    "imagesCount": 117,
+    "imageCategories": [
+      "Tất cả",
+      "Phòng",
+      "Video",
+      "Ngoại thất",
+      "Thực phẩm và đồ uống",
+      "Của khách trọ",
+      "Của chủ sở hữu",
+      "Chế độ xem Phố và 360°"
+    ],
+    "scrapedAt": "2026-09-29T13:33:31.856Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {},
+    "openingHours": [],
+    "wasOpenAtScrapeTime": null,
+    "peopleAlsoSearch": [
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Karaoke Sao Mai 2",
+        "reviewsCount": 1,
+        "totalScore": 5
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Karaoke Sao Mai",
+        "reviewsCount": 48,
+        "totalScore": 3.5
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Nhà Nghỉ Sao Mai | Nhà nghỉ Cảng Sa Kỳ",
+        "reviewsCount": 64,
+        "totalScore": 4.1
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Sao Mai Motel",
+        "reviewsCount": 27,
+        "totalScore": 3.8
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Nhà Nghỉ Sao Mai",
+        "reviewsCount": 12,
+        "totalScore": 4.3
+      }
+    ],
+    "placesTags": [],
+    "reviewsTags": [],
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kh%C3%A1ch%20s%E1%BA%A1n%20Sao%20Mai&query_place_id=ChIJMaBnOMT5aDER8g-XDAw_cN8",
+    "searchPageUrl": "https://www.google.com/maps/search/Kh%C3%A1ch%20S%E1%BA%A1n%20Sao%20Mai%20Qu%E1%BA%A3ng%20Ng%C3%A3i/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Khách Sạn Sao Mai Quảng Ngãi",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn-L9bB0NnCFLo1k1MjTAMxxcMDa2npeSsKEw-Y7rtnPSL3dZIPvlmTaobveuDsRkQYYGowTbK0W6T4mxHXQwiL14p-HoHu7fRQ94wKjpyttN98uh9xTyOlo16n3f8YMurfP11f=w408-h544-k-no",
+    "kgmid": "/g/11fjfnw_71",
+    "businessProfileId": "5248365421852385198",
+    "questionsAndAnswers": [],
+    "updatesFromCustomers": {
+      "text": "Điểm rẽ xuống KS Sao mai 1km từ bắc vào",
+      "language": "vi",
+      "postDate": "7 tháng trước",
+      "postedBy": {
+        "name": "Truong Lu",
+        "url": "https://www.google.com/maps/contrib/101650178472899630979?hl=vi",
+        "title": null,
+        "totalReviews": 0
+      },
+      "media": [
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPKaJ91SrjAP27eAY-bCydzfGUaLoAhpKbMgogvc4txZVdxEuz5Os184oQBKcNJVErN-QjZZSEJpCAjynWnypv87LnEsDImA6od8VcTpaKNmHO8gNcp3Ajwr-L5Xlkp-D9nEtxB0-iTAvti=k-no",
+          "postDate": "7 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPYZZ2enZHWmUSvZDKdHpyRMP0ar0uTk3QYVkn7HzRIFxCMPK-lvowrK255Wr4SORa_XWnPg98BNqYc6hQUS6A1RvE-Ni1ZD7u2bxfd4-oy_pBLQbx5H16UNWS_ZrqhcN4pNZWSjcwGXPJz=k-no",
+          "postDate": "7 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmNXnQeIIjQxE5SnrJQADG0sZnVqLl4b3qEHiZt44VhBDFmEIcD96C-HAfmiO4kD_dJ1xRTxoi1rseTYmyVXchAG3CsJn8javRYqQ4AuU9lsoOj8YemJ1s1EQ7d4bhGm3uNMcXBg_ygjlpoS=k-no",
+          "postDate": "7 tháng trước"
+        }
+      ]
+    },
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [],
+    "phones": [],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn-L9bB0NnCFLo1k1MjTAMxxcMDa2npeSsKEw-Y7rtnPSL3dZIPvlmTaobveuDsRkQYYGowTbK0W6T4mxHXQwiL14p-HoHu7fRQ94wKjpyttN98uh9xTyOlo16n3f8YMurfP11f=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Bãi tắm Mỹ Khê",
+    "subTitle": null,
+    "description": "Bãi biển nên thơ có dịch vụ cho thuê ghế và dù, nhân viên cứu hộ túc trực, quán bar, nhà hàng và các dịch vụ.",
+    "ownerDescription": null,
+    "price": null,
+    "categoryName": "Bãi biển",
+    "address": "Quảng Ngãi, Việt Nam",
+    "neighborhood": null,
+    "street": null,
+    "city": null,
+    "postalCode": null,
+    "state": null,
+    "countryCode": null,
+    "phone": "",
+    "phoneUnformatted": "",
+    "claimThisBusiness": false,
+    "location": {
+      "lat": 15.1848425,
+      "lng": 108.8948748
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": null,
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.5,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJg8MvftBNaDER6NssmUdoG9c",
+    "categories": [
+      "Bãi biển"
+    ],
+    "fid": "0x31684dd07e2fc383:0xd71b6847992cdbe8",
+    "cid": "15500097199247514600",
+    "reviewsCount": 563,
+    "reviewsDistribution": {
+      "oneStar": 15,
+      "twoStar": 7,
+      "threeStar": 46,
+      "fourStar": 114,
+      "fiveStar": 381
+    },
+    "imagesCount": 1366,
+    "imageCategories": [
+      "Tất cả",
+      "Bãi biển",
+      "Video",
+      "Chế độ xem Phố và 360°"
+    ],
+    "scrapedAt": "2026-09-29T13:33:33.447Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {},
+    "openingHours": [],
+    "wasOpenAtScrapeTime": null,
+    "peopleAlsoSearch": [],
+    "placesTags": [],
+    "reviewsTags": [],
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=B%C3%A3i%20t%E1%BA%AFm%20M%E1%BB%B9%20Kh%C3%AA&query_place_id=ChIJg8MvftBNaDER6NssmUdoG9c",
+    "searchPageUrl": "https://www.google.com/maps/search/B%C3%A3n%20%C4%91%E1%BA%A3o%20M%E1%BB%B9%20Kh%C3%AA%20Qu%E1%BA%A3ng%20Ng%C3%A3i/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Bãn đảo Mỹ Khê Quảng Ngãi",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmtfQqkDfrPNaYTW3VytfCUgT-W-8Bs8nyLquHy6CpM-kaj6JMmGsj9R4eNc2vFO8h8GPy66WqNsEk_CHn1zE9hMWLJLSOe0M_5RvNOHYC6fRh71Ct7FJjO8Mc1CMEgo-4PJ0E=w408-h270-k-no",
+    "kgmid": "/g/120wl82x",
+    "businessProfileId": null,
+    "questionsAndAnswers": [],
+    "updatesFromCustomers": {
+      "text": "Checkin bãi biển đẹp nhất Quảng Ngãi",
+      "language": "vi",
+      "postDate": "2 năm trước",
+      "postedBy": {
+        "name": "tuyen pham",
+        "url": "https://www.google.com/maps/contrib/100667818519169429192?hl=vi",
+        "title": "Local Guide",
+        "totalReviews": 0
+      },
+      "media": [
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmP1nvSnfpiLHQ43eZ-oKHIbwGppzcaUIZa98Ae3l4GEPiclo7KN8-XBbEW3Sjj54N4F2To2cOK5sNouWIqVidWLJQ176gtjxYieuxEc4Xt1vvnL77uKNlsP3DdK9uRoxkmaduet=k-no",
+          "postDate": "2 năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmNf_PpYRYh3XDecNafRrdqjp9Fhzxf1BVi673-4xIdtRLNlG45ACXNveK1NC6qG7VxBlGAHtzdMYA18MqRVJ3U2mtpUglXJu6o2F6ZZXKqK_YgzB97II6RKm5KzTttXnTB5P-Ar=k-no",
+          "postDate": "2 năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmNS5p9s7j3k7i6QwLhOhMBIKZkPk-J_d3XBcYWrueDdTSv12u5Z4I444vMq7661uzXg7nS7RNQsiwa6d6qY-ejKKGx-OZM491vV3By0C8Pxqkr6P1HB6QDWtIEIovAF43Aa9fU0Xw=k-no",
+          "postDate": "2 năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMJUPtU58F6RLxBvaCCgd0lyaapOYutGRP7zxh_J-Glaof_xjorCR-s3e70at6-RNGxszEO2mHxB1THPrA7ArtiXUUMPn3nB3q2lQK7WoaW4GX6cwURDKCXu4xl3JhKbIVeO7c=k-no",
+          "postDate": "2 năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPuhsWi018drnuolIDJdjbSIydfLYBOTkEb2ax9gNjbxt1atgC8A6YJjJCKblQMY_zKTeDkx3GsF89XdBXSQNuenZaIxwjiwRO3OPdXxsoQ4Rducs61LhPvcUfuTcgh1Ck0Y-wNHQ=k-no",
+          "postDate": "2 năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMz4Bsa5DZ-K7pJeLw7EEAWqruwQV4pU71gAWLOT7G7vFoegE6guSToMYerchfrL_tdlU4NsA8XjH6tlf-MPhTWlN2MX3saJ5ff8NSprgtSLwpZUEwGtmMzjMrQD-NvdubiPibS=k-no",
+          "postDate": "2 năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmOco-fV2epBKWDvIylMqEVXT_NEaEwThykVz7PHsq4qKiLx2pNtvvm7-hqIQChWyb4tjlYri0iePdv9k6yYu-dD9_EjCgGWQ5oS9iTKUgmnHXNlWgsRYNPlUeEJo_2jGQhl9Qv6zw=k-no",
+          "postDate": "2 năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmM10hvqCFv1SJNl92jgLOc_f5zTPpm1-THJOXXcaMHcT7bpEcRFoa0uTXE0BMoZC_ikBPY-ojnm9Y8lP3yQRA3OhhYRiJ8CU8H2OwRvqImLtoUwUkrwvgjD3_Ds3Yf98JRQq36h=k-no",
+          "postDate": "2 năm trước"
+        }
+      ]
+    },
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [],
+    "phones": [],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmtfQqkDfrPNaYTW3VytfCUgT-W-8Bs8nyLquHy6CpM-kaj6JMmGsj9R4eNc2vFO8h8GPy66WqNsEk_CHn1zE9hMWLJLSOe0M_5RvNOHYC6fRh71Ct7FJjO8Mc1CMEgo-4PJ0E=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Quan an Thanh Lan, Sa Huynh, Quang Ngai",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": null,
+    "price": null,
+    "categoryName": "Nhà hàng",
+    "address": "M327+3VR, Tấn Lộc, Sa Huỳnh, Quảng Ngãi, Việt Nam",
+    "neighborhood": "Tấn Lộc, Sa Huỳnh",
+    "street": "M327+3VR",
+    "city": "Quảng Ngãi",
+    "postalCode": null,
+    "state": "Sa Huỳnh, Quảng Ngãi",
+    "countryCode": "VN",
+    "phone": "+84 358 213 458",
+    "phoneUnformatted": "+84358213458",
+    "claimThisBusiness": true,
+    "location": {
+      "lat": 14.6502341,
+      "lng": 109.06465
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": null,
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 3.9,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJZ_3jDgzpaDERgqOzRXg5KR0",
+    "categories": [
+      "Nhà hàng"
+    ],
+    "fid": "0x3168e90c0ee3fd67:0x1d29397845b3a382",
+    "cid": "2101273889873306498",
+    "reviewsCount": 178,
+    "reviewsDistribution": {
+      "oneStar": 9,
+      "twoStar": 9,
+      "threeStar": 34,
+      "fourStar": 68,
+      "fiveStar": 58
+    },
+    "imagesCount": 204,
+    "imageCategories": [],
+    "scrapedAt": "2026-09-29T13:33:46.037Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {},
+    "openingHours": [
+      {
+        "day": "Thứ Ba",
+        "hours": "08:00 to 22:00"
+      },
+      {
+        "day": "Thứ Tư",
+        "hours": "08:00 to 22:00"
+      },
+      {
+        "day": "Thứ Năm",
+        "hours": "08:00 to 22:00"
+      },
+      {
+        "day": "Thứ Sáu",
+        "hours": "08:00 to 22:00"
+      },
+      {
+        "day": "Thứ Bảy",
+        "hours": "08:00 to 22:00"
+      },
+      {
+        "day": "Chủ Nhật",
+        "hours": "08:00 to 22:00"
+      },
+      {
+        "day": "Thứ Hai",
+        "hours": "08:00 to 22:00"
+      }
+    ],
+    "wasOpenAtScrapeTime": true,
+    "peopleAlsoSearch": [],
+    "placesTags": [],
+    "reviewsTags": [],
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Quan%20an%20Thanh%20Lan%2C%20Sa%20Huynh%2C%20Quang%20Ngai&query_place_id=ChIJZ_3jDgzpaDERgqOzRXg5KR0",
+    "searchPageUrl": "https://www.google.com/maps/search/Nh%C3%A0%20H%C3%A0ng%20B%C3%A0%20Lan%20Qu%E1%BA%A3ng%20Ng%C3%A3i/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Nhà Hàng Bà Lan Quảng Ngãi",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/grass-cs/ACvplmO7HWSTgwW3JkEDnjmiE9h784Xn6WZOqF75aCdoJ26qBhrSP2ocKnPsyb76sg2RrT4QbPiLX1mTAKoK5xz79WNLS0TLykLKTBsr90iD-VP1x1iyHP64wUBmg7WtpW2JyR1mAzE7=w408-h306-k-no",
+    "kgmid": "/g/11bwy_1rh5",
+    "businessProfileId": null,
+    "questionsAndAnswers": [],
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [],
+    "phones": [],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/grass-cs/ACvplmO7HWSTgwW3JkEDnjmiE9h784Xn6WZOqF75aCdoJ26qBhrSP2ocKnPsyb76sg2RrT4QbPiLX1mTAKoK5xz79WNLS0TLykLKTBsr90iD-VP1x1iyHP64wUBmg7WtpW2JyR1mAzE7=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Chợ Đêm Măng Đen",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": null,
+    "price": null,
+    "categoryName": "Điểm thu hút khách du lịch",
+    "address": "Măng Đen, Quảng Ngãi, Việt Nam",
+    "neighborhood": "Măng Đen",
+    "street": null,
+    "city": "Quảng Ngãi",
+    "postalCode": null,
+    "state": "Măng Đen, Quảng Ngãi",
+    "countryCode": "VN",
+    "phone": "",
+    "phoneUnformatted": "",
+    "claimThisBusiness": true,
+    "location": {
+      "lat": 14.5938158,
+      "lng": 108.2888118
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": "H7VQ+GG Măng Đen, Kon Tum, Việt Nam",
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.6,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJWzS7UQBDaTEReKOgXKsFmpU",
+    "categories": [
+      "Điểm thu hút khách du lịch"
+    ],
+    "fid": "0x3169430051bb345b:0x959a05ab5ca0a378",
+    "cid": "10779934891616281464",
+    "reviewsCount": 517,
+    "reviewsDistribution": {
+      "oneStar": 7,
+      "twoStar": 9,
+      "threeStar": 30,
+      "fourStar": 100,
+      "fiveStar": 371
+    },
+    "imagesCount": 1744,
+    "imageCategories": [
+      "Tất cả",
+      "Mới nhất",
+      "Video",
+      "Chế độ xem Phố và 360°"
+    ],
+    "scrapedAt": "2026-09-29T13:33:52.225Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {},
+    "openingHours": [],
+    "wasOpenAtScrapeTime": null,
+    "peopleAlsoSearch": [
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Khu Kinh Tế Đêm Măng Đen",
+        "reviewsCount": 248,
+        "totalScore": 4.6
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Phố Đêm Măng Đen",
+        "reviewsCount": 100,
+        "totalScore": 4.7
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Chợ Măng Đen",
+        "reviewsCount": 526,
+        "totalScore": 4.1
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Chợ phiên Làng T’mang Deeng",
+        "reviewsCount": 529,
+        "totalScore": 4.6
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Hồ Đức Mẹ",
+        "reviewsCount": 4,
+        "totalScore": 4.5
+      }
+    ],
+    "placesTags": [],
+    "reviewsTags": [],
+    "additionalInfo": {
+      "Tiện nghi": [
+        {
+          "Nhà vệ sinh": true
+        }
+      ],
+      "Trẻ em": [
+        {
+          "Phù hợp cho trẻ em": true
+        },
+        {
+          "Sân chơi": true
+        }
+      ]
+    },
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ch%E1%BB%A3%20%C4%90%C3%AAm%20M%C4%83ng%20%C4%90en&query_place_id=ChIJWzS7UQBDaTEReKOgXKsFmpU",
+    "searchPageUrl": "https://www.google.com/maps/search/Ch%E1%BB%A3%20%C4%90%C3%AAm%20Qu%E1%BA%A3ng%20Ng%C3%A3i/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Chợ Đêm Quảng Ngãi",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/grass-cs/ACvplmP1N5Dn2X0Bg8LwQG2NLR6SyCkJM7XggFzfn8KgxEOyR3Rx39dA8ZmZh239jdcjX73S4aZCr_gQ0HD33DQOHU0EqXjKdxC49HQuHMD-HOOV7uYsmP3-6NrAk0ihtir2HNrg1xjg3ONrm1aX=w408-h544-k-no",
+    "kgmid": "/g/11xdxcfpbq",
+    "businessProfileId": null,
+    "questionsAndAnswers": [],
+    "updatesFromCustomers": {
+      "text": "Ổn áp nhất tui từng đi, trà sữa ngon, đồ ăn cũng ngon và no nê . Đi mùa mưa nên nó ấm áp, nó dịu keo lắm mấy bà",
+      "language": "vi",
+      "postDate": "2 tháng trước",
+      "postedBy": {
+        "name": "Chloe",
+        "url": "https://www.google.com/maps/contrib/114450325918934220146?hl=vi",
+        "title": null,
+        "totalReviews": 2
+      },
+      "media": [
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmM1JQgpuBvVm_qoTaiWotvhwdvBUK27Aw15kmeemrL_l-blKdSxuPoORhGeO21AztMTufKjYqlYIGsHWYJpX92PDW3Z-U8jOtNI_4DF3fOmW5dk-PtyyxYStpeKDPfkgPS8-WXjtuWE-PRb=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMYfqwMAaHzA-kobJIwTtww0NqSSMoB5Z4Y3czwEXzYQclQ2MLCadnOyT_ZrqYWFqCkRVW-02s3qhPRw-5p7b42xnIy9ioKKp1L_U3fr3Z--RBdueGsGLLqRaHeaVImfJFMiVZQXxR2PTfg=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmOIuJ9GdPMxotfmhrJWVKcu8bCRlU1bIEPUNIceADWnB4rZ74UBk00aXN3l66Vud_sp8zkwGMWvTO_GZvckXSKxAgluYH9aCLRW3dfWRtnQMYuvblek74wXzDi4gCRFBK4hXf-qnkiqb-Dv=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPVmpl8qJPE2eXH9f21L4BlUwlFMK_klb2xtiWvySNZNwMVBq4SAvTym8DyqhQoRD1ZOs-x_fY5sUH7k6ojgdbbd8m1a9EPA6nREyS-3ycAfqptjvxs_R1p8PYtsloC4eqM4YRy_8A395V6=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMm6A8WivJtorPfHEVjvWTL4EI2I14fDWlyoKE2vqfYyV1BimHY17mmdnaJNXt7kXTZnaLzN3gHRcI77_sB7WIWJ9os7WGy3xq266whoZT627uyQjiDAjPGW9EcZ7QAd2peQ5pPnTw6cpw8=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmOa1elJ0Y6qkW_XHDaxDKWaAtFS7Bbntaz-1vhCYo4z58zbFUk_bo6r81Hda-Gm6BeYBk0nFxU8-XmkbuU4GRG98g0FY2KriV3ETZ_9ccJ0b14pTOAew5HnlMh6R90o6blo99MKQBro9-hU=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmODQC6F_EFAOP3TkyfocxIVJrvWdW2ZgP67DZVlvUBK-t5K6NoeIYJLVFKUdyGq3O7-l6z-VUEP2bIJGFhLz5c-2pxHmsm5o_yKaqgkPzBkgPjI5Yq4aeKNft_A3yi_eYpYcBydhI0Rjq8m=k-no",
+          "postDate": "2 tháng trước"
+        }
+      ]
+    },
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [],
+    "phones": [],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/grass-cs/ACvplmP1N5Dn2X0Bg8LwQG2NLR6SyCkJM7XggFzfn8KgxEOyR3Rx39dA8ZmZh239jdcjX73S4aZCr_gQ0HD33DQOHU0EqXjKdxC49HQuHMD-HOOV7uYsmP3-6NrAk0ihtir2HNrg1xjg3ONrm1aX=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Thác Đray Nur",
+    "subTitle": null,
+    "description": "Những ngọn thác hùng vĩ thu hút khách du lịch & dã ngoại đến với nơi thiên nhiên tươi đẹp này.",
+    "ownerDescription": "Giữa đại ngàn kỳ vĩ, trùng điệp núi non, Dray Nur mang trong mình vẻ đẹp tươi tắn, nguyên sơ cùng với những huyền thoại được lưu truyền qua nhiều thế hệ. Hồ nước dưới chân thác xanh biếc, như một viên ngọc quý nằm yên dưới sự bảo vệ của đại ngàn xung quanh. Lác đác những mỏn đá nằm rải rắc giữa những sóng nước với nhiều hình dạng độc đáo. Nhìn từ xa, thác Dray Nur như một bức tường nước khổng lồ, muôn ngàn sợi nước trắng xóa quấn quít, đan xen, lung linh, huyền ảo. Từ thác Dray Nur, du khách có thể lang thang theo những con đường mòn trong rừng nguyên sinh để ngắm những gốc cây đại thụ hàng ngàn năm tuổi, rễ của chúng ôm chặt những tảng đá lớn, hoặc khám phá những hang động kì thú.",
+    "price": null,
+    "categoryName": "Điểm thu hút khách du lịch",
+    "address": "thôn Buôn Kuốp, Ea Na, Đắk Lắk, Việt Nam",
+    "neighborhood": "thôn Buôn Kuốp, Ea Na",
+    "street": null,
+    "city": "Đắk Lắk",
+    "postalCode": null,
+    "state": "Ea Na, Đắk Lắk",
+    "countryCode": "VN",
+    "website": "https://trungnguyenhealing.com/",
+    "phone": "",
+    "phoneUnformatted": "",
+    "claimThisBusiness": false,
+    "location": {
+      "lat": 12.5416329,
+      "lng": 107.8912843
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": "GVRR+MG Ea Na, Đắk Lắk, Việt Nam",
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.5,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJ9RuixJMicjEROEfrqnW8pDI",
+    "categories": [
+      "Điểm thu hút khách du lịch"
+    ],
+    "fid": "0x31722293c4a21bf5:0x32a4bc75aaeb4738",
+    "cid": "3649248811641685816",
+    "reviewsCount": 8253,
+    "reviewsDistribution": {
+      "oneStar": 183,
+      "twoStar": 179,
+      "threeStar": 750,
+      "fourStar": 1638,
+      "fiveStar": 5503
+    },
+    "imagesCount": 38737,
+    "imageCategories": [
+      "Tất cả",
+      "Mới nhất",
+      "Video",
+      "Của chủ sở hữu",
+      "Chế độ xem Phố và 360°"
+    ],
+    "scrapedAt": "2026-09-29T13:33:31.474Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {
+      "Su": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 5
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 13
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 79
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 85
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 77
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 71
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 68
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "Mo": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 1
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 7
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 19
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 35
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 41
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 35
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 32
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 26
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 16
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "Tu": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 4
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 10
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 18
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 32
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 28
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 28
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 28
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 16
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "We": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 3
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 7
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 15
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 26
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 32
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 35
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "Th": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 6
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 14
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 32
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 52
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 66
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 71
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 71
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 70
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 69
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 68
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 54
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "Fr": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 6
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 47
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 79
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 95
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 94
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 86
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 82
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 80
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 72
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 53
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "Sa": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 7
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 16
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 93
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 100
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 95
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 91
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 91
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 85
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 68
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ]
+    },
+    "openingHours": [
+      {
+        "day": "Thứ Ba",
+        "hours": "06:00 to 18:00"
+      },
+      {
+        "day": "Thứ Tư",
+        "hours": "06:00 to 18:00"
+      },
+      {
+        "day": "Thứ Năm",
+        "hours": "06:00 to 18:00"
+      },
+      {
+        "day": "Thứ Sáu",
+        "hours": "06:00 to 18:00"
+      },
+      {
+        "day": "Thứ Bảy",
+        "hours": "06:00 to 18:00"
+      },
+      {
+        "day": "Chủ Nhật",
+        "hours": "06:00 to 18:00"
+      },
+      {
+        "day": "Thứ Hai",
+        "hours": "06:00 to 18:00"
+      }
+    ],
+    "wasOpenAtScrapeTime": false,
+    "peopleAlsoSearch": [
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Thác Băng Rup (Trinh Nữ)",
+        "reviewsCount": 290,
+        "totalScore": 3.9
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Cây si cổ thụ",
+        "reviewsCount": 24,
+        "totalScore": 4.6
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Thác Đray Sáp",
+        "reviewsCount": 53,
+        "totalScore": 4.6
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Khu Du lịch Sinh thái Văn hóa Cụm Thác Đray Sáp - Gia Long",
+        "reviewsCount": 907,
+        "totalScore": 4
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Thác Dray Sap",
+        "reviewsCount": 1,
+        "totalScore": 5
+      }
+    ],
+    "placesTags": [],
+    "reviewsTags": [],
+    "additionalInfo": {
+      "Các tùy chọn dịch vụ": [
+        {
+          "Dịch vụ tại chỗ": true
+        }
+      ],
+      "Phù hợp cho người khuyết tật": [
+        {
+          "Chỗ đỗ xe cho xe lăn": false
+        },
+        {
+          "Lối vào cho xe lăn": false
+        }
+      ],
+      "Tiện nghi": [
+        {
+          "Nhà hàng": true
+        },
+        {
+          "Nhà vệ sinh": true
+        },
+        {
+          "Nhà vệ sinh cho cả hai giới": true
+        }
+      ],
+      "Thanh toán": [
+        {
+          "Thẻ tín dụng": true
+        }
+      ],
+      "Trẻ em": [
+        {
+          "Phù hợp cho trẻ em": true
+        },
+        {
+          "Sân chơi": true
+        }
+      ],
+      "Bãi đỗ xe": [
+        {
+          "Bãi đỗ xe có tính phí": true
+        }
+      ]
+    },
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Th%C3%A1c%20%C4%90ray%20Nur&query_place_id=ChIJ9RuixJMicjEROEfrqnW8pDI",
+    "searchPageUrl": "https://www.google.com/maps/search/Th%C3%A1c%20%C4%90ray%20Nur%20Kon%20Tum/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Thác Đray Nur Kon Tum",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm3qTf0yumk3BkvQWPx72KaNWYurSjy4n1oTP75Lnu9C10dtIygIbcHceoV9mAuJlV_RIv3GNdrG4X-fwOJ7YtUg5HAZ-fV5fNbkkgk3QYMfDmgcMEtqZAZCTW8o8D-ZeegdRBk1A=w408-h262-k-no",
+    "kgmid": "/g/120s282p",
+    "businessProfileId": "3761446770826316645",
+    "questionsAndAnswers": [],
+    "updatesFromCustomers": {
+      "text": "Hôm nay trở lại, thác ít nước hơn nhưng vẫn đẹp.",
+      "language": "vi",
+      "postDate": "6 ngày trước",
+      "postedBy": {
+        "name": "Hữu Khánh",
+        "url": "https://www.google.com/maps/contrib/103723518817340470126?hl=vi",
+        "title": "Local Guide",
+        "totalReviews": 460
+      },
+      "media": [
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPD68OAI9AAfRISbx6-fySv3w71Hs7GgUVksG--XM1kGYMZj7e1kwkrQRABRLwnz2y8Eruplb42fKTA92G2w1PC74w2_WKe5Z1hQMn1T-jS2Jj5-FoJUHxkXBfeRLbMsV_o61vnINZSIXza=k-no",
+          "postDate": "6 ngày trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmNrcEZrLbJp8ikSI75XRje8RNWNx6Ez3q6U5ouPO6RWc0FWSG6JIM2AVsrEAZg5gkM-Sn5jN_2TPCFR5AINW1Ldi9C6WSg7aUNq1t4BhXzIbGoYs6pNDvsL41GD7F6XY4JsBSc_o4Gt8V_H=k-no",
+          "postDate": "6 ngày trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMQKBwOe6uUw16g0hLu02Iirzp036ExDHaEZzDOafvMaimLPredn_J2juEuaYp1xHvcCR6k1KDshDwQb6vm52_vYA7jWqm5ayWSbc8YC8ngcGE-TKo24eEut29GCF8vwtLicraFbBavjCWg=k-no",
+          "postDate": "6 ngày trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPK_E96q6xQphXQK21-iLi_MOFfwTwQG-iWEB-ATyMtWxWUq81GWtinX_YvenTq7fO5E9612l4nQIxy8vS3GcBThl_qY4ar79JUwqV_22rcBhiWuiHXHwTPLc1BeNfMlI0B0PTLJ8XD3Qqg=k-no",
+          "postDate": "6 ngày trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMiBUPbvgGIzz4OPBWKgrcRz6nHDi0Fqjj2guFYImYLS7afldBOgJzGiQCCL4GmOMPiiO7KZyw4j1Kouw5c1_-xnZeri2euyNCgIoH9N6HVI1ljPI5AgholoyaEWzsQ4Dqits209rZmlN5k=k-no",
+          "postDate": "6 ngày trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMMTiQG9VuAYUSp4B4m8aziX5zeadTOXRGrqhUQEf14iMObWLAbPQ7PuJyODTSJeh2mmW-eTRw4XdrXCqdOtVi-uzcze5PDTk-SKc8VD8cGeeyu2tafyP0o2dddKl8_SODxII6n=k-no",
+          "postDate": "6 ngày trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMPRCliRdn0nvVPKUQgpZA-Jk0qTdvXI0ubIv09fKL3WoPzve09JRO5PQCAc6KhSy_SZ7yUXxRntnRdydkHZQlFpaeeuPbtD4tXvJ8geFEBC562iEFpg13oYc3bP1OcrzhaIG-gtTIr4Ql2=k-no",
+          "postDate": "6 ngày trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMXGPjMp2tkAu9PugDxb9f35-6wcb8DFwHyIAYLWjMzebSTTHBLcHP166kmqByWfCY6NI-duS9OH4H81xDE7hKwnaaOL9cAdGs9DTWqfoxaxXqyIUeaT-jJRly1Ph12A7cLYzE15hJR0LeJ=k-no",
+          "postDate": "6 ngày trước"
+        }
+      ]
+    },
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [
+      "sales01healing@trungnguyenlegend.com",
+      "sales02healing@trungnguyenlegend.com"
+    ],
+    "phones": [
+      "1900633617"
+    ],
+    "phonesUncertain": [
+      "22-06-2026",
+      "02-04-2024",
+      "29-11-2023",
+      "1900633617"
+    ],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [
+      "https://www.facebook.com/TrungNguyenCoffeeTour"
+    ],
+    "youtubes": [
+      "www.youtube.com/embed/bsJpxYAfFT4"
+    ],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "domain": "trungnguyenhealing.com",
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm3qTf0yumk3BkvQWPx72KaNWYurSjy4n1oTP75Lnu9C10dtIygIbcHceoV9mAuJlV_RIv3GNdrG4X-fwOJ7YtUg5HAZ-fV5fNbkkgk3QYMfDmgcMEtqZAZCTW8o8D-ZeegdRBk1A=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Bếp Nhà Mình Măng Đen",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": "Bếp nhà mình nơi trải nghiệm ẩm thực thuần việt",
+    "price": null,
+    "categoryName": "Nhà hàng",
+    "address": "01 Đ. Trường Chinh, Măng Đen, Quảng Ngãi 60275, Việt Nam",
+    "neighborhood": "Măng Đen",
+    "street": "01 Đ. Trường Chinh",
+    "city": "Quảng Ngãi",
+    "postalCode": "60275",
+    "state": "Măng Đen, Quảng Ngãi",
+    "countryCode": "VN",
+    "phone": "+84 964 308 993",
+    "phoneUnformatted": "+84964308993",
+    "claimThisBusiness": false,
+    "location": {
+      "lat": 14.6020118,
+      "lng": 108.2895441
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": "J72Q+RR Măng Đen, Kon Tum, Việt Nam",
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.5,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJFbdiBQBDaTERBSzcOSXS2Iw",
+    "categories": [
+      "Nhà hàng"
+    ],
+    "fid": "0x316943000562b715:0x8cd8d22539dc2c05",
+    "cid": "10149092817605766149",
+    "reviewsCount": 281,
+    "reviewsDistribution": {
+      "oneStar": 23,
+      "twoStar": 6,
+      "threeStar": 6,
+      "fourStar": 11,
+      "fiveStar": 235
+    },
+    "imagesCount": 495,
+    "imageCategories": [],
+    "scrapedAt": "2026-09-29T13:34:15.811Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {},
+    "openingHours": [
+      {
+        "day": "Thứ Ba",
+        "hours": "10:30 to 23:30"
+      },
+      {
+        "day": "Thứ Tư",
+        "hours": "10:30 to 23:30"
+      },
+      {
+        "day": "Thứ Năm",
+        "hours": "10:30 to 23:30"
+      },
+      {
+        "day": "Thứ Sáu",
+        "hours": "10:30 to 23:30"
+      },
+      {
+        "day": "Thứ Bảy",
+        "hours": "10:30 to 23:30"
+      },
+      {
+        "day": "Chủ Nhật",
+        "hours": "10:30 to 23:30"
+      },
+      {
+        "day": "Thứ Hai",
+        "hours": "10:30 to 23:30"
+      }
+    ],
+    "wasOpenAtScrapeTime": true,
+    "peopleAlsoSearch": [],
+    "placesTags": [],
+    "reviewsTags": [],
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=B%E1%BA%BFp%20Nh%C3%A0%20M%C3%ACnh%20M%C4%83ng%20%C4%90en&query_place_id=ChIJFbdiBQBDaTERBSzcOSXS2Iw",
+    "searchPageUrl": "https://www.google.com/maps/search/Nh%C3%A0%20H%C3%A0ng%20Minh%20Kon%20Tum/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Nhà Hàng Minh Kon Tum",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnyRL8UXnMaylJpLR1k6LdkTmygdUzPrflJmoLgvtSQIWr3poKYgdbaEonpsxCCPcKn7L-3CQmQv4I_kE48K2htub0aX9gsgG8MSqskUbe4FbKGTnOcnnKKgMI81avzcH0Jo0Wc4A_JpTg=w408-h577-k-no",
+    "kgmid": "/g/11w_mlt5xl",
+    "businessProfileId": "12764214336822815228",
+    "questionsAndAnswers": [],
+    "webResults": [],
+    "tableReservationLinks": [
+      {
+        "name": "facebook.com",
+        "url": "https://www.facebook.com/profile.php?id=61571096092139"
+      }
+    ],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [],
+    "phones": [],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnyRL8UXnMaylJpLR1k6LdkTmygdUzPrflJmoLgvtSQIWr3poKYgdbaEonpsxCCPcKn7L-3CQmQv4I_kE48K2htub0aX9gsgG8MSqskUbe4FbKGTnOcnnKKgMI81avzcH0Jo0Wc4A_JpTg=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Konklor Bungalow Garden Hotel",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": null,
+    "price": "10 £",
+    "categoryName": "Khách sạn",
+    "address": "38 Bắc Kạn, Kon Tum, Quảng Ngãi 60000, Việt Nam",
+    "neighborhood": "Kon Tum",
+    "street": "38 Bắc Kạn",
+    "city": "Quảng Ngãi",
+    "postalCode": "60000",
+    "state": "Kon Tum, Quảng Ngãi",
+    "countryCode": "VN",
+    "website": "https://www.facebook.com/konklor.hotel",
+    "phone": "+84 260 3861 555",
+    "phoneUnformatted": "+842603861555",
+    "claimThisBusiness": false,
+    "location": {
+      "lat": 14.349878,
+      "lng": 108.0335532
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": "82XM+XC Kon Tum, Quảng Ngãi, Việt Nam",
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.3,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJFz3T_sL_azER4ggowgo6gMU",
+    "categories": [
+      "Khách sạn"
+    ],
+    "fid": "0x316bffc2fed33d17:0xc5803a0ac22808e2",
+    "cid": "14231438640372254946",
+    "reviewsCount": 767,
+    "reviewsDistribution": {
+      "oneStar": 30,
+      "twoStar": 20,
+      "threeStar": 78,
+      "fourStar": 205,
+      "fiveStar": 434
+    },
+    "imagesCount": 2184,
+    "imageCategories": [],
+    "scrapedAt": "2026-09-29T13:34:16.097Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": "Khách sạn 2 sao",
+    "hotelDescription": null,
+    "checkInDate": "2026-10-02",
+    "checkOutDate": "2026-10-03",
+    "similarHotelsNearby": [
+      {
+        "name": "Khách Sạn Green Hotel",
+        "rating": 4.1,
+        "reviews": 39,
+        "description": null,
+        "price": "9 £"
+      },
+      {
+        "name": "Homestay Nắng Nghiêng - Du lịch trải nghiệm thân thiện - an toàn và bền vững",
+        "rating": 4.7,
+        "reviews": 39,
+        "description": null,
+        "price": "9 £"
+      },
+      {
+        "name": "Hotel Window 2",
+        "rating": 4.3,
+        "reviews": 356,
+        "description": null,
+        "price": "7 £"
+      },
+      {
+        "name": "Window Hotel 1",
+        "rating": 4.4,
+        "reviews": 304,
+        "description": "Cũng là khách sạn 2 sao, rẻ hơn 4 £",
+        "price": "7 £"
+      },
+      {
+        "name": "Khách Sạn Bắc Hương",
+        "rating": 3.7,
+        "reviews": 132,
+        "description": null,
+        "price": "10 £"
+      },
+      {
+        "name": "Indochine Hotel",
+        "rating": 3.8,
+        "reviews": 473,
+        "description": "Bữa sáng miễn phí",
+        "price": null
+      },
+      {
+        "name": "Hồng My hotel",
+        "rating": 4,
+        "reviews": 127,
+        "description": null,
+        "price": null
+      },
+      {
+        "name": "Hoàng khách",
+        "rating": 3.8,
+        "reviews": 266,
+        "description": null,
+        "price": null
+      },
+      {
+        "name": "D'Villa Hotel & Homestay Kon Tum",
+        "rating": 4,
+        "reviews": 79,
+        "description": null,
+        "price": null
+      },
+      {
+        "name": "Khách sạn Hào Hoa (Hao Hoa Hotel)",
+        "rating": 4.4,
+        "reviews": 63,
+        "description": null,
+        "price": null
+      }
+    ],
+    "hotelAds": [
+      {
+        "title": "Bluepillow.co.uk",
+        "googleUrl": "https://www.google.com/travel/lodging/clk?pc=AA80OswtjjgF4DLUWMwzfnlvlyb0E7NH-OwyrIBB1vcBH9VQW0UpTT6eiYMdhF6fE0xiNPNxA--RtnoNsVu_ljoE7MmY75P2Ml492-vmsAl4rS6eZ81xybhWoweyuhWuWYEYRvmPs1j4mZInHHrdbGv-fc-agV8cLvQJJWqRpDwY-dbdUje-C5OJG_NnSQ&pcurl=https://www.bluepillow.co.uk/search/60afaecde1592a12ea63b4c2?begin%3D2026-10-02%26end%3D2026-10-03%26block_id%3D-b,xRCViCEtOI4AbrmC466cevUzIXSzGRZpcsmUQCCvK_hDMUXjb3J6bDrDU-yM4cIa,-bpex-Hotel%26fees%3D1.37%26tax%3D1.37%26total%3D10.49%26adults%3D2%26childs%3D0%26infants%3D0%26childrens%3D0%26country%3DGB%26currency%3DGBP%26language%3Dvi%26source%3Dmapresults%26utm_campaign%3Dhotel%26prid%3Dforeign&s=AD1XQnn2it1nNBC1fUVUT0f0cTPB",
+        "isOfficialSite": false,
+        "price": "10 £",
+        "url": "https://www.bluepillow.co.uk/search/60afaecde1592a12ea63b4c2?begin=2026-10-02&end=2026-10-03&block_id=-b,xRCViCEtOI4AbrmC466cevUzIXSzGRZpcsmUQCCvK_hDMUXjb3J6bDrDU-yM4cIa,-bpex-Hotel&fees=1.37&tax=1.37&total=10.49&adults=2&childs=0&infants=0&childrens=0&country=GB&currency=GBP&language=vi&source=mapresults&utm_campaign=hotel&prid=foreign"
+      },
+      {
+        "title": "Trip.com",
+        "googleUrl": "https://www.google.com/travel/lodging/clk?pc=AA80OswfVhWUJlxfM6LFF1DBf0RnovxKyPsTh6FVvlYcmT4nnMyJo2Tc4W-1oamD8YzdXRXNQXcCj7eV-dASNuSirtn0WcAl8xM5A_AI4XSGgiU3vbX4xyBqP_QukADj3Z5yOq6UlwQhTjcUis-gbsq-iJCL_Iw4ARx4ZQdDpplBnn4wJXGsxho&pcurl=https://uk.trip.com/hotels/redirect?hotelid%3D10621708%26city%3D62898%26shoppingid%3DMcvuSxW_hfcn%26adult%3D2%26children%3D0%26ages%3D%26checkin%3D2026-10-02%26checkout%3D2026-10-03%26curr%3DGBP%26Allianceid%3D15214%26Sid%3D1349478%26prid%3DLANG_GB%26trip_sub1%3D02_10_2026_1_mapresults_10621708_GB_desktop_default___0_0-LANG_GB-landing%26hpaopts%3Dstand%5BH4sIAAAAAAAA_-Ny5WKSYBJi4mCUsub4cGpzM5MQo5HBfUaLrfIBHDMYe5Z1sK5gZNzByHSRUb71deCOeSoODxlj-g991YhRd3jBuOPq7EamBSyMUjy-yWWlwRXh8RlpyXkKjBoNL99dZfNgDGKzcHZ1dTGOkuFiDg12EVwpfMHlxgUpBylmd6cARcni60KfDio6JLGm5um6O2X0i3UxMnkwrmJk52I2MDIUYPrEyI9sbryZ2SQmRkMAVb7Tm7QAAAA%5Dfgt%5B1%5D%26br%3D11.68%26tf%3D1.37%26display%3Dincavg%26locale%3Den_gb%26crn%3D1%26roomid%3D544007536%26allianceid%3D15214%26sid%3D1349478&s=AD1XQnn4i9EvQ0fFCqkiMNp2ooCz",
+        "isOfficialSite": false,
+        "price": "12 £",
+        "url": "https://uk.trip.com/hotels/redirect?hotelid=10621708&city=62898&shoppingid=McvuSxW_hfcn&adult=2&children=0&ages=&checkin=2026-10-02&checkout=2026-10-03&curr=GBP&Allianceid=15214&Sid=1349478&prid=LANG_GB&trip_sub1=02_10_2026_1_mapresults_10621708_GB_desktop_default___0_0-LANG_GB-landing&hpaopts=stand[H4sIAAAAAAAA_-Ny5WKSYBJi4mCUsub4cGpzM5MQo5HBfUaLrfIBHDMYe5Z1sK5gZNzByHSRUb71deCOeSoODxlj-g991YhRd3jBuOPq7EamBSyMUjy-yWWlwRXh8RlpyXkKjBoNL99dZfNgDGKzcHZ1dTGOkuFiDg12EVwpfMHlxgUpBylmd6cARcni60KfDio6JLGm5um6O2X0i3UxMnkwrmJk52I2MDIUYPrEyI9sbryZ2SQmRkMAVb7Tm7QAAAA]fgt[1]&br=11.68&tf=1.37&display=incavg&locale=en_gb&crn=1&roomid=544007536&allianceid=15214&sid=1349478"
+      },
+      {
+        "title": "Traveloka.com",
+        "googleUrl": "https://www.google.com/travel/lodging/clk?pc=AA80OszWhUjAiXNmnzA4LhHDwRBd91GP2W31XX7sUjV1qRx6Zi9K8cvPwXDbi_KMITfx4fnG1z6AOcht0ZbHUsr98YswayTPidgHdM6UK0hCwyCU9poXEpwXZYlQx2rB1h86waIi-hniaPvIqq-eSnBt4t9LllhK5prORiLUaIPHRv3AKxPwlO0iRq97&pcurl=https://www.traveloka.com/en-en/hotel/search?spec%3D02-10-2026.03-10-2026.1.1.HOTEL_GEO.30073488.Quang%2520Ngai.2%26hotelId%3D3000010032219%26contexts%3D%257B%2522accessCode%2522:%252290975GHAD1305desktop%2522%252C%2522metasearchRequestId%2522%253A%252208de73c9-f1d1-4b59-9fba-b9ea7ba03411%2522%252C%2522dateSelectionType%2522%253A%2522default%2522%252C%2522metasearchSelectedHotelID%2522%253A%25223000010032219%2522%252C%2522plc%2522%253A%2522%252BuZ0DuqxNnOxSrO1ntMbcBJbpXuDlRgSaAn3I2%252FTXhNSCvE1Kio%252BTHY%252F5I6Fv9%252FHoBnIsaes0YpNseIrMXQhXQ%253D%253D%2522%252C%2522pvlc%2522%253A%2522UlkH%252FTuTJIMMRn6qjziBoCdm5yBP59UBp5rT2kr3cRSRQetJNxA7RmQV%252BGLnSgOj%2522%257D%26metasearchId%3DGoogleHotelAdsUser%26metasearchRateId%3Ddesktop%26metasearchRatekey%3DsgyUU2M0LrnnpXh1LPwoI%26priceDisplay%3DNIGHT%26metasearchRefid%3D12345678910abcdefghijk@-%26adType%3D0%26PPA%3D0%26hotelCampaign%3D1%26cur%3DGBP&s=AD1XQnmTRDkd4QoN25WBp6BHSEhI",
+        "isOfficialSite": false,
+        "price": "11 £",
+        "url": "https://www.traveloka.com/en-en/hotel/search?spec=02-10-2026.03-10-2026.1.1.HOTEL_GEO.30073488.Quang Ngai.2&hotelId=3000010032219&contexts={\"accessCode\":\"90975GHAD1305desktop\",\"metasearchRequestId\":\"08de73c9-f1d1-4b59-9fba-b9ea7ba03411\",\"dateSelectionType\":\"default\",\"metasearchSelectedHotelID\":\"3000010032219\",\"plc\":\"+uZ0DuqxNnOxSrO1ntMbcBJbpXuDlRgSaAn3I2/TXhNSCvE1Kio+THY/5I6Fv9/HoBnIsaes0YpNseIrMXQhXQ==\",\"pvlc\":\"UlkH/TuTJIMMRn6qjziBoCdm5yBP59UBp5rT2kr3cRSRQetJNxA7RmQV+GLnSgOj\"}&metasearchId=GoogleHotelAdsUser&metasearchRateId=desktop&metasearchRatekey=sgyUU2M0LrnnpXh1LPwoI&priceDisplay=NIGHT&metasearchRefid=12345678910abcdefghijk@-&adType=0&PPA=0&hotelCampaign=1&cur=GBP"
+      },
+      {
+        "title": "Agoda",
+        "googleUrl": "https://www.google.com/travel/lodging/clk?pc=AA80OszKE5TY9IUdqas0Gr-eyJTkdWvUvytYtwypDXcNK3Q8nHqhdonPPpBkkdXa9CXslqkIGUaL-YovEzI0QvlWBLz6igqPB4gPZvjMt1IcBQOn69tTQlPy4KBd5sJUBS6bxcdNyz6xrYzbrLorOOtPzl9vq8-3TqO8c3VVY05A4IeeZj6Z-WS7elvF6C4c4A&pcurl=https://www.agoda.com/vi-vn/partners/partnersearch.aspx?site_id%3D1917614%26CkInDay%3D02%26CkInMonth%3D10%26CkInYear%3D2026%26CkOutDay%3D03%26campaignid%3D%26CkOutMonth%3D10%26CkOutYear%3D2026%26SearchDateType%3Ddefault%26NumberOfAdults%3D2%26LT%3D3%26NumberOfChildren%3D0%26childages%3D%26NumberOfRooms%3D1%26gsite%3Dmapresults%26los%3D1%26PartnerCurrency%3DVND%26hid%3D861974%26RoomID%3D%26masterRoomId%3D928600015%26PriceTotal%3D13.08%26PriceTax%3D1.55%26PriceFee%3D0.58%26RatePlan%3D%26UserCountry%3DGB%26Currency%3DGBP%26UserDevice%3Ddesktop%26Verif%3Dfalse%26rr%3Drow_desktop%26audience_list%3D%26mcid%3D3038%26booking_source%3Dcpc%26adType%3D0%26mpt%3Db0NSWGdRMEVtbnpoLzBKelFBQytuaUU3S0pWY20wbUtEYnhteVZ1andpeHZ0RVB0N09YSEcyTDhuWEJxMkRRZjhUZkl1clNvWXdjZnRRPT0%26original_rr%3D%26gaClickSrc%3D%26clickType%3Dhotel%26lang%3Dvi%26pkgId%3D&s=AD1XQnmh91659NlK8gOIL-dTmX7H",
+        "isOfficialSite": false,
+        "price": "13 £",
+        "url": "https://www.agoda.com/vi-vn/partners/partnersearch.aspx?site_id=1917614&CkInDay=02&CkInMonth=10&CkInYear=2026&CkOutDay=03&campaignid=&CkOutMonth=10&CkOutYear=2026&SearchDateType=default&NumberOfAdults=2&LT=3&NumberOfChildren=0&childages=&NumberOfRooms=1&gsite=mapresults&los=1&PartnerCurrency=VND&hid=861974&RoomID=&masterRoomId=928600015&PriceTotal=13.08&PriceTax=1.55&PriceFee=0.58&RatePlan=&UserCountry=GB&Currency=GBP&UserDevice=desktop&Verif=false&rr=row_desktop&audience_list=&mcid=3038&booking_source=cpc&adType=0&mpt=b0NSWGdRMEVtbnpoLzBKelFBQytuaUU3S0pWY20wbUtEYnhteVZ1andpeHZ0RVB0N09YSEcyTDhuWEJxMkRRZjhUZkl1clNvWXdjZnRRPT0&original_rr=&gaClickSrc=&clickType=hotel&lang=vi&pkgId="
+      },
+      {
+        "title": "Evendo",
+        "googleUrl": "https://www.google.com/travel/lodging/clk?pc=AA80OszV8HtXlddeCT3oVt-Tsraf0bE0MIwTq1amgkFMWZBKOoQCKDrjmfFEphlm0Yjv3eG9MDL52Hz1O3Ry7ZUYylRazuwM11F2L9GgZlqCLBp5jFU2YtpmkpwqBCsmz98SAwsQcw16n4gfNwbRkRk_4rjYNfk0I2UR3SR9JnpT9MgXE-_ScpuCa_39pGeeYMgzug&pcurl=https://evendo.com/stays/konklor-hotel/00313064?check_in%3D2026-10-02%26check_out%3D2026-10-03%26who%3D%255B%257B%2522adults%2522:2,%2522children%2522:%255B%255D%257D%255D%26currency%3DGBP%26language%3Dvi%26country%3DGB%26utm_source%3Dgoogle%26utm_medium%3Dgooglehotels%26utm_campaign%3Dmapresults%26pdtax%3D1.64%26pdtotal%3D12.55%26prid%3D&s=AD1XQnk6HbzTvD_Dk5lqWz3oJ4xH",
+        "isOfficialSite": false,
+        "price": "13 £",
+        "url": "https://evendo.com/stays/konklor-hotel/00313064?check_in=2026-10-02&check_out=2026-10-03&who=[{\"adults\":2,\"children\":[]}]&currency=GBP&language=vi&country=GB&utm_source=google&utm_medium=googlehotels&utm_campaign=mapresults&pdtax=1.64&pdtotal=12.55&prid="
+      },
+      {
+        "title": "Tripening Hotels",
+        "googleUrl": "https://www.google.com/travel/lodging/clk?pc=AA80OswtymvIPDyg_mqCfl9sjJYzs421_ZeuIGdNO7uyCqJNC1nSjfmOzkDLLaLiGdvyGJDNrerCNbcZjMwu3KE_Q6i_DjgwNw78V6_oxMgXQmB-9SBM39rC4vi5JTKFNK2Sj0uQdD-FebD_O9BVDzLRnxQ1ttHN2VxGWWVj2J6z3AWRLEeoAet3z3ALK9-x_A&pcurl=https://www.tripening.com/hotels/-/8936600-konklor-hotel?checkin-date%3D2026-10-02%26checkout-date%3D2026-10-03%26adults%3D2%26currency%3DGBP%26lang%3Dvi%26google-package-id%3D%26rate-rule-id%3D%26google-displayed-price%3D15.01%26children%3D0%26google-displayed-tax%3D0.00%26google-displayed-currency%3DGBP%26utm_source%3Dgoogle_hotel_ads%26utm_medium%3Dfree%26utm_campaign%3Dgha_property&s=AD1XQnlrZQO-uDZcm8hVKODuLqBQ",
+        "isOfficialSite": false,
+        "price": "15 £",
+        "url": "https://www.tripening.com/hotels/-/8936600-konklor-hotel?checkin-date=2026-10-02&checkout-date=2026-10-03&adults=2&currency=GBP&lang=vi&google-package-id=&rate-rule-id=&google-displayed-price=15.01&children=0&google-displayed-tax=0.00&google-displayed-currency=GBP&utm_source=google_hotel_ads&utm_medium=free&utm_campaign=gha_property"
+      },
+      {
+        "title": "Travelmyth.co.uk",
+        "googleUrl": "https://www.google.com/travel/lodging/clk?pc=AA80OszxvXxb3lHjNdmndzA8ITrbUeAHw9eWWtVhHQY0t6qk5vKMUTGRaaWVwBpj9z4e4CwjMQBih5CFtYmnyyFq1jhzlvmJ62vj9t1MHrugDdSZo1AHBH92gtRanKwkcT1ByF584wtfC9GfPvcTmS7JBsuDz37piNbOUsWG2OG5zJCbpydYPzqLL34R5Q&pcurl=https://www.travelmyth.co.uk/entertravelmyth?source%3DGoogle%26h%3D1010474%26checkin_day%3D02%26checkin_month%3D10%26checkin_year%3D2026%26checkout_day%3D03%26checkout_month%3D10%26checkout_year%3D2026%26lengthOfStay%3D1%26checkin_day_of_week%3DFriday%26bookingWindow%3D3%26adults%3D2%26children%3D0%26packageId%3D%26device%3Ddesktop%26gsite%3Dmapresults%26prTax%3D0.00%26prTotal%3D13.07%26ratePlanId%3D%26rateRuleId%3Dtaxesincl%26userCountry%3DGB%26userLang%3Dvi%26cId%3D%26currency%3DGBP%26dateType%3Ddefault%26aId%3D80%26aLabel%3D8007&s=AD1XQnnuCxxnR7BUe5_O99blK5yS",
+        "isOfficialSite": false,
+        "price": "13 £",
+        "url": "https://www.travelmyth.co.uk/entertravelmyth?source=Google&h=1010474&checkin_day=02&checkin_month=10&checkin_year=2026&checkout_day=03&checkout_month=10&checkout_year=2026&lengthOfStay=1&checkin_day_of_week=Friday&bookingWindow=3&adults=2&children=0&packageId=&device=desktop&gsite=mapresults&prTax=0.00&prTotal=13.07&ratePlanId=&rateRuleId=taxesincl&userCountry=GB&userLang=vi&cId=&currency=GBP&dateType=default&aId=80&aLabel=8007"
+      }
+    ],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {},
+    "openingHours": [],
+    "wasOpenAtScrapeTime": null,
+    "peopleAlsoSearch": [],
+    "placesTags": [],
+    "reviewsTags": [],
+    "additionalInfo": {
+      "Amenities": [
+        {
+          "Wi-Fi miễn phí": true
+        },
+        {
+          "Bữa sáng có tính phí": true
+        },
+        {
+          "Đỗ xe miễn phí": true
+        },
+        {
+          "Phù hợp cho người khuyết tật": false
+        },
+        {
+          "Bể bơi": false
+        },
+        {
+          "Có điều hòa nhiệt độ": true
+        },
+        {
+          "Dịch vụ giặt ủi": true
+        },
+        {
+          "Chấp nhận vật nuôi": false
+        },
+        {
+          "Dịch vụ phòng": true
+        },
+        {
+          "Nhà hàng": true
+        },
+        {
+          "Xe đưa đón ra sân bay": false
+        },
+        {
+          "Trung tâm thể dục": false
+        }
+      ]
+    },
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Konklor%20Bungalow%20Garden%20Hotel&query_place_id=ChIJFz3T_sL_azER4ggowgo6gMU",
+    "searchPageUrl": "https://www.google.com/maps/search/Resort%20Kon%20Klor%20Kon%20Tum/@11.524178541496333,114.15382519614111,13z?hl=vi",
+    "searchString": "Resort Kon Klor Kon Tum",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RH7D0vPtY0F8KL7MLBVVPQb0QHSa4NwdZVId9LDQqJAXcKtveSKynPKO4JF3cnly81Jy75yQ1XOVjg9cKYlok9KCgli8EWS8lsTGqqNyXDpAuzlT99AiDx1OVbtpxzS0eGTaT5Ew=w533-h240-k-no",
+    "kgmid": "/g/11b5pjwkdy",
+    "businessProfileId": "569215798967305640",
+    "questionsAndAnswers": [],
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [
+      {
+        "text": "Chảo mừng quý khách đến với Konklor Hotel!",
+        "buttonText": null,
+        "buttonLink": null,
+        "date": "2026-09-27T04:41:09.000Z",
+        "imageUrl": "https://lh3.googleusercontent.com/geougc/AF1QipNHcxz_XlwK3corT8c6dN70LOcSTra5aqwppJCe=h400-no"
+      }
+    ],
+    "emails": [
+      "konklorhotel@gmail.com"
+    ],
+    "phones": [
+      "+84 260 3861 555"
+    ],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [
+      "https://www.facebook.com/konklor.hotel"
+    ],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "domain": "facebook.com",
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RH7D0vPtY0F8KL7MLBVVPQb0QHSa4NwdZVId9LDQqJAXcKtveSKynPKO4JF3cnly81Jy75yQ1XOVjg9cKYlok9KCgli8EWS8lsTGqqNyXDpAuzlT99AiDx1OVbtpxzS0eGTaT5Ew=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Chợ Măng Đen",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": null,
+    "price": null,
+    "categoryName": "Chợ",
+    "address": "J73Q+J6V, Măng Đen, Quảng Ngãi, Việt Nam",
+    "neighborhood": "Măng Đen",
+    "street": "J73Q+J6V",
+    "city": "Quảng Ngãi",
+    "postalCode": null,
+    "state": "Măng Đen, Quảng Ngãi",
+    "countryCode": "VN",
+    "phone": "",
+    "phoneUnformatted": "",
+    "claimThisBusiness": true,
+    "location": {
+      "lat": 14.6041162,
+      "lng": 108.2880437
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": null,
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.1,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJ-QFA5aZDaTER_HtCmP4aGtM",
+    "categories": [
+      "Chợ"
+    ],
+    "fid": "0x316943a6e54001f9:0xd31a1afe98427bfc",
+    "cid": "15211500372175780860",
+    "reviewsCount": 526,
+    "reviewsDistribution": {
+      "oneStar": 16,
+      "twoStar": 19,
+      "threeStar": 102,
+      "fourStar": 123,
+      "fiveStar": 266
+    },
+    "imagesCount": 777,
+    "imageCategories": [],
+    "scrapedAt": "2026-09-29T13:34:36.829Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": null,
+    "popularTimesLivePercent": null,
+    "popularTimesHistogram": {},
+    "openingHours": [
+      {
+        "day": "Thứ Ba",
+        "hours": "05:00 to 17:00"
+      },
+      {
+        "day": "Thứ Tư",
+        "hours": "05:00 to 17:00"
+      },
+      {
+        "day": "Thứ Năm",
+        "hours": "05:00 to 17:00"
+      },
+      {
+        "day": "Thứ Sáu",
+        "hours": "05:00 to 17:00"
+      },
+      {
+        "day": "Thứ Bảy",
+        "hours": "05:00 to 17:00"
+      },
+      {
+        "day": "Chủ Nhật",
+        "hours": "05:00 to 17:00"
+      },
+      {
+        "day": "Thứ Hai",
+        "hours": "05:00 to 17:00"
+      }
+    ],
+    "wasOpenAtScrapeTime": false,
+    "peopleAlsoSearch": [],
+    "placesTags": [
+      {
+        "title": "Thực phẩm và đồ uống",
+        "count": 1
+      },
+      {
+        "title": "Mua sắm",
+        "count": 1
+      },
+      {
+        "title": "Nơi lưu trú",
+        "count": 1
+      },
+      {
+        "title": "Khác",
+        "count": 1
+      }
+    ],
+    "reviewsTags": [],
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ch%E1%BB%A3%20M%C4%83ng%20%C4%90en&query_place_id=ChIJ-QFA5aZDaTER_HtCmP4aGtM",
+    "searchPageUrl": "https://www.google.com/maps/search/Ch%E1%BB%A3%20Phong%20H%C6%B0%E1%BB%9Bng%20Kon%20Tum/@14.777411151024733,106.92640321255267,9z?hl=vi",
+    "searchString": "Chợ Phong Hướng Kon Tum",
+    "language": "vi",
+    "rank": 2,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/grass-cs/ACvplmOV39RICMhKgx-cXWR0EWCpUALjRU_oRCyY8KRlsks8IXKmRe7CADRrcuCO8xhOZ2Yex9pze4dCI0dby3oDaDuGX2oqMX75l0CaeAQCY0BxYyUN0dmpU-boKKNWXhXFBPlh5znM0kxns4I=w408-h271-k-no",
+    "kgmid": "/g/11hd8lkv87",
+    "businessProfileId": null,
+    "questionsAndAnswers": [],
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [],
+    "phones": [],
+    "phonesUncertain": [],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/grass-cs/ACvplmOV39RICMhKgx-cXWR0EWCpUALjRU_oRCyY8KRlsks8IXKmRe7CADRrcuCO8xhOZ2Yex9pze4dCI0dby3oDaDuGX2oqMX75l0CaeAQCY0BxYyUN0dmpU-boKKNWXhXFBPlh5znM0kxns4I=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Rừng thông Măng Đen",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": null,
+    "price": null,
+    "categoryName": "Điểm thu hút khách du lịch",
+    "address": "AH132, Măng Đen, Quảng Ngãi, Việt Nam",
+    "neighborhood": "Măng Đen",
+    "street": "AH132",
+    "city": "Quảng Ngãi",
+    "postalCode": null,
+    "state": "Măng Đen, Quảng Ngãi",
+    "countryCode": "VN",
+    "website": "http://mangdenkontum.com/",
+    "phone": "+84 374 653 663",
+    "phoneUnformatted": "+84374653663",
+    "claimThisBusiness": false,
+    "location": {
+      "lat": 14.574119,
+      "lng": 108.2765741
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": "H7FG+JJ Măng Đen, Kon Tum, Việt Nam",
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.7,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJ7-Dubg9FaTERQa7QeJ6J0CA",
+    "categories": [
+      "Điểm thu hút khách du lịch"
+    ],
+    "fid": "0x3169450f6eeee0ef:0x20d0899e78d0ae41",
+    "cid": "2364541118094290497",
+    "reviewsCount": 582,
+    "reviewsDistribution": {
+      "oneStar": 7,
+      "twoStar": 2,
+      "threeStar": 28,
+      "fourStar": 74,
+      "fiveStar": 471
+    },
+    "imagesCount": 1708,
+    "imageCategories": [
+      "Tất cả",
+      "Mới nhất",
+      "Video",
+      "Chế độ xem Phố và 360°"
+    ],
+    "scrapedAt": "2026-09-29T13:33:59.701Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": "Không quá đông đúc",
+    "popularTimesLivePercent": 27,
+    "popularTimesHistogram": {
+      "Su": [
+        {
+          "hour": 4,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 54
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 54
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 18
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 51
+        }
+      ],
+      "Mo": [
+        {
+          "hour": 4,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 15
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 30
+        }
+      ],
+      "Tu": [
+        {
+          "hour": 4,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 18
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 27
+        }
+      ],
+      "We": [
+        {
+          "hour": 4,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 60
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 60
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 27
+        }
+      ],
+      "Th": [
+        {
+          "hour": 4,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 54
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 60
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 18
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 33
+        }
+      ],
+      "Fr": [
+        {
+          "hour": 4,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 15
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 15
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 66
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 84
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 78
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 15
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 12
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 18
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 21
+        }
+      ],
+      "Sa": [
+        {
+          "hour": 4,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 18
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 54
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 72
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 84
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 100
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 93
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 93
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 81
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 66
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 18
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 24
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 18
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 12
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 18
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 21
+        }
+      ]
+    },
+    "openingHours": [
+      {
+        "day": "Thứ Ba",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Tư",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Năm",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Sáu",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Bảy",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Chủ Nhật",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Hai",
+        "hours": "Mở cửa cả ngày"
+      }
+    ],
+    "wasOpenAtScrapeTime": true,
+    "peopleAlsoSearch": [
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Măng Đen Travel",
+        "reviewsCount": 341,
+        "totalScore": 4.5
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Đường thông chữ S Măng Đen",
+        "reviewsCount": 141,
+        "totalScore": 4.4
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Đồi cỏ Măng Đen",
+        "reviewsCount": 125,
+        "totalScore": 4.4
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Du lịch Măng Đen",
+        "reviewsCount": 61,
+        "totalScore": 4.2
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Rừng thiêng",
+        "reviewsCount": 1,
+        "totalScore": 5
+      }
+    ],
+    "placesTags": [],
+    "reviewsTags": [],
+    "additionalInfo": {
+      "Phù hợp cho người khuyết tật": [
+        {
+          "Lối vào cho xe lăn": false
+        }
+      ],
+      "Trẻ em": [
+        {
+          "Phù hợp cho trẻ em": true
+        }
+      ]
+    },
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=R%E1%BB%ABng%20th%C3%B4ng%20M%C4%83ng%20%C4%90en&query_place_id=ChIJ7-Dubg9FaTERQa7QeJ6J0CA",
+    "searchPageUrl": "https://www.google.com/maps/search/R%E1%BB%ABng%20nguy%C3%AAn%20sinh%20P%C6%A1ng%20Th%C3%A1i%20Kon%20Tum/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Rừng nguyên sinh Pơng Thái Kon Tum",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/grass-cs/ACvplmMieBM_hY69BhhvFFQWrWfOWA3s3Yfyz61OmODy5Bb1OZv3PEHpngkEnEUbpGl2Dgiuee4KIROYxWOnThY4lXccgnkT1YWDMUF7PoQrr1P_Ldgzs1d6gju1t4OGm544xV2nBCmiec08cznm=w408-h272-k-no",
+    "kgmid": "/g/11dzt64qr_",
+    "businessProfileId": "5392255185669131877",
+    "questionsAndAnswers": [],
+    "updatesFromCustomers": {
+      "text": "Thời tiết đẹp",
+      "language": "vi",
+      "postDate": "một năm trước",
+      "postedBy": {
+        "name": "Vũ Quang Minh",
+        "url": "https://www.google.com/maps/contrib/100819000705477463099?hl=vi",
+        "title": "Local Guide",
+        "totalReviews": 396
+      },
+      "media": [
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMyxrpVOxeXmG2s5Xb5NkKgeM4fxUIsBZxKE7EA1lIyUN1LulE4NZFmeugYEoy1blVRY3G6IyELtC5K-TkDNDN3qtxAEsWd-EKmd9pQmMouIkapkiavisBZZo925XrDytuqFJo7=k-no",
+          "postDate": "một năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMPvjqLNyFIi7Ev-ETnPnIvPwzyQvT8mV2P4u5DLF2GrX27Tz72bWv6949_L5bAtNIbFy3IOs5w0nmm2fWERQTyqsdYMo7pcBNlWfIel0TiMmWkB2H2OR3igp4MVJf4MC3SVnC6WA=k-no",
+          "postDate": "một năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmOQDYB-X7i-MF7x0LldYcI3ASSgegVHQnXQv2iXV8VqSDPi8Uruh0YV0K0YLEirbrMj4tWR4PXCc1c4BAhZ7zNmJj6eiCauVRt6kfHuGebzyPEbd0dpna1UTpzhPyZXCVG2mrcc=k-no",
+          "postDate": "một năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPTreFHiY9vkMkK4WJV4tUvzCcOjOGsm1PQHx423cP9KzsbMjwdOdzVrxhOYv6VPQ49LiKswnSUTSjwZFIbMVAVPvylUnbtNh_n3FJVMrUrUF3B5u42MxKXJydhBzO2SHeyQwxfwg=k-no",
+          "postDate": "một năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmNVAOKnYscY8kZSySZvY6G9s_bAmgP93mLXUbzhzP24K72VjWgniDTU3UEArK2ArMYub8iEhzlX2xAxam-nNkEWeHmtS6e2zR_IK-A4qycawQTZQadY5kMFb76to3DCCJCJLABU=k-no",
+          "postDate": "một năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMiVbt7xNwfD7dywY0XXefjulXvFRnFu9layxMvZ47xRUip3_NKBSM_YJksCraFi2dm08_pdEJ-fsmlddkjiKtlyAq7nflBFc4OYd4UM7yHJGaBsUOVW4gVBRT4CWCf7E3VjdBpYA=k-no",
+          "postDate": "một năm trước"
+        }
+      ]
+    },
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [
+      "rsvn@goldenboutique.vn"
+    ],
+    "phones": [],
+    "phonesUncertain": [
+      "081 230 9999",
+      "108.280964",
+      "14.585503"
+    ],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [
+      "https://www.instagram.com/mangdenkontum"
+    ],
+    "facebooks": [
+      "https://www.facebook.com/ReviewMangden",
+      "https://www.facebook.com/mangdengoldenboutiquehotel",
+      "http://www.facebook.com/share.php"
+    ],
+    "youtubes": [
+      "https://www.youtube.com/channel/UC3K2e1-lomwMI7iew7ESnDQ"
+    ],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "domain": "mangdenkontum.com",
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/grass-cs/ACvplmMieBM_hY69BhhvFFQWrWfOWA3s3Yfyz61OmODy5Bb1OZv3PEHpngkEnEUbpGl2Dgiuee4KIROYxWOnThY4lXccgnkT1YWDMUF7PoQrr1P_Ldgzs1d6gju1t4OGm544xV2nBCmiec08cznm=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Indochine Coffee Kon Tum",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": "Nằm ngay cạnh cây cầu Đăkbla hiền hòa, đầy thơ mộng, cửa ngõ vào thành phố Kon tum Indochine Coffee được xây dựng để đáp ứng nhu cầu thư giãn, trao đổi, gặp gỡ bạn bè, người thân của người dân Kon Tum nói riêng hay của tất cả du khách từ mọi miền đất nước nói chung. Đây là một phần của tổ hợp khách sạn Indochine dọc theo sông Đăkbla.\nTừ quán Café, quý khách sẽ có được cái nhìn toàn cảnh núi sông Đăkbla được định hình bằng những vòm tre. Những cụm tre thẳng hàng tạo cho khách hàng ấn tượng như đang hòa mình trong khu rừng đầy tre và có tầm nhìn liên lục ra đến sông núi.\nTòa nhà chính hình chữ nhật được bao quanh bởi hồ nước nhân tạo. Tất cả các hướng đều thông thoáng tự nhiên: phía Nam là các phố chính dọc sông Đăkbla, phía Đông",
+    "price": "1-100.000 ₫",
+    "categoryName": "Quán cà phê",
+    "address": "30 Bạch Đằng, Kon Tum, Quảng Ngãi, Việt Nam",
+    "neighborhood": "Kon Tum",
+    "street": "30 Bạch Đằng",
+    "city": "Quảng Ngãi",
+    "postalCode": null,
+    "state": "Kon Tum, Quảng Ngãi",
+    "countryCode": "VN",
+    "website": "http://indochinehotel.vn/",
+    "phone": "+84 260 3863 334",
+    "phoneUnformatted": "+842603863334",
+    "claimThisBusiness": false,
+    "location": {
+      "lat": 14.3453834,
+      "lng": 108.0020928
+    },
+    "locatedIn": "Indochine Hotel",
+    "floor": null,
+    "plusCode": "82W2+5R Kon Tum, Quảng Ngãi, Việt Nam",
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.1,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJpTwbDtz_azERE7XnwS-IMnQ",
+    "categories": [
+      "Quán cà phê"
+    ],
+    "fid": "0x316bffdc0e1b3ca5:0x7432882fc1e7b513",
+    "cid": "8372904395933201683",
+    "reviewsCount": 1821,
+    "reviewsDistribution": {
+      "oneStar": 83,
+      "twoStar": 57,
+      "threeStar": 270,
+      "fourStar": 591,
+      "fiveStar": 820
+    },
+    "imagesCount": 5312,
+    "imageCategories": [
+      "Tất cả",
+      "Mới nhất",
+      "Video",
+      "Thực đơn",
+      "Thực phẩm và đồ uống",
+      "Bầu không khí",
+      "Vườn",
+      "Cà phê đá",
+      "Nước ép",
+      "Cà phê",
+      "Trà đá",
+      "Chế độ xem Phố và 360°"
+    ],
+    "scrapedAt": "2026-09-29T13:34:32.012Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": "Không quá đông đúc",
+    "popularTimesLivePercent": 34,
+    "popularTimesHistogram": {
+      "Su": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 32
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 62
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 89
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 100
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 98
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 84
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 37
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 35
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 41
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 41
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 35
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 22
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "Mo": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 49
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 50
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 28
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 28
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 30
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 37
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 35
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 21
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "Tu": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 25
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 53
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 52
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 41
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 25
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 26
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 35
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 22
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "We": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 26
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 41
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 49
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 25
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 41
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 37
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 35
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 26
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "Th": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 28
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 49
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 58
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 58
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 43
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 25
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 47
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 45
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 29
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "Fr": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 27
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 47
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 60
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 58
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 50
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 35
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 39
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 41
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 41
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 33
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ],
+      "Sa": [
+        {
+          "hour": 5,
+          "occupancyPercent": 0
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 86
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 82
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 62
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 43
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 35
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 31
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 56
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 72
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 49
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 32
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 0
+        }
+      ]
+    },
+    "openingHours": [
+      {
+        "day": "Thứ Ba",
+        "hours": "06:30 to 22:00"
+      },
+      {
+        "day": "Thứ Tư",
+        "hours": "06:30 to 22:00"
+      },
+      {
+        "day": "Thứ Năm",
+        "hours": "06:30 to 22:00"
+      },
+      {
+        "day": "Thứ Sáu",
+        "hours": "06:30 to 22:00"
+      },
+      {
+        "day": "Thứ Bảy",
+        "hours": "06:30 to 22:00"
+      },
+      {
+        "day": "Chủ Nhật",
+        "hours": "06:30 to 22:00"
+      },
+      {
+        "day": "Thứ Hai",
+        "hours": "06:30 to 22:00"
+      }
+    ],
+    "wasOpenAtScrapeTime": true,
+    "peopleAlsoSearch": [
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "À KONTUM COFFEE",
+        "reviewsCount": 80,
+        "totalScore": 4.9
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Coffee Moi",
+        "reviewsCount": 333,
+        "totalScore": 4.2
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Passion Coffee",
+        "reviewsCount": 203,
+        "totalScore": 4.3
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "MỘC",
+        "reviewsCount": 136,
+        "totalScore": 5
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Country coffee",
+        "reviewsCount": 76,
+        "totalScore": 4.6
+      }
+    ],
+    "placesTags": [],
+    "reviewsTags": [],
+    "additionalInfo": {
+      "Các tùy chọn dịch vụ": [
+        {
+          "Chỗ ngồi ngoài trời": true
+        },
+        {
+          "Đồ ăn mang đi": true
+        },
+        {
+          "Ăn tại chỗ": true
+        },
+        {
+          "Giao hàng": false
+        }
+      ],
+      "Điểm nổi bật": [
+        {
+          "Cà phê ngon": true
+        },
+        {
+          "Nhiều trà ngon": true
+        }
+      ],
+      "Nổi tiếng về": [
+        {
+          "Phù hợp để làm việc trên máy tính xách tay": true
+        }
+      ],
+      "Phù hợp cho người khuyết tật": [
+        {
+          "Chỗ ngồi cho xe lăn": true
+        },
+        {
+          "Nhà vệ sinh cho xe lăn": true
+        },
+        {
+          "Lối vào cho xe lăn": false
+        }
+      ],
+      "Dịch vụ": [
+        {
+          "Bia": true
+        },
+        {
+          "Cà phê": true
+        },
+        {
+          "Rượu": true
+        }
+      ],
+      "Lựa chọn ăn uống": [
+        {
+          "Bữa sáng": true
+        },
+        {
+          "Dịch vụ ăn uống": true
+        },
+        {
+          "Món tráng miệng": true
+        },
+        {
+          "Chỗ ngồi": true
+        },
+        {
+          "Phục vụ tại bàn": true
+        }
+      ],
+      "Tiện nghi": [
+        {
+          "Nhà vệ sinh": true
+        }
+      ],
+      "Bầu không khí": [
+        {
+          "Ấm cúng": true
+        },
+        {
+          "Lãng mạn": true
+        },
+        {
+          "Thông thường": true
+        },
+        {
+          "Yên tĩnh": true
+        }
+      ],
+      "Khách hàng": [
+        {
+          "Du khách": true
+        },
+        {
+          "Nhóm": true
+        }
+      ],
+      "Lên kế hoạch": [
+        {
+          "Nhận đặt chỗ": true
+        }
+      ],
+      "Thanh toán": [
+        {
+          "Thanh toán di động qua NFC": true
+        },
+        {
+          "Thẻ ghi nợ": true
+        }
+      ],
+      "Trẻ em": [
+        {
+          "Phù hợp cho trẻ em": true
+        },
+        {
+          "Thực đơn dành cho trẻ em": true
+        }
+      ],
+      "Bãi đỗ xe": [
+        {
+          "Bãi đỗ xe miễn phí": true
+        },
+        {
+          "Nhiều chỗ đỗ xe": true
+        },
+        {
+          "Đỗ xe miễn phí trên đường": true
+        }
+      ],
+      "Thú cưng": [
+        {
+          "Cho phép mang theo chó": true
+        }
+      ]
+    },
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Indochine%20Coffee%20Kon%20Tum&query_place_id=ChIJpTwbDtz_azERE7XnwS-IMnQ",
+    "searchPageUrl": "https://www.google.com/maps/search/Qu%C3%A1n%20C%C3%A0%20Ph%C3%AA%20B%E1%BB%9D%20S%C3%B4ng%20Kon%20Tum/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Quán Cà Phê Bờ Sông Kon Tum",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/grass-cs/ACvplmMgahLf20Oo2pUwwbW1sf2o-asSsGwUj-pIuOifV0AiMI1xe52gC6dCnhoCaSs0CubP-Wtr6w6l7zNkwagVv2JpW9k7HxEtR6DmWtd5M0ONINGz6mlZz-X8LhofkNQbrDzKsv5MMydSb2Xh=w408-h272-k-no",
+    "kgmid": "/g/11gs7n5hjy",
+    "businessProfileId": "10015581981493539762",
+    "questionsAndAnswers": [],
+    "updatesFromCustomers": {
+      "text": "Quán có không gian đẹp",
+      "language": "vi",
+      "postDate": "một năm trước",
+      "postedBy": {
+        "name": "Vũ Quang Minh",
+        "url": "https://www.google.com/maps/contrib/100819000705477463099?hl=vi",
+        "title": "Local Guide",
+        "totalReviews": 396
+      },
+      "media": [
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPHn4h3ET9Edz6MKjfXeI5sCNE6m1T5tFlZPbV_EZZ8daXuYGKYrWayDgQXOnrh-h4omvXaTdghAQFuyKTKAZet1yZFdEPD-iPycfqhF7AAdlvzYUD1sWb8NsiK5m38kx2IHfil=k-no",
+          "postDate": "một năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPXISEe8aZ7qXmkO76_8qg4YEWSyxLxv00HstS3xxRKpLDjsh2Eb8cDK6BWj71itxXv7cGrH4bGDTMwei-LssIYo6hs95uBQK7aPY3j8SCVS0wx3yLZuaZ5oiimQWfBtAYahI1K=k-no",
+          "postDate": "một năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmP1TrtYYepgHDbcwkHXU9vy9jPKKGcZuv-yGPdwgh7mmyhFVxHV5S-C7ywgF_2AYpxDIL-zXRlo8Mig8gmKPD7_7YO3dyY-GwQoD0FILx1eZDMYZtx8-cpHAzY8VzP70l6ZPlyq=k-no",
+          "postDate": "một năm trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmOarhEdNq4UNton5zByIyYnTRT-zT3Dw3f0Ai-Q-8a4KXnJS9MBJzcn5nNs17vtTeP7q5CXxL0n5huSOVahRkh_oWwGyGWf5XOKCKjoJjwvYANl1mor4PpRtq03BCtSLNaTOn3U=k-no",
+          "postDate": "một năm trước"
+        }
+      ]
+    },
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [
+      "info@indochinehotel.vn"
+    ],
+    "phones": [
+      "02603863334",
+      "02603863335",
+      "0918766611"
+    ],
+    "phonesUncertain": [
+      "0260 3863 334",
+      "0260 3863 335",
+      "2603 862 762",
+      "091 876 6611",
+      "2603 863334",
+      "2603 863335"
+    ],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [],
+    "youtubes": [],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "domain": "indochinehotel.vn",
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/grass-cs/ACvplmMgahLf20Oo2pUwwbW1sf2o-asSsGwUj-pIuOifV0AiMI1xe52gC6dCnhoCaSs0CubP-Wtr6w6l7zNkwagVv2JpW9k7HxEtR6DmWtd5M0ONINGz6mlZz-X8LhofkNQbrDzKsv5MMydSb2Xh=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  },
+  {
+    "title": "Làng Gò Cỏ",
+    "subTitle": null,
+    "description": null,
+    "ownerDescription": "Làng Gò Cỏ (tổ dân phố Long Thạnh 2, phường Phổ Thạnh, thị xã Đức Phổ) là một ngôi làng cổ Chăm Pa. Ngôi làng gắn liền với nghề truyền thống nông và ngư nghiệp. Hiện nay, Làng Gò Cỏ là điểm du lịch cộng đồng hấp dẫn, có màu sắc riêng biệt, mang đến cho du khách những cảm nhận thực tế về tính hoang sơ và văn minh của thiên nhiên cũng như con người nơi đây.",
+    "price": null,
+    "categoryName": "Đại lý du lịch",
+    "address": "P34F+53M, tổ dân phố Long Thạnh 2, phường, Sa Huỳnh, Quảng Ngãi 570000, Việt Nam",
+    "neighborhood": "phường, Sa Huỳnh",
+    "street": "P34F+53M, tổ dân phố Long Thạnh 2",
+    "city": "Quảng Ngãi",
+    "postalCode": "570000",
+    "state": "Sa Huỳnh, Quảng Ngãi",
+    "countryCode": "VN",
+    "website": "https://langgoco.com/",
+    "phone": "+84 255 6288 111",
+    "phoneUnformatted": "+842556288111",
+    "claimThisBusiness": false,
+    "location": {
+      "lat": 14.7061567,
+      "lng": 109.0739236
+    },
+    "locatedIn": null,
+    "floor": null,
+    "plusCode": null,
+    "menu": null,
+    "servicesLink": null,
+    "totalScore": 4.6,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "placeId": "ChIJ19ppvr7uaDERgynbRSmJMxs",
+    "categories": [
+      "Đại lý du lịch",
+      "Điểm thu hút khách du lịch"
+    ],
+    "fid": "0x3168eebebe69dad7:0x1b33892945db2983",
+    "cid": "1960061073194953091",
+    "reviewsCount": 373,
+    "reviewsDistribution": {
+      "oneStar": 6,
+      "twoStar": 5,
+      "threeStar": 24,
+      "fourStar": 51,
+      "fiveStar": 287
+    },
+    "imagesCount": 2130,
+    "imageCategories": [
+      "Tất cả",
+      "Mới nhất",
+      "Video",
+      "Không gian bên trong",
+      "Của chủ sở hữu"
+    ],
+    "scrapedAt": "2026-09-29T13:32:59.850Z",
+    "reserveTableUrl": null,
+    "googleFoodUrl": null,
+    "hotelStars": null,
+    "hotelDescription": null,
+    "checkInDate": null,
+    "checkOutDate": null,
+    "hotelAds": [],
+    "popularTimesLiveText": "Hơi đông đúc",
+    "popularTimesLivePercent": 58,
+    "popularTimesHistogram": {
+      "Su": [
+        {
+          "hour": 4,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 71
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 83
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 71
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 73
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 91
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 87
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 81
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 79
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 85
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 91
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 69
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 61
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 71
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 73
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 46
+        }
+      ],
+      "Mo": [
+        {
+          "hour": 4,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 77
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 77
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 75
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 69
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 69
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 65
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 73
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 73
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 83
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 59
+        }
+      ],
+      "Tu": [
+        {
+          "hour": 4,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 40
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 53
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 65
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 65
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 73
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 75
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 77
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 53
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 53
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 53
+        }
+      ],
+      "We": [
+        {
+          "hour": 4,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 61
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 75
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 61
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 75
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 75
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 67
+        }
+      ],
+      "Th": [
+        {
+          "hour": 4,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 65
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 53
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 71
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 81
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 83
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 79
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 75
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 61
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 34
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 28
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 40
+        }
+      ],
+      "Fr": [
+        {
+          "hour": 4,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 32
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 51
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 65
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 77
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 57
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 61
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 61
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 42
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 36
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 44
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 55
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 61
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 38
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 28
+        }
+      ],
+      "Sa": [
+        {
+          "hour": 4,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 5,
+          "occupancyPercent": 53
+        },
+        {
+          "hour": 6,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 7,
+          "occupancyPercent": 65
+        },
+        {
+          "hour": 8,
+          "occupancyPercent": 67
+        },
+        {
+          "hour": 9,
+          "occupancyPercent": 61
+        },
+        {
+          "hour": 10,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 11,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 12,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 13,
+          "occupancyPercent": 71
+        },
+        {
+          "hour": 14,
+          "occupancyPercent": 79
+        },
+        {
+          "hour": 15,
+          "occupancyPercent": 100
+        },
+        {
+          "hour": 16,
+          "occupancyPercent": 100
+        },
+        {
+          "hour": 17,
+          "occupancyPercent": 87
+        },
+        {
+          "hour": 18,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 19,
+          "occupancyPercent": 48
+        },
+        {
+          "hour": 20,
+          "occupancyPercent": 46
+        },
+        {
+          "hour": 21,
+          "occupancyPercent": 63
+        },
+        {
+          "hour": 22,
+          "occupancyPercent": 69
+        },
+        {
+          "hour": 23,
+          "occupancyPercent": 71
+        },
+        {
+          "hour": 0,
+          "occupancyPercent": 61
+        },
+        {
+          "hour": 1,
+          "occupancyPercent": 71
+        },
+        {
+          "hour": 2,
+          "occupancyPercent": 59
+        },
+        {
+          "hour": 3,
+          "occupancyPercent": 57
+        }
+      ]
+    },
+    "openingHours": [
+      {
+        "day": "Thứ Ba",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Tư",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Năm",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Sáu",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Bảy",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Chủ Nhật",
+        "hours": "Mở cửa cả ngày"
+      },
+      {
+        "day": "Thứ Hai",
+        "hours": "Mở cửa cả ngày"
+      }
+    ],
+    "wasOpenAtScrapeTime": true,
+    "peopleAlsoSearch": [
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Trung tâm du khách làng Gò Cỏ",
+        "reviewsCount": 18,
+        "totalScore": 4.8
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Bãi biển Gò Cỏ",
+        "reviewsCount": 41,
+        "totalScore": 4.6
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "DVDL làng gò cỏ",
+        "reviewsCount": 0,
+        "totalScore": 0
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "Homestay Vườn Cau",
+        "reviewsCount": 14,
+        "totalScore": 4.7
+      },
+      {
+        "category": "Mọi người cũng tìm kiếm",
+        "title": "họ Lượng",
+        "reviewsCount": 0,
+        "totalScore": 0
+      }
+    ],
+    "placesTags": [
+      {
+        "title": "Dịch vụ",
+        "count": 1
+      },
+      {
+        "title": "Nơi lưu trú",
+        "count": 1
+      }
+    ],
+    "reviewsTags": [],
+    "gasPrices": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=L%C3%A0ng%20G%C3%B2%20C%E1%BB%8F&query_place_id=ChIJ19ppvr7uaDERgynbRSmJMxs",
+    "searchPageUrl": "https://www.google.com/maps/search/L%C3%A0ng%20ch%C3%A8o%20thuy%E1%BB%81n%20C%C3%A0%20R%E1%BB%93%20Qu%E1%BA%A3ng%20Ng%C3%A3i/@9.684655472197845,114.6834277878095,12z?hl=vi",
+    "searchString": "Làng chèo thuyền Cà Rồ Quảng Ngãi",
+    "language": "vi",
+    "rank": 1,
+    "isAdvertisement": false,
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkS_4uhox7CRkh4N7BtpBzIF_AzMXThsX3Bgd6obiaxUnw3wrGLDqVY8NuHJU0au87o404Hslw7sSOrH6A1am4xB1UDytrgrldor8nH1rmYnVTXOJfa5yZXefX9DFP15tIJeBPe-A=w408-h272-k-no",
+    "kgmid": "/g/11ggnfz32f",
+    "businessProfileId": "17913867193746329048",
+    "additionalInfo": {
+      "Thanh toán": [
+        {
+          "Chỉ nhận tiền mặt": true
+        }
+      ]
+    },
+    "questionsAndAnswers": [],
+    "updatesFromCustomers": {
+      "text": "Ngôi làng cổ sẽ bật mí cho Quý khách những “hóa thạch văn hóa” thú vị thông qua các hoạt động tham quan, trải nghiệm cùng cộng đồng người dân bản địa. Làng Gò Cỏ sẽ là điểm đến tuyệt vời, thỏa mãn nhu cầu của những du khách yêu chuộng sự hoang sơ và văn minh.",
+      "language": "vi",
+      "postDate": "2 tháng trước",
+      "postedBy": {
+        "name": "Giang Nguyen Hong",
+        "url": "https://www.google.com/maps/contrib/117739159910278351853?hl=vi",
+        "title": "Local Guide",
+        "totalReviews": 266
+      },
+      "media": [
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmMtOJga3K-Q762aGF5TSUVLR-9012DniNb20cqBVq_Kr_tBW2zif1pVTxGcohbXuLgdJ7h-fBvbmd66FypbJcEIkvaXKfReC8YUw2AaKh0QCCIog8bPxpuWQK8C_Z6bi9zRVR8hXuOcYQA=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmN3Os8qzW_Xld6QINXmy8r9eqqpqGGVoWoOC5yJBN0STtKfVSBwoityMGura2LgFSKXTkcNQUOtnNTAZ6AdXjrM1kIqzg9spWesjeIY-AITuoOrXFrDx6N20jKOFvo2jB019_WLtEeXMpsO=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmP_3yWD6Md07usqiAgvdptYDzEDQCCUGrTNhfmfmzplyhTF-63QZWyNj5HV-LMWtSvehU69BYs983u3fUZpapfS1Bvzik2CdI-hY3ZTtlVEqrX1anOSXzhRgisxabdRd-ywazN-POwsswrM=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmNhmKoiHrEMpTcAX2nF2G6pFsyB-kjQ0L4UlTVBfiKu3VyGxk94BaJZsa-s8Ln9BMxzL6UdQSX0kds6DQ3s7-zHUpIx6x6wutjnQKLhf4Qr5ua2q7RXQyO6VjE-wbjwFZQaHX7AH3CKJ-pS=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmP4VcwznMmAKtPR7agCPOeW2-D7gUGBXTQaz1QJ9QrbBva5IUL3UUc0BKo1Y2ZtsHCrhvNr4WTADFiZI7qnuVk4nCb1wtymPP-EOSDscmTn01BXjDKn2x_RXW2OkR6tc5ZeALLfARnN5WY=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmO-qJd_EGDd99OOHObGG1FokG9IPj7H08-A_pHeWkQMmUd-mz-5tpFGgqUkqelfUqK44cmn8E36J2zY3JzP64xlM6pCd_PI7gF9e6D1Ke1TeDWJ66E2ICwPC-f2mT6bz_gR1Fu6x6T0UASs=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmPAl-MGZbEHFrZtOOa--cIGGpOe68RKUehh23epT9CtrZgDVG23b2Hj8ppwMYod11rbD6iExIsjhehl-oHD56CyCl9sDWa3DsfzPEq1-HKb0s495VO4P1ftX8zwuvKh0VhVOeIECX-0HJE=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmOmhGWrAqMAAqmeEG1fkz6zNruq2vF97GMz_9HZHHoZmqrrIOrdabI07wCTdqRRVEm1jZFAM1nv-aVdalWPtYbwsSfP_9V1ihHXS31P95fptP9ulZ-UYkRZAi-_X8s9g9SMEpmvrtFegZM=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmOU_n4wYPdL64PNl01ZiWi1GxdWMOixOliI78zhxyrSYE0t2gHbYwtv7jIOAeuq7ynSCOHch2KuNOxF5I22ojQIsRTG2D3O4EToJO2AknU2uQlRifpQFiFWfeFRCizZm34F-OxtDOpdAGA=k-no",
+          "postDate": "2 tháng trước"
+        },
+        {
+          "link": "https://lh3.googleusercontent.com/grass-cs/ACvplmOX9kScWB9RgW6aAr_unbamLB_QyCyC6RLX-ZLBnMmm5o9DdEZgM0desVEWFyw766JGVGFQ-dQ_Ii87KtsWmRS0aXXc9lvH1ShtLMh-Q1JyVhkzgZoKo9gwvA7ioljB-8_mcJYlEfMC85Q=k-no",
+          "postDate": "2 tháng trước"
+        }
+      ]
+    },
+    "webResults": [],
+    "tableReservationLinks": [],
+    "tableReservationProviders": [],
+    "bookingLinks": [],
+    "restaurantData": {
+      "tableReservationProvider": null
+    },
+    "ownerUpdates": [],
+    "emails": [
+      "Langgoco.htx@gmail.com"
+    ],
+    "phones": [],
+    "phonesUncertain": [
+      "0255 6288 111",
+      "097 971 8024"
+    ],
+    "linkedIns": [],
+    "twitters": [],
+    "instagrams": [],
+    "facebooks": [
+      "https://www.facebook.com/langgoco.htx",
+      "facebook.com/langgoco.htx"
+    ],
+    "youtubes": [
+      "https://www.youtube.com/channel/UCTivLIUlRwrmlXjmd4bI8gg"
+    ],
+    "tiktoks": [],
+    "pinterests": [],
+    "discords": [],
+    "domain": "langgoco.com",
+    "imageUrls": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkS_4uhox7CRkh4N7BtpBzIF_AzMXThsX3Bgd6obiaxUnw3wrGLDqVY8NuHJU0au87o404Hslw7sSOrH6A1am4xB1UDytrgrldor8nH1rmYnVTXOJfa5yZXefX9DFP15tIJeBPe-A=w1920-h1080-k-no"
+    ],
+    "reviews": [],
+    "leadsEnrichment": []
+  }
+]

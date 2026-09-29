@@ -85,6 +85,7 @@ class Place(Base):
     tags = Column(JSON, nullable=True)                         # Mảng thẻ tag ["van_hoa", "checkin"]
     phone_number = Column(String(50), nullable=True)           # Số điện thoại liên hệ (Hotline / Lễ tân)
     website = Column(String(500), nullable=True)                # Website / Trang đặt chỗ / Fanpage
+    google_maps_url = Column(String(500), nullable=True)        # Đường dẫn Google Maps xác thực (Place Profile)
 
 
     # Quan hệ ngược về Tỉnh và Xã

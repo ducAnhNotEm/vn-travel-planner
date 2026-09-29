@@ -81,10 +81,14 @@
   - Bổ sung thành công 100% ảnh xác thực cho 6 địa điểm còn thiếu (Sóc Sơn, Mường La, Lương Văn Tri, Phúc Yên, Chùa Keo Thái Bình, Đền Trần Nam Định).
   - Đạt độ phủ ảnh 100% (779/779 địa danh trong `travel_db.db` có ảnh hợp lệ HTTP 200, 0 URL trùng lặp).
   - Đồng bộ 100% sang toàn bộ các tệp JSON dữ liệu (`places_63_to_34.json`, `places_north.json`).
-- [x] Triển khai Pipeline Làm giàu Dữ liệu 9 Đô thị du lịch lớn (`scripts/enrich_major_cities.py` qua Apify `compass/crawler-google-places`):
-  - Mở rộng Database Schema: Thêm 2 cột `phone_number VARCHAR(50)` và `website VARCHAR(500)` vào bảng `places` và SQLAlchemy model `Place`.
-  - Backfill miễn phí số điện thoại và website cho 259 địa danh cũ từ cache offline Google Places.
-  - Cào thành công 268 địa điểm mới từ Google Maps trên 9 Đô thị lớn (Hà Nội, TP.HCM, Đà Nẵng, Quảng Ninh, Hải Phòng, Huế, Khánh Hòa, Lâm Đồng, Cần Thơ), bổ sung ~30 địa điểm/thành phố tập trung chuyên sâu: 117 Khách sạn/Resort/Homestay (`HOTEL`), 63 Chợ truyền thống & Chợ đêm (`MARKET`), các Khu vui chơi giải trí & Điểm check-in nổi tiếng (`ATTRACTION`).
-  - Nâng tổng quy mô database lên **1.027 địa danh**, trong đó **431 địa danh có số điện thoại liên hệ hotline** và **331 địa danh có website chính thức**, 100% có ảnh Google Maps CDN độ nét cao, 0 lỗi khóa ngoại SQLite.
-  - Tích hợp số điện thoại liên hệ và website chính thức lên giao diện frontend (`frontend/index.html`) và API Core (`app/services/travel_calculator.py`).
+- [x] Triển khai thành công Pipeline Thu thập & Làm giàu Dữ liệu 25 Tỉnh Thành Còn Thiếu (`scripts/harvest_and_ingest_remaining.py` qua Apify `compass/crawler-google-places`):
+  - Kế hoạch Lead BA từ Claude Sonnet 4.6 (`data/ba_remaining_provinces_plan.json`) định hình 456 địa điểm theo nhịp sinh học du lịch Việt Nam, bao phủ đủ 5 category: `RESTAURANT`, `ACTIVITY`, `MARKET`, `ATTRACTION`, `HOTEL`.
+  - Thu thập và lưu trữ an toàn 25 file cache thô JSON tại `data/raw_remaining_provinces/` (đầy đủ 25/25 tỉnh thành đích).
+  - Tự động xoay vòng token (`APIFY_TOKEN` sang `APIFY_TOKEN_BACKUP`), khử trùng lặp đa tầng theo Google Place ID và khoảng cách Haversine (< 30m).
+  - Nâng tổng quy mô cơ sở dữ liệu lên **1.387 địa danh** (tăng thêm 360 địa danh sạch), trong đó **649 địa danh có hotline** và **459 địa danh có website chính thức**.
+- [x] Tích hợp Trường `google_maps_url` & Hệ thống Ghim Vị Trí (Location Pin) Chuẩn Xác Thực 100%:
+  - Mở rộng Database Schema & Model SQLAlchemy: Thêm cột `google_maps_url VARCHAR(500)` vào bảng `places`.
+  - Thực thi `scripts/populate_places_urls.py`: Nạp thành công URL xác thực từ cache offline Google Places và Google Place ID chuẩn (`ChIJ...`).
+  - Thanh lọc 18 địa danh unverified/không có Place ID: Loại bỏ triệt để 18 bản ghi cũ (trùng lặp hoặc thiếu provenance), đưa toàn bộ cơ sở dữ liệu `travel_db.db` về **1.369 địa danh chuẩn mực 100%**, trong đó **100% địa danh sở hữu Google Place ID xác thực và Google Maps URL dẫn thẳng vào Google Business Profile** (0 link giả, 0 URL null).
+  - Tích hợp `google_maps_url` vào API Core [`app/services/travel_calculator.py`](file:///d:/vn-travel-planner/app/services/travel_calculator.py) và giao diện [`frontend/index.html`](file:///d:/vn-travel-planner/frontend/index.html) với nút ghim vị trí mở thẳng Google Business Profile để chỉ đường thực tế.
 

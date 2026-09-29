@@ -964,7 +964,13 @@
                     <span class="bg-blue-50 text-brand-blue text-[10px] font-bold px-2 py-0.5 rounded">08:45 - 10:15 (1h30m)</span>
                     <span class="bg-orange-50 text-brand-orange text-[10px] font-bold px-2 py-0.5 rounded">Must-visit</span>
                   </div>
-                  <h4 class="font-bold text-base text-brand-blue mt-1">Chùa Dâu</h4>
+                  <div class="flex items-center gap-2 mt-1">
+                    <h4 class="font-bold text-base text-brand-blue">Chùa Dâu</h4>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Ch%C3%B9a%20D%C3%A2u&query_place_id=ChIJsQgi1SinNTERvnH6eFiHbNs" target="_blank" title="Mở ghim vị trí chính xác trên Google Maps (tránh đi sai)" class="text-brand-orange hover:text-white hover:bg-brand-orange bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-md text-[11px] font-bold transition flex items-center gap-1 shadow-2xs">
+                      <i class="fa-solid fa-location-dot text-[10px]"></i>
+                      <span>Ghim GG Maps</span>
+                    </a>
+                  </div>
                   <p class="text-xs text-slate-500">Xã Trí Quả, Thuận Thành</p>
                 </div>
               </div>
@@ -1123,9 +1129,15 @@
               <i class="fa-solid fa-location-dot text-brand-orange"></i> Xã Trí Quả, Huyện Thuận Thành, Tỉnh Bắc Ninh
             </p>
           </div>
-          <button class="bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg transition">
-            + Thêm vào chuyến đi
-          </button>
+          <div class="flex items-center gap-2.5">
+            <a id="detail-maps-pin-btn" href="https://www.google.com/maps/search/?api=1&query=Ch%C3%B9a%20D%C3%A2u&query_place_id=ChIJsQgi1SinNTERvnH6eFiHbNs" target="_blank" title="Mở chính xác vị trí trên Google Maps (tránh đi sai đường)" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl font-bold text-sm shadow-md transition flex items-center gap-2">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Ghim Google Maps</span>
+            </a>
+            <button class="bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg transition">
+              + Thêm vào chuyến đi
+            </button>
+          </div>
         </div>
       </div>
 
@@ -1165,8 +1177,10 @@
               </a>
             </div>
             <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-              <span class="text-slate-400 block font-semibold mb-1">Trang phục:</span>
-              <span class="font-bold text-brand-blue text-sm">Lịch sự, trang nghiêm</span>
+              <span class="text-slate-400 block font-semibold mb-1">Định vị Google Maps:</span>
+              <a id="detail-maps-link" href="https://www.google.com/maps/search/?api=1&query=Ch%C3%B9a%20D%C3%A2u&query_place_id=ChIJsQgi1SinNTERvnH6eFiHbNs" target="_blank" class="font-bold text-emerald-600 hover:underline text-sm flex items-center gap-1.5 truncate">
+                <i class="fa-solid fa-location-dot text-xs"></i> <span>Mở hồ sơ địa điểm</span>
+              </a>
             </div>
           </div>
         </div>

@@ -55,8 +55,20 @@ Build a production-grade, AI-assisted domestic travel planning system ("VNTravel
 - **Temples & Public Markets**: Strictly **0 VND / Free Entry / Public**.
 
 ### Photo Ground Truth & Wikipedia Standard:
-- **Danh lam thắng cảnh, Di tích, Chùa chiền, Đền miếu**: Bắt buộc lấy ảnh thực tế 100% từ **Wikipedia / Wikimedia Commons** (qua REST API hoặc Search API). Tuyệt đối không dùng ảnh minh họa giả hoặc ảnh stock lặp lại.
-- **Khách sạn, Chợ, Quán ăn**: Tạm thời để trống hoặc thu thập xác thực sau; nghiêm cấm sao chép nhân bản 1 link ảnh cho nhiều cơ sở khác nhau.
+- **Danh lam thắng cảnh, Di tích, Chùa chiền, Đền miếu**: Bắt buộc lấy ảnh thực tế 100% từ **Wikipedia / Wikimedia Commons** (qua REST API hoặc Search API) hoặc Google Maps CDN độ nét cao. Tuyệt đối không dùng ảnh minh họa giả hoặc ảnh stock lặp lại.
+- **Khách sạn, Chợ, Quán ăn**: Bắt buộc là ảnh chụp thực tế riêng biệt từ Google Places CDN / Playwright; nghiêm cấm sao chép nhân bản 1 link ảnh cho nhiều cơ sở khác nhau.
+
+### Real Address Ground Truth (Địa chỉ thực tế — Cấm địa chỉ giả mạo):
+- **100% địa chỉ trả về qua API phải là địa chỉ thực địa có thật**: Số nhà, tên đường, ngõ/ngách, thôn/xã/phường, quận/huyện, tỉnh/thành phố chuẩn Google Maps `formatted_address` hoặc cấu trúc phân cấp hành chính chuẩn quốc gia.
+- ❌ **CẤM HOÀN TOÀN** địa chỉ placeholder tự chế: `"{name}, {province}, Việt Nam"`. Nếu địa điểm tự nhiên không có số nhà (thác, đèo, đỉnh núi), phải ghi đúng địa danh hành chính cấp thôn/xã/huyện (ví dụ: `Đèo Ô Quy Hồ, Xã Sơn Bình, Huyện Tam Đường, Lai Châu`).
+
+### Google Maps Pin & URL Ground Truth (Quy tắc Ghim Vị Trí & Cấm Tạo Ảo Giác URL):
+- **Mục đích của Icon Ghim (📍)**: Khi backend đẩy dữ liệu (ảnh, tên, giá, thời gian mở cửa, địa chỉ), icon ghim trên frontend sẽ cho phép người dùng mở đúng **Google Business Profile / Place Page** để xem lối vào thực tế, giờ mở cửa thời gian thực và dẫn đường navigation (tránh sai sót khi chỉ dựa vào tọa độ GPS thuần túy).
+- ❌ **TUYỆT ĐỐI CẤM TỰ Ý TẠO URL TÌM KIẾM GIẢ**: Nghiêm cấm tự ghép chuỗi `https://www.google.com/maps/search/?api=1&query=...` khi không có `place_id` xác thực. Link tìm kiếm tự chế có thể dẫn sai vị trí hoặc nhảy sang địa điểm trùng tên ở tỉnh khác, gây hậu quả nghiêm trọng cho người dùng thực tế.
+- ✅ **Chỉ chấp nhận URL chuẩn xác thực**:
+  1. `url` trích xuất trực tiếp từ Google Maps Scraper / Places API đã được thẩm định.
+  2. HOẶC URL gắn liền với Google Place ID xác thực: `https://www.google.com/maps/place/?q=place_id:{google_place_id}` (với `google_place_id` bắt đầu bằng `ChIJ...`).
+  3. Nếu địa điểm chưa có Place ID hoặc URL xác thực $\rightarrow$ trường `google_maps_url` **BẮT BUỘC ĐỂ `NULL`**. Frontend sẽ không hiển thị ghim giả hoặc hiển thị trạng thái chưa liên kết. Không được gian dối tạo ảo giác dữ liệu!
 
 ---
 
