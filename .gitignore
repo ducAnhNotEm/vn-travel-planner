@@ -20,3 +20,11 @@ __pycache__/
 
 # Docker
 .dockerignore
+
+# Cache
+data/map_cache/
+.pytest_cache/
+
+# Agent Scratch & Workspaces
+.agents/
+

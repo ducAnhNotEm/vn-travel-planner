@@ -91,3 +91,25 @@ class Place(Base):
     # Quan hệ ngược về Tỉnh và Xã
     province = relationship("Province", back_populates="places")
     ward = relationship("Ward", back_populates="places")
+
+class Airport(Base):
+    __tablename__ = "airports"
+
+    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    iata_code = Column(String(10), unique=True, index=True, nullable=False)   # HAN, SGN, DAD...
+    name = Column(String(255), nullable=False)
+    province_name = Column(String(100))
+    city_served = Column(String(100))
+    is_international = Column(Boolean, default=False)
+    
+    lat = Column(Float, nullable=False)
+    lng = Column(Float, nullable=False)
+    address = Column(String(500))
+    rating = Column(Float)
+    review_count = Column(Integer)
+    
+    google_place_id = Column(String(100), unique=True, nullable=True)
+    google_maps_url = Column(String(500), nullable=True)
+    image_url = Column(Text, nullable=True)
+    phone_number = Column(String(50), nullable=True)
+    website = Column(String(500), nullable=True)

@@ -1,0 +1,1006 @@
+1. Mình muốn đi Đà Nẵng 3 ngày 2 đêm, 2 người, đi máy bay, thích biển.
+
+2. Mình muốn đi Hà Nội 2 ngày 1 đêm, 4 người, đi ô tô, thích tham quan phố cổ.
+
+3. Mình muốn đi Ninh Bình 2 ngày 1 đêm, 3 người, đi xe máy, thích chùa và danh thắng.
+
+4. Mình muốn đi Đà Lạt 3 ngày 2 đêm, 2 người, đi xe máy, thích thiên nhiên.
+
+5. Mình muốn đi Phú Quốc 4 ngày 3 đêm, 4 người, đi máy bay, thích biển và hải sản.
+
+6. Mình muốn đi Huế 2 ngày 1 đêm, 3 người, đi ô tô, thích di tích lịch sử.
+
+7. Mình muốn đi Hội An 3 ngày 2 đêm, 2 người, đi máy bay, thích phố cổ và ẩm thực.
+
+8. Mình muốn đi Sapa 3 ngày 2 đêm, 4 người, đi ô tô, thích núi và thiên nhiên.
+
+9. Mình muốn đi Hạ Long 2 ngày 1 đêm, 5 người, đi ô tô, thích biển.
+
+10. Mình muốn đi Quy Nhơn 3 ngày 2 đêm, 4 người, đi máy bay, thích biển và hải sản.
+
+11. Mình muốn đi Vũng Tàu 2 ngày 1 đêm, 3 người, đi xe máy, thích biển.
+
+12. Mình muốn đi Cần Thơ 2 ngày 1 đêm, 4 người, đi ô tô, thích chợ và ẩm thực.
+
+13. Mình muốn đi Hà Giang 4 ngày 3 đêm, 4 người, đi xe máy, thích núi và cảnh đẹp.
+
+14. Mình muốn đi Cao Bằng 3 ngày 2 đêm, 3 người, đi ô tô, thích thác nước và thiên nhiên.
+
+15. Mình muốn đi Mộc Châu 2 ngày 1 đêm, 4 người, đi xe máy, thích thiên nhiên.
+
+16. Mình muốn đi Tam Đảo 2 ngày 1 đêm, 2 người, đi xe máy, thích núi.
+
+17. Mình muốn đi Quảng Ninh 3 ngày 2 đêm, 5 người, đi ô tô, thích biển và hải sản.
+
+18. Mình muốn đi Thanh Hóa 2 ngày 1 đêm, 4 người, đi ô tô, thích biển.
+
+19. Mình muốn đi Nghệ An 3 ngày 2 đêm, 5 người, đi ô tô, thích biển và di tích.
+
+20. Mình muốn đi Quảng Bình 3 ngày 2 đêm, 4 người, đi ô tô, thích hang động.
+
+21. Mình muốn đi Quảng Trị 2 ngày 1 đêm, 3 người, đi ô tô, thích di tích lịch sử.
+
+22. Mình muốn đi Quảng Nam 3 ngày 2 đêm, 4 người, đi ô tô, thích phố cổ và biển.
+
+23. Mình muốn đi Bình Định 3 ngày 2 đêm, 2 người, đi máy bay, thích biển.
+
+24. Mình muốn đi Phú Yên 3 ngày 2 đêm, 4 người, đi ô tô, thích biển và cảnh đẹp.
+
+25. Mình muốn đi Khánh Hòa 4 ngày 3 đêm, 4 người, đi máy bay, thích biển và hải sản.
+
+26. Mình muốn đi Ninh Thuận 3 ngày 2 đêm, 3 người, đi ô tô, thích biển và thiên nhiên.
+
+27. Mình muốn đi Bình Thuận 2 ngày 1 đêm, 4 người, đi ô tô, thích biển.
+
+28. Mình muốn đi Lâm Đồng 3 ngày 2 đêm, 5 người, đi ô tô, thích núi và thiên nhiên.
+
+29. Mình muốn đi Đồng Nai 2 ngày 1 đêm, 4 người, đi ô tô, thích thiên nhiên.
+
+30. Mình muốn đi Bến Tre 2 ngày 1 đêm, 3 người, đi ô tô, thích sông nước và ẩm thực.
+
+31. Mình muốn đi Tiền Giang 2 ngày 1 đêm, 4 người, đi ô tô, thích chợ và sông nước.
+
+32. Mình muốn đi An Giang 3 ngày 2 đêm, 4 người, đi ô tô, thích chùa và núi.
+
+33. Mình muốn đi Kiên Giang 3 ngày 2 đêm, 4 người, đi máy bay, thích biển.
+
+34. Mình muốn đi Cà Mau 2 ngày 1 đêm, 3 người, đi ô tô, thích thiên nhiên.
+
+35. Mình muốn đi Sóc Trăng 2 ngày 1 đêm, 4 người, đi ô tô, thích chùa.
+
+36. Mình muốn đi Bạc Liêu 2 ngày 1 đêm, 3 người, đi ô tô, thích văn hóa và ẩm thực.
+
+37. Mình muốn đi Trà Vinh 2 ngày 1 đêm, 4 người, đi ô tô, thích chùa.
+
+38. Mình muốn đi Vĩnh Long 2 ngày 1 đêm, 5 người, đi ô tô, thích sông nước.
+
+39. Mình muốn đi Đồng Tháp 2 ngày 1 đêm, 4 người, đi ô tô, thích thiên nhiên.
+
+40. Mình muốn đi Tây Ninh 2 ngày 1 đêm, 3 người, đi xe máy, thích chùa và núi.
+
+41. Mình muốn đi Bắc Ninh 2 ngày 1 đêm, 4 người, đi ô tô, thích chùa và di tích.
+
+42. Mình muốn đi Bắc Giang 2 ngày 1 đêm, 3 người, đi xe máy, thích chùa và thiên nhiên.
+
+43. Mình muốn đi Lạng Sơn 2 ngày 1 đêm, 4 người, đi ô tô, thích núi và chợ.
+
+44. Mình muốn đi Tuyên Quang 3 ngày 2 đêm, 4 người, đi ô tô, thích thiên nhiên.
+
+45. Mình muốn đi Yên Bái 3 ngày 2 đêm, 3 người, đi xe máy, thích núi.
+
+46. Mình muốn đi Lai Châu 3 ngày 2 đêm, 4 người, đi ô tô, thích núi và cảnh đẹp.
+
+47. Mình muốn đi Điện Biên 3 ngày 2 đêm, 4 người, đi ô tô, thích di tích lịch sử.
+
+48. Mình muốn đi Sơn La 3 ngày 2 đêm, 5 người, đi ô tô, thích núi và thiên nhiên.
+
+49. Mình muốn đi Hòa Bình 2 ngày 1 đêm, 4 người, đi ô tô, thích hồ và núi.
+
+50. Mình muốn đi Phú Thọ 2 ngày 1 đêm, 3 người, đi ô tô, thích đền và di tích.
+
+51. Mình muốn đi Hải Phòng 2 ngày 1 đêm, 4 người, đi ô tô, thích biển và hải sản.
+
+52. Mình muốn đi Thái Bình 2 ngày 1 đêm, 3 người, đi ô tô, thích chùa và ẩm thực.
+
+53. Mình muốn đi Nam Định 2 ngày 1 đêm, 4 người, đi ô tô, thích đền chùa.
+
+54. Mình muốn đi Hà Nam 2 ngày 1 đêm, 3 người, đi xe máy, thích chùa.
+
+55. Mình muốn đi Hưng Yên 2 ngày 1 đêm, 4 người, đi ô tô, thích di tích.
+
+56. Mình muốn đi Hải Dương 2 ngày 1 đêm, 4 người, đi ô tô, thích chùa và ẩm thực.
+
+57. Mình muốn đi Vĩnh Phúc 2 ngày 1 đêm, 3 người, đi xe máy, thích núi.
+
+58. Mình muốn đi Ninh Bình 3 ngày 2 đêm, 6 người, đi ô tô, thích chùa và hang động.
+
+59. Mình muốn đi Hà Nội 3 ngày 2 đêm, 5 người, đi ô tô, thích bảo tàng và ẩm thực.
+
+60. Mình muốn đi Đà Nẵng 4 ngày 3 đêm, 6 người, đi ô tô, thích biển và chùa.
+
+61. Mình muốn đi Huế 3 ngày 2 đêm, 4 người, đi ô tô, thích cung đình và ẩm thực.
+
+62. Mình muốn đi Hội An 2 ngày 1 đêm, 3 người, đi xe máy, thích phố cổ.
+
+63. Mình muốn đi Đà Lạt 4 ngày 3 đêm, 4 người, đi ô tô, thích hoa và thiên nhiên.
+
+64. Mình muốn đi Sapa 4 ngày 3 đêm, 5 người, đi ô tô, thích núi và bản làng.
+
+65. Mình muốn đi Hạ Long 3 ngày 2 đêm, 4 người, đi ô tô, thích biển và đảo.
+
+66. Mình muốn đi Phú Quốc 3 ngày 2 đêm, 2 người, đi máy bay, thích biển và nghỉ dưỡng.
+
+67. Mình muốn đi Nha Trang 3 ngày 2 đêm, 4 người, đi máy bay, thích biển và hải sản.
+
+68. Mình muốn đi Quy Nhơn 2 ngày 1 đêm, 3 người, đi máy bay, thích biển và đảo.
+
+69. Mình muốn đi Phú Yên 4 ngày 3 đêm, 5 người, đi ô tô, thích biển và chụp ảnh.
+
+70. Mình muốn đi Cần Thơ 3 ngày 2 đêm, 4 người, đi ô tô, thích chợ nổi và ẩm thực.
+
+71. Mình muốn đi Hà Giang 3 ngày 2 đêm, 2 người, đi xe máy, thích đèo và núi.
+
+72. Mình muốn đi Cao Bằng 4 ngày 3 đêm, 4 người, đi ô tô, thích thác và hang động.
+
+73. Mình muốn đi Mộc Châu 3 ngày 2 đêm, 3 người, đi xe máy, thích đồi chè.
+
+74. Mình muốn đi Tam Đảo 2 ngày 1 đêm, 4 người, đi ô tô, thích núi và thiên nhiên.
+
+75. Mình muốn đi Ninh Bình 2 ngày 1 đêm, 2 người, đi xe máy, thích chùa và cảnh đẹp.
+
+76. Mình muốn đi Quảng Bình 4 ngày 3 đêm, 5 người, đi ô tô, thích hang động và biển.
+
+77. Mình muốn đi Quảng Nam 3 ngày 2 đêm, 3 người, đi ô tô, thích Hội An và biển.
+
+78. Mình muốn đi Khánh Hòa 3 ngày 2 đêm, 5 người, đi máy bay, thích biển và đảo.
+
+79. Mình muốn đi Bình Thuận 3 ngày 2 đêm, 4 người, đi ô tô, thích biển và hải sản.
+
+80. Mình muốn đi Tây Ninh 2 ngày 1 đêm, 4 người, đi ô tô, thích núi và chùa.
+
+81. Mình muốn đi An Giang 2 ngày 1 đêm, 3 người, đi ô tô, thích núi và chùa.
+
+82. Mình muốn đi Bến Tre 2 ngày 1 đêm, 4 người, đi xe máy, thích sông nước và trái cây.
+
+83. Mình muốn đi Cà Mau 3 ngày 2 đêm, 4 người, đi ô tô, thích thiên nhiên và ẩm thực.
+
+84. Mình muốn đi Đồng Tháp 2 ngày 1 đêm, 5 người, đi ô tô, thích đồng sen và thiên nhiên.
+
+85. Mình muốn đi Bắc Ninh 2 ngày 1 đêm, 2 người, đi xe máy, thích đền chùa.
+
+86. Mình muốn đi Lạng Sơn 3 ngày 2 đêm, 4 người, đi ô tô, thích núi và chợ.
+
+87. Mình muốn đi Điện Biên 2 ngày 1 đêm, 3 người, đi ô tô, thích di tích lịch sử.
+
+88. Mình muốn đi Sơn La 4 ngày 3 đêm, 4 người, đi ô tô, thích núi và văn hóa.
+
+89. Mình muốn đi Hòa Bình 3 ngày 2 đêm, 5 người, đi ô tô, thích hồ và thiên nhiên.
+
+90. Mình muốn đi Hải Phòng 3 ngày 2 đêm, 4 người, đi ô tô, thích biển và đồ ăn.
+
+91. Mình muốn đi Hà Nội 2 ngày 1 đêm, 2 người, đi xe máy, thích cà phê và phố cổ.
+
+92. Mình muốn đi Đà Nẵng 2 ngày 1 đêm, 3 người, đi xe máy, thích biển và đồ ăn.
+
+93. Mình muốn đi Huế 2 ngày 1 đêm, 2 người, đi xe máy, thích di tích và ẩm thực.
+
+94. Mình muốn đi Đà Lạt 3 ngày 2 đêm, 3 người, đi xe máy, thích cà phê và thiên nhiên.
+
+95. Mình muốn đi Nha Trang 4 ngày 3 đêm, 6 người, đi ô tô, thích biển và hải sản.
+
+96. Mình muốn đi Sapa 3 ngày 2 đêm, 2 người, đi ô tô, thích núi và chụp ảnh.
+
+97. Mình muốn đi Hạ Long 2 ngày 1 đêm, 3 người, đi ô tô, thích biển và hải sản.
+
+98. Mình muốn đi Hội An 3 ngày 2 đêm, 4 người, đi ô tô, thích phố cổ và đồ ăn.
+
+99. Mình muốn đi Quy Nhơn 4 ngày 3 đêm, 5 người, đi ô tô, thích biển và hải sản.
+
+100. Mình muốn đi Ninh Bình 3 ngày 2 đêm, 4 người, đi ô tô, thích chùa, thiên nhiên và danh thắng.
+
+
+101. Nhóm mình có 4 người, muốn làm chuyến Đà Nẵng 3 ngày 2 đêm, đi máy bay và thích đi biển.
+
+102. Cuối tháng này mình định đi Ninh Bình 2 ngày 1 đêm với 3 người bạn, chủ yếu muốn tham quan chùa và danh thắng.
+
+103. Hai vợ chồng mình muốn đi Đà Lạt khoảng 3 ngày, thích những chỗ có cảnh thiên nhiên đẹp và quán cà phê.
+
+104. Bọn mình có 5 người, đang tính đi Phú Quốc 4 ngày 3 đêm, muốn vừa tắm biển vừa ăn hải sản.
+
+105. Mình muốn làm một chuyến Hà Nội 2 ngày 1 đêm cho nhóm 4 người, ưu tiên phố cổ và đồ ăn ngon.
+
+106. Nhóm 6 người muốn đi Hạ Long 2 ngày 1 đêm bằng ô tô, chủ yếu muốn đi biển và ăn hải sản.
+
+107. Mình với hai người bạn muốn khám phá Hội An trong 3 ngày 2 đêm, thích phố cổ và các món ăn địa phương.
+
+108. Bọn mình định đi Sapa 3 ngày 2 đêm, có 4 người và muốn ngắm núi với cảnh đẹp.
+
+109. Cho mình lịch trình Huế 2 ngày 1 đêm nhé, nhóm mình 3 người và thích tìm hiểu di tích lịch sử.
+
+110. Mình đang tính đi Quy Nhơn với 4 người trong 3 ngày 2 đêm, muốn dành nhiều thời gian ở biển.
+
+111. Nhóm mình 3 người muốn chạy xe máy lên Hà Giang 4 ngày 3 đêm, thích cảnh núi và các cung đường đẹp.
+
+112. Mình muốn đi Cao Bằng 3 ngày 2 đêm cùng 4 người, ưu tiên thác nước và các điểm thiên nhiên.
+
+113. Bọn mình có 4 người, muốn đi Mộc Châu 2 ngày 1 đêm bằng xe máy và tham quan những nơi có cảnh đẹp.
+
+114. Cho mình gợi ý chuyến Tam Đảo 2 ngày 1 đêm cho 2 người, bọn mình thích núi và không khí mát mẻ.
+
+115. Mình muốn đi Cần Thơ cuối tuần này với 4 người, thích chợ nổi và đồ ăn miền Tây.
+
+116. Nhóm mình 5 người muốn đi Vũng Tàu 2 ngày 1 đêm bằng xe máy, chủ yếu để đi biển và ăn hải sản.
+
+117. Mình muốn khám phá Phú Yên trong 3 ngày 2 đêm, đi cùng 3 người bạn và thích chụp ảnh biển.
+
+118. Bọn mình muốn đi Nha Trang 3 ngày 2 đêm, 4 người, ưu tiên biển, đảo và hải sản.
+
+119. Mình có 2 người, muốn đi Huế bằng xe máy trong 3 ngày, thích các di tích và món ăn địa phương.
+
+120. Nhóm 5 người muốn đi Quảng Bình 3 ngày 2 đêm bằng ô tô, thích hang động và biển.
+
+121. Mình muốn lên kế hoạch đi Tây Ninh 2 ngày 1 đêm cho 3 người, thích núi và chùa.
+
+122. Bọn mình 4 người đang muốn đi An Giang 3 ngày 2 đêm, muốn tham quan chùa và núi.
+
+123. Mình với gia đình 5 người muốn đi Bến Tre 2 ngày 1 đêm, thích sông nước và trái cây.
+
+124. Cho nhóm mình lịch trình Cà Mau 3 ngày 2 đêm nhé, bọn mình thích thiên nhiên và đồ ăn địa phương.
+
+125. Mình muốn đi Đồng Tháp 2 ngày 1 đêm với 4 người, chủ yếu muốn tham quan thiên nhiên.
+
+126. Nhóm mình có 3 người và muốn đi Bắc Ninh 2 ngày 1 đêm để tham quan đền chùa.
+
+127. Bọn mình 4 người muốn đi Lạng Sơn 3 ngày 2 đêm, thích núi và đi chợ.
+
+128. Mình muốn đi Điện Biên 2 ngày 1 đêm với 3 người bạn, chủ yếu quan tâm các di tích lịch sử.
+
+129. Nhóm 4 người muốn đi Sơn La 3 ngày 2 đêm, thích núi và tìm hiểu văn hóa địa phương.
+
+130. Mình muốn đi Hòa Bình 2 ngày 1 đêm cùng 4 người, thích hồ và cảnh thiên nhiên.
+
+131. Bọn mình có 4 người, muốn đi Hải Phòng 2 ngày 1 đêm và dành thời gian cho biển với hải sản.
+
+132. Mình muốn đi Nam Định 2 ngày 1 đêm với 3 người, thích tham quan các đền chùa.
+
+133. Nhóm mình 4 người muốn đi Hải Dương trong 2 ngày, vừa tham quan chùa vừa thử đồ ăn địa phương.
+
+134. Mình muốn đi Vĩnh Phúc 2 ngày 1 đêm bằng xe máy, nhóm 3 người và thích những nơi có núi.
+
+135. Bọn mình muốn đi Quảng Nam 3 ngày 2 đêm, có 4 người và muốn kết hợp phố cổ với biển.
+
+136. Mình có 2 người, muốn đi Bình Định 3 ngày 2 đêm, chủ yếu để nghỉ ngơi và đi biển.
+
+137. Nhóm mình 4 người đang tính đi Ninh Thuận 3 ngày 2 đêm, thích biển và những nơi có cảnh tự nhiên.
+
+138. Bọn mình 5 người muốn đi Bình Thuận 2 ngày 1 đêm bằng ô tô, ưu tiên biển và hải sản.
+
+139. Mình muốn đi Lâm Đồng 3 ngày 2 đêm cùng 4 người, thích núi và thiên nhiên.
+
+140. Nhóm mình 3 người muốn đi Đồng Nai 2 ngày 1 đêm, thích các điểm du lịch gần thiên nhiên.
+
+141. Hai người bọn mình muốn đi Đà Nẵng vào cuối tuần, khoảng 2 ngày 1 đêm, chủ yếu muốn đi biển và ăn ngon.
+
+142. Mình có nhóm 5 người, muốn đi Đà Lạt 4 ngày 3 đêm, thích cà phê, hoa và cảnh đẹp.
+
+143. Bọn mình 3 người muốn đi Hội An 2 ngày 1 đêm, thích đi dạo phố cổ vào buổi tối.
+
+144. Mình muốn đi Phú Quốc với gia đình 6 người trong 4 ngày 3 đêm, ưu tiên biển và hải sản.
+
+145. Nhóm mình muốn đi Hà Nội 3 ngày 2 đêm, có 5 người và thích bảo tàng với phố cổ.
+
+146. Mình muốn đưa gia đình đi Ninh Bình 2 ngày 1 đêm, tổng cộng 6 người, thích chùa và cảnh đẹp.
+
+147. Bọn mình có 4 người muốn đi Sapa 4 ngày 3 đêm, muốn khám phá núi và các bản làng.
+
+148. Mình với 3 người bạn muốn đi Hạ Long 3 ngày 2 đêm, thích biển và tham quan đảo.
+
+149. Nhóm 4 người muốn đi Huế 3 ngày 2 đêm, ưu tiên các công trình lịch sử và món ăn đặc sản.
+
+150. Mình muốn đi Cần Thơ 2 ngày 1 đêm với 3 người bạn, thích chợ nổi và các món miền Tây.
+
+151. Bọn mình muốn đi Hà Giang bằng xe máy, khoảng 3 ngày 2 đêm, nhóm có 4 người.
+
+152. Mình có 5 người, muốn đi Cao Bằng 4 ngày 3 đêm và ưu tiên những địa điểm có thác nước.
+
+153. Nhóm mình 3 người muốn đi Mộc Châu 3 ngày 2 đêm, chủ yếu ngắm cảnh và đi đồi chè.
+
+154. Mình muốn đi Tam Đảo với người yêu 2 ngày 1 đêm, thích những chỗ yên tĩnh và có núi.
+
+155. Bọn mình có 4 người muốn đi Quảng Bình 4 ngày 3 đêm, thích khám phá hang động và đi biển.
+
+156. Mình với 2 người bạn muốn đi Phú Yên 3 ngày 2 đêm, muốn tìm các điểm đẹp để chụp ảnh.
+
+157. Nhóm mình 5 người muốn đi Nha Trang 4 ngày 3 đêm, thích biển và các món hải sản.
+
+158. Mình muốn đi Quy Nhơn 3 ngày 2 đêm với 3 người bạn, ưu tiên những địa điểm gần biển.
+
+159. Bọn mình 4 người đang tính đi Tây Ninh 2 ngày 1 đêm, muốn kết hợp tham quan núi và chùa.
+
+160. Mình muốn đi An Giang 2 ngày 1 đêm với 3 người, thích cảnh núi và các ngôi chùa.
+
+161. Nhóm mình 4 người muốn đi Bến Tre cuối tuần, khoảng 2 ngày 1 đêm, thích trải nghiệm sông nước.
+
+162. Mình muốn đi Cà Mau 3 ngày 2 đêm với 5 người, muốn tham quan các điểm thiên nhiên.
+
+163. Bọn mình 4 người muốn đi Đồng Tháp 2 ngày 1 đêm, thích ngắm cảnh và thử đặc sản địa phương.
+
+164. Mình muốn đi Bắc Ninh 2 ngày 1 đêm với 2 người bạn, chủ yếu tham quan đền chùa.
+
+165. Nhóm mình 5 người muốn đi Lạng Sơn 2 ngày 1 đêm, thích núi và mua sắm ở chợ.
+
+166. Mình có 3 người, muốn đi Điện Biên 3 ngày 2 đêm và tìm hiểu các địa điểm lịch sử.
+
+167. Bọn mình 4 người muốn đi Sơn La 4 ngày 3 đêm, thích cảnh núi và văn hóa vùng cao.
+
+168. Mình muốn đi Hòa Bình 3 ngày 2 đêm với 5 người, ưu tiên hồ và các điểm gần thiên nhiên.
+
+169. Nhóm 4 người muốn đi Hải Phòng 3 ngày 2 đêm, muốn vừa đi biển vừa thưởng thức đồ ăn.
+
+170. Mình với 3 người bạn muốn đi Nam Định 2 ngày 1 đêm, thích đền chùa và món ăn địa phương.
+
+171. Bọn mình có 4 người muốn đi Đà Nẵng 4 ngày 3 đêm, thích biển, chùa và hải sản.
+
+172. Mình muốn đi Hà Nội 3 ngày 2 đêm với 2 người bạn, thích phố cổ, cà phê và bảo tàng.
+
+173. Nhóm mình 6 người muốn đi Đà Lạt 3 ngày 2 đêm, chủ yếu đi chơi và ngắm cảnh.
+
+174. Mình với người yêu muốn đi Hội An 3 ngày 2 đêm, thích phố cổ và đồ ăn.
+
+175. Bọn mình 4 người muốn đi Ninh Bình 3 ngày 2 đêm, thích chùa, hang động và thiên nhiên.
+
+176. Mình muốn đi Sapa 2 ngày 1 đêm với 3 người bạn, thích núi và cảnh đẹp.
+
+177. Nhóm mình 5 người muốn đi Hạ Long 2 ngày 1 đêm, ưu tiên biển và hải sản.
+
+178. Mình muốn đi Huế 3 ngày 2 đêm cùng gia đình 5 người, thích di tích và ẩm thực.
+
+179. Bọn mình 4 người muốn đi Phú Quốc 3 ngày 2 đêm, chủ yếu nghỉ dưỡng và đi biển.
+
+180. Mình muốn đi Quy Nhơn 4 ngày 3 đêm với nhóm 6 người, thích biển và hải sản.
+
+181. Nhóm mình 3 người muốn đi Hà Giang 4 ngày 3 đêm, thích núi, đèo và chụp ảnh.
+
+182. Mình muốn đi Cao Bằng 3 ngày 2 đêm cùng 4 người, ưu tiên thác nước và hang động.
+
+183. Bọn mình 5 người muốn đi Mộc Châu 2 ngày 1 đêm, thích đồi chè và cảnh núi.
+
+184. Mình muốn đi Tam Đảo 2 ngày 1 đêm với 3 người bạn, thích thiên nhiên và không khí mát.
+
+185. Nhóm 4 người muốn đi Quảng Bình 3 ngày 2 đêm, thích hang động, biển và đồ ăn.
+
+186. Mình muốn đi Phú Yên 4 ngày 3 đêm cùng 5 người, muốn khám phá biển và các điểm chụp ảnh đẹp.
+
+187. Bọn mình 4 người muốn đi Nha Trang 3 ngày 2 đêm, thích biển, đảo và hải sản.
+
+188. Mình với 2 người bạn muốn đi Bình Định 3 ngày 2 đêm, chủ yếu muốn đi biển và ăn hải sản.
+
+189. Nhóm mình 5 người muốn đi Ninh Thuận 2 ngày 1 đêm, thích biển và cảnh thiên nhiên.
+
+190. Mình muốn đi Bình Thuận 3 ngày 2 đêm với 4 người, ưu tiên biển và hải sản.
+
+191. Bọn mình 4 người muốn đi Cần Thơ 3 ngày 2 đêm, thích chợ nổi và đồ ăn miền Tây.
+
+192. Mình muốn đi Bến Tre 2 ngày 1 đêm cùng 3 người bạn, thích sông nước và trái cây.
+
+193. Nhóm 5 người muốn đi An Giang 3 ngày 2 đêm, thích chùa, núi và cảnh đẹp.
+
+194. Mình với 2 người bạn muốn đi Tây Ninh 2 ngày 1 đêm, thích núi và tham quan chùa.
+
+195. Bọn mình 4 người muốn đi Bắc Ninh 2 ngày 1 đêm, chủ yếu tìm hiểu các di tích và đền chùa.
+
+196. Mình muốn đi Lạng Sơn 3 ngày 2 đêm với nhóm 5 người, thích núi, chợ và đồ ăn.
+
+197. Nhóm mình 3 người muốn đi Hòa Bình 2 ngày 1 đêm, thích hồ và thiên nhiên.
+
+198. Mình muốn đi Hải Phòng 2 ngày 1 đêm với 4 người bạn, thích biển và hải sản.
+
+199. Bọn mình 5 người muốn đi Quảng Nam 3 ngày 2 đêm, thích Hội An, biển và ẩm thực.
+
+200. Mình muốn đi Đà Nẵng 3 ngày 2 đêm với nhóm 4 người, đi ô tô và muốn kết hợp biển, chùa và ăn hải sản.
+
+
+
+201. Mình muốn đi Đà Nẵng 3 ngày, thích biển và hải sản.
+
+202. Cho mình lịch trình Ninh Bình 2 ngày, mình thích chùa và danh thắng.
+
+203. Mình muốn đi Đà Lạt 3 ngày với người yêu, thích thiên nhiên.
+
+204. Nhóm mình muốn đi Phú Quốc 4 ngày, ưu tiên biển và hải sản.
+
+205. Mình muốn khám phá Hà Nội trong 2 ngày, thích phố cổ và đồ ăn.
+
+206. Bọn mình 4 người muốn đi Hạ Long 2 ngày, thích biển.
+
+207. Mình muốn đi Hội An 3 ngày, thích phố cổ và ẩm thực.
+
+208. Cho mình chuyến Sapa 3 ngày, nhóm 4 người, thích núi.
+
+209. Mình muốn đi Huế 2 ngày với 3 người bạn, thích di tích lịch sử.
+
+210. Nhóm mình 5 người muốn đi Quy Nhơn, thích biển và hải sản.
+
+211. Mình muốn đi Hà Giang 4 ngày, thích núi và cảnh đẹp.
+
+212. Cho mình lịch trình Cao Bằng 3 ngày cho nhóm 4 người.
+
+213. Mình muốn đi Mộc Châu 2 ngày, thích thiên nhiên.
+
+214. Bọn mình 3 người muốn đi Tam Đảo, thích núi và khí hậu mát.
+
+215. Mình muốn đi Cần Thơ 2 ngày, thích chợ nổi và đồ ăn.
+
+216. Nhóm mình muốn đi Vũng Tàu cuối tuần, thích biển và hải sản.
+
+217. Mình muốn đi Phú Yên 3 ngày, thích biển và chụp ảnh.
+
+218. Cho mình lịch trình Nha Trang 3 ngày, nhóm 4 người, thích biển.
+
+219. Mình muốn đi Quảng Bình 3 ngày, thích hang động.
+
+220. Bọn mình 4 người muốn đi Tây Ninh 2 ngày, thích chùa và núi.
+
+221. Mình muốn đi An Giang 3 ngày, thích chùa và núi.
+
+222. Cho mình lịch trình Bến Tre 2 ngày, thích sông nước.
+
+223. Mình muốn đi Cà Mau 3 ngày, thích thiên nhiên.
+
+224. Nhóm mình 4 người muốn đi Đồng Tháp 2 ngày, thích cảnh đẹp.
+
+225. Mình muốn đi Bắc Ninh 2 ngày, thích đền chùa.
+
+226. Cho mình lịch trình Lạng Sơn 3 ngày, thích núi và chợ.
+
+227. Mình muốn đi Điện Biên 2 ngày, thích di tích lịch sử.
+
+228. Nhóm mình muốn đi Sơn La 3 ngày, thích núi và văn hóa.
+
+229. Mình muốn đi Hòa Bình 2 ngày, thích hồ và thiên nhiên.
+
+230. Bọn mình 4 người muốn đi Hải Phòng 2 ngày, thích biển và hải sản.
+
+231. Mình muốn đi Nam Định 2 ngày, thích đền chùa.
+
+232. Cho mình lịch trình Hải Dương 2 ngày, thích chùa và đồ ăn.
+
+233. Mình muốn đi Vĩnh Phúc 2 ngày, thích núi.
+
+234. Nhóm mình 3 người muốn đi Quảng Nam 3 ngày, thích phố cổ và biển.
+
+235. Mình muốn đi Bình Định 3 ngày, thích biển.
+
+236. Cho mình chuyến Ninh Thuận 3 ngày, thích biển và thiên nhiên.
+
+237. Mình muốn đi Bình Thuận 2 ngày, thích biển và hải sản.
+
+238. Nhóm mình muốn đi Lâm Đồng 3 ngày, thích núi.
+
+239. Mình muốn đi Đồng Nai 2 ngày, thích thiên nhiên.
+
+240. Bọn mình 4 người muốn đi Tiền Giang 2 ngày, thích sông nước và ẩm thực.
+
+241. Mình muốn đi Trà Vinh 2 ngày, thích chùa.
+
+242. Cho mình lịch trình Sóc Trăng 2 ngày, thích chùa và văn hóa.
+
+243. Mình muốn đi Bạc Liêu 2 ngày, thích văn hóa và ẩm thực.
+
+244. Nhóm mình 3 người muốn đi Vĩnh Long 2 ngày, thích sông nước.
+
+245. Mình muốn đi Kiên Giang 3 ngày, thích biển.
+
+246. Cho mình lịch trình Cà Mau 2 ngày, thích thiên nhiên và đồ ăn.
+
+247. Mình muốn đi Đà Nẵng với 4 người, thích biển và chùa.
+
+248. Nhóm mình 5 người muốn đi Hà Nội, thích phố cổ và bảo tàng.
+
+249. Mình muốn đi Đà Lạt với 2 người, thích cà phê và cảnh đẹp.
+
+250. Bọn mình muốn đi Phú Quốc, thích biển và nghỉ dưỡng.
+
+251. Mình muốn đi Ninh Bình với gia đình, thích chùa và thiên nhiên.
+
+252. Cho mình lịch trình Hội An cho hai người, thích phố cổ.
+
+253. Nhóm mình muốn đi Sapa, có 5 người và thích núi.
+
+254. Mình muốn đi Hạ Long với bạn bè, thích biển và đảo.
+
+255. Bọn mình muốn đi Huế, thích di tích và ẩm thực.
+
+256. Mình muốn đi Quy Nhơn với gia đình, thích biển.
+
+257. Cho mình lịch trình Hà Giang cho nhóm 4 người, thích đi xe máy.
+
+258. Mình muốn đi Cao Bằng, nhóm 3 người, thích thác nước.
+
+259. Bọn mình muốn đi Mộc Châu, thích đồi chè và thiên nhiên.
+
+260. Mình muốn đi Tam Đảo với người yêu, thích núi.
+
+261. Cho mình chuyến Đà Nẵng 3 ngày cho 4 người.
+
+262. Mình muốn đi Ninh Bình 2 ngày với 3 người.
+
+263. Bọn mình muốn đi Đà Lạt 4 ngày.
+
+264. Mình muốn đi Phú Quốc 3 ngày với gia đình.
+
+265. Nhóm mình 5 người muốn đi Hà Nội 2 ngày.
+
+266. Cho mình lịch trình Hạ Long 2 ngày cho 4 người.
+
+267. Mình muốn đi Hội An 3 ngày với 2 người bạn.
+
+268. Bọn mình 4 người muốn đi Sapa 3 ngày.
+
+269. Mình muốn đi Huế 2 ngày với 3 người.
+
+270. Nhóm mình 6 người muốn đi Quy Nhơn 3 ngày.
+
+271. Mình muốn đi Hà Giang 3 ngày với 4 người.
+
+272. Cho mình lịch trình Cao Bằng 4 ngày cho 5 người.
+
+273. Mình muốn đi Mộc Châu 2 ngày với 3 người.
+
+274. Bọn mình 4 người muốn đi Tam Đảo 2 ngày.
+
+275. Mình muốn đi Cần Thơ 3 ngày với 4 người.
+
+276. Nhóm mình 5 người muốn đi Vũng Tàu 2 ngày.
+
+277. Mình muốn đi Phú Yên 4 ngày với 3 người.
+
+278. Cho mình lịch trình Nha Trang 3 ngày cho 5 người.
+
+279. Mình muốn đi Quảng Bình 3 ngày với 4 người.
+
+280. Bọn mình 3 người muốn đi Tây Ninh 2 ngày.
+
+281. Mình muốn đi An Giang 3 ngày với 4 người.
+
+282. Cho mình lịch trình Bến Tre 2 ngày cho 5 người.
+
+283. Mình muốn đi Cà Mau 3 ngày với 4 người.
+
+284. Nhóm mình 3 người muốn đi Đồng Tháp 2 ngày.
+
+285. Mình muốn đi Bắc Ninh 2 ngày với 4 người.
+
+286. Bọn mình 5 người muốn đi Lạng Sơn 3 ngày.
+
+287. Mình muốn đi Điện Biên 2 ngày với 3 người.
+
+288. Cho mình lịch trình Sơn La 4 ngày cho 4 người.
+
+289. Mình muốn đi Hòa Bình 2 ngày với 5 người.
+
+290. Nhóm mình 4 người muốn đi Hải Phòng 3 ngày.
+
+291. Mình muốn đi Nam Định 2 ngày với 3 người.
+
+292. Cho mình lịch trình Hải Dương 2 ngày cho 4 người.
+
+293. Mình muốn đi Vĩnh Phúc 2 ngày với 3 người.
+
+294. Bọn mình 4 người muốn đi Quảng Nam 3 ngày.
+
+295. Mình muốn đi Bình Định 3 ngày với 2 người.
+
+296. Cho mình lịch trình Ninh Thuận 3 ngày cho 4 người.
+
+297. Mình muốn đi Bình Thuận 2 ngày với 5 người.
+
+298. Nhóm mình 4 người muốn đi Lâm Đồng 3 ngày.
+
+299. Mình muốn đi Đồng Nai 2 ngày với 3 người.
+
+300. Bọn mình 5 người muốn đi Tiền Giang 2 ngày.
+## 301–400: Câu viết tắt, không dấu, có lỗi gõ
+
+301. Cho mk lich trinh Da Nang 3 ngay 2 dem.
+
+302. Mình đi HN 2 ngày, 4 ng.
+
+303. Nhóm mk 5 ng muốn đi ĐN 3n2d.
+
+304. Cho mình lịch trình Hạ Long 2n1d.
+
+305. Bọn mình đi NTrang 3 ngày 4 người.
+
+306. Mình muốn đi Phú Quốc 4 ngày 3 đêm.
+
+307. Cho mk gợi ý đi Huế 2 ngày.
+
+308. Nhóm 3 ng muốn đi Hội An 2n1d.
+
+309. Mình đi Đà Lạt 3n2d với 5 người.
+
+310. Cho mình lịch trình Sapa 3 ngày 2 đêm.
+
+311. Mk muốn đi Quảng Bình 3 ngày.
+
+312. Bọn mk 4 ng đi Ninh Bình 2 ngày.
+
+313. Cho mình lịch trình HN 3 ngày cho 3 ng.
+
+314. Mình muốn đi Hải Phòng 2n1d, 4 ng.
+
+315. Nhóm mình 5 ng đi Thanh Hóa 3 ngày.
+
+316. Cho mk lịch trình Nghệ An 2 ngày.
+
+317. Mình đi Hà Tĩnh 2n1d với 3 ng.
+
+318. Bọn mình muốn đi Quảng Trị 3 ngày, 4 người.
+
+319. Cho mk lịch trình Huế 3n2d, ưu tiên chùa.
+
+320. Mình muốn đi ĐN 3 ngày, thích biển.
+
+321. Nhóm mk đi Quảng Nam 2 ngày, 4 ng.
+
+322. Cho mình lịch trình Bình Định 3n2d.
+
+323. Mk muốn đi Phú Yên 3 ngày, 3 ng.
+
+324. Bọn mình 4 ng muốn đi Khánh Hòa 2 ngày.
+
+325. Mình đi NTrang 3n2d, thích hải sản.
+
+326. Cho mk lịch trình Ninh Thuận 2 ngày.
+
+327. Nhóm mình 5 ng đi Bình Thuận 3 ngày.
+
+328. Mình muốn đi Mũi Né 2n1d.
+
+329. Cho mình lịch trình Lâm Đồng 3 ngày, 4 ng.
+
+330. Mk muốn đi Đà Lạt 2n1d, thích quán ăn.
+
+331. Bọn mk đi Đồng Nai 2 ngày, 3 ng.
+
+332. Mình muốn đi Bà Rịa 3 ngày.
+
+333. Cho mk lịch trình Vũng Tàu 2n1d.
+
+334. Nhóm 4 ng đi Tây Ninh 2 ngày.
+
+335. Mình đi Bình Dương 2n1d với 3 người.
+
+336. Cho mình lịch trình Cần Thơ 3 ngày.
+
+337. Mk muốn đi An Giang 2n1d, 4 ng.
+
+338. Bọn mình 5 ng đi Kiên Giang 3 ngày.
+
+339. Cho mk lịch trình Phú Quốc 3n2d.
+
+340. Mình muốn đi Sóc Trăng 2 ngày, 3 ng.
+
+341. Nhóm mk 4 ng đi Bạc Liêu 2n1d.
+
+342. Mình muốn đi Cà Mau 3 ngày.
+
+343. Cho mình lịch trình Đồng Tháp 2 ngày cho 4 ng.
+
+344. Mk đi Vĩnh Long 2n1d với 3 ng.
+
+345. Bọn mình muốn đi Bến Tre 2 ngày, 5 người.
+
+346. Cho mk lịch trình Tiền Giang 2n1d.
+
+347. Mình muốn đi Trà Vinh 3 ngày với 4 ng.
+
+348. Nhóm mk đi Hậu Giang 2 ngày.
+
+349. Cho mình lịch trình Long An 2n1d, 3 ng.
+
+350. Mk muốn đi Bắc Ninh 2 ngày, 4 ng.
+
+351. Bọn mình đi Bắc Giang 3n2d.
+
+352. Cho mk lịch trình Lạng Sơn 2 ngày.
+
+353. Mình muốn đi Cao Bằng 3 ngày 2 đêm.
+
+354. Nhóm 4 ng đi Hà Giang 4n3d.
+
+355. Mk muốn đi Tuyên Quang 2 ngày.
+
+356. Cho mình lịch trình Yên Bái 3n2d, 4 ng.
+
+357. Bọn mk đi Lào Cai 3 ngày.
+
+358. Mình muốn đi Điện Biên 2n1d, 3 ng.
+
+359. Cho mk lịch trình Sơn La 3 ngày, thích thiên nhiên.
+
+360. Nhóm mình 5 ng đi Lai Châu 2 ngày.
+
+361. Mình muốn đi Hòa Bình 2n1d.
+
+362. Cho mk lịch trình Phú Thọ 2 ngày cho 4 ng.
+
+363. Bọn mình đi Vĩnh Phúc 3n2d.
+
+364. Mk muốn đi Ninh Bình 2 ngày, thích chùa.
+
+365. Cho mình lịch trình Nam Định 2n1d, 3 ng.
+
+366. Nhóm mk 4 ng đi Thái Bình 2 ngày.
+
+367. Mình muốn đi Hải Dương 2n1d.
+
+368. Bọn mk đi Quảng Ninh 3 ngày, 5 ng.
+
+369. Cho mk lịch trình Hạ Long 3n2d, thích biển.
+
+370. Mình muốn đi Hải Phòng 2 ngày, thích ăn uống.
+
+371. Nhóm 3 ng đi Hà Nội 3n2d.
+
+372. Mk muốn đi Hà Nội 2 ngày, ưu tiên chùa.
+
+373. Cho mình lịch trình HN 3 ngày, 4 ng.
+
+374. Bọn mình đi ĐN 2n1d, thích đồ ăn.
+
+375. Mk muốn đi Hội An 3 ngày, 5 ng.
+
+376. Cho mình lịch trình Quảng Nam 3n2d.
+
+377. Mình đi Quảng Ngãi 2 ngày với 4 ng.
+
+378. Nhóm mk 3 ng đi Bình Định 2n1d.
+
+379. Bọn mình muốn đi Phú Yên 3 ngày.
+
+380. Cho mk lịch trình Khánh Hòa 3n2d, 5 ng.
+
+381. Mình muốn đi Ninh Thuận 2n1d, thích biển.
+
+382. Nhóm mk đi Bình Thuận 3 ngày, 4 ng.
+
+383. Cho mình lịch trình Lâm Đồng 2n1d.
+
+384. Mk muốn đi Đà Lạt 3 ngày, thích chùa.
+
+385. Bọn mình 4 ng đi Đồng Nai 2 ngày.
+
+386. Cho mk lịch trình Vũng Tàu 3n2d.
+
+387. Mình muốn đi Tây Ninh 2 ngày, 3 ng.
+
+388. Nhóm mk đi Cần Thơ 3n2d, 4 ng.
+
+389. Cho mình lịch trình An Giang 2 ngày.
+
+390. Mk muốn đi Phú Quốc 4n3d, 5 ng.
+
+391. Bọn mk đi Bến Tre 2n1d, thích chợ.
+
+392. Mình muốn đi Cà Mau 3 ngày, 4 ng.
+
+393. Cho mk lịch trình Cần Thơ 2 ngày, thích ăn uống.
+
+394. Nhóm 5 ng đi Đồng Tháp 3n2d.
+
+395. Mk muốn đi Vĩnh Long 2 ngày.
+
+396. Bọn mình đi Bắc Ninh 2n1d, thích đền chùa.
+
+397. Cho mình lịch trình Cao Bằng 3 ngày, 4 ng.
+
+398. Mình muốn đi Hà Giang 4n3d, thích thiên nhiên.
+
+399. Nhóm mk 3 ng đi Lào Cai 2 ngày.
+
+400. Cho mk lịch trình Sapa 3n2d, ưu tiên chỗ gần nhau.
+## 401–500: Câu phức tạp, nhiều yêu cầu cùng lúc
+
+401. Nhóm mình 4 người muốn đi Đà Nẵng 3 ngày 2 đêm, ưu tiên biển và quán ăn, các điểm nên gần nhau.
+
+402. Mình muốn đi Hà Nội 3 ngày với 5 người, thích đền chùa và món ăn địa phương, không muốn lịch trình quá dày.
+
+403. Bọn mình 3 người đi Đà Lạt 3 ngày 2 đêm, muốn kết hợp tham quan, ăn uống và nghỉ ở khách sạn gần điểm cuối mỗi ngày.
+
+404. Cho mình lịch trình Ninh Bình 2 ngày 1 đêm cho 4 người, ưu tiên chùa và các địa điểm thiên nhiên.
+
+405. Nhóm 5 người muốn đi Phú Quốc 4 ngày 3 đêm, thích biển, hải sản và muốn các điểm trong cùng ngày không quá xa nhau.
+
+406. Mình đi Hội An 3 ngày với 4 người, muốn tham quan phố cổ, chùa và các quán ăn nổi tiếng.
+
+407. Bọn mình muốn đi Huế 2 ngày 1 đêm, 3 người, ưu tiên di tích và đền chùa, lịch trình nhẹ nhàng.
+
+408. Cho mình lịch trình Quảng Ninh 3 ngày cho 4 người, muốn đi Hạ Long và một số điểm nổi tiếng gần nhau.
+
+409. Nhóm mình 5 người đi Nha Trang 3 ngày 2 đêm, thích biển và hải sản, muốn sắp xếp điểm tham quan theo thứ tự thuận tiện.
+
+410. Mình muốn đi Hà Giang 4 ngày 3 đêm với 4 người, thích thiên nhiên và muốn mỗi ngày chỉ đi một số điểm chính.
+
+411. Bọn mình 3 người đi Sapa 3 ngày 2 đêm, muốn tham quan thiên nhiên, ăn đặc sản và ở khách sạn thuận tiện cho ngày hôm sau.
+
+412. Cho mình lịch trình Đà Nẵng 2 ngày 1 đêm cho 4 người, ưu tiên biển, chợ và nhà hàng địa phương.
+
+413. Nhóm 4 người muốn đi Quảng Nam 3 ngày, kết hợp Hội An với các địa điểm nổi tiếng khác, ưu tiên điểm gần nhau.
+
+414. Mình muốn đi Bình Định 3 ngày 2 đêm với 5 người, thích biển, hải sản và các địa điểm nổi tiếng.
+
+415. Bọn mình đi Phú Yên 3 ngày với 3 người, muốn tham quan biển, chùa và các địa điểm nổi tiếng nhưng không muốn di chuyển quá nhiều.
+
+416. Cho mình lịch trình Khánh Hòa 3 ngày 2 đêm, 4 người, ưu tiên biển và hải sản, mỗi ngày sắp xếp các điểm theo khoảng cách gần đến xa.
+
+417. Nhóm mình 5 người muốn đi Ninh Thuận 2 ngày, thích biển và các địa điểm thiên nhiên, cần lịch trình không quá dày.
+
+418. Mình muốn đi Bình Thuận 3 ngày 2 đêm với 4 người, ưu tiên Mũi Né, biển và các quán hải sản.
+
+419. Bọn mình 3 người đi Lâm Đồng 3 ngày, muốn tham quan Đà Lạt, chùa và các địa điểm nổi tiếng.
+
+420. Cho mình lịch trình Đồng Nai 2 ngày 1 đêm cho 4 người, ưu tiên những nơi nổi tiếng và nhà hàng gần các điểm tham quan.
+
+421. Nhóm 5 người muốn đi Vũng Tàu 2 ngày, thích biển và hải sản, muốn ngày đầu đi các điểm gần trung tâm.
+
+422. Mình muốn đi Tây Ninh 2 ngày 1 đêm với 3 người, ưu tiên đền chùa và các địa điểm nổi tiếng.
+
+423. Bọn mình đi Cần Thơ 3 ngày 2 đêm, 4 người, muốn tham quan chợ, ăn đặc sản và đến các điểm nổi tiếng.
+
+424. Cho mình lịch trình An Giang 2 ngày cho 5 người, thích chùa, chợ và các địa điểm văn hóa.
+
+425. Nhóm mình 4 người muốn đi Kiên Giang 3 ngày 2 đêm, ưu tiên biển, hải sản và các địa điểm nổi tiếng.
+
+426. Mình muốn đi Phú Quốc 4 ngày 3 đêm với 5 người, muốn chia điểm tham quan hợp lý để không phải quay lại quá nhiều.
+
+427. Bọn mình 3 người đi Bến Tre 2 ngày, thích chợ, đồ ăn địa phương và các địa điểm gần nhau.
+
+428. Cho mình lịch trình Cà Mau 3 ngày 2 đêm cho 4 người, muốn tham quan thiên nhiên và ăn đặc sản địa phương.
+
+429. Nhóm 5 người đi Đồng Tháp 2 ngày, muốn kết hợp chùa, chợ và các địa điểm nổi tiếng.
+
+430. Mình muốn đi Vĩnh Long 2 ngày 1 đêm với 3 người, ưu tiên chợ và các điểm tham quan gần nhau.
+
+431. Bọn mình 4 người muốn đi Bắc Ninh 2 ngày, thích đền chùa và các địa điểm văn hóa.
+
+432. Cho mình lịch trình Bắc Giang 3 ngày 2 đêm cho 5 người, ưu tiên chùa và các địa điểm nổi tiếng.
+
+433. Nhóm mình 4 người đi Lạng Sơn 2 ngày, muốn tham quan chợ, đền chùa và ăn đặc sản.
+
+434. Mình muốn đi Cao Bằng 3 ngày 2 đêm với 3 người, thích thiên nhiên và muốn lịch trình di chuyển hợp lý.
+
+435. Bọn mình 5 người đi Hà Giang 4 ngày 3 đêm, muốn ưu tiên cảnh đẹp thiên nhiên và không đi quá nhiều điểm mỗi ngày.
+
+436. Cho mình lịch trình Tuyên Quang 2 ngày cho 4 người, thích đền chùa và các địa điểm văn hóa.
+
+437. Nhóm 3 người muốn đi Yên Bái 3 ngày 2 đêm, ưu tiên thiên nhiên và những địa điểm nổi tiếng.
+
+438. Mình đi Lào Cai 3 ngày với 4 người, muốn tham quan Sapa, ăn đặc sản và nghỉ ở nơi thuận tiện cho hôm sau.
+
+439. Bọn mình 5 người đi Điện Biên 2 ngày 1 đêm, muốn tham quan các địa điểm nổi tiếng và di tích.
+
+440. Cho mình lịch trình Sơn La 3 ngày 2 đêm, 4 người, thích thiên nhiên và muốn các điểm trong ngày ở gần nhau.
+
+441. Nhóm mình 3 người muốn đi Lai Châu 2 ngày, ưu tiên cảnh đẹp và các địa điểm nổi tiếng.
+
+442. Mình muốn đi Hòa Bình 2 ngày 1 đêm với 4 người, thích thiên nhiên và muốn lịch trình nhẹ nhàng.
+
+443. Bọn mình đi Phú Thọ 2 ngày, 5 người, muốn tham quan đền chùa và các địa điểm văn hóa.
+
+444. Cho mình lịch trình Vĩnh Phúc 3 ngày 2 đêm cho 4 người, thích thiên nhiên và chùa.
+
+445. Nhóm 5 người muốn đi Nam Định 2 ngày, ưu tiên đền chùa và các địa điểm văn hóa.
+
+446. Mình muốn đi Thái Bình 2 ngày 1 đêm với 3 người, muốn tham quan chùa và ăn món địa phương.
+
+447. Bọn mình 4 người đi Hải Dương 2 ngày, thích đền chùa, chợ và các địa điểm nổi tiếng.
+
+448. Cho mình lịch trình Hải Phòng 3 ngày 2 đêm, 5 người, ưu tiên biển, hải sản và các điểm gần nhau.
+
+449. Nhóm mình muốn đi Quảng Ninh 3 ngày với 4 người, muốn kết hợp biển, chợ và đền chùa.
+
+450. Mình đi Hạ Long 2 ngày 1 đêm với 3 người, thích biển và hải sản, muốn lịch trình đơn giản.
+
+451. Bọn mình 4 người muốn đi Hà Nội 3 ngày, ngày đầu ưu tiên các điểm trung tâm, ngày sau đi các điểm xa hơn.
+
+452. Cho mình lịch trình Đà Nẵng 3 ngày 2 đêm, 5 người, mỗi ngày khoảng vài điểm chính và ưu tiên các điểm gần nhau.
+
+453. Nhóm 4 người đi Hội An 2 ngày 1 đêm, muốn ngày đầu tham quan và ngày sau ưu tiên ăn uống, chợ và chùa.
+
+454. Mình muốn đi Huế 3 ngày với 3 người, ưu tiên di tích, đền chùa và món ăn địa phương, không muốn lịch trình quá dày.
+
+455. Bọn mình 5 người đi Ninh Bình 3 ngày 2 đêm, muốn kết hợp thiên nhiên, chùa và các địa điểm nổi tiếng.
+
+456. Cho mình lịch trình Hạ Long 3 ngày cho 4 người, ưu tiên biển và hải sản, các điểm trong từng ngày nên gần nhau.
+
+457. Nhóm mình 3 người muốn đi Đà Lạt 4 ngày 3 đêm, thích thiên nhiên, quán ăn và chùa, không muốn di chuyển quá nhiều.
+
+458. Mình đi Phú Quốc 3 ngày 2 đêm với 5 người, muốn ưu tiên biển, hải sản và các địa điểm nổi tiếng.
+
+459. Bọn mình 4 người muốn đi Cần Thơ 3 ngày, thích chợ, món ăn địa phương và các điểm văn hóa.
+
+460. Cho mình lịch trình Vũng Tàu 2 ngày 1 đêm, 3 người, ưu tiên biển, hải sản và những điểm nổi tiếng.
+
+461. Nhóm 5 người đi Hà Giang 4 ngày 3 đêm, muốn ngày đầu đi các điểm gần nơi xuất phát và những ngày sau đi xa dần.
+
+462. Mình muốn đi Cao Bằng 3 ngày với 4 người, ưu tiên thiên nhiên và muốn sắp xếp các điểm theo khoảng cách.
+
+463. Bọn mình 3 người đi Lào Cai 3 ngày 2 đêm, muốn tham quan thiên nhiên, ăn đặc sản và chọn khách sạn thuận tiện.
+
+464. Cho mình lịch trình Nha Trang 3 ngày, 5 người, thích biển và hải sản, muốn hạn chế thời gian di chuyển giữa các điểm.
+
+465. Nhóm mình 4 người muốn đi Bình Định 3 ngày 2 đêm, kết hợp biển, chùa, đồ ăn và các điểm nổi tiếng.
+
+466. Mình đi Phú Yên 2 ngày 1 đêm với 3 người, muốn tập trung vào các điểm nổi tiếng và không đi quá xa.
+
+467. Bọn mình 5 người đi Ninh Thuận 3 ngày, thích biển và thiên nhiên, muốn mỗi ngày có một lịch trình vừa phải.
+
+468. Cho mình lịch trình Bình Thuận 3 ngày 2 đêm cho 4 người, ưu tiên biển, hải sản và các điểm gần nhau.
+
+469. Nhóm 3 người muốn đi Đồng Nai 2 ngày, thích thiên nhiên, chùa và các địa điểm nổi tiếng.
+
+470. Mình muốn đi Tây Ninh 3 ngày với 4 người, ưu tiên đền chùa và các điểm tham quan nổi tiếng.
+
+471. Bọn mình 5 người muốn đi Cần Thơ 2 ngày 1 đêm, ngày đầu tham quan chợ và ngày sau đi các điểm văn hóa.
+
+472. Cho mình lịch trình An Giang 3 ngày 2 đêm, 4 người, ưu tiên chùa, chợ và các địa điểm nổi tiếng.
+
+473. Nhóm mình 3 người đi Bến Tre 2 ngày, muốn tham quan chợ, ăn đặc sản và đi những nơi gần nhau.
+
+474. Mình muốn đi Cà Mau 3 ngày 2 đêm với 5 người, ưu tiên thiên nhiên và các địa điểm nổi tiếng.
+
+475. Bọn mình 4 người đi Đồng Tháp 2 ngày 1 đêm, thích chùa, chợ và món ăn địa phương.
+
+476. Cho mình lịch trình Bắc Ninh 3 ngày cho 4 người, ưu tiên đền chùa và các điểm văn hóa, không muốn đi quá dày.
+
+477. Nhóm 5 người muốn đi Lạng Sơn 2 ngày, thích chợ, đền chùa và đặc sản địa phương.
+
+478. Mình đi Cao Bằng 4 ngày 3 đêm với 3 người, muốn ưu tiên thiên nhiên và chia điểm tham quan hợp lý theo từng ngày.
+
+479. Bọn mình 4 người muốn đi Hà Giang 3 ngày 2 đêm, thích cảnh đẹp và muốn hạn chế việc quay lại cùng một khu vực.
+
+480. Cho mình lịch trình Sapa 3 ngày cho 5 người, ưu tiên thiên nhiên, ăn uống và khách sạn thuận tiện.
+
+481. Nhóm mình 4 người muốn đi Đà Nẵng 4 ngày 3 đêm, thích biển, chùa và đồ ăn, đồng thời muốn điểm cuối mỗi ngày thuận tiện cho ngày hôm sau.
+
+482. Mình muốn đi Hà Nội 3 ngày 2 đêm với 5 người, ưu tiên đền chùa, món ăn địa phương và các điểm nổi tiếng trong khu vực trung tâm trước.
+
+483. Bọn mình 3 người đi Ninh Bình 3 ngày, muốn kết hợp chùa và thiên nhiên, mỗi ngày đi các điểm gần nhau để giảm thời gian di chuyển.
+
+484. Cho mình lịch trình Huế 3 ngày 2 đêm cho 4 người, ưu tiên di tích và đền chùa, ngày cuối muốn ở gần khu vực thuận tiện để kết thúc chuyến đi.
+
+485. Nhóm 5 người muốn đi Hội An 3 ngày 2 đêm, thích phố cổ, chùa, chợ và món ăn địa phương, không muốn lịch trình quá dày.
+
+486. Mình đi Đà Lạt 3 ngày với 4 người, muốn kết hợp thiên nhiên, chùa và quán ăn, ưu tiên sắp xếp các điểm theo khu vực.
+
+487. Bọn mình 5 người muốn đi Phú Quốc 4 ngày 3 đêm, ưu tiên biển và hải sản, muốn chia các điểm theo từng khu vực để tránh di chuyển xa.
+
+488. Cho mình lịch trình Hà Giang 4 ngày 3 đêm, 4 người, thích thiên nhiên và muốn ngày đầu nhẹ nhàng rồi tăng dần số điểm tham quan.
+
+489. Nhóm 3 người đi Nha Trang 3 ngày 2 đêm, muốn biển, hải sản và các điểm nổi tiếng, ưu tiên lịch trình có các điểm gần nhau.
+
+490. Mình muốn đi Bình Định 3 ngày với 5 người, kết hợp biển, chùa và ăn uống, mỗi ngày chỉ cần các điểm chính.
+
+491. Bọn mình 4 người đi Quảng Nam 4 ngày 3 đêm, muốn tham quan Hội An và các điểm nổi tiếng khác, ưu tiên những nơi gần nhau theo từng ngày.
+
+492. Cho mình lịch trình Quảng Bình 3 ngày 2 đêm, 5 người, thích thiên nhiên, chùa và món ăn địa phương, không muốn di chuyển quá nhiều.
+
+493. Nhóm mình 3 người muốn đi Quảng Trị 2 ngày 1 đêm, ưu tiên di tích, đền chùa và các địa điểm nổi tiếng.
+
+494. Mình đi Quảng Ngãi 3 ngày với 4 người, muốn kết hợp biển, chùa và hải sản, ưu tiên các điểm gần nhau.
+
+495. Bọn mình 5 người muốn đi Phú Yên 3 ngày 2 đêm, thích biển, chùa và hải sản, muốn sắp xếp điểm tham quan theo khoảng cách.
+
+496. Cho mình lịch trình Lâm Đồng 4 ngày 3 đêm cho 4 người, ưu tiên thiên nhiên, chùa và đồ ăn, muốn mỗi ngày tập trung vào một khu vực.
+
+497. Nhóm 3 người đi Cần Thơ 3 ngày 2 đêm, muốn chợ, đồ ăn địa phương và các điểm văn hóa, đồng thời muốn khách sạn thuận tiện cho lịch trình ngày hôm sau.
+
+498. Mình muốn đi Kiên Giang 4 ngày 3 đêm với 5 người, ưu tiên biển, hải sản và các địa điểm nổi tiếng, hạn chế việc di chuyển qua lại giữa các khu vực.
+
+499. Bọn mình 4 người đi Bắc Ninh 2 ngày 1 đêm, thích đền chùa và văn hóa địa phương, muốn các điểm tham quan được sắp xếp theo thứ tự thuận tiện.
+
+500. Cho mình lịch trình Đà Nẵng 3 ngày 2 đêm cho 5 người, thích biển, chùa và đồ ăn địa phương, ưu tiên các điểm gần nhau, lịch trình không quá dày và khách sạn thuận tiện cho ngày tiếp theo.
+
+

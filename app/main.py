@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import planner_router
+from app.routers import planner_router, map_router
 
 app = FastAPI(
     title="Vietnam Travel Planner API",
@@ -11,6 +11,7 @@ import os
 from fastapi.responses import FileResponse
 
 app.include_router(planner_router.router)
+app.include_router(map_router.router)
 
 FRONTEND_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "index.html")
 

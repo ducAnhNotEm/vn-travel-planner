@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Leaflet 1.9.4 Interactive Map Engine CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -44,6 +47,20 @@
       border-radius: 50%;
       border: 3px solid #0F294D;
       background: white;
+    }
+    .custom-airport-marker, .custom-place-marker, .custom-origin-marker {
+      background: transparent;
+      border: none;
+    }
+    .leaflet-popup-content-wrapper {
+      border-radius: 14px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      padding: 0;
+      overflow: hidden;
+    }
+    .leaflet-popup-content {
+      margin: 8px 12px;
+      line-height: 1.4;
     }
   </style>
 </head>
@@ -616,7 +633,7 @@
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-600 mb-1.5">Thời gian chuyến đi</label>
-          <select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-brand-blue focus:outline-none focus:border-brand-orange cursor-pointer">
+          <select id="trip-days-select" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-brand-blue focus:outline-none focus:border-brand-orange cursor-pointer">
             <option value="1">1 Ngày (Đi về trong ngày)</option>
             <option value="2">2 Ngày 1 Đêm</option>
             <option value="3" selected>3 Ngày 2 Đêm (Khuyên dùng)</option>
@@ -626,7 +643,7 @@
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-600 mb-1.5">Số lượng khách & Phòng</label>
-          <select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-brand-blue focus:outline-none focus:border-brand-orange cursor-pointer">
+          <select id="trip-group-size-select" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-brand-blue focus:outline-none focus:border-brand-orange cursor-pointer">
             <option value="1">1 Người (1 phòng đơn)</option>
             <option value="2">2 Người (1 phòng đôi)</option>
             <option value="3">3 Người (2 phòng)</option>
@@ -885,7 +902,7 @@
             <div class="text-[11px] text-slate-500 hidden sm:block">Hệ thống sẽ tự động ghép thêm quán ăn & cà phê lân cận</div>
           </div>
         </div>
-        <button id="btn-generate-itinerary" onclick="switchScreen('itinerary')" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-orange-500/30 transition flex items-center gap-2 text-sm active:scale-95">
+        <button id="btn-generate-itinerary" onclick="generateDynamicItinerary()" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-orange-500/30 transition flex items-center gap-2 text-sm active:scale-95">
           <i class="fa-solid fa-wand-magic-sparkles"></i>
           <span>Tạo Lịch Trình Tự Động (AI + Thuật toán)</span>
           <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -900,208 +917,97 @@
   <main id="screen-itinerary" class="screen-view flex-1 py-6 px-4 max-w-7xl mx-auto w-full">
     <!-- Header Info -->
     <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm mb-6 flex flex-wrap items-center justify-between gap-4">
-      <div>
+      <div id="itinerary-header-info">
         <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wide">
           <span>Kế hoạch chuyến đi</span>
           <i class="fa-solid fa-circle text-[4px]"></i>
           <span class="text-brand-orange">Đã tối ưu hóa đường đi</span>
         </div>
-        <h2 class="text-xl md:text-2xl font-extrabold text-brand-blue mt-0.5">Bắc Ninh Cổ Kính & Thanh Bình (3N2Đ)</h2>
-        <p class="text-xs text-slate-500 mt-1 flex items-center gap-3">
-          <span><i class="fa-solid fa-users text-slate-400"></i> 4 Người (2 phòng)</span>
-          <span><i class="fa-solid fa-car text-slate-400"></i> Ô tô cá nhân (63k xăng/ngày)</span>
-          <span><i class="fa-solid fa-wallet text-slate-400"></i> Dự tính: 3.450.000đ</span>
+        <h2 id="itinerary-header-title" class="text-xl md:text-2xl font-extrabold text-brand-blue mt-0.5">Lịch Trình Du Lịch Thông Minh</h2>
+        <p id="itinerary-header-meta" class="text-xs text-slate-500 mt-1 flex flex-wrap items-center gap-3">
+          <span id="itinerary-meta-people"><i class="fa-solid fa-users text-slate-400"></i> 4 Người (2 phòng)</span>
+          <span id="itinerary-meta-vehicle"><i class="fa-solid fa-car text-slate-400"></i> Ô tô cá nhân</span>
+          <span id="itinerary-meta-distance"><i class="fa-solid fa-route text-slate-400"></i> Quãng đường: 45 km</span>
+          <span id="itinerary-meta-cost" class="text-brand-orange font-bold"><i class="fa-solid fa-wallet text-brand-orange"></i> Dự tính: 3.450.000đ</span>
         </p>
       </div>
       <div class="flex items-center gap-2">
-        <button class="bg-slate-100 hover:bg-slate-200 text-brand-blue px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
-          <i class="fa-solid fa-pen-to-square"></i> Sửa điểm
+        <button onclick="switchScreen('planner')" class="bg-slate-100 hover:bg-slate-200 text-brand-blue px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-pen-to-square"></i> Đổi điểm
         </button>
-        <button class="bg-brand-orange text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md hover:bg-brand-orangeHover transition flex items-center gap-1.5">
-          <i class="fa-solid fa-share-nodes"></i> Chia sẻ
+        <button onclick="copyTripSummary()" class="bg-brand-orange text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md hover:bg-brand-orangeHover transition flex items-center gap-1.5 active:scale-95">
+          <i class="fa-solid fa-share-nodes"></i> Chia sẻ chuyến đi
         </button>
       </div>
     </div>
 
     <!-- Day Tabs -->
-    <div class="flex items-center gap-2 border-b border-slate-200 mb-6">
-      <button class="px-4 py-2.5 font-extrabold text-sm border-b-2 border-brand-orange text-brand-orange flex items-center gap-2">
-        <span>Ngày 1: Chùa Dâu & Cổ Tự</span>
-        <span class="bg-orange-100 text-brand-orange text-[10px] px-1.5 py-0.5 rounded-full">18.2 km</span>
-      </button>
-      <button class="px-4 py-2.5 font-bold text-sm text-slate-500 hover:text-brand-blue transition">
-        <span>Ngày 2: Tiên Du & Phật Tích</span>
-      </button>
-      <button class="px-4 py-2.5 font-bold text-sm text-slate-500 hover:text-brand-blue transition">
-        <span>Ngày 3: Ẩm thực & Chợ Suối Hoa</span>
-      </button>
+    <div id="itinerary-day-tabs" class="flex items-center gap-2 border-b border-slate-200 mb-6 overflow-x-auto pb-1">
+      <!-- Dynamic day tabs rendered here -->
     </div>
 
-    <!-- Split Screen: 60% Timeline + 40% Map -->
+    <!-- Split Screen: 60% Timeline + 40% Map & Expense -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
       <!-- Left: Timeline (Strictly Human Travel Rhythm) -->
       <div class="lg:col-span-7 space-y-4">
         
-        <!-- Step 1: Start -->
-        <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
-          <div class="bg-slate-100 rounded-xl p-3 border border-slate-200 flex items-center justify-between text-xs">
-            <div class="flex items-center gap-2 font-bold text-slate-700">
-              <i class="fa-solid fa-flag-checkered text-brand-orange"></i>
-              <span>08:00 - Xuất phát từ Trung tâm Hà Nội</span>
-            </div>
-            <span class="text-slate-400">🚗 25 km (35 phút)</span>
-          </div>
+        <!-- Timeline Steps Container -->
+        <div id="itinerary-timeline-container" class="space-y-4">
+          <!-- Dynamic timeline steps rendered here -->
         </div>
 
-        <!-- Step 2: Chùa Dâu -->
-        <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
-          <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:border-brand-orange/40 transition">
-            <div class="flex items-start justify-between gap-3">
-              <div class="flex gap-3">
-                <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=150&q=80" class="w-16 h-16 rounded-xl object-cover">
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="bg-blue-50 text-brand-blue text-[10px] font-bold px-2 py-0.5 rounded">08:45 - 10:15 (1h30m)</span>
-                    <span class="bg-orange-50 text-brand-orange text-[10px] font-bold px-2 py-0.5 rounded">Must-visit</span>
-                  </div>
-                  <div class="flex items-center gap-2 mt-1">
-                    <h4 class="font-bold text-base text-brand-blue">Chùa Dâu</h4>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Ch%C3%B9a%20D%C3%A2u&query_place_id=ChIJsQgi1SinNTERvnH6eFiHbNs" target="_blank" title="Mở ghim vị trí chính xác trên Google Maps (tránh đi sai)" class="text-brand-orange hover:text-white hover:bg-brand-orange bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-md text-[11px] font-bold transition flex items-center gap-1 shadow-2xs">
-                      <i class="fa-solid fa-location-dot text-[10px]"></i>
-                      <span>Ghim GG Maps</span>
-                    </a>
-                  </div>
-                  <p class="text-xs text-slate-500">Xã Trí Quả, Thuận Thành</p>
-                </div>
-              </div>
-              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">Miễn phí vé</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 3: Gap-Filled Cafe -->
-        <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
-          <div class="bg-white rounded-2xl p-4 border border-dashed border-slate-300 bg-slate-50/50">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
-                  <i class="fa-solid fa-mug-saucer"></i>
-                </div>
-                <div>
-                  <div class="text-[10px] font-bold text-purple-700 uppercase tracking-wide">10:15 - 11:00 (Nghỉ chân 45m)</div>
-                  <h4 class="font-bold text-sm text-brand-blue">Cà Phê Gốm Dâu Village <span class="text-[11px] font-normal text-slate-400">(Hệ thống tự gợi ý)</span></h4>
-                </div>
-              </div>
-              <span class="text-xs text-slate-500 font-bold">~35.000đ/ly</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 4: Lunch (Nhịp sinh học ăn trưa) -->
-        <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
-          <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
-            <div class="flex items-start justify-between gap-3">
-              <div class="flex gap-3">
-                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=150&q=80" class="w-16 h-16 rounded-xl object-cover">
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded">11:30 - 12:45 (Ăn trưa 1h15m)</span>
-                  </div>
-                  <h4 class="font-bold text-base text-brand-blue mt-1">Nhà hàng Tân Lương Sơn</h4>
-                  <p class="text-xs text-slate-500">90 Lý Nhân Tông, Kinh Bắc</p>
-                </div>
-              </div>
-              <span class="text-xs font-bold text-slate-700">~150.000đ / người</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 5: Hotel Midday Rest (Nhịp sinh học nghỉ trưa) -->
-        <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
-          <div class="bg-blue-50/50 rounded-2xl p-4 border border-brand-blue/20">
-            <div class="flex items-start justify-between gap-3">
-              <div class="flex gap-3">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=150&q=80" class="w-16 h-16 rounded-xl object-cover">
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="bg-brand-blue text-white text-[10px] font-bold px-2 py-0.5 rounded">13:00 - 14:45 (Nghỉ trưa & Check-in)</span>
-                  </div>
-                  <h4 class="font-bold text-base text-brand-blue mt-1">Grand Phoenix Hotel Bac Ninh</h4>
-                  <p class="text-xs text-slate-500">Nghỉ ngơi tránh nắng trưa trước khi đi chùa chiều</p>
-                </div>
-              </div>
-              <span class="text-xs font-bold text-brand-orange">1.675.000đ / đêm</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- DYNAMIC HOTEL SWITCHING WARNING CARD (Tính năng đặc biệt) -->
-        <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 shadow-sm my-6">
-          <div class="flex items-start gap-3">
-            <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center text-base flex-shrink-0">
-              <i class="fa-solid fa-triangle-exclamation"></i>
-            </div>
-            <div>
-              <div class="flex items-center gap-2">
-                <h4 class="font-bold text-sm text-amber-900">Cảnh Báo Tối Ưu Quãng Đường Di Chuyển</h4>
-                <span class="bg-amber-200 text-amber-800 text-[10px] font-extrabold px-2 py-0.5 rounded">Thuật toán phát hiện</span>
-              </div>
-              <p class="text-xs text-amber-800 mt-1 leading-relaxed">
-                Khách sạn hiện tại (Grand Phoenix) cách điểm tham quan đầu tiên của Ngày 3 tới <strong class="text-red-700">38 km</strong> (mất hơn 1 tiếng đi xe). Đề xuất đổi sang khách sạn ở Quế Võ để tối ưu.
-              </p>
-              
-              <!-- Comparison -->
-              <div class="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-amber-200 text-xs">
-                <div class="bg-white/80 p-2.5 rounded-lg border border-amber-200">
-                  <div class="font-semibold text-slate-500">Khách sạn cũ:</div>
-                  <div class="font-bold text-brand-blue">Grand Phoenix (38 km)</div>
-                  <div class="text-[11px] text-red-600 mt-0.5">Tốn thêm 1h15p di chuyển</div>
-                </div>
-                <div class="bg-white p-2.5 rounded-lg border-2 border-emerald-500 shadow-sm">
-                  <div class="font-semibold text-emerald-700">Đề xuất đổi:</div>
-                  <div class="font-bold text-brand-blue">Phoenix Resort (4 km)</div>
-                  <div class="text-[11px] text-emerald-600 mt-0.5 font-bold">Tiết kiệm 34 km & 1h15p</div>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-2 mt-3">
-                <button class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition shadow-sm">
-                  ✓ Chấp nhận đổi khách sạn (Khuyên dùng)
-                </button>
-                <button class="bg-white hover:bg-slate-100 text-slate-600 border border-slate-300 text-xs font-bold px-3 py-1.5 rounded-lg transition">
-                  Giữ khách sạn cũ
-                </button>
-              </div>
-            </div>
-          </div>
+        <!-- DYNAMIC HOTEL SWITCHING WARNING CARD -->
+        <div id="itinerary-hotel-switch-container" class="hidden">
+          <!-- Rendered dynamically if should_switch is true -->
         </div>
 
       </div>
 
-      <!-- Right: Interactive Map Preview -->
-      <div class="lg:col-span-5 sticky top-28 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="p-3.5 border-b border-slate-100 flex items-center justify-between text-xs font-bold">
-          <span class="text-brand-blue flex items-center gap-2">
-            <i class="fa-solid fa-map-location-dot text-brand-orange"></i>
-            <span>Bản đồ lộ trình Ngày 1</span>
-          </span>
-          <span class="text-slate-400">Thuật toán Haversine</span>
-        </div>
-        <div class="h-96 bg-slate-100 relative flex items-center justify-center overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-60">
-          <div class="absolute inset-0 bg-slate-900/10"></div>
-          
-          <!-- Mock Map Markers -->
-          <div class="absolute top-1/4 left-1/3 bg-brand-orange text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white">1</div>
-          <div class="absolute top-1/2 left-1/2 bg-brand-blue text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white">2</div>
-          <div class="absolute bottom-1/4 right-1/3 bg-emerald-600 text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shadow-lg border-2 border-white">3</div>
-
-          <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md p-3 rounded-xl shadow-lg border border-slate-100 text-xs">
-            <div class="font-bold text-brand-blue mb-1">Cung đường tối ưu ngày 1:</div>
-            <div class="text-slate-600 flex items-center gap-2 text-[11px]">
-              <span>Hà Nội</span> $\rightarrow$ <span>Chùa Dâu</span> $\rightarrow$ <span>Tân Lương Sơn</span> $\rightarrow$ <span>Grand Phoenix</span>
+      <!-- Right: Goong Static Map Preview & Financial Breakdown -->
+      <div class="lg:col-span-5 sticky top-28 space-y-5">
+        <!-- Map Card -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+          <div class="p-3.5 border-b border-slate-100 flex items-center justify-between text-xs font-bold bg-slate-50/70">
+            <span id="itinerary-map-title" class="text-brand-blue flex items-center gap-2">
+              <i class="fa-solid fa-map-location-dot text-brand-orange"></i>
+              <span>Bản đồ lộ trình Ngày 1</span>
+            </span>
+            <div class="flex items-center gap-2">
+              <span id="map-mode-badge" class="text-[10px] text-purple-700 bg-purple-100 border border-purple-200 px-2 py-0.5 rounded font-extrabold flex items-center gap-1">
+                <i class="fa-solid fa-plane"></i> Đa phương thức
+              </span>
+              <button id="btn-toggle-static-map" onclick="toggleMapMode()" class="text-slate-500 hover:text-brand-blue text-[11px] font-semibold transition px-2 py-0.5 bg-white rounded border border-slate-200 shadow-2xs flex items-center gap-1" title="Chuyển đổi Bản đồ Leaflet / Ảnh tĩnh Goong">
+                <i class="fa-solid fa-image"></i>
+                <span id="toggle-map-btn-text">Ảnh Goong</span>
+              </button>
             </div>
           </div>
+          <div id="itinerary-map-image-container" class="h-96 bg-slate-100 relative overflow-hidden">
+            <!-- Interactive Leaflet Map -->
+            <div id="itinerary-leaflet-map" class="w-full h-full relative z-0"></div>
+
+            <!-- Static Goong Map Alternative View -->
+            <div id="itinerary-static-map-wrapper" class="absolute inset-0 z-10 bg-slate-100 hidden flex items-center justify-center overflow-hidden">
+              <img id="itinerary-static-map-img" src="" alt="Goong Static Map" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Floating Bottom Navigation Action Bar -->
+            <div class="absolute bottom-2.5 left-2.5 right-2.5 z-[400] bg-white/95 backdrop-blur-md p-2 rounded-xl shadow-md border border-slate-200 flex items-center justify-between text-xs pointer-events-auto">
+              <div id="itinerary-map-route-summary" class="font-bold text-brand-blue truncate flex items-center gap-1.5 text-[11px]">
+                <i class="fa-solid fa-circle-nodes text-brand-orange"></i>
+                <span>Hành trình số Leaflet</span>
+              </div>
+              <a id="itinerary-google-nav-btn" href="#" target="_blank" class="bg-brand-orange hover:bg-brand-orangeHover text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center gap-1 transition flex-shrink-0 shadow-2xs">
+                <i class="fa-solid fa-diamond-turn-right text-[10px]"></i>
+                <span>Dẫn đường GG</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Financial Breakdown Card -->
+        <div id="itinerary-cost-breakdown-card" class="bg-gradient-to-br from-slate-900 via-brand-blue to-slate-900 text-white rounded-2xl p-5 shadow-lg border border-slate-800">
+          <!-- Dynamic cost breakdown rendered here -->
         </div>
       </div>
     </div>
@@ -1130,7 +1036,7 @@
             </p>
           </div>
           <div class="flex items-center gap-2.5">
-            <a id="detail-maps-pin-btn" href="https://www.google.com/maps/search/?api=1&query=Ch%C3%B9a%20D%C3%A2u&query_place_id=ChIJsQgi1SinNTERvnH6eFiHbNs" target="_blank" title="Mở chính xác vị trí trên Google Maps (tránh đi sai đường)" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl font-bold text-sm shadow-md transition flex items-center gap-2">
+            <a id="detail-maps-pin-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJsQgi1SinNTERvnH6eFiHbNs" target="_blank" title="Mở chính xác vị trí trên Google Maps (tránh đi sai đường)" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl font-bold text-sm shadow-md transition flex items-center gap-2">
               <i class="fa-solid fa-location-dot"></i>
               <span>Ghim Google Maps</span>
             </a>
@@ -1178,7 +1084,7 @@
             </div>
             <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
               <span class="text-slate-400 block font-semibold mb-1">Định vị Google Maps:</span>
-              <a id="detail-maps-link" href="https://www.google.com/maps/search/?api=1&query=Ch%C3%B9a%20D%C3%A2u&query_place_id=ChIJsQgi1SinNTERvnH6eFiHbNs" target="_blank" class="font-bold text-emerald-600 hover:underline text-sm flex items-center gap-1.5 truncate">
+              <a id="detail-maps-link" href="https://www.google.com/maps/place/?q=place_id:ChIJsQgi1SinNTERvnH6eFiHbNs" target="_blank" class="font-bold text-emerald-600 hover:underline text-sm flex items-center gap-1.5 truncate">
                 <i class="fa-solid fa-location-dot text-xs"></i> <span>Mở hồ sơ địa điểm</span>
               </a>
             </div>
@@ -1302,6 +1208,18 @@
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Xử lý vòng đời bản đồ Leaflet trong SPA: cập nhật lại viewport khi chuyển sang tab itinerary
+      if (screenId === 'itinerary') {
+        setTimeout(() => {
+          if (window.itineraryMap) {
+            window.itineraryMap.invalidateSize();
+            if (window.itineraryFeatureGroup && window.itineraryFeatureGroup.getLayers().length > 0) {
+              window.itineraryMap.fitBounds(window.itineraryFeatureGroup.getBounds(), { padding: [30, 30], maxZoom: 15 });
+            }
+          }
+        }, 150);
+      }
     }
 
     // TÍCH HỢP ĐỊNH VỊ VỊ TRÍ HIỆN TẠI (HYBRID GPS + IP FALLBACK)
@@ -1553,6 +1471,927 @@
         } else if (!shouldSelect && isSelected) {
           togglePlaceCard(card);
         }
+      });
+    }
+
+    // ==========================================
+    // DYNAMIC MULTI-DAY ITINERARY & GOONG MAP
+    // ==========================================
+    window.CURRENT_TRIP_PLAN = null;
+    window.CURRENT_ACTIVE_DAY = 1;
+
+    async function generateDynamicItinerary() {
+      const generateBtn = document.getElementById('btn-generate-itinerary');
+      const originalText = generateBtn ? generateBtn.innerHTML : '';
+
+      // Thu thập địa điểm đã chọn
+      let selectedKeywords = [];
+      document.querySelectorAll('.place-select-card.selected h4').forEach(el => {
+        selectedKeywords.push(el.innerText.trim());
+      });
+
+      // Nếu người dùng chưa chọn điểm nào, lấy các điểm mặc định trên màn hình
+      if (selectedKeywords.length === 0) {
+        document.querySelectorAll('.place-select-card h4').forEach((el, idx) => {
+          if (idx < 4) selectedKeywords.push(el.innerText.trim());
+        });
+      }
+
+      const days = parseInt(document.getElementById('trip-days-select')?.value) || 1;
+      const groupSize = parseInt(document.getElementById('trip-group-size-select')?.value) || 2;
+      const vehicle = document.querySelector('input[name="vehicle"]:checked')?.value || 'car';
+
+      const startInput = document.getElementById('start-location-input');
+      const origin_lat = startInput && startInput.dataset.lat ? parseFloat(startInput.dataset.lat) : null;
+      const origin_lng = startInput && startInput.dataset.lng ? parseFloat(startInput.dataset.lng) : null;
+      const origin_name = startInput ? startInput.value : 'Hà Nội';
+
+      if (generateBtn) {
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Đang tính toán tối ưu lịch trình & bản đồ...</span>';
+      }
+
+      try {
+        const response = await fetch('/api/plan/calculate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt_keywords: selectedKeywords,
+            days: days,
+            group_size: groupSize,
+            vehicle_type: vehicle,
+            origin_lat: origin_lat,
+            origin_lng: origin_lng,
+            origin_name: origin_name
+          })
+        });
+
+        if (!response.ok) {
+          const errData = await response.json();
+          alert(errData.detail || 'Có lỗi khi lập lịch trình. Vui lòng thử lại!');
+          return;
+        }
+
+        const planData = await response.json();
+        window.CURRENT_TRIP_PLAN = planData;
+        window.CURRENT_ACTIVE_DAY = 1;
+
+        // Render dữ liệu lên giao diện
+        renderTripPlan(planData, 1);
+
+        // Chuyển sang màn hình lịch trình
+        switchScreen('itinerary');
+      } catch (err) {
+        console.error('Lỗi gọi API:', err);
+        alert('Không thể kết nối đến máy chủ API: ' + err.message);
+      } finally {
+        if (generateBtn) {
+          generateBtn.disabled = false;
+          generateBtn.innerHTML = originalText;
+        }
+      }
+    }
+
+    // ==========================================
+    // LEAFLET INTERACTIVE MAP & MULTI-MODAL LOGIC
+    // ==========================================
+    window.itineraryMap = null;
+    window.itineraryFeatureGroup = null;
+    window.MAP_VIEW_MODE = 'leaflet'; // 'leaflet' | 'static'
+
+    function toggleMapMode() {
+      const staticWrapper = document.getElementById('itinerary-static-map-wrapper');
+      const btnText = document.getElementById('toggle-map-btn-text');
+      if (!staticWrapper) return;
+
+      if (window.MAP_VIEW_MODE === 'leaflet') {
+        window.MAP_VIEW_MODE = 'static';
+        staticWrapper.classList.remove('hidden');
+        if (btnText) btnText.innerText = 'Bản đồ Leaflet';
+      } else {
+        window.MAP_VIEW_MODE = 'leaflet';
+        staticWrapper.classList.add('hidden');
+        if (btnText) btnText.innerText = 'Ảnh Goong';
+        if (window.itineraryMap) {
+          setTimeout(() => {
+            window.itineraryMap.invalidateSize();
+            if (window.itineraryFeatureGroup && window.itineraryFeatureGroup.getLayers().length > 0) {
+              window.itineraryMap.fitBounds(window.itineraryFeatureGroup.getBounds(), { padding: [30, 30], maxZoom: 15 });
+            }
+          }, 100);
+        }
+      }
+    }
+
+    function renderOutboundFlightTransitCard(transit) {
+      if (!transit) return '';
+
+      const firstMile = transit.first_mile || {};
+      const flight = transit.flight || {};
+      const lastMile = transit.last_mile || {};
+      const originAirport = transit.origin_airport || {};
+      const gatewayAirport = transit.gateway_airport || {};
+
+      const airlinesText = (flight.recommended_airlines && flight.recommended_airlines.length > 0)
+        ? flight.recommended_airlines.join(', ')
+        : 'Vietnam Airlines, Bamboo Airways, Vietjet Air';
+
+      // Last-mile transit options (Taxi/GrabCar, Airport Bus, Rental Motorbike)
+      const defaultOptions = [
+        {
+          name: 'Taxi / GrabCar đón sảnh',
+          cost_display: lastMile.estimated_cost_vnd ? `${lastMile.estimated_cost_vnd.toLocaleString('vi-VN')} đ` : '~350.000 đ',
+          duration_text: lastMile.duration_text || '35-45 phút',
+          description: 'Đưa đón tận sảnh, tiện nhất cho gia đình & hành lý cồng kềnh.',
+          badge: 'Khuyên dùng cho gia đình',
+          icon: 'fa-taxi'
+        },
+        {
+          name: 'Tuyến xe buýt sân bay / Shuttle Bus',
+          cost_display: '30.000 - 45.000 đ / người',
+          duration_text: '45-60 phút',
+          description: 'Tuyến xe cố định về trung tâm đô thị, tiết kiệm chi phí tối đa.',
+          badge: 'Tiết kiệm chi phí',
+          icon: 'fa-bus'
+        },
+        {
+          name: 'Thuê xe máy nhận trực tiếp tại sân bay',
+          cost_display: '120.000 - 150.000 đ / ngày',
+          duration_text: lastMile.duration_text || '35-45 phút',
+          description: 'Nhận xe máy ngay tại bãi giữ xe sân bay, linh hoạt tự do khám phá.',
+          badge: 'Tự do & Linh hoạt',
+          icon: 'fa-motorcycle'
+        }
+      ];
+
+      const options = (lastMile.options && lastMile.options.length > 0) ? lastMile.options : defaultOptions;
+
+      return `
+        <!-- OUTBOUND FLIGHT TRANSIT CARD (DAY 1) -->
+        <div class="relative pl-8 pb-5 border-l-2 border-purple-300 timeline-dot">
+          <div class="bg-gradient-to-br from-purple-900 via-indigo-950 to-slate-900 text-white rounded-2xl p-5 shadow-lg border border-purple-500/30">
+            <!-- Header -->
+            <div class="flex items-center justify-between border-b border-purple-800/60 pb-3 mb-4 flex-wrap gap-2">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center text-sm shadow-md">
+                  <i class="fa-solid fa-plane-departure"></i>
+                </div>
+                <div>
+                  <span class="text-[10px] uppercase tracking-wider font-extrabold text-purple-300">Hành Trình Hàng Không Khép Kín</span>
+                  <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+                    <span>Chặng Đi: ${originAirport.iata_code || 'HAN'} ✈️ ${gatewayAirport.iata_code || 'DAD'}</span>
+                  </h3>
+                </div>
+              </div>
+              <span class="bg-purple-500/20 text-purple-300 border border-purple-400/30 text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1.5">
+                <i class="fa-solid fa-clock"></i> Khởi hành buổi sáng
+              </span>
+            </div>
+
+            <div class="space-y-3.5 text-xs">
+              <!-- Step 1: First-mile Ground Transit -->
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i class="fa-solid fa-car"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-extrabold text-blue-200">1. Chặng đường bộ ra sân bay xuất phát</span>
+                    <span class="text-blue-300 font-bold">${firstMile.distance_km || 28} km • ~${firstMile.duration_text || '40 phút'}</span>
+                  </div>
+                  <p class="text-slate-300 text-[11px] mt-0.5">
+                    ${firstMile.from_name || 'Điểm xuất phát'} ➔ <strong class="text-white">${originAirport.name || 'Cảng hàng không Nội Bài'} (${originAirport.iata_code || 'HAN'})</strong>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 2: Check-in Buffer Badge -->
+              <div class="bg-amber-500/15 border border-amber-400/30 rounded-xl p-3 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-amber-500/30 text-amber-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i class="fa-solid fa-passport"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="font-extrabold text-amber-200">2. Thủ tục Hàng không & Soi chiếu an ninh</span>
+                    <span class="bg-amber-400 text-slate-900 text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-2xs">
+                      Có mặt trước 90-120 phút làm thủ tục & kiểm tra an ninh
+                    </span>
+                  </div>
+                  <p class="text-slate-300 text-[11px] mt-1">
+                    Làm thủ tục tại sảnh khởi hành ${originAirport.name || 'sân bay'}, gửi hành lý ký gửi và qua cổng kiểm soát an ninh. Khuyến nghị check-in online trước 24h để tiết kiệm thời gian xếp hàng.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 3: In-flight Transit Info -->
+              <div class="bg-purple-500/15 border border-purple-400/30 rounded-xl p-3 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-purple-500/30 text-purple-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i class="fa-solid fa-plane"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2 flex-wrap">
+                    <span class="font-extrabold text-purple-200">3. Chặng bay trên không: ${originAirport.iata_code || 'HAN'} ➔ ${gatewayAirport.iata_code || 'DAD'}</span>
+                    <span class="text-purple-300 font-bold">~${flight.flight_duration_text || '1 giờ 20 phút'} (~${flight.flight_distance_km || 630} km)</span>
+                  </div>
+                  <div class="text-[11px] text-slate-300 mt-1">
+                    <span class="text-slate-400">Hãng hàng không:</span> <strong class="text-white">${airlinesText}</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 4: Baggage Claim Buffer -->
+              <div class="bg-emerald-500/15 border border-emerald-400/30 rounded-xl p-3 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-emerald-500/30 text-emerald-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i class="fa-solid fa-suitcase-rolling"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-extrabold text-emerald-200">4. Hạ cánh & Nhận hành lý băng chuyền</span>
+                    <span class="bg-emerald-400/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded">20-30 phút</span>
+                  </div>
+                  <p class="text-slate-300 text-[11px] mt-0.5">
+                    Đáp xuống <strong class="text-white">${gatewayAirport.name || 'Sân bay'} (${gatewayAirport.iata_code || 'DAD'})</strong>, nhận hành lý ký gửi tại sảnh ga đến và di chuyển ra sảnh chờ đón xe.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 5: Last-mile Arrival Transit Options -->
+              <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-extrabold text-slate-200 flex items-center gap-1.5">
+                    <i class="fa-solid fa-van-shuttle text-brand-orange"></i>
+                    <span>5. Tùy chọn trung chuyển Last-mile (${gatewayAirport.iata_code || ''} ➔ Điểm đến: ${lastMile.distance_km || 30} km)</span>
+                  </span>
+                  <span class="text-[10px] text-slate-400">Đón trả tại ga</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+                  ${options.map(opt => `
+                    <div class="bg-white/10 hover:bg-white/15 transition p-2.5 rounded-xl border border-white/10 flex flex-col justify-between">
+                      <div>
+                        <div class="flex items-center justify-between mb-1">
+                          <span class="font-bold text-white text-[11px]">${opt.name || opt.title || 'Phương tiện'}</span>
+                          <span class="text-[9px] bg-purple-400/20 text-purple-300 font-extrabold px-1.5 py-0.5 rounded">${opt.badge || 'Tùy chọn'}</span>
+                        </div>
+                        <p class="text-slate-300 text-[10px] line-clamp-2">${opt.description || opt.desc || ''}</p>
+                      </div>
+                      <div class="mt-2 pt-1.5 border-t border-white/10 flex items-center justify-between text-[11px]">
+                        <span class="font-extrabold text-brand-orange">${opt.cost_display || opt.cost_est || ''}</span>
+                        <span class="text-slate-400 text-[10px]">${opt.duration_text || ''}</span>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderReturnFlightTransitCard(transit) {
+      if (!transit) return '';
+
+      const firstMile = transit.first_mile || {};
+      const flight = transit.flight || {};
+      const lastMile = transit.last_mile || {};
+      const originAirport = transit.origin_airport || {};
+      const gatewayAirport = transit.gateway_airport || {};
+
+      return `
+        <!-- RETURN FLIGHT TRANSIT CARD (RETURN DAY) -->
+        <div class="relative pl-8 pt-2 pb-4 border-l-2 border-purple-300 timeline-dot">
+          <div class="bg-gradient-to-br from-purple-950 via-slate-900 to-slate-900 text-white rounded-2xl p-5 shadow-lg border border-purple-500/30">
+            <!-- Header -->
+            <div class="flex items-center justify-between border-b border-purple-800/60 pb-3 mb-4 flex-wrap gap-2">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center text-sm shadow-md">
+                  <i class="fa-solid fa-plane-arrival"></i>
+                </div>
+                <div>
+                  <span class="text-[10px] uppercase tracking-wider font-extrabold text-purple-300">Chuyến Bay Chiều Về</span>
+                  <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+                    <span>Lượt Về: ${originAirport.iata_code || 'DAD'} ✈️ ${gatewayAirport.iata_code || 'HAN'}</span>
+                  </h3>
+                </div>
+              </div>
+              <span class="bg-purple-500/20 text-purple-300 border border-purple-400/30 text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1.5">
+                <i class="fa-solid fa-house-chimney"></i> Kết thúc kỳ nghỉ
+              </span>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <!-- Step 1: Hotel to Gateway Airport -->
+              <div class="bg-white/10 rounded-xl p-3 border border-white/10 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i class="fa-solid fa-car"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-extrabold text-blue-200">1. Trả phòng & Di chuyển ra sân bay ${originAirport.iata_code || ''}</span>
+                    <span class="text-blue-300 font-bold">${firstMile.distance_km || 30} km • ~${firstMile.duration_text || '45 phút'}</span>
+                  </div>
+                  <p class="text-slate-300 text-[11px] mt-0.5">
+                    Rời điểm lưu trú, di chuyển ra <strong class="text-white">${originAirport.name || 'Cảng hàng không cửa ngõ'} (${originAirport.iata_code || ''})</strong>.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 2: Return Check-in Buffer Badge -->
+              <div class="bg-amber-500/15 border border-amber-400/30 rounded-xl p-3 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-amber-500/30 text-amber-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i class="fa-solid fa-passport"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="font-extrabold text-amber-200">2. Thủ tục bay chiều về & Soi chiếu</span>
+                    <span class="bg-amber-400 text-slate-900 text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-2xs">
+                      Có mặt trước 90-120 phút làm thủ tục & kiểm tra an ninh chiều về
+                    </span>
+                  </div>
+                  <p class="text-slate-300 text-[11px] mt-1">
+                    Ký gửi hành lý đặc sản, qua cổng kiểm tra an ninh tại ${originAirport.name || 'sân bay'} và chuẩn bị lên tàu bay.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 3: In-flight Return -->
+              <div class="bg-purple-500/15 border border-purple-400/30 rounded-xl p-3 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-purple-500/30 text-purple-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i class="fa-solid fa-plane"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2 flex-wrap">
+                    <span class="font-extrabold text-purple-200">3. Chuyến bay về: ${originAirport.iata_code || ''} ➔ ${gatewayAirport.iata_code || ''}</span>
+                    <span class="text-purple-300 font-bold">~${flight.flight_duration_text || '1 giờ 20 phút'}</span>
+                  </div>
+                  <p class="text-slate-300 text-[11px] mt-0.5">
+                    Bay thẳng về <strong class="text-white">${gatewayAirport.name || 'Sân bay'} (${gatewayAirport.iata_code || ''})</strong>.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 4: Arrival & Return Home -->
+              <div class="bg-emerald-500/15 border border-emerald-400/30 rounded-xl p-3 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-emerald-500/30 text-emerald-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i class="fa-solid fa-house-user"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-extrabold text-emerald-200">4. Hạ cánh, nhận hành lý & Về nhà an toàn</span>
+                    <span class="text-emerald-300 font-bold">${lastMile.distance_km || 28} km • ~${lastMile.duration_text || '40 phút'}</span>
+                  </div>
+                  <p class="text-slate-300 text-[11px] mt-0.5">
+                    Nhận hành lý ký gửi tại ${gatewayAirport.name || 'sân bay'} và đón xe về nhà (${lastMile.to_name || 'Vị trí ban đầu'}), hoàn thành chuyến đi trọn vẹn!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function initOrUpdateLeafletMap(planData, activeDay) {
+      const mapContainer = document.getElementById('itinerary-leaflet-map');
+      if (!mapContainer) return;
+
+      // Khởi tạo map singleton nếu chưa có
+      if (!window.itineraryMap) {
+        window.itineraryMap = L.map('itinerary-leaflet-map', {
+          zoomControl: true,
+          attributionControl: false
+        }).setView([16.0544, 108.2022], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(window.itineraryMap);
+
+        window.itineraryFeatureGroup = L.featureGroup().addTo(window.itineraryMap);
+      }
+
+      // Xóa các layer cũ
+      if (window.itineraryFeatureGroup) {
+        window.itineraryFeatureGroup.clearLayers();
+      }
+
+      const currentDay = planData.days ? (planData.days.find(d => d.day === activeDay) || planData.days[0]) : null;
+      const isFlightRequired = planData.flight_transit && planData.flight_transit.is_flight_required;
+      const mapModeBadge = document.getElementById('map-mode-badge');
+
+      if (mapModeBadge) {
+        if (isFlightRequired) {
+          mapModeBadge.className = "text-[10px] text-purple-700 bg-purple-100 border border-purple-200 px-2 py-0.5 rounded font-extrabold flex items-center gap-1";
+          mapModeBadge.innerHTML = '<i class="fa-solid fa-plane"></i> Đa phương thức';
+        } else {
+          mapModeBadge.className = "text-[10px] text-emerald-700 bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded font-extrabold flex items-center gap-1";
+          mapModeBadge.innerHTML = '<i class="fa-solid fa-car"></i> Đường bộ';
+        }
+      }
+
+      // 1. Vẽ Multi-Modal Route nếu có Flight Transit
+      if (isFlightRequired) {
+        const ft = planData.flight_transit;
+        const originAirport = ft.origin_airport;
+        const gatewayAirport = ft.destination_gateway_airport || ft.gateway_airport;
+
+        function createAirportIcon(iata) {
+          return L.divIcon({
+            className: 'custom-airport-marker',
+            html: `
+              <div class="w-8 h-8 rounded-full bg-purple-600 border-2 border-white shadow-lg flex items-center justify-center text-white text-xs font-bold transform -translate-x-1/2 -translate-y-1/2 hover:scale-110 transition cursor-pointer" title="Sân bay ${iata}">
+                ✈️
+              </div>
+            `,
+            iconSize: [32, 32],
+            iconAnchor: [16, 16]
+          });
+        }
+
+        function createAirportPopup(airport) {
+          if (!airport) return '';
+          return `
+            <div class="p-2 min-w-[210px] text-xs font-sans">
+              <div class="flex items-center gap-1.5 font-extrabold text-purple-700 text-sm mb-1">
+                <span>✈️ Sân bay ${airport.iata_code}</span>
+                <span class="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded font-bold">${airport.is_international ? 'Quốc tế' : 'Nội địa'}</span>
+              </div>
+              <div class="font-bold text-slate-800">${airport.name}</div>
+              <div class="text-slate-500 text-[11px] mt-1">${airport.address || (airport.province_name ? airport.province_name + ', Việt Nam' : '')}</div>
+              ${airport.city_served ? `<div class="text-slate-400 text-[10px] mt-0.5">Khu vực phục vụ: ${airport.city_served}</div>` : ''}
+              ${airport.google_maps_url ? `<a href="${airport.google_maps_url}" target="_blank" class="inline-flex items-center gap-1 text-brand-orange hover:underline text-[11px] font-bold mt-1.5"><i class="fa-solid fa-location-dot"></i> Xem trên GG Maps</a>` : ''}
+            </div>
+          `;
+        }
+
+        // Airport Markers
+        if (originAirport && originAirport.lat && originAirport.lng) {
+          const origMarker = L.marker([originAirport.lat, originAirport.lng], {
+            icon: createAirportIcon(originAirport.iata_code)
+          }).addTo(window.itineraryFeatureGroup);
+          origMarker.bindPopup(createAirportPopup(originAirport));
+        }
+
+        if (gatewayAirport && gatewayAirport.lat && gatewayAirport.lng) {
+          const gateMarker = L.marker([gatewayAirport.lat, gatewayAirport.lng], {
+            icon: createAirportIcon(gatewayAirport.iata_code)
+          }).addTo(window.itineraryFeatureGroup);
+          gateMarker.bindPopup(createAirportPopup(gatewayAirport));
+        }
+
+        // Flight Arc (Dashed Purple: #8B5CF6, weight: 4, dashArray: '8, 8')
+        const flightLeg = ft.outbound_flight;
+        const flightArc = (flightLeg && flightLeg.flight_arc_polyline && flightLeg.flight_arc_polyline.length > 0)
+          ? flightLeg.flight_arc_polyline
+          : (flightLeg && flightLeg.arc_coordinates ? flightLeg.arc_coordinates : null);
+
+        if (flightArc && flightArc.length > 0) {
+          const flightLine = L.polyline(flightArc, {
+            color: '#8B5CF6',
+            weight: 4,
+            dashArray: '8, 8',
+            opacity: 0.95,
+            lineCap: 'round',
+            lineJoin: 'round'
+          }).addTo(window.itineraryFeatureGroup);
+
+          flightLine.bindPopup(`
+            <div class="p-2 text-xs font-sans">
+              <div class="font-extrabold text-purple-700 flex items-center gap-1.5 mb-1 text-sm">
+                <i class="fa-solid fa-plane"></i>
+                <span>Chặng bay: ${originAirport ? originAirport.iata_code : ''} ➔ ${gatewayAirport ? gatewayAirport.iata_code : ''}</span>
+              </div>
+              <div class="text-slate-600 font-medium">Khoảng cách hàng không: ~${flightLeg.flight_distance_km} km</div>
+              <div class="text-slate-500 mt-0.5">Thời gian bay: ~${flightLeg.flight_duration_text}</div>
+              ${flightLeg.recommended_airlines ? `<div class="text-purple-600 text-[11px] mt-1 font-semibold">Hãng hàng không: ${flightLeg.recommended_airlines.join(', ')}</div>` : ''}
+            </div>
+          `);
+        }
+
+        // Road Polylines (First-mile and Last-mile: solid #0F294D, weight: 4)
+        const firstMile = ft.outbound_first_mile;
+        if (firstMile && firstMile.polyline && firstMile.polyline.length > 0) {
+          const firstMileLine = L.polyline(firstMile.polyline, {
+            color: '#0F294D',
+            weight: 4,
+            opacity: 0.9,
+            lineCap: 'round',
+            lineJoin: 'round'
+          }).addTo(window.itineraryFeatureGroup);
+
+          firstMileLine.bindPopup(`
+            <div class="p-2 text-xs font-sans">
+              <div class="font-bold text-brand-blue flex items-center gap-1 mb-1">
+                <i class="fa-solid fa-car"></i> <span>Chặng 1: Ra sân bay</span>
+              </div>
+              <div class="text-slate-600">${firstMile.from_name} ➔ ${firstMile.to_name}</div>
+              <div class="text-slate-500 mt-1">${firstMile.distance_km} km • ~${firstMile.duration_text}</div>
+            </div>
+          `);
+        }
+
+        const lastMile = ft.outbound_last_mile;
+        if (lastMile && lastMile.polyline && lastMile.polyline.length > 0) {
+          const lastMileLine = L.polyline(lastMile.polyline, {
+            color: '#0F294D',
+            weight: 4,
+            opacity: 0.9,
+            lineCap: 'round',
+            lineJoin: 'round'
+          }).addTo(window.itineraryFeatureGroup);
+
+          lastMileLine.bindPopup(`
+            <div class="p-2 text-xs font-sans">
+              <div class="font-bold text-brand-blue flex items-center gap-1 mb-1">
+                <i class="fa-solid fa-route"></i> <span>Chặng 3: Sân bay ➔ Điểm đến</span>
+              </div>
+              <div class="text-slate-600">${lastMile.from_name} ➔ ${lastMile.to_name}</div>
+              <div class="text-slate-500 mt-1">${lastMile.distance_km} km • ~${lastMile.duration_text}</div>
+            </div>
+          `);
+        }
+      }
+
+      // 2. Render Daily Places markers (numbers 1, 2, 3...) using lat/lng from day_steps
+      if (currentDay && currentDay.itinerary && currentDay.itinerary.length > 0) {
+        const dayCoords = [];
+
+        currentDay.itinerary.forEach((place, idx) => {
+          const lat = place.lat !== undefined && place.lat !== null ? parseFloat(place.lat) : null;
+          const lng = place.lng !== undefined && place.lng !== null ? parseFloat(place.lng) : null;
+
+          if (lat !== null && lng !== null && !isNaN(lat) && !isNaN(lng)) {
+            dayCoords.push([lat, lng]);
+
+            const placeIcon = L.divIcon({
+              className: 'custom-place-marker',
+              html: `
+                <div class="w-7 h-7 rounded-full bg-brand-orange border-2 border-white shadow-md flex items-center justify-center text-white font-extrabold text-xs transform -translate-x-1/2 -translate-y-1/2 hover:scale-110 transition cursor-pointer">
+                  ${idx + 1}
+                </div>
+              `,
+              iconSize: [28, 28],
+              iconAnchor: [14, 14]
+            });
+
+            const marker = L.marker([lat, lng], { icon: placeIcon }).addTo(window.itineraryFeatureGroup);
+
+            const pinBtn = place.google_maps_url
+              ? `<a href="${place.google_maps_url}" target="_blank" class="inline-flex items-center gap-1 text-brand-orange hover:underline text-[11px] font-bold mt-1.5"><i class="fa-solid fa-location-dot"></i> Ghim Google Maps</a>`
+              : '';
+
+            marker.bindPopup(`
+              <div class="p-2 min-w-[190px] text-xs font-sans">
+                <div class="flex items-center gap-1.5 font-bold text-brand-orange mb-1">
+                  <span class="w-4 h-4 rounded-full bg-brand-orange text-white text-[10px] flex items-center justify-center font-bold">${idx + 1}</span>
+                  <span>${place.suggested_time || ''}</span>
+                  <span class="text-[10px] bg-blue-50 text-brand-blue px-1 py-0.5 rounded">${place.period_name || 'Tham quan'}</span>
+                </div>
+                <div class="font-bold text-slate-800 text-sm mb-1">${place.name}</div>
+                <div class="text-slate-500 text-[11px] line-clamp-2">${place.address || ''}</div>
+                <div class="text-emerald-600 font-semibold text-[11px] mt-1">${place.price_display || ''}</div>
+                ${pinBtn}
+              </div>
+            `);
+          }
+        });
+
+        // Nối đường bộ giữa các điểm trong ngày nếu road-only hoặc tour trong ngày
+        if (!isFlightRequired && dayCoords.length > 1) {
+          L.polyline(dayCoords, {
+            color: '#0F294D',
+            weight: 4,
+            opacity: 0.85,
+            lineCap: 'round',
+            lineJoin: 'round'
+          }).addTo(window.itineraryFeatureGroup);
+        }
+      }
+
+      // 3. Khung nhìn bao quát toàn bộ lộ trình
+      if (window.itineraryFeatureGroup && window.itineraryFeatureGroup.getLayers().length > 0) {
+        window.itineraryMap.fitBounds(window.itineraryFeatureGroup.getBounds(), {
+          padding: [30, 30],
+          maxZoom: 15
+        });
+      }
+
+      // Xử lý invalidateSize để load đầy đủ tile OpenStreetMap
+      setTimeout(() => {
+        if (window.itineraryMap) {
+          window.itineraryMap.invalidateSize();
+        }
+      }, 150);
+    }
+
+    function renderTripPlan(planData, activeDay) {
+      if (!planData || !planData.days || planData.days.length === 0) return;
+      window.CURRENT_ACTIVE_DAY = activeDay;
+
+      // 1. Cập nhật Header Info
+      const summary = planData.summary;
+      const headerTitle = document.getElementById('itinerary-header-title');
+      const metaPeople = document.getElementById('itinerary-meta-people');
+      const metaVehicle = document.getElementById('itinerary-meta-vehicle');
+      const metaDistance = document.getElementById('itinerary-meta-distance');
+      const metaCost = document.getElementById('itinerary-meta-cost');
+
+      if (headerTitle) {
+        headerTitle.innerText = `Lịch Trình Du Lịch (${summary.total_days}N${summary.total_days > 1 ? summary.total_days - 1 : 0}Đ) - ${summary.group_size} Người`;
+      }
+      if (metaPeople) {
+        const rooms = Math.ceil(summary.group_size / 2);
+        metaPeople.innerHTML = `<i class="fa-solid fa-users text-slate-400"></i> ${summary.group_size} Người (${rooms} phòng đôi)`;
+      }
+      if (metaVehicle) {
+        metaVehicle.innerHTML = `<i class="fa-solid fa-car text-slate-400"></i> ${summary.vehicle}`;
+      }
+      if (metaDistance) {
+        metaDistance.innerHTML = `<i class="fa-solid fa-route text-slate-400"></i> Quãng đường: ${summary.total_distance_km} km`;
+      }
+      if (metaCost) {
+        metaCost.innerHTML = `<i class="fa-solid fa-wallet text-brand-orange"></i> Tổng: ${summary.grand_total_group_vnd.toLocaleString('vi-VN')}đ (~${summary.grand_total_per_person_vnd.toLocaleString('vi-VN')}đ/người)`;
+      }
+
+      // 2. Render Day Tabs
+      const dayTabsContainer = document.getElementById('itinerary-day-tabs');
+      if (dayTabsContainer) {
+        dayTabsContainer.innerHTML = planData.days.map((day, idx) => {
+          const dayNum = day.day;
+          const isActive = dayNum === activeDay;
+          const activeClass = isActive
+            ? 'px-4 py-2.5 font-extrabold text-sm border-b-2 border-brand-orange text-brand-orange flex items-center gap-2 cursor-pointer'
+            : 'px-4 py-2.5 font-bold text-sm text-slate-500 hover:text-brand-blue transition flex items-center gap-2 cursor-pointer';
+
+          return `
+            <button onclick="renderTripPlan(window.CURRENT_TRIP_PLAN, ${dayNum})" class="${activeClass}">
+              <span>Ngày ${dayNum}</span>
+              <span class="bg-orange-100 text-brand-orange text-[10px] px-1.5 py-0.5 rounded-full font-bold">${day.day_distance_km} km</span>
+            </button>
+          `;
+        }).join('');
+      }
+
+      // 3. Render Timeline Steps cho ngày active
+      const currentDay = planData.days.find(d => d.day === activeDay) || planData.days[0];
+      const timelineContainer = document.getElementById('itinerary-timeline-container');
+      if (timelineContainer) {
+        let stepsHtml = '';
+
+        // Day 1: Nếu có chặng bay lượt đi (flight_transit_outbound), chèn Thẻ Hành Trình Bay ở đầu Ngày 1
+        if (currentDay.flight_transit_outbound) {
+          stepsHtml += renderOutboundFlightTransitCard(currentDay.flight_transit_outbound);
+        }
+
+        // Bước Xuất phát trong ngày
+        const startStepTitle = (currentDay.day === 1 && currentDay.flight_transit_outbound)
+          ? `11:30 - Nhận phòng/Nghỉ trưa & Bắt đầu tham quan Ngày 1`
+          : `08:00 - Xuất phát bắt đầu Ngày ${currentDay.day}`;
+
+        stepsHtml += `
+          <!-- Step Xuất phát -->
+          <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
+            <div class="bg-slate-100 rounded-xl p-3 border border-slate-200 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2 font-bold text-slate-700">
+                <i class="fa-solid fa-flag-checkered text-brand-orange"></i>
+                <span>${startStepTitle}</span>
+              </div>
+              <span class="text-slate-400">🚗 ${currentDay.day_distance_km} km toàn chặng</span>
+            </div>
+          </div>
+        `;
+
+        currentDay.itinerary.forEach((place, idx) => {
+          const pinUrl = place.google_maps_url;
+          const pinButton = pinUrl
+            ? `<a href="${pinUrl}" target="_blank" title="Mở ghim vị trí chính xác trên Google Maps (tránh đi sai)" class="text-brand-orange hover:text-white hover:bg-brand-orange bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-md text-[11px] font-bold transition flex items-center gap-1 shadow-2xs">
+                 <i class="fa-solid fa-location-dot text-[10px]"></i>
+                 <span>Ghim GG Maps</span>
+               </a>`
+            : '';
+
+          const imgUrl = place.image_url || 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=150&q=80';
+
+          stepsHtml += `
+            <div class="relative pl-8 pb-4 border-l-2 border-slate-200 timeline-dot">
+              <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:border-brand-orange/40 transition">
+                <div class="flex items-start justify-between gap-3">
+                  <div class="flex gap-3">
+                    <img src="${imgUrl}" alt="${place.name}" class="w-16 h-16 rounded-xl object-cover flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=150&q=80'">
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <span class="bg-blue-50 text-brand-blue text-[10px] font-bold px-2 py-0.5 rounded">
+                          ${place.period_icon || '⏰'} ${place.suggested_time} (${place.period_name || 'Tham quan'})
+                        </span>
+                        <span class="bg-orange-50 text-brand-orange text-[10px] font-bold px-2 py-0.5 rounded">Chặng ${place.step}</span>
+                      </div>
+                      <div class="flex items-center gap-2 mt-1 flex-wrap">
+                        <h4 class="font-bold text-base text-brand-blue">${place.name}</h4>
+                        ${pinButton}
+                      </div>
+                      <p class="text-xs text-slate-500 mt-0.5 line-clamp-1">${place.address}</p>
+                    </div>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded flex-shrink-0">
+                    ${place.price_display}
+                  </span>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        // Ngày về: Nếu có chặng bay lượt về (flight_transit_return), chèn Thẻ Hành Trình Bay Chiều Về ở cuối ngày
+        if (currentDay.flight_transit_return) {
+          stepsHtml += renderReturnFlightTransitCard(currentDay.flight_transit_return);
+        }
+
+        timelineContainer.innerHTML = stepsHtml;
+      }
+
+      // 4. Render Hotel Switching Warning
+      const hotelSwitchContainer = document.getElementById('itinerary-hotel-switch-container');
+      if (hotelSwitchContainer) {
+        if (planData.hotel_switch_advice && planData.hotel_switch_advice.should_switch) {
+          hotelSwitchContainer.className = "bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 shadow-sm my-6";
+          hotelSwitchContainer.innerHTML = `
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center text-base flex-shrink-0">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="font-bold text-sm text-amber-900">Cảnh Báo Tối Ưu Quãng Đường Di Chuyển</h4>
+                  <span class="bg-amber-200 text-amber-800 text-[10px] font-extrabold px-2 py-0.5 rounded">Thuật toán phát hiện</span>
+                </div>
+                <p class="text-xs text-amber-800 mt-1 leading-relaxed">
+                  ${planData.hotel_switch_advice.summary}
+                </p>
+                <div class="mt-2 space-y-1">
+                  ${planData.hotel_switch_advice.switches.map(s => `
+                    <div class="text-[11px] text-amber-900 font-semibold bg-white/70 p-2 rounded-lg border border-amber-200">
+                      • ${s.advice}
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          hotelSwitchContainer.className = "hidden";
+          hotelSwitchContainer.innerHTML = "";
+        }
+      }
+
+      // 5. Render Interactive Leaflet Map & Dual-Mode
+      const mapTitle = document.getElementById('itinerary-map-title');
+      if (mapTitle) {
+        mapTitle.innerHTML = `
+          <i class="fa-solid fa-map-location-dot text-brand-orange"></i>
+          <span>Bản đồ lộ trình Ngày ${currentDay.day} (${currentDay.day_distance_km} km)</span>
+        `;
+      }
+
+      initOrUpdateLeafletMap(planData, activeDay);
+
+      // Cập nhật ảnh tĩnh dự phòng cho Goong Static Map view
+      const staticMapImg = document.getElementById('itinerary-static-map-img');
+      if (staticMapImg) {
+        if (currentDay.static_map_url) {
+          staticMapImg.src = currentDay.static_map_url;
+        } else {
+          staticMapImg.src = '';
+        }
+      }
+
+      // Cập nhật tóm tắt lộ trình dưới đáy bản đồ
+      const mapRouteSummary = document.getElementById('itinerary-map-route-summary');
+      if (mapRouteSummary) {
+        if (planData.flight_transit && planData.flight_transit.is_flight_required) {
+          mapRouteSummary.innerHTML = `
+            <i class="fa-solid fa-plane text-purple-600"></i>
+            <span>Lộ trình hàng không & đường bộ Ngày ${currentDay.day}</span>
+          `;
+        } else {
+          mapRouteSummary.innerHTML = `
+            <i class="fa-solid fa-circle-nodes text-brand-orange"></i>
+            <span>Tuyến đường xe chạy Ngày ${currentDay.day} (${currentDay.day_distance_km} km)</span>
+          `;
+        }
+      }
+
+      // Cập nhật nút Dẫn đường Google Maps
+      const googleNavBtn = document.getElementById('itinerary-google-nav-btn');
+      if (googleNavBtn) {
+        if (currentDay.itinerary && currentDay.itinerary.length > 0) {
+          const waypoints = currentDay.itinerary.map(p => p.name).join('/');
+          googleNavBtn.href = `https://www.google.com/maps/dir/${encodeURIComponent(waypoints)}`;
+          googleNavBtn.classList.remove('hidden');
+        } else {
+          googleNavBtn.classList.add('hidden');
+        }
+      }
+
+      // 6. Render Financial Breakdown Card
+      const costBreakdownCard = document.getElementById('itinerary-cost-breakdown-card');
+      if (costBreakdownCard) {
+        const trans = planData.transport_cost;
+        const hotel = planData.accommodation_cost;
+        const ft = planData.flight_transit;
+
+        costBreakdownCard.innerHTML = `
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <i class="fa-solid fa-calculator text-brand-orange mr-1"></i> Dự toán chi phí minh bạch
+            </span>
+            <span class="text-[11px] bg-brand-orange/20 text-brand-orange font-extrabold px-2 py-0.5 rounded-md">
+              Đoàn ${summary.group_size} người
+            </span>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <!-- Phương tiện đường bộ -->
+            <div class="flex items-start justify-between">
+              <div>
+                <div class="font-bold text-slate-200">${trans.vehicle}</div>
+                <div class="text-[11px] text-slate-400">${trans.distance_km} km toàn chuyến</div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold text-white">${trans.total_group_cost_vnd.toLocaleString('vi-VN')}đ</div>
+                <div class="text-[11px] text-brand-orange font-semibold">~${trans.cost_per_person_vnd.toLocaleString('vi-VN')}đ/người</div>
+              </div>
+            </div>
+
+            <!-- Vé máy bay & Trung chuyển (nếu có) -->
+            ${(ft && ft.is_flight_required && ft.total_transit_cost_vnd) ? `
+            <div class="flex items-start justify-between border-t border-slate-800/80 pt-2.5">
+              <div>
+                <div class="font-bold text-purple-300 flex items-center gap-1">
+                  <i class="fa-solid fa-plane-departure text-[10px]"></i>
+                  <span>Vé máy bay & Trung chuyển</span>
+                </div>
+                <div class="text-[11px] text-slate-400">Khứ hồi cả đoàn (${summary.group_size} người)</div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold text-white">${ft.total_transit_cost_vnd.toLocaleString('vi-VN')}đ</div>
+                <div class="text-[11px] text-purple-300 font-semibold">~${Math.round(ft.total_transit_cost_vnd / Math.max(1, summary.group_size)).toLocaleString('vi-VN')}đ/người</div>
+              </div>
+            </div>
+            ` : ''}
+
+            <!-- Khách sạn -->
+            ${hotel ? `
+            <div class="flex items-start justify-between border-t border-slate-800/80 pt-2.5">
+              <div>
+                <div class="font-bold text-slate-200">Khách sạn & Lưu trú</div>
+                <div class="text-[11px] text-slate-400">${hotel.formula_note}</div>
+              </div>
+              <div class="text-right">
+                <div class="font-bold text-white">${hotel.total_hotel_cost_vnd.toLocaleString('vi-VN')}đ</div>
+                <div class="text-[11px] text-brand-orange font-semibold">~${hotel.cost_per_person_vnd.toLocaleString('vi-VN')}đ/người</div>
+              </div>
+            </div>
+            ` : ''}
+
+            <!-- Tổng cộng -->
+            <div class="border-t-2 border-slate-700/80 pt-3 flex items-center justify-between">
+              <div>
+                <div class="font-extrabold text-sm text-white">TỔNG DỰ TÍNH CẢ ĐOÀN</div>
+                <div class="text-[11px] text-slate-400">Đã bao gồm xe + lưu trú${(ft && ft.is_flight_required) ? ' + vé bay' : ''}</div>
+              </div>
+              <div class="text-right">
+                <div class="text-base font-extrabold text-brand-orange">${summary.grand_total_group_vnd.toLocaleString('vi-VN')}đ</div>
+                <div class="text-xs font-bold text-emerald-400">~${summary.grand_total_per_person_vnd.toLocaleString('vi-VN')}đ / người</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function copyTripSummary() {
+      if (!window.CURRENT_TRIP_PLAN) {
+        alert('Chưa có lịch trình để chia sẻ.');
+        return;
+      }
+      const p = window.CURRENT_TRIP_PLAN;
+      let text = `✈️ LỊCH TRÌNH DU LỊCH (${p.summary.total_days} Ngày - Đoàn ${p.summary.group_size} người)\n`;
+      text += `🚗 Phương tiện: ${p.summary.vehicle} (${p.summary.total_distance_km} km)\n`;
+      text += `💰 Tổng chi phí dự tính cả đoàn: ${p.summary.grand_total_group_vnd.toLocaleString('vi-VN')} VNĐ\n`;
+      text += `👉 Mỗi người chỉ khoảng: ${p.summary.grand_total_per_person_vnd.toLocaleString('vi-VN')} VNĐ\n\n`;
+
+      p.days.forEach(d => {
+        text += `📍 NGÀY ${d.day} (${d.day_distance_km} km):\n`;
+        d.itinerary.forEach(item => {
+          text += `  • [${item.suggested_time}] ${item.name} (${item.period_name}) - ${item.price_display}\n`;
+        });
+        text += `\n`;
+      });
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Đã sao chép tóm tắt lịch trình vào Clipboard! Bạn có thể dán vào nhóm Zalo hoặc Messenger của đoàn.');
+      }).catch(err => {
+        prompt('Sao chép lịch trình dưới đây:', text);
       });
     }
 

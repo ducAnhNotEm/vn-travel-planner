@@ -135,3 +135,65 @@ When enabling Google Places API:
      - Formatted address and verified coordinates (`lat`, `lng`).
      - Real place photos (CDN URLs).
 
+---
+
+## 8. Robustness & User-Centered Scheduling Governance
+
+### 8.1. Graceful 4-Tier Fallback Strategy (Xử lý khi thiếu dữ liệu)
+When user requests generic micro-services (cyber games, billiards, laundromats) absent from `travel_db.db` and unresolvable via Apify:
+- **Tier 1 (DB & Apify Ground Truth)**: Primary resolution.
+- **Tier 2 (Semantic Substitution)**: Suggest closest verified entertainment equivalent from `travel_db.db` (amusement centers, cinema, boardgame cafes).
+- **Tier 3 (Commercial Hub Stop)**: Route user to the central town street/commercial boulevard where such micro-services naturally cluster.
+- **Tier 4 (Flexible Free-form Slot + Radar Button)**: Preserve time slot as `[Hoạt động tự do]` and render a 1-click Google Maps radar button to scan live surrounding services. Zero hallucination permitted.
+
+### 8.2. Distance Outlier & Smart Advisory (Cảnh báo Điểm quá xa)
+When an auxiliary place is $\ge 15 - 20\text{ km}$ ($> 35 - 45\text{ mins}$) away from the day's main cluster:
+- Trigger Smart Advisory Card with exact travel time and vehicle cost overhead.
+- Provide Option A (Recommended): Switch to equivalent place within $< 3\text{ km}$.
+- Provide Option B: Keep place and automatically reposition to the day's end or on the most convenient adjacent day route.
+
+### 8.3. Hard Pinned Constraints & Anchor-Based Clustering (Ghim ngày cố định)
+- User-specified day/session bindings are supreme invariants (Hard Constraints).
+- The pinned place acts as an Anchor Centroid for Day $X$, dynamically attracting nearby attractions and repelling distant ones to preserve optimal daily routing.
+
+---
+
+## 9. Multi-Modal Flight Transit Architecture
+- **Threshold**: Inter-provincial Haversine distance $D \ge 300\text{ km}$.
+- **Gateway Airport Catchment ($R \le 150\text{ km}$)**: Uses normalized multi-criteria scoring between flight frequency and road transit distance to automatically bind non-airport tourist destinations (e.g. Hội An $\to$ DAD, Sa Pa $\to$ HAN).
+- **3-Piece Routing**:
+  - `first_mile`: Origin $\to$ Departure Airport (Road via Goong API).
+  - `air_corridor`: Departure Airport $\to$ Arrival Airport (Geodesic purple dashed arc `#7C3AED`, no road API calls).
+  - `last_mile`: Arrival Airport $\to$ Destination Hotel/Attraction (Road via Goong API).
+
+---
+
+## 10. Long-Distance Road Trip Fatigue & Topographic Speed Model
+- **Safety Fatigue Caps**:
+  - Mandatory 30-min pit-stop every $3 - 3.5\text{ hours}$ (or $160 - 200\text{ km}$).
+  - Maximum $8\text{ hours}$ driving per day ($\le 450\text{ km}$).
+  - Mandatory intermediate overnight staging city for trips $\ge 650 - 700\text{ km}$ (e.g., Hà Nội $\leftrightarrow$ Đà Nẵng stops at Đồng Hới or Vinh).
+- **Topographic Terrain Winding & Speed Matrix**:
+  - Flat / Expressway: $K_{\text{topo}} = 1.25, V_{\text{avg}} = 80\text{ km/h}$.
+  - Coastal / Rolling hills: $K_{\text{topo}} = 1.35, V_{\text{avg}} = 60\text{ km/h}$.
+  - Mountain / Highland passes (Tây Bắc, Tây Nguyên): $K_{\text{topo}} = 1.75, V_{\text{avg}} = 35\text{ km/h}$.
+
+---
+
+## 11. Local-First Sovereign AI Architecture
+- **Primary Model**: Local Ollama instance serving `vn-travel-qwen:7b` (Fine-tuned Qwen 2.5 7B on Vietnam Travel Domain dataset).
+  - High privacy, 100% offline resilient, domain slang & bio-rhythm aware.
+- **Secondary Fallback**: Google Gemini 2.0 Flash via circuit-breaker (triggered on connection failure or $> 4\text{s}$ timeout).
+- **Contract Enforcement**: Pydantic schema validation for 100% predictable, non-hallucinated JSON outputs.
+
+---
+
+## 12. Operations Research Optimization & Real-World Export
+- **Routing Engine**: 2-Opt local search refinement to eliminate crossing edges.
+- **Hard Time-Window Scheduling**: Strict validation against place `working_hours` intervals.
+- **1-Click Hand-off**:
+  - Google Maps multi-waypoint direct navigation deep links.
+  - iCal (`.ics`) file export with 15-minute advance reminder notifications.
+
+
+

@@ -31,11 +31,13 @@
 - [x] Single-day Nearest Neighbor route sequencing (TSP).
 - [x] Transportation cost calculator for 4 modes (`car`, `bus`, `taxi`, `motorbike`).
 - [x] Dynamic database price formatting (Hotels with real rates, Free temples/markets).
-- [ ] Multi-day Geographic Clustering (K-Means / DBSCAN / Distance-based density).
-- [ ] Human biological pacing time-slot allocation (Morning, Lunch, Midday rest, Afternoon, Dinner, Night).
-- [ ] Gap-filling engine (Auto-recommend nearby dining/cafes when days > user picks).
-- [ ] Inter-day Hotel Switching Evaluator ($\ge 30-40\text{ km}$ threshold alert).
-- [ ] Group accommodation math ($\lceil \text{group size} / 2 \rceil$ rooms) & Bill splitter.
+- [x] Multi-day Geographic Clustering (K-Medoids / Distance-based density thuần Python 100%).
+- [x] Human biological pacing time-slot allocation (Sáng di tích, Trưa ăn đặc sản, Chiều cafe/trải nghiệm, Tối ăn tối, Đêm dạo phố).
+- [x] Gap-filling engine (Tự động điền khuyết quán ăn/danh thắng cùng cụm từ `travel_db.db` khi người dùng chọn ít điểm).
+- [x] Inter-day Hotel Switching Evaluator ($\ge 35\text{ km}$ cảnh báo đổi khách sạn, $< 20\text{ km}$ khuyên giữ nguyên).
+- [x] Group accommodation math ($\lceil \text{group size} / 2 \rceil$ phòng) & Phân bổ chi phí di chuyển dùng chung chia đều trên mỗi người.
+- [x] Tích hợp Goong Static Map Route API (`https://rsapi.goong.io/staticmap/route`) qua Backend Proxy (`app/services/map_service.py`, `app/routers/map_router.py`) kèm disk caching (`data/map_cache/`).
+- [x] Áp dụng phương pháp luận Spec-Driven Development (SDD) từ GitHub Spec-Kit: Thiết lập `.specify/` với `constitution.md`, templates chuẩn và feature package `001-multi-day-planner-goong/`.
 
 ---
 
@@ -91,4 +93,35 @@
   - Thực thi `scripts/populate_places_urls.py`: Nạp thành công URL xác thực từ cache offline Google Places và Google Place ID chuẩn (`ChIJ...`).
   - Thanh lọc 18 địa danh unverified/không có Place ID: Loại bỏ triệt để 18 bản ghi cũ (trùng lặp hoặc thiếu provenance), đưa toàn bộ cơ sở dữ liệu `travel_db.db` về **1.369 địa danh chuẩn mực 100%**, trong đó **100% địa danh sở hữu Google Place ID xác thực và Google Maps URL dẫn thẳng vào Google Business Profile** (0 link giả, 0 URL null).
   - Tích hợp `google_maps_url` vào API Core [`app/services/travel_calculator.py`](file:///d:/vn-travel-planner/app/services/travel_calculator.py) và giao diện [`frontend/index.html`](file:///d:/vn-travel-planner/frontend/index.html) với nút ghim vị trí mở thẳng Google Business Profile để chỉ đường thực tế.
+
+---
+
+## 7. Multi-Modal Transit, Road Trip Engine & Test Suite (Completed)
+- [x] Triển khai **Hành trình Hàng không Khép kín** (`app/services/flight_transit_service.py`):
+  - Dữ liệu chuẩn xác thực 22 sân bay dân dụng toàn quốc (`data/airports_vietnam.json`, bảng `airports` trong `travel_db.db`).
+  - Thuật toán Gateway Airport Catchment ($R \le 150\text{ km}$) áp dụng hàm thỏa dụng chuẩn hóa đa tiêu chí (Normalized Multi-Criteria Utility Function).
+  - Phân tách lộ trình 3 mảnh ghép: First-mile $\to$ Air Corridor (nét đứt tím) $\to$ Last-mile.
+- [x] Triển khai **Road Trip Đường Dài & Giới Hạn Thể Lực** (`app/services/road_trip_service.py`):
+  - Ràng buộc mỏi mệt sinh học: Pit-stop sau 3 - 3.5h lái xe, giới hạn tối đa 8h lái xe/ngày.
+  - Phân tách chặng dừng chân nghỉ đêm (Overnight Staging City) khi cự ly $\ge 650 - 700\text{ km}$.
+  - Hỗ trợ chế độ Express vs Scenic Discovery, vòng lặp chống nhàm chán (Anti-Boredom Loop).
+- [x] Xây dựng và chuẩn hóa bộ kiểm thử tự động **95/95 test cases đạt 100% Pass**:
+  - `tests/test_adversarial_resilience.py` (21 tests).
+  - `tests/test_flight_transit.py` (38 tests).
+  - `tests/test_road_trip_service.py` (36 tests).
+
+---
+
+## 8. Elite Roadmap (Kế hoạch Triển khai Chuẩn Top 0.1%)
+- [ ] **P0: Tối ưu hóa Vận trù học TSP & Time Windows**:
+  - Thay thế Nearest Neighbor bằng **2-Opt Local Search** trong `travel_calculator.py`.
+  - Bổ sung Hard Time-Window validation đối chiếu `working_hours` của từng địa điểm trong `travel_db.db`.
+- [ ] **P1: Local-First AI Engine (Ollama Primary + Gemini Fallback)**:
+  - Dataset Generator: Sinh 300 - 500 mẫu hội thoại du lịch Việt Nam từ 1.369 địa danh.
+  - Script fine-tuning QLoRA trên Unsloth/Colab cho `vn-travel-qwen:7b`.
+  - Triển khai `app/services/llm_service.py` với Circuit Breaker: Thử Ollama (`localhost:11434`) trước, timeout $> 4\text{s}$ tự động fallback sang Google Gemini 2.0 Flash.
+- [ ] **P2: Actionable Export Engine**:
+  - Tự động sinh Google Maps Multi-Stop Navigation URL cho từng ngày.
+  - Xuất file `.ics` (iCal) đồng bộ lịch trình vào Google/Apple Calendar.
+
 
