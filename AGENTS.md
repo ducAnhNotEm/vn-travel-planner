@@ -78,10 +78,32 @@ TASK ASSIGNED
       │
       ▼
 6. EXECUTE TESTS ON REAL DATABASE (travel_db.db)
+      │  ┌────────────────────────────────────────────────────────┐
+      ├──┤ If test fails: Apply Systematic Root-Cause Debugging   │
+      │  └────────────────────────────────────────────────────────┘
+      ▼
+7. CHALLENGER REVIEW CHECKPOINT (Self-Audit or Subagent Adversarial Inspection)
       │
       ▼
-7. UPDATE IMPLEMENTATION_STATUS.md & REPORT
+8. UPDATE IMPLEMENTATION_STATUS.md & REPORT
 ```
+
+### 1.1. Systematic Root-Cause Debugging Protocol (Quy trình Truy vết Gốc rễ):
+- ❌ **CẤM CHỮA CHÁY BỀ MẶT**: Tuyệt đối không thêm `if-else` chắp vá hoặc bọc `try-except pass` để làm xanh test một cách giả tạo khi test bị fail.
+- ✅ **4 Bước Bắt buộc**:
+  1. **Quan sát & Cô lập**: Đọc kỹ stack trace, xác định chính xác assertion/dòng code bị gãy.
+  2. **Tái hiện Tối thiểu (Minimal Reproduction)**: Tạo test case độc lập nhỏ nhất tái hiện đúng lỗi biên (boundary/edge case).
+  3. **Truy vết Giả thuyết Gốc rễ (Root Cause Hypothesis)**: Tìm nguyên nhân ở tầng kiến trúc/toán học/dữ liệu thay vì lỗi cú pháp bề mặt.
+  4. **Sửa 1 điểm cốt lõi & Hồi quy**: Can thiệp đúng điểm gốc rễ, chạy lại toàn bộ test suite (`pytest -q`) để bảo đảm zero-regression.
+
+### 1.2. Challenger Review Protocol (Cơ chế Phản biện Chéo):
+- Trước khi chốt bất kỳ tính năng phức tạp nào (OR routing, flight transit, road trip, multi-day clustering):
+  - Agent bắt buộc phải tự đặt mình hoặc ủy nhiệm subagent đóng vai **"Challenger / Adversarial Reviewer"**.
+  - **3 Câu hỏi Thẩm vấn**:
+    1. *Giải pháp này có vi phạm YAGNI hoặc có thể rút gọn thành ít dòng hơn không?*
+    2. *Nếu dữ liệu đầu vào bị null, thiếu tọa độ hoặc Goong API sập thì hệ thống có sụp đổ không?*
+    3. *Toàn bộ tính toán khoảng cách/thời gian đã dùng engine xác định (Haversine/Matrix) thay vì LLM tự nhẩm chưa?*
+
 
 ---
 
@@ -295,4 +317,14 @@ Khi người dùng yêu cầu một địa điểm hoặc loại hình dịch v�
 | **Đèo dốc / Vùng cao / Tây Bắc** | Lào Cai, Yên Bái, Sơn La, Điện Biên, Lai Châu, Hà Giang, Cao Bằng, Bắc Kạn, Tuyên Quang, Kon Tum, Gia Lai, Đắk Lắk, Đắk Nông, Lâm Đồng | 1.75 | 35 km/h |
 
 > **Lưu ý triển khai**: Table trên là **lookup tĩnh** — mã hóa cứng trong `travel_calculator.py` dưới dạng Python dict `PROVINCE_TERRAIN`. Khi origin/destination thuộc 2 nhóm khác nhau, lấy $K_{\text{topo}}$ **trung bình gia quyền** theo tỷ lệ phần trăm quãng đường ước tính qua từng vùng địa hình.
+
+---
+
+## 15. Field-Grade Travel UI/UX Engineering Standard
+
+Mọi triển khai giao diện frontend và tương tác người dùng bắt buộc phải tuân thủ đặc tả kỹ thuật thực địa tại [`skills/TRAVEL_UI_SYSTEM.md`](file:///d:/vn-travel-planner/skills/TRAVEL_UI_SYSTEM.md):
+- **Bố cục 2 Mặt phẳng (Dual-Plane)**: Bản đồ toàn màn hình + Bottom Sheet tương tác 3 nấc (Collapsed, Half, Full).
+- **Hệ thống Nhịp sinh học Trực quan**: Mã màu timeline theo khung giờ sinh học (Tránh nắng gắt 13h-15h, Biển chiều, Ẩm thực đêm).
+- **Thẻ Giải trình Quyết định (Smart Advisory & Hotel Switch)**: Gợi ý A/B cho điểm quá xa ($\ge 15\text{km}$), bảng đối chiếu chênh lệch quãng đường/chi phí khi đổi khách sạn.
+- **Công thái học Thực địa (Mobile Field Ergonomics)**: Vùng bấm ngón tay cái $\ge 48\times 48\text{px}$, độ tương phản ngoài trời $\ge 4.5:1$, thanh điều hướng 1-chạm (Google Maps Multi-stop URL & iCal sync).
 
