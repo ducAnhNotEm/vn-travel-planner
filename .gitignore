@@ -27,4 +27,7 @@ data/map_cache/
 
 # Agent Scratch & Workspaces
 .agents/
-
+# Model weights & GGUF
+*.gguf
+*.safetensors
+checkpoints*/
