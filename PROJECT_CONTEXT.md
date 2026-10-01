@@ -191,9 +191,45 @@ When an auxiliary place is $\ge 15 - 20\text{ km}$ ($> 35 - 45\text{ mins}$) awa
 ## 12. Operations Research Optimization & Real-World Export
 - **Routing Engine**: 2-Opt local search refinement to eliminate crossing edges.
 - **Hard Time-Window Scheduling**: Strict validation against place `working_hours` intervals.
+  - Constraint formula: $\text{Arrival}_i + \text{Dwell}_i + \text{TravelTime}_{i \to j} \le \text{CloseTime}_j$
+  - On violation: Push conflicting place to the nearest feasible time window, never silently drop or reorder without warning.
 - **1-Click Hand-off**:
   - Google Maps multi-waypoint direct navigation deep links.
   - iCal (`.ics`) file export with 15-minute advance reminder notifications.
 
+---
 
+## 13. Two-Speed Place Resolution & Province Terrain Coding
+
+### 13.1. Two-Speed Apify Resolution (for places absent from DB)
+| Lane | Method | Latency | Output |
+|:---|:---|:---:|:---|
+| **Lane A (Fast)** | Goong Geocoding API | < 300ms | `(lat, lng)` + raw address. Immediate UI render with `[Chưa xác minh]` badge. |
+| **Lane B (Background)** | Apify `google-maps-scraper` | 10-30s | Full enrichment: `working_hours`, `rating`, `photo_url`, `google_place_id`. Auto-updates UI via polling or SSE. |
+
+- Cache key for Apify results: `apify:{slugify(place_name)}:{province_code}` — TTL 7 days.
+- If Lane B returns empty after 2 retries → discard Lane A result, activate 4-Tier Fallback (Section 8.1).
+- Implementation module: `app/services/apify_fallback.py` (planned).
+
+### 13.2. Province Terrain Mapping (`PROVINCE_TERRAIN` dict in `travel_calculator.py`)
+```python
+PROVINCE_TERRAIN = {
+    # Đồng bằng / Cao tốc — K_topo=1.22, V_avg=80km/h
+    "flat": ["ha_noi", "tp_ho_chi_minh", "hai_phong", "can_tho", "da_nang",
+             "nam_dinh", "hung_yen", "thai_binh", "vinh_long", "dong_thap",
+             "an_giang", "tien_giang", "long_an", "kien_giang"],
+    # Bán sơn địa / Duyên hải — K_topo=1.35, V_avg=60km/h
+    "coastal": ["thanh_hoa", "nghe_an", "ha_tinh", "quang_binh", "quang_tri",
+                "thua_thien_hue", "quang_nam", "quang_ngai", "binh_dinh",
+                "phu_yen", "khanh_hoa", "ninh_thuan", "binh_thuan", "quang_ninh",
+                "binh_duong", "dong_nai", "ba_ria_vung_tau"],
+    # Đèo dốc / Vùng cao — K_topo=1.75, V_avg=35km/h
+    "highland": ["lao_cai", "yen_bai", "son_la", "dien_bien", "lai_chau",
+                 "ha_giang", "cao_bang", "bac_kan", "tuyen_quang",
+                 "kon_tum", "gia_lai", "dak_lak", "dak_nong", "lam_dong"],
+}
+K_TOPO = {"flat": 1.22, "coastal": 1.35, "highland": 1.75}
+V_AVG  = {"flat": 80,   "coastal": 60,   "highland": 35}   # km/h
+```
+**Cross-terrain trips**: When origin and destination span different terrain groups, compute weighted-average $K_{\text{topo}}$ proportional to estimated distance through each zone (60% first zone + 40% second zone as safe default when exact split is unknown).
 

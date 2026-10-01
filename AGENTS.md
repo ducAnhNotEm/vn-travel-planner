@@ -260,4 +260,39 @@ Khi người dùng tìm kiếm địa điểm chung chung hoặc dịch vụ vi 
   - **Google Maps Multi-Stop Navigation URL**: Tự động sinh link mở thẳng ứng dụng Google Maps với toàn bộ các chặng dừng trong ngày (`https://www.google.com/maps/dir/Origin/Stop1/Stop2/.../Hotel`).
   - **Lịch số (iCal / Google Calendar)**: Chuẩn hóa xuất file `.ics` đồng bộ toàn bộ mốc giờ check-in, ăn uống, tham quan kèm thông báo nhắc trước 15 phút.
 
+---
+
+## 14. Two-Speed Place Resolution Architecture (Phân luồng 2 Tốc độ khi Địa điểm ngoài DB)
+
+Khi người dùng yêu cầu một địa điểm hoặc loại hình dịch vụ **không tồn tại trong `travel_db.db`**, hệ thống bắt buộc áp dụng kiến trúc phân luồng 2 tốc độ — **KHÔNG ĐƯỢC block UI** chờ kết quả Apify:
+
+### Lane A — Fast Lane: Goong Geocoding (≤ 300ms, Đồng bộ)
+1. **Trigger**: Ngay khi phát hiện địa điểm ngoài DB, tức thì gọi Goong Geocoding API (`https://rsapi.goong.io/geocode`) với tên địa điểm + tỉnh thành.
+2. **Output**: Trả về tọa độ `(lat, lng)` và địa chỉ định dạng tạm thời (unverified) trong vòng < 300ms.
+3. **Hành vi**: Ngay lập tức chèn địa điểm vào lịch trình với badge `[Chưa xác minh đầy đủ]`. Người dùng thấy kết quả ngay, không bị block.
+4. **Giới hạn**: Goong Geocoding chỉ cho tọa độ + địa chỉ thô — **KHÔNG CÓ** giờ mở cửa, rating, ảnh, Place ID. Bắt buộc hiển thị cảnh báo rõ ràng về điều này.
+
+### Lane B — Background Lane: Apify Scraper (10-30s, Bất đồng bộ)
+1. **Trigger**: Ngay sau khi Lane A trả về kết quả, enqueue một Apify Actor job (`apify/google-maps-scraper`) trong background task (FastAPI `BackgroundTasks` hoặc `asyncio.create_task`).
+2. **Output khi hoàn thành**: Cập nhật bản ghi địa điểm với dữ liệu đầy đủ: `working_hours`, `rating`, `photo_url`, `google_place_id`, `formatted_address` chuẩn Google.
+3. **Cơ chế Push Update**: Backend ghi kết quả Apify vào cache (key = `apify:{place_name}:{province}`). Client polling `GET /api/place/status/{cache_key}` mỗi 3 giây hoặc dùng SSE (Server-Sent Events) để nhận update tự động.
+4. **Hành vi sau khi Lane B hoàn thành**: Badge `[Chưa xác minh đầy đủ]` tự động chuyển thành `✅ Đã xác minh` và dữ liệu đầy đủ được render (giờ mở cửa, ảnh, nút ghim Google Maps).
+
+### Luật Sắt về Phân luồng:
+- ❌ **TUYỆT ĐỐI CẤM** gọi Apify synchronously và block toàn bộ request của người dùng 10-30 giây.
+- ❌ **TUYỆT ĐỐI CẤM** skip Lane A và chờ Lane B xong mới trả kết quả — vi phạm UX nghiêm trọng.
+- ✅ **BẮT BUỘC** Lane A phải luôn chạy trước và phản hồi user trong < 500ms.
+- ✅ **BẮT BUỘC** Cache kết quả Apify (TTL = 7 ngày) để tránh scrape lại cùng địa điểm, tiết kiệm quota.
+- ✅ **Khi Apify không tìm thấy** (empty result sau 2 lần retry): Kích hoạt 4-Tier Fallback (Section 6). Xóa kết quả Lane A. Không được giữ lại dữ liệu unverified trong lịch trình cuối cùng.
+
+### Topographic Province Lookup Table (Tra cứu địa hình theo tỉnh):
+Để áp đúng $K_{\text{topo}}$ trong Section 10 khi tính thời gian di chuyển:
+
+| Nhóm địa hình | Các tỉnh/thành phố | $K_{\text{topo}}$ | $V_{\text{avg}}$ |
+|:---|:---|:---:|:---:|
+| **Đồng bằng / Cao tốc** | Hà Nội, TP.HCM, Hải Phòng, Cần Thơ, Đà Nẵng, Nam Định, Hưng Yên, Thái Bình, Vĩnh Long, Đồng Tháp, An Giang, Tiền Giang, Long An, Kiên Giang (đồng bằng) | 1.22 | 80 km/h |
+| **Bán sơn địa / Duyên hải** | Thanh Hóa, Nghệ An, Hà Tĩnh, Quảng Bình, Quảng Trị, Thừa Thiên-Huế, Quảng Nam, Quảng Ngãi, Bình Định, Phú Yên, Khánh Hòa, Ninh Thuận, Bình Thuận, Quảng Ninh, Bình Dương, Đồng Nai, Bà Rịa–Vũng Tàu | 1.35 | 60 km/h |
+| **Đèo dốc / Vùng cao / Tây Bắc** | Lào Cai, Yên Bái, Sơn La, Điện Biên, Lai Châu, Hà Giang, Cao Bằng, Bắc Kạn, Tuyên Quang, Kon Tum, Gia Lai, Đắk Lắk, Đắk Nông, Lâm Đồng | 1.75 | 35 km/h |
+
+> **Lưu ý triển khai**: Table trên là **lookup tĩnh** — mã hóa cứng trong `travel_calculator.py` dưới dạng Python dict `PROVINCE_TERRAIN`. Khi origin/destination thuộc 2 nhóm khác nhau, lấy $K_{\text{topo}}$ **trung bình gia quyền** theo tỷ lệ phần trăm quãng đường ước tính qua từng vùng địa hình.
 
