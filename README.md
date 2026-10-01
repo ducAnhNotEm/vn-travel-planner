@@ -47,8 +47,23 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
 
-Mở trình duyệt tại: **`http://localhost:8000/`** để sử dụng ứng dụng web.
-Tài liệu API Swagger UI: **`http://localhost:8000/docs`**.
+### 3.1. Cài Đặt Bộ Não AI Nội Bộ (Local NLU Engine - Ollama)
+
+Dự án áp dụng kiến trúc **Local-First AI**, sử dụng mô hình miền chuyên dụng **`vn-travel-qwen:7b`** (fine-tuned từ Qwen 2.5 7B Instruct) chạy trực tiếp trên máy thông qua **Ollama** mà không phụ thuộc Internet hay tốn chi phí API ngoài:
+
+1. **Cài đặt Ollama**: Tải và cài đặt tại [ollama.com/download](https://ollama.com/download).
+2. **Tải file Model Weights**:
+   - Tải file model `Qwen2.5-7B-Instruct.Q4_K_M.gguf` (~4.68 GB) từ Google Drive của nhóm dự án và đặt vào thư mục gốc của project: `vn-travel-planner/`.
+3. **Nạp Model vào Ollama**:
+   ```powershell
+   # Đứng tại thư mục gốc dự án
+   ollama create vn-travel-qwen:7b -f Modelfile
+   ```
+4. **Kiểm tra suy luận AI**:
+   ```powershell
+   python test_nlu_inference.py
+   ```
+   *(Model sẽ tự động phân tích câu prompt tiếng Việt và trích xuất JSON NLU chuẩn Pydantic để đưa vào thuật toán tối ưu lộ trình).*
 
 ---
 
