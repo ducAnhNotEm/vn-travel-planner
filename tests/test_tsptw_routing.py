@@ -48,18 +48,37 @@ DB_PATH = os.path.join(PROJECT_ROOT, "travel_db.db")
 # ==============================================================================
 # DATABASE FIXTURE HELPERS
 # ==============================================================================
+LEGACY_MAP = {
+    1001: "Hoàng thành Thăng Long",
+    1012: "Chùa Quán Sứ",
+    1446: "Bảo tàng Điêu khắc Chăm Đà Nẵng",
+    1865: "Chợ Đêm Sơn Trà",
+    2155: "Nhà Hàng Gà Đồi Điện Biên",
+    2264: "Nhà hàng Bún Chả Đắc Kim",
+}
+
 def get_db_place(place_id: int) -> Dict[str, Any]:
     """Trích xuất bản ghi thật từ travel_db.db theo id."""
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute(
-        """
-        SELECT id, name, category, lat, lng, address, typical_time_spent, google_place_id
-        FROM places WHERE id = ?
-        """,
-        (place_id,)
-    )
-    row = c.fetchone()
+    if place_id in LEGACY_MAP:
+        c.execute(
+            """
+            SELECT id, name, category, lat, lng, address, typical_time_spent, google_place_id
+            FROM places WHERE name = ?
+            """,
+            (LEGACY_MAP[place_id],)
+        )
+        row = c.fetchone()
+    else:
+        c.execute(
+            """
+            SELECT id, name, category, lat, lng, address, typical_time_spent, google_place_id
+            FROM places WHERE id = ?
+            """,
+            (place_id,)
+        )
+        row = c.fetchone()
     conn.close()
     if not row:
         raise ValueError(f"Place ID {place_id} not found in {DB_PATH}")
@@ -420,7 +439,7 @@ class TestSuite4GroundTruthRealScenarios:
         day_places = [p_mykhe, p_cham, p_sontra]
         sim_route, dist = solve_day_tsptw_2opt(day_places, start_time_str="08:30")
 
-        sontra_step = next(s for s in sim_route if s["id"] == 1865)
+        sontra_step = next(s for s in sim_route if s["id"] == p_sontra["id"])
         arr_min = parse_time_str(sontra_step["arrival_time"])
         dep_min = parse_time_str(sontra_step["departure_time"])
 
@@ -429,7 +448,7 @@ class TestSuite4GroundTruthRealScenarios:
         )
         assert sontra_step["is_time_window_valid"] is True
         # Khẳng định Chợ đêm nằm ở cuối lộ trình và các điểm tham quan ban ngày được xếp buổi sáng
-        assert sim_route[-1]["id"] == 1865, "Chợ Đêm Sơn Trà must be sequenced as the final stop of the day"
+        assert sim_route[-1]["id"] == p_sontra["id"], "Chợ Đêm Sơn Trà must be sequenced as the final stop of the day"
         assert parse_time_str(sim_route[0]["arrival_time"]) < parse_time_str("12:00"), (
             "Daytime sightseeing places must be scheduled in the morning"
         )
@@ -447,7 +466,7 @@ class TestSuite4GroundTruthRealScenarios:
         day_places = [p_hoangthanh, p_quansu, p_dackim]
         sim_route, _ = solve_day_tsptw_2opt(day_places, start_time_str="08:00")
 
-        quansu_step = next(s for s in sim_route if s["id"] == 1012)
+        quansu_step = next(s for s in sim_route if s["id"] == p_quansu["id"])
         q_arr = parse_time_str(quansu_step["arrival_time"])
         q_dep = parse_time_str(quansu_step["departure_time"])
 
@@ -470,7 +489,7 @@ class TestSuite4GroundTruthRealScenarios:
         day_places = [p_hoangthanh, p_quansu, p_dackim]
         sim_route, _ = solve_day_tsptw_2opt(day_places, start_time_str="08:00")
 
-        ht_step = next(s for s in sim_route if s["id"] == 1001)
+        ht_step = next(s for s in sim_route if s["id"] == p_hoangthanh["id"])
         ht_dep = parse_time_str(ht_step["departure_time"])
 
         assert ht_dep <= parse_time_str("17:00"), (
@@ -493,7 +512,7 @@ class TestSuite4GroundTruthRealScenarios:
         day_hn = [p_hoangthanh, p_quansu, p_dackim]
         sim_hn, _ = solve_day_tsptw_2opt(day_hn, start_time_str="08:00")
 
-        dk_step = next(s for s in sim_hn if s["id"] == 2264)
+        dk_step = next(s for s in sim_hn if s["id"] == p_dackim["id"])
         dk_arr = parse_time_str(dk_step["arrival_time"])
         assert parse_time_str("11:30") <= dk_arr <= parse_time_str("13:30"), (
             f"Bún Chả Đắc Kim arrival must be in lunch window 11:30 - 13:30, got {dk_step['arrival_time']}"
@@ -513,7 +532,7 @@ class TestSuite4GroundTruthRealScenarios:
         }
         day_nt = [p_sight, p_gadoi]
         sim_nt, _ = solve_day_tsptw_2opt(day_nt, start_time_str="09:00")
-        gd_step = next(s for s in sim_nt if s["id"] == 2155)
+        gd_step = next(s for s in sim_nt if s["id"] == p_gadoi["id"])
         gd_arr = parse_time_str(gd_step["arrival_time"])
         assert parse_time_str("11:30") <= gd_arr <= parse_time_str("13:30"), (
             f"Gà Đồi Điện Biên arrival must be in lunch window 11:30 - 13:30, got {gd_step['arrival_time']}"

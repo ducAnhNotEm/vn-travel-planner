@@ -1,7 +1,15 @@
 from fastapi import APIRouter, HTTPException, Query, Response
-from app.services.map_service import get_static_route_image
+from pydantic import BaseModel, Field
+from typing import List
+from app.services.map_service import get_static_route_image, get_multi_stop_route
 
 router = APIRouter(prefix="/api/map", tags=["Map Service"])
+
+
+class DirectionsRequest(BaseModel):
+    coordinates: List[List[float]] = Field(..., min_length=2, description="Danh sách các cặp tọa độ [[lat, lng], ...]")
+    vehicle: str = Field("car", description="Loại phương tiện (car, motorbike, taxi)")
+
 
 @router.get("/static-route")
 def get_route_map(
@@ -34,3 +42,17 @@ def get_route_map(
         )
 
     return Response(content=image_bytes, media_type="image/png")
+
+
+@router.post("/directions")
+def get_directions(req: DirectionsRequest):
+    """
+    Backend Proxy cung cấp đa tuyến uốn lượn đường bộ thực tế (Goong Directions API).
+    Bảo vệ Goong API Key, tự động cache và giải mã tọa độ cho Leaflet vẽ đường uốn lượn thật.
+    """
+    coords = [(c[0], c[1]) for c in req.coordinates if len(c) >= 2]
+    if len(coords) < 2:
+        raise HTTPException(status_code=400, detail="Cần tối thiểu 2 điểm tọa độ hợp lệ.")
+
+    route_data = get_multi_stop_route(coords, vehicle=req.vehicle)
+    return route_data

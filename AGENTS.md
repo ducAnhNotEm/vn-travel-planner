@@ -119,6 +119,11 @@ TASK ASSIGNED
 - ❌ **LLM MUST NOT** decide hotel switching on pure intuition. (Must strictly follow distance threshold & cost evaluation).
 - ❌ **LLM MUST NOT** calculate bill totals or split expenses mentally. (Must use deterministic math).
 - ❌ **LLM MUST NOT** guess or invent coordinates, opening hours, or room prices. Ground truth must come from `travel_db.db`.
+- ❌ **NEVER CONFUSE ORIGIN AND DESTINATION (Cấm nhầm lẫn Điểm xuất phát và Điểm đến)**:
+  - Khi người dùng nhập câu có cấu trúc đảo ngữ hoặc đa địa danh (ví dụ: *"Tới Quảng Nam đi bằng máy bay xuất phát từ Bắc Ninh"*, *"Ở Bắc Ninh muốn du lịch Hội An"*):
+  - **NLU Parser BẮT BUỘC phân rã chính xác**: `origin = "Bắc Ninh"` và `destination = "Quảng Nam"`.
+  - **Tuyệt đối cấm**: Lấy địa danh của `origin` làm điểm tham quan của `destination`, dẫn đến bug kinh điển: *Đi từ Bắc Ninh tới Bắc Ninh*.
+  - Toàn bộ danh lam, khách sạn, nhà hàng trong lịch trình bắt buộc phải thuộc tỉnh `destination` (Quảng Nam). `origin` (Bắc Ninh) chỉ đóng vai trò điểm đón ban đầu (first-mile) và điểm trả khách cuối cùng (return last-mile).
 - ❌ **NEVER EXPOSE PAID API KEYS (Google Maps / Goong Maps)** in public frontend code. All third-party geocoding / autocomplete API calls with paid keys MUST route through a backend endpoint (`/api/...`) with in-memory caching to prevent quota exhaustion and credential leakage.
 - ❌ **NEVER BREAK ZERO-ERROR GEOLOCATION**: Free client fallbacks (HTML5 Geolocation + IP reverse-geocoding via BigDataCloud/IPWhois) must always remain operational even if external Google API keys are missing or quota is exceeded.
 
@@ -179,11 +184,19 @@ TASK ASSIGNED
 
 ---
 
-## 4. Hotel Switching Rules (Quy tắc đổi khách sạn)
+## 4. Hotel Switching & Anchoring Rules (Quy tắc đổi & neo khách sạn)
 
-- Do not recommend hotel changes for minor distance differences ($< 20\text{ km}$).
-- Only trigger hotel switching alerts when distance between days is substantial ($\ge 30 - 40\text{ km}$) and travel time saved outweighs check-in/out inconvenience.
-- In multi-day trips (3-5 days), cap hotel changes at 1-2 times maximum to avoid hotel-hopping fatigue.
+- **Nguồn sự thật duy nhất (`travel_params.py`)**:
+  - Ngưỡng khoảng cách xa: $D_{\text{one-way}} \ge 35\text{ km}$ (`HOTEL_FAR_ONE_WAY_KM`).
+  - Ngưỡng tiết kiệm tối thiểu để đổi: $\Delta D \ge 20\text{ km}$ (`HOTEL_MIN_SAVING_KM`).
+- **Khách sạn neo cố định (Hard-pinned Hotel)**:
+  - Khi khách hàng chủ động chọn 1 khách sạn làm điểm lưu trú cố định: Hệ thống **tôn trọng 100% lựa chọn của khách**, không tự ý xóa hay ép đổi.
+  - Nếu khoảng cách từ khách sạn tới cụm tham quan trong ngày $\ge 35\text{ km}$:
+    - Gắn thẻ thời gian di chuyển khứ hồi vào timeline của ngày đó.
+    - Kích hoạt **Smart Hotel Advisory** với 2 phương án minh bạch:
+      - **Phương án A**: Gợi ý đổi khách sạn lân cận cụm đó từ `travel_db.db` để tiết kiệm thời gian ngồi xe.
+      - **Phương án B**: Giữ nguyên khách sạn của khách để không phải dọn hành lý, xuất phát sớm hơn.
+    - Làm giàu lời khuyên tự nhiên bằng **Claude 4.6 AI Advisor**.
 
 ---
 
@@ -226,41 +239,45 @@ Khi người dùng tìm kiếm địa điểm chung chung hoặc dịch vụ vi 
 
 ---
 
-## 9. Multi-Modal Transit & Gateway Airport Catchment Rules (Hàng không Đa phương thức)
+## 9. Multi-Modal Transit & Real Road Polyline Rules (Định tuyến & Bản đồ Thực tế)
 
 - **Ngưỡng Kích hoạt Hàng không**: Khi khoảng cách trắc địa liên tỉnh $D(\text{Origin}, \text{Destination}) \ge 300\text{ km}$:
   - Bắt buộc kiểm tra tính khả thi của đường bay trung chuyển.
 - **Quy tắc Sân bay Cửa ngõ (Gateway Airport Catchment Area)**:
   - Với các điểm đến không có sân bay thương mại riêng (Hội An, Ninh Bình, Sa Pa, Mũi Né...): Quét các sân bay trong bán kính hành lang lân cận $R \le 150\text{ km}$.
-  - Lựa chọn sân bay tối ưu bắt buộc dùng **Hàm thỏa dụng đa tiêu chí chuẩn hóa không thứ nguyên (Normalized Multi-Criteria Utility Function)** giữa tần suất chuyến bay $F(A)$ và cự ly đường bộ $D(A, T)$. Cấm lấy 2 đại lượng khác thứ nguyên trừ trực tiếp cho nhau.
-- **Mô hình Bản đồ 3 Mảnh ghép (3-Piece Route Visualization)**:
-  - First-mile (Đường bộ Goong) $\to$ Air Corridor (Cung trắc địa nối 2 sân bay, nét đứt tím `#7C3AED`) $\to$ Last-mile (Đường bộ Goong).
-  - ❌ **TUYỆT ĐỐI CẤM** gọi Routing API đường bộ xuyên biển hoặc xuyên không gian giữa các tỉnh cách nhau hàng trăm km.
+  - Lựa chọn sân bay tối ưu bắt buộc dùng **Hàm thỏa dụng đa tiêu chí chuẩn hóa không thứ nguyên (Normalized Multi-Criteria Utility Function)** giữa tần suất chuyến bay $F(A)$ và cự ly đường bộ $D(A, T)$.
+- **Vẽ bản đồ đường uốn lượn thực tế (Goong Directions Real Polylines)**:
+  - Tất cả các chặng đường bộ (First-mile, Last-mile, lộ trình trong ngày) bắt buộc dùng tọa độ giải mã từ **Goong Directions API** với bộ đệm kép (In-memory LRU + MD5 Disk Cache).
+  - Leaflet vẽ đường thực tế bám sát mạng lưới giao thông. Tuyệt đối không nối đường thẳng chim bay (trừ khi rớt mạng/hết quota, vẽ nét đứt dự phòng kèm nhãn ước tính).
+  - Chặng bay hàng không vẽ cung trắc địa nét đứt tím `#8B5CF6`.
 
 ---
 
-## 10. Long-Distance Road Trip Fatigue & Topographic Speed Rules (Road Trip & Địa hình)
+## 10. Long-Distance Road Trip Fatigue & Feasibility Trade-offs (Road Trip & Đánh đổi)
 
+- **Thời lượng chuyến đi linh hoạt**: Cho phép mở rộng từ $1$ đến $14\text{ ngày}$ (`MAX_TRIP_DAYS = 14`), không ép cứng 5N4Đ.
 - **Ràng buộc Mỏi mệt Sinh học (Fatigue Constraint)**:
-  - Sau mỗi $3 - 3.5\text{ giờ}$ lái xe liên tục (hoặc $160 - 200\text{ km}$), bắt buộc chèn một trạm dừng nghỉ ngắn 30-45 phút (uống nước, đổ xăng).
-  - Trần thể lực an toàn: Tối đa $8\text{ giờ}$ lái xe/ngày ($\le 450\text{ km}$).
-  - Cự ly $\ge 650 - 700\text{ km}$: Bắt buộc tách thành hành trình nhiều ngày và chọn điểm dừng chân nghỉ đêm tối ưu (Overnight Staging City) sát trục giao thông chính.
-- **Ma trận Vận tốc Địa hình Thực tế (Topographic Terrain Matrix)**:
-  - Tuyệt đối cấm áp dụng một vận tốc cao tốc duy nhất cho toàn bộ địa hình Việt Nam:
-    - **Đồng bằng / Cao tốc**: $K_{\text{topo}} = 1.20 - 1.25, V_{\text{avg}} = 70 - 90\text{ km/h}$.
-    - **Bán sơn địa / Duyên hải**: $K_{\text{topo}} = 1.30 - 1.35, V_{\text{avg}} = 55 - 65\text{ km/h}$.
-    - **Đèo dốc Vùng cao / Tây Bắc**: $K_{\text{topo}} = 1.65 - 1.85, V_{\text{avg}} = 30 - 40\text{ km/h}$.
+  - Sau mỗi $3.5\text{ giờ}$ lái xe liên tục, bắt buộc chèn một trạm dừng nghỉ ngắn 30 phút.
+  - Trần thể lực an toàn: Tối đa $8\text{ giờ}$ lái xe/ngày ($\le 400\text{ km}$ với ô tô, $\le 280\text{ km}$ với xe máy).
+  - Cự ly một chiều $\ge 400\text{ km}$: Bắt buộc tách thành hành trình nhiều ngày và chọn điểm dừng chân nghỉ đêm tối ưu (Overnight Staging City).
+- **Cơ chế Đánh đổi Khả thi (Feasibility Trade-offs)**:
+  - Khi cự ly quá lớn so với số ngày khách chọn ($D_{\text{one-way}} \ge 300\text{ km}$ mà $\text{Play Days} \le 0$):
+    - Hệ thống **không ép đổi ngày của khách**, mà đưa ra 3 phương án đánh đổi minh bạch:
+      1. **Chuyển sang đi máy bay** (chỉ mất ~2h bay thay vì mất nhiều ngày trên xe).
+      2. **Tăng số ngày lên mức tối thiểu an toàn** ($\ge \text{Total Drive Days} + 2$).
+      3. **Chọn điểm đến gần hơn** trong bán kính an toàn $\le 400\text{ km}$.
+    - Kèm phân tích lời khuyên tự nhiên từ **Claude 4.6 AI Advisor**.
 
 ---
 
-## 11. Local-First AI Sovereign Architecture & Circuit Breaker Governance (Kiến trúc AI Tự chủ)
+## 11. Multi-Tier AI Architecture & Governance (Kiến trúc AI Đa tầng)
 
-- **Tôn chỉ "Local First"**:
-  - **LÕI SỐ 1 (PRIMARY)**: Máy chủ cục bộ **Ollama** (`http://localhost:11434`) chạy mô hình miền **`vn-travel-qwen:7b`** (fine-tuned trên nền Qwen 2.5 7B Instruct).
-  - Đảm bảo tính tự chủ công nghệ, chạy Offline 100% không phụ thuộc Internet, bảo mật tuyệt đối dữ liệu cá nhân.
-- **Cơ chế Phòng thủ Circuit Breaker**:
-  - **LÕI SỐ 2 (FALLBACK)**: **Google Gemini 2.0 Flash API**.
-  - Tự động kích hoạt khi kết nối Ollama bị từ chối (`ConnectionRefusedError`) hoặc thời gian phản hồi quá $4\text{ giây}$. Tuyệt đối không để ứng dụng bị crash hay treo vô tận.
+- **LÕI SỐ 1 (PRIMARY CLOUD LLM)**: **Claude 4.6** (`claude-sonnet-4-6` qua VyceAI API).
+  - Đảm nhiệm việc tạo lời khuyên tư vấn (AI Explainer), phân tích đánh đổi khách sạn và an toàn thể lực road trip với ngôn phong tự nhiên, sâu sắc và lịch thiệp.
+- **LÕI SỐ 2 (LOCAL FALLBACK)**: Máy chủ cục bộ **Ollama** (`http://localhost:11434`) chạy mô hình miền **`vn-travel-qwen:7b`**.
+  - Tự động kích hoạt khi mất kết nối Internet, đảm bảo tính tự chủ và bảo mật.
+- **LÕI SỐ 3 (DETERMINISTIC FALLBACK)**: Thuật toán xác định thuần Python.
+  - Bảo đảm Zero-Crash dù cả Claude và Ollama đều không khả dụng.
 - **Pydantic Structured Output Enforcement**:
   - Mọi phản hồi từ LLM bắt buộc phải được validate qua Pydantic Schema để triệt tiêu hoàn toàn rủi ro hallucination hoặc lỗi cú pháp JSON.
 

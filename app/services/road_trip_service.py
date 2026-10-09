@@ -28,6 +28,8 @@ from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
 from enum import Enum
 
+from app.services import travel_params as P
+
 # ─── Đường dẫn DB mặc định ────────────────────────────────────────────────────
 _DB_PATH = r"d:\vn-travel-planner\travel_db.db"
 
@@ -144,19 +146,15 @@ _FUEL_COST_PER_KM = {
     VehicleType.VAN:       2400,
 }
 
-# Ràng buộc an toàn sinh học (giờ)
-_MAX_CONTINUOUS_DRIVE_HRS = 4.0    # Không lái quá 4h liên tục
-_MANDATORY_SHORT_BREAK_MINS = 30   # Dừng nghỉ bắt buộc
-_MAX_DAILY_DRIVE_HRS = 8.0         # Tổng không quá 8h/ngày
-_SAFE_DAILY_KM = {                  # Km an toàn tối đa mỗi ngày
-    VehicleType.CAR:       400,
-    VehicleType.MOTORBIKE: 280,
-    VehicleType.VAN:       380,
-}
+# Ràng buộc an toàn sinh học — đọc từ nguồn sự thật duy nhất app/services/travel_params.py
+_MAX_CONTINUOUS_DRIVE_HRS = P.MAX_CONTINUOUS_DRIVE_HRS
+_MANDATORY_SHORT_BREAK_MINS = P.MANDATORY_BREAK_MINS
+_MAX_DAILY_DRIVE_HRS = P.MAX_DAILY_DRIVE_HRS
+_SAFE_DAILY_KM = {VehicleType(k): v for k, v in P.SAFE_DAILY_KM.items()}
 
 # Ngưỡng kích hoạt Road Trip mode
-_ROAD_TRIP_THRESHOLD_KM = 300.0    # Dưới ngưỡng này: đường bộ trực tiếp, không cần staging
-_OVERNIGHT_STAGING_KM   = 400.0    # Từ ngưỡng này: bắt buộc nghỉ đêm giữa chặng
+_ROAD_TRIP_THRESHOLD_KM = P.ROAD_TRIP_THRESHOLD_KM
+_OVERNIGHT_STAGING_KM   = float(P.SAFE_DAILY_KM["car"])  # Quá 1 ngày lái an toàn → nghỉ đêm giữa chặng
 
 # Bán kính Corridor Buffer cho Scenic Mode (km vuông góc tính từ trục đường)
 _SCENIC_CORRIDOR_RADIUS_KM = 20.0
@@ -223,7 +221,7 @@ def _road_distance_estimate(haversine_km: float) -> float:
     Hệ số tortuosity 1.35 là giá trị chuẩn cho đường bộ Việt Nam (có đèo, cua).
     Nguồn: Nghiên cứu thực địa dữ liệu Google Maps VN.
     """
-    return haversine_km * 1.35
+    return haversine_km * P.LONG_HAUL_TORTUOSITY
 
 
 def _drive_time_mins(road_km: float, vehicle: VehicleType) -> int:
@@ -809,6 +807,25 @@ def check_road_trip_feasibility(
     total_drive_days  = drive_days_needed * 2             # Khứ hồi
     play_days         = total_trip_days - total_drive_days
 
+    min_days_rec = total_drive_days + 2
+    trade_offs = [
+        {
+            "action": "FLY",
+            "title": "Chuyển sang đi máy bay",
+            "description": f"Chỉ mất ~1.5 - 2h bay thay vì {total_drive_days} ngày lái xe khứ hồi. Dành trọn vẹn {total_trip_days} ngày để du lịch."
+        },
+        {
+            "action": "MORE_DAYS",
+            "title": f"Tăng số ngày lên ≥ {min_days_rec} ngày",
+            "description": f"Dành {total_drive_days} ngày di chuyển an toàn và có ít nhất 2 ngày trọn vẹn khám phá điểm đến."
+        },
+        {
+            "action": "CLOSER_DEST",
+            "title": "Chọn điểm đến gần hơn",
+            "description": f"Chọn các tỉnh trong bán kính ≤ 350 - 400 km để đi về trong {total_trip_days} ngày mà không bị kiệt sức."
+        }
+    ]
+
     if play_days <= 0:
         return {
             "feasible": False,
@@ -817,10 +834,11 @@ def check_road_trip_feasibility(
                 f"⚠️ Cảnh báo: Quãng đường {one_way_km:.0f} km mỗi chiều cần tối thiểu "
                 f"{drive_days_needed} ngày lái ({total_drive_days} ngày khứ hồi). "
                 f"Với {total_trip_days} ngày, bạn sẽ không có thời gian tham quan tại điểm đến. "
-                f"Khuyên bạn đặt tối thiểu {total_drive_days + 2} ngày hoặc chuyển sang đi máy bay."
+                f"Khuyên bạn đặt tối thiểu {min_days_rec} ngày hoặc chuyển sang đi máy bay."
             ),
-            "min_days_recommended": total_drive_days + 2,
+            "min_days_recommended": min_days_rec,
             "drive_days_each_way": drive_days_needed,
+            "trade_offs": trade_offs,
         }
     elif play_days == 1:
         return {
@@ -833,6 +851,7 @@ def check_road_trip_feasibility(
             ),
             "play_days_available": play_days,
             "drive_days_each_way": drive_days_needed,
+            "trade_offs": trade_offs,
         }
 
     return {

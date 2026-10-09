@@ -1,4 +1,6 @@
+import os
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from app.routers import planner_router, map_router
 
 app = FastAPI(
@@ -7,13 +9,12 @@ app = FastAPI(
     version="1.0.0"
 )
 
-import os
-from fastapi.responses import FileResponse
-
 app.include_router(planner_router.router)
 app.include_router(map_router.router)
 
-FRONTEND_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "index.html")
+FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend")
+FRONTEND_PATH = os.path.join(FRONTEND_DIR, "index.html")
+PLAN_STREAM_PATH = os.path.join(FRONTEND_DIR, "plan_stream.js")
 
 @app.get("/")
 def root():
@@ -24,3 +25,8 @@ def root():
         "docs_url": "/docs"
     }
 
+@app.get("/plan_stream.js")
+def plan_stream_js():
+    if os.path.exists(PLAN_STREAM_PATH):
+        return FileResponse(PLAN_STREAM_PATH, media_type="application/javascript")
+    return {"error": "plan_stream.js not found"}

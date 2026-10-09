@@ -12,6 +12,7 @@
   <!-- Leaflet 1.9.4 Interactive Map Engine CDN -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/plan_stream.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -583,12 +584,102 @@
       <p class="text-sm text-slate-500 mt-2">Chọn địa điểm bạn muốn đến, hệ thống sẽ tự động ghép đường đi và hoàn thiện lịch trình theo nhịp sống thật.</p>
     </div>
 
+    <!-- ========================================================================= -->
+    <!-- AI PROMPT NLU TEST & AUTO-FILL CARD -->
+    <!-- ========================================================================= -->
+    <div class="bg-gradient-to-r from-slate-900 via-brand-blue to-slate-900 rounded-2xl shadow-xl p-5 mb-8 text-white border border-slate-700/80">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 text-brand-orange flex items-center justify-center text-lg shadow-sm">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-base font-extrabold text-white">Thử Nghiệm Nhập Prompt Tự Do (AI NLU Sandbox)</h3>
+              <span id="ai-engine-status-badge" class="text-[10px] bg-slate-800 text-slate-300 border border-slate-600 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400" id="ai-engine-dot"></span>
+                <span id="ai-engine-status-text">Đang kiểm tra Ollama...</span>
+              </span>
+            </div>
+            <p class="text-xs text-slate-300 mt-0.5">Nhập câu yêu cầu bằng tiếng Việt tự nhiên để kiểm tra trích xuất JSON và xem tự động điền form.</p>
+          </div>
+        </div>
+
+        <!-- Engine Selector -->
+        <div class="flex items-center gap-2 w-full sm:w-auto bg-slate-800/80 p-1.5 rounded-xl border border-slate-700">
+          <label class="text-[11px] text-slate-300 font-bold whitespace-nowrap pl-1">Mô hình:</label>
+          <select id="ai-engine-select" class="bg-slate-900 text-xs font-bold text-orange-300 border border-slate-600 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-brand-orange cursor-pointer">
+            <option value="v2" selected>Ollama: vn-travel-qwen-v2 (GGUF V2 Mới)</option>
+            <option value="v1">Ollama: vn-travel-qwen:7b (GGUF V1)</option>
+            <option value="fusion">Gộp khối: V1 + V2 Slot-Level Fusion</option>
+            <option value="claude">Claude 4.6 Sonnet (Cloud Reference)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Prompt Input & Run Button -->
+      <div class="flex flex-col sm:flex-row gap-2">
+        <div class="relative flex-1">
+          <input type="text" id="ai-prompt-input"
+            value="Tới Quảng Nam 3 ngày đi bằng máy bay xuất phát từ Bắc Ninh nhóm 4 người"
+            placeholder="Ví dụ: Tới Quảng Nam 3 ngày đi bằng máy bay xuất phát từ Bắc Ninh nhóm 4 người..."
+            class="w-full bg-slate-800/90 border border-slate-600 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/30">
+          <button type="button" onclick="document.getElementById('ai-prompt-input').value = ''" class="absolute right-3 top-3 text-slate-400 hover:text-white text-xs">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <button type="button" id="btn-parse-prompt" onclick="runPromptTest()"
+          class="bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-3 rounded-xl font-extrabold text-sm flex items-center justify-center gap-2 transition shadow-lg shadow-orange-500/25 active:scale-95 whitespace-nowrap">
+          <i class="fa-solid fa-bolt"></i>
+          <span>Phân Tích & Điền Form</span>
+        </button>
+      </div>
+
+      <!-- Quick 1-Click Test Chips -->
+      <div class="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-slate-800/80 text-xs">
+        <span class="text-slate-400 font-bold text-[11px]">Mẫu thử nhanh:</span>
+        <button type="button" onclick="setPromptQuick('Tới Quảng Nam 3 ngày đi bằng máy bay xuất phát từ Bắc Ninh nhóm 4 người')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 text-[11px] transition">🎯 Đảo ngữ: Tới Quảng Nam... từ Bắc Ninh</button>
+        <button type="button" onclick="setPromptQuick('Tạo lịch trình du lịch núi phía Bắc cho 2 người xuất phát từ HN')" class="bg-slate-800 hover:bg-emerald-900/60 text-emerald-300 px-2.5 py-1 rounded-lg border border-emerald-700/60 text-[11px] transition">🏔️ Núi phía Bắc từ HN (V3)</button>
+        <button type="button" onclick="setPromptQuick('Tôi muốn đi biển các tỉnh phía Bắc đi 3 người xuất phát từ Hà Nội trừ Hải Phòng')" class="bg-slate-800 hover:bg-rose-900/60 text-rose-300 px-2.5 py-1 rounded-lg border border-rose-700/60 text-[11px] transition">🌊 Biển phía Bắc trừ Hải Phòng (V3)</button>
+        <button type="button" onclick="setPromptQuick('Hà Nội đi Đà Nẵng 3 ngày bằng ô tô không đi máy bay đoàn 5 người')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 text-[11px] transition">🚗 Phủ định: Không đi máy bay</button>
+        <button type="button" onclick="setPromptQuick('Từ TP.HCM đi Đà Lạt 3 ngày 2 đêm xe máy 2 người')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 text-[11px] transition">🏍️ TP.HCM ➔ Đà Lạt</button>
+      </div>
+
+      <!-- Live Output Preview Panel (Hidden until user clicks) -->
+      <div id="ai-result-panel" class="mt-4 p-4 bg-slate-950/90 border border-slate-800 rounded-xl hidden">
+        <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-800">
+          <div class="flex items-center gap-2 text-xs font-bold text-emerald-400" id="ai-result-header">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Kết quả phân tích JSON thành công</span>
+          </div>
+          <div class="text-[11px] text-slate-400 flex items-center gap-2">
+            <span id="ai-result-engine" class="text-orange-300 font-mono"></span>
+            <span id="ai-result-latency" class="bg-slate-800 px-2 py-0.5 rounded font-mono"></span>
+          </div>
+        </div>
+
+        <!-- Extracted Slots Badges (Xuất phát, Điểm tới, Số ngày, Số người, Phương tiện) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3" id="ai-result-badges">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Raw JSON Preview -->
+        <details class="cursor-pointer group">
+          <summary class="text-xs text-slate-400 hover:text-slate-200 font-bold flex items-center gap-1.5 select-none">
+            <i class="fa-solid fa-code text-[11px]"></i>
+            <span>Xem chuỗi JSON thô từ Model (Raw JSON)</span>
+          </summary>
+          <pre id="ai-result-raw-json" class="mt-2 p-3 bg-slate-900 border border-slate-800 rounded-lg text-emerald-300 font-mono text-[11px] overflow-x-auto max-h-56 whitespace-pre-wrap"></pre>
+        </details>
+      </div>
+    </div>
+
     <!-- Parameter Config Card -->
     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div>
           <label class="block text-xs font-bold text-slate-600 mb-1.5">Tỉnh / Thành phố</label>
-          <select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-brand-blue focus:outline-none focus:border-brand-orange">
+          <select id="planner-province-select" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-brand-blue focus:outline-none focus:border-brand-orange">
             <optgroup label="── Thành phố trực thuộc Trung ương ──">
               <option value="1">Thành phố Hà Nội</option>
               <option value="79">Thành phố Hồ Chí Minh</option>
@@ -1222,6 +1313,311 @@
       }
     }
 
+    // ==========================================
+    // AI PROMPT NLU SANDBOX & AUTO-FILL LOGIC
+    // ==========================================
+    function setPromptQuick(text) {
+      const input = document.getElementById('ai-prompt-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+      }
+    }
+
+    async function checkOllamaLiveStatus() {
+      const badgeText = document.getElementById('ai-engine-status-text');
+      const dot = document.getElementById('ai-engine-dot');
+      if (!badgeText) return;
+
+      try {
+        const res = await fetch('/api/plan/ollama-status');
+        if (!res.ok) throw new Error('Status check failed');
+        const data = await res.json();
+
+        if (data.online) {
+          const models = data.models || [];
+          if (dot) dot.className = "w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse";
+          if (data.has_v2 && data.has_v1) {
+            badgeText.innerText = "Ollama: Sẵn sàng (V1 + V2 Online)";
+          } else if (data.has_v2) {
+            badgeText.innerText = "Ollama: Sẵn sàng (vn-travel-qwen-v2 Online)";
+          } else if (data.has_v1) {
+            badgeText.innerText = "Ollama: Sẵn sàng (vn-travel-qwen:7b Online)";
+          } else {
+            badgeText.innerText = `Ollama: Online (${models.length} models)`;
+          }
+        } else {
+          if (dot) dot.className = "w-1.5 h-1.5 rounded-full bg-amber-400";
+          badgeText.innerText = "Ollama: Chưa bật (Bấm xem hướng dẫn)";
+        }
+      } catch (err) {
+        if (dot) dot.className = "w-1.5 h-1.5 rounded-full bg-slate-400";
+        badgeText.innerText = "Ollama: Chưa kết nối";
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      checkOllamaLiveStatus();
+    });
+
+    async function runPromptTest() {
+      const promptInput = document.getElementById('ai-prompt-input');
+      const engineSelect = document.getElementById('ai-engine-select');
+      const btn = document.getElementById('btn-parse-prompt');
+      const panel = document.getElementById('ai-result-panel');
+      const header = document.getElementById('ai-result-header');
+      const engineDisplay = document.getElementById('ai-result-engine');
+      const latencyDisplay = document.getElementById('ai-result-latency');
+      const badgesContainer = document.getElementById('ai-result-badges');
+      const rawJsonDisplay = document.getElementById('ai-result-raw-json');
+
+      if (!promptInput || !promptInput.value.trim()) {
+        alert("Vui lòng nhập câu prompt cần phân tích!");
+        return;
+      }
+
+      const promptText = promptInput.value.trim();
+      const engineChoice = engineSelect ? engineSelect.value : 'v2';
+
+      const originalBtnHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Đang phân tích...</span>';
+
+      try {
+        const res = await fetch('/api/plan/parse-prompt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: promptText, engine: engineChoice })
+        });
+
+        const data = await res.json();
+        panel.classList.remove('hidden');
+
+        if (data.success && data.parsed_json) {
+          header.className = "flex items-center gap-2 text-xs font-bold text-emerald-400";
+          header.innerHTML = '<i class="fa-solid fa-circle-check"></i><span>Phân tích JSON thành công! Đã tự động điền form</span>';
+          engineDisplay.innerText = data.engine_used || engineChoice;
+          latencyDisplay.innerText = `${data.latency_ms}ms`;
+
+          rawJsonDisplay.innerText = JSON.stringify(data.parsed_json, null, 2);
+
+          const ext = data.extracted || {};
+          let html = `
+            <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-lg">
+              <span class="text-[10px] text-slate-400 block font-semibold">Điểm xuất phát (Origin)</span>
+              <span class="text-xs font-bold text-orange-300 truncate block">${ext.origin || '<span class="text-slate-500 italic">null</span>'}</span>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-lg">
+              <span class="text-[10px] text-slate-400 block font-semibold">Điểm đến (Destination)</span>
+              <span class="text-xs font-bold text-emerald-300 truncate block">${ext.destination || '<span class="text-slate-500 italic">null</span>'}</span>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-lg">
+              <span class="text-[10px] text-slate-400 block font-semibold">Thời gian & Số người</span>
+              <span class="text-xs font-bold text-blue-300 block">${ext.days ? ext.days + ' ngày' : 'null'} • ${ext.group_size ? ext.group_size + ' người' : 'null'}</span>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-lg">
+              <span class="text-[10px] text-slate-400 block font-semibold">Phương tiện di chuyển</span>
+              <span class="text-xs font-bold text-purple-300 block">${ext.prefer_flight ? '✈️ Máy bay' : (ext.vehicle_type || 'Tự chọn')}</span>
+            </div>
+          `;
+
+          // Schema V3: Vùng & Địa hình
+          const regions = ext.destination_regions || [];
+          const terrains = ext.terrain_types || [];
+          if (regions.length > 0 || terrains.length > 0) {
+            const combined = [...regions, ...terrains].join(' • ');
+            html += `
+              <div class="bg-slate-900 border border-emerald-800/70 p-2.5 rounded-lg">
+                <span class="text-[10px] text-emerald-400 block font-semibold">🗺️ Vùng & Địa hình (V3)</span>
+                <span class="text-xs font-bold text-emerald-300 truncate block">${combined}</span>
+              </div>
+            `;
+          }
+
+          // Schema V3: Điểm loại trừ (Negative Constraint)
+          const excluded = [...(ext.excluded_destinations || []), ...(ext.excluded_places || [])];
+          if (excluded.length > 0) {
+            html += `
+              <div class="bg-slate-900 border border-rose-800/70 p-2.5 rounded-lg">
+                <span class="text-[10px] text-rose-400 block font-semibold">🚫 Điểm loại trừ (V3)</span>
+                <span class="text-xs font-bold text-rose-300 truncate block">${excluded.join(', ')}</span>
+              </div>
+            `;
+          }
+
+          // Điểm ghim bắt buộc
+          const pinned = ext.hard_pinned_locations || ext.must_visit_places || [];
+          if (pinned.length > 0) {
+            html += `
+              <div class="bg-slate-900 border border-amber-800/70 p-2.5 rounded-lg">
+                <span class="text-[10px] text-amber-400 block font-semibold">📍 Điểm ghim bắt buộc</span>
+                <span class="text-xs font-bold text-amber-300 truncate block">${pinned.join(', ')}</span>
+              </div>
+            `;
+          }
+
+          // Ngân sách
+          if (ext.budget_total_vnd) {
+            html += `
+              <div class="bg-slate-900 border border-yellow-800/70 p-2.5 rounded-lg">
+                <span class="text-[10px] text-yellow-400 block font-semibold">💰 Ngân sách</span>
+                <span class="text-xs font-bold text-yellow-300 truncate block">${Number(ext.budget_total_vnd).toLocaleString('vi-VN')} đ</span>
+              </div>
+            `;
+          }
+
+          badgesContainer.innerHTML = html;
+
+          autoFillPlannerForm(ext);
+
+        } else {
+          header.className = "flex items-center gap-2 text-xs font-bold text-amber-400";
+          header.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i><span>Chưa trích xuất được JSON hợp lệ</span>';
+          engineDisplay.innerText = data.engine_used || engineChoice;
+          latencyDisplay.innerText = `${data.latency_ms || 0}ms`;
+
+          badgesContainer.innerHTML = `
+            <div class="col-span-full bg-red-950/40 border border-red-800/60 p-3 rounded-lg text-xs text-red-300">
+              <strong>Lỗi:</strong> ${data.error || 'Mô hình không trả về chuỗi JSON hợp lệ.'}
+            </div>
+          `;
+          rawJsonDisplay.innerText = data.raw_response || '(Không có phản hồi thô)';
+        }
+
+      } catch (err) {
+        panel.classList.remove('hidden');
+        header.className = "flex items-center gap-2 text-xs font-bold text-red-400";
+        header.innerHTML = '<i class="fa-solid fa-circle-xmark"></i><span>Lỗi kết nối máy chủ API</span>';
+        rawJsonDisplay.innerText = err.message;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalBtnHTML;
+      }
+    }
+
+    function autoFillPlannerForm(extracted) {
+      if (!extracted) return;
+
+      const flashElement = (el) => {
+        if (!el) return;
+        el.classList.add('ring-2', 'ring-emerald-400', 'bg-emerald-50/50');
+        setTimeout(() => {
+          el.classList.remove('ring-2', 'ring-emerald-400', 'bg-emerald-50/50');
+        }, 2000);
+      };
+
+      // 1. Điền Điểm Xuất Phát
+      if (extracted.origin) {
+        const startInput = document.getElementById('start-location-input');
+        if (startInput) {
+          startInput.value = extracted.origin;
+          flashElement(startInput);
+        }
+      }
+
+      // 2. Điền Tỉnh / Thành phố Điểm Đến
+      if (extracted.destination) {
+        const dest = extracted.destination.toLowerCase();
+        const provSelect = document.getElementById('planner-province-select');
+        if (provSelect) {
+          const specialMap = {
+            'quảng nam': '48',
+            'hội an': '48',
+            'mỹ sơn': '48',
+            'đà nẵng': '48',
+            'sa pa': '15',
+            'sapa': '15',
+            'lào cai': '15',
+            'đà lạt': '68',
+            'lâm đồng': '68',
+            'nha trang': '56',
+            'khánh hòa': '56',
+            'hạ long': '22',
+            'quảng ninh': '22',
+            'ninh bình': '37',
+            'hà nội': '1',
+            'sài gòn': '79',
+            'hồ chí minh': '79',
+            'tp hcm': '79',
+            'huế': '46',
+            'bắc ninh': '24'
+          };
+
+          let matchedValue = null;
+          for (const [key, val] of Object.entries(specialMap)) {
+            if (dest.includes(key)) {
+              matchedValue = val;
+              break;
+            }
+          }
+
+          if (!matchedValue) {
+            for (let opt of provSelect.options) {
+              const optText = opt.text.toLowerCase();
+              if (optText.includes(dest) || dest.includes(optText.replace('tỉnh ', '').replace('thành phố ', ''))) {
+                matchedValue = opt.value;
+                break;
+              }
+            }
+          }
+
+          if (matchedValue) {
+            provSelect.value = matchedValue;
+            flashElement(provSelect);
+          }
+        }
+      }
+
+      // 3. Điền Số ngày
+      if (extracted.days) {
+        const daysSelect = document.getElementById('trip-days-select');
+        if (daysSelect) {
+          const daysVal = String(Math.min(Math.max(extracted.days, 1), 5));
+          daysSelect.value = daysVal;
+          flashElement(daysSelect);
+        }
+      }
+
+      // 4. Điền Số lượng khách
+      if (extracted.group_size) {
+        const groupSelect = document.getElementById('trip-group-size-select');
+        if (groupSelect) {
+          const target = extracted.group_size;
+          let bestVal = "2";
+          let minDiff = 999;
+          for (let opt of groupSelect.options) {
+            const v = parseInt(opt.value);
+            if (Math.abs(v - target) < minDiff) {
+              minDiff = Math.abs(v - target);
+              bestVal = opt.value;
+            }
+          }
+          groupSelect.value = bestVal;
+          flashElement(groupSelect);
+        }
+      }
+
+      // 5. Chọn Phương tiện di chuyển
+      if (extracted.vehicle_type) {
+        const vType = extracted.vehicle_type.toLowerCase();
+        let targetRadioValue = 'car';
+        if (vType.includes('van') || vType.includes('16') || vType.includes('xe riêng') || (extracted.group_size && extracted.group_size > 8)) {
+          targetRadioValue = 'van';
+        } else if (vType.includes('motor') || vType.includes('xe máy')) {
+          targetRadioValue = 'motorbike';
+        } else if (vType.includes('taxi') || vType.includes('grab')) {
+          targetRadioValue = 'taxi';
+        }
+
+        const targetRadio = document.querySelector(`input[name="vehicle"][value="${targetRadioValue}"]`);
+        if (targetRadio) {
+          const card = targetRadio.closest('.vehicle-card');
+          if (card) selectVehicleCard(card);
+        }
+      }
+    }
+
+
     // TÍCH HỢP ĐỊNH VỊ VỊ TRÍ HIỆN TẠI (HYBRID GPS + IP FALLBACK)
     async function getCurrentLocation() {
       const input = document.getElementById('start-location-input');
@@ -1541,6 +1937,12 @@
 
         // Chuyển sang màn hình lịch trình
         switchScreen('itinerary');
+
+        // Bắt đầu lắng nghe SSE Progressive Loading (nếu có stream URL)
+        if (typeof startPlanStream === 'function' && window.itineraryMap) {
+          if (window._stopCurrentPlanStream) window._stopCurrentPlanStream();
+          window._stopCurrentPlanStream = startPlanStream(planData, window.itineraryMap);
+        }
       } catch (err) {
         console.error('Lỗi gọi API:', err);
         alert('Không thể kết nối đến máy chủ API: ' + err.message);

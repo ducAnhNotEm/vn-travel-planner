@@ -1,9 +1,37 @@
 import math
-import sqlite3
 import json
 import re
 import os
+import threading
 from typing import List, Dict, Any, Tuple, Optional, Union
+from app.services import travel_params as P
+from app.services.map_service import get_multi_stop_route, plan_routes, wait_routes  # get_multi_stop_route: giữ để tương thích import cũ
+from app.services.place_index import PlaceIndex, default_db_path, get_index, fill_gaps as _fill_gaps_indexed
+
+# Chỉ mục không gian RAM (thay SELECT/LIKE/haversine-scan trong hot-path).
+_INDEX_BY_PATH: Dict[str, PlaceIndex] = {}
+_INDEX_BY_PATH_LOCK = threading.Lock()
+
+
+def _index_for(db_path: Optional[str] = None) -> PlaceIndex:
+    """
+    None / đường dẫn trùng DB mặc định -> chỉ mục TOÀN CỤC (nạp 1 lần ở lifespan).
+    Đường dẫn tường minh khác -> chỉ mục riêng, cache theo đường dẫn: test/script dùng DB khác vẫn đọc ĐÚNG DB đó
+    như bản cũ (bản cũ mở sqlite3.connect(db_path) mỗi lần).
+    """
+    if not db_path:
+        return get_index()
+    key = os.path.normcase(os.path.abspath(db_path))
+    if key == os.path.normcase(os.path.abspath(default_db_path())):
+        return get_index()
+    idx = _INDEX_BY_PATH.get(key)
+    if idx is None:
+        with _INDEX_BY_PATH_LOCK:
+            idx = _INDEX_BY_PATH.get(key)
+            if idx is None:
+                idx = _INDEX_BY_PATH[key] = PlaceIndex.load(db_path)
+    return idx
+
 
 # ==============================================================================
 # 0. IN-MEMORY CACHE CHO GIỜ MỞ CỬA CRAWLED GOOGLE PLACES
@@ -349,6 +377,14 @@ def evaluate_intervals_for_visit(
     if not intervals:
         intervals = [(0, 1440)]
 
+    if len(intervals) == 1:
+        o, c = intervals[0]
+        arr = max(est_arr, o)
+        dep = arr + dwell
+        wait = max(0, o - est_arr)
+        lateness = max(0, dep - c)
+        return (arr, dep, wait, (o, c), lateness)
+
     feasible = []
     for (o, c) in intervals:
         arr = max(est_arr, o)
@@ -613,21 +649,22 @@ def solve_day_tsptw_2opt(
     pin_times = [parse_time_str(p["pin_time"]) if p.get("pin_time") else None for p in places]
     is_pinneds = [bool(p.get("is_pinned")) for p in places]
 
-    # Precompute ma trận khoảng cách và thời gian di chuyển
+    # Precompute ma trận khoảng cách và thời gian di chuyển (đối xứng để giảm 50% tính toán lượng giác)
     dist_mat = [[0.0] * n for _ in range(n)]
     time_mat = [[0] * n for _ in range(n)]
+    topo_factor = (k_topo / max(1.0, v_avg)) * 60.0
     for i in range(n):
-        for j in range(n):
-            if i != j:
-                d = haversine_distance(places[i]["lat"], places[i]["lng"], places[j]["lat"], places[j]["lng"])
-                dist_mat[i][j] = d
-                if d < 0.001:
-                    t = 0
-                elif d < 0.5:
-                    t = 3
-                else:
-                    t = max(3, math.ceil((d * k_topo / max(1.0, v_avg)) * 60.0))
-                time_mat[i][j] = t
+        lat_i, lng_i = places[i]["lat"], places[i]["lng"]
+        for j in range(i + 1, n):
+            d = haversine_distance(lat_i, lng_i, places[j]["lat"], places[j]["lng"])
+            dist_mat[i][j] = dist_mat[j][i] = d
+            if d < 0.001:
+                t = 0
+            elif d < 0.5:
+                t = 3
+            else:
+                t = max(3, math.ceil(d * topo_factor))
+            time_mat[i][j] = time_mat[j][i] = t
 
     def _fast_eval(order: List[int]) -> Tuple[float, int, int]:
         total_d = 0.0
@@ -657,6 +694,7 @@ def solve_day_tsptw_2opt(
 
     current_order = list(range(n))
     curr_dist, curr_late, curr_wait = _fast_eval(current_order)
+    has_pinned = any(is_pinneds)
 
     improved = True
     for _ in range(max_iterations):
@@ -665,7 +703,7 @@ def solve_day_tsptw_2opt(
         improved = False
         for i in range(0, n - 1):
             for j in range(i + 1, n):
-                if any(is_pinneds[current_order[k]] for k in range(i, j + 1)):
+                if has_pinned and any(is_pinneds[current_order[k]] for k in range(i, j + 1)):
                     continue
                 cand_order = current_order[:i] + current_order[i:j+1][::-1] + current_order[j+1:]
                 c_dist, c_late, c_wait = _fast_eval(cand_order)
@@ -859,70 +897,23 @@ def sequence_by_human_rhythm(day_places: List[Dict[str, Any]]) -> List[Dict[str,
 def fill_gaps_from_db(
     current_places: List[Dict[str, Any]],
     target_count: int = 3,
-    db_path: str = r"d:\vn-travel-planner\travel_db.db"
+    db_path: Optional[str] = None            # None = chỉ mục toàn cục; đường dẫn tường minh = chỉ mục riêng
 ) -> List[Dict[str, Any]]:
     """
-    Nếu người dùng chọn quá ít điểm, tự động truy vấn `travel_db.db`
-    lấy thêm nhà hàng đặc sản hoặc điểm tham quan lân cận trong cùng khu vực.
+    Nếu người dùng chọn quá ít điểm, tự động lấy thêm nhà hàng đặc sản hoặc điểm tham quan lân cận
+    (bán kính 25 km quanh điểm đầu tiên). k-NN trên cKDTree trong RAM (~50 µs) thay cho
+    SELECT toàn bảng + vòng lặp haversine. Ngữ nghĩa và thứ tự kết quả giữ nguyên.
     """
-    if len(current_places) >= target_count or not current_places:
-        return current_places
-
-    ref_lat = current_places[0]["lat"]
-    ref_lng = current_places[0]["lng"]
-    current_ids = {p["id"] for p in current_places}
-
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
-    c.execute("""
-        SELECT id, name, category, lat, lng, address, rating, price_range, prices, 
-               phone_number, website, image_url, google_maps_url, typical_time_spent, google_place_id
-        FROM places
-        WHERE category IN ('RESTAURANT', 'ATTRACTION', 'MARKET', 'ACTIVITY')
-    """)
-    rows = c.fetchall()
-    conn.close()
-
-    candidates = []
-    for r in rows:
-        if r[0] in current_ids:
-            continue
-        dist = haversine_distance(ref_lat, ref_lng, r[3], r[4])
-        if dist <= 25.0:  # Trong bán kính 25km lân cận
-            candidates.append((dist, {
-                "id": r[0],
-                "name": r[1],
-                "category": r[2],
-                "lat": r[3],
-                "lng": r[4],
-                "address": r[5],
-                "rating": r[6],
-                "price_range_db": r[7],
-                "prices_json_db": r[8],
-                "phone_number": r[9],
-                "website": r[10],
-                "image_url": r[11],
-                "google_maps_url": r[12],
-                "typical_time_spent": r[13],
-                "google_place_id": r[14]
-            }))
-
-    candidates.sort(key=lambda x: x[0])
-    needed = target_count - len(current_places)
-    filled = current_places.copy()
-    for _, place in candidates[:needed]:
-        filled.append(place)
-
-    return filled
+    return _fill_gaps_indexed(current_places, target_count=target_count, index=_index_for(db_path))
 
 # ==============================================================================
 # 8. ĐÁNH GIÁ ĐỔI KHÁCH SẠN LIÊN NGÀY (HOTEL SWITCHING EVALUATOR)
 # ==============================================================================
 def evaluate_hotel_switching(day_routes: List[List[Dict[str, Any]]]) -> Dict[str, Any]:
     """
-    Đánh giá khoảng cách giữa các ngày:
-    - Nếu khoảng cách giữa ngày N và N+1 >= 35 km -> Cảnh báo gợi ý đổi khách sạn.
-    - Nếu < 20 km -> Gợi ý giữ nguyên 1 khách sạn để đỡ mệt.
+    Đánh giá khoảng cách giữa các ngày dựa trên travel_params (P.HOTEL_FAR_ONE_WAY_KM, P.HOTEL_MIN_SAVING_KM).
+    - Nếu khoảng cách giữa ngày N và N+1 >= P.HOTEL_FAR_ONE_WAY_KM (35 km) -> Cảnh báo gợi ý đổi khách sạn.
+    - Nếu < P.HOTEL_MIN_SAVING_KM (20 km) -> Gợi ý giữ nguyên 1 khách sạn để đỡ mệt.
     """
     if len(day_routes) <= 1:
         return {"should_switch": False, "reason": "Chuyến đi trong ngày, không cần đổi khách sạn."}
@@ -935,7 +926,7 @@ def evaluate_hotel_switching(day_routes: List[List[Dict[str, Any]]]) -> Dict[str
         start_p = day_routes[d+1][0]
         dist = haversine_distance(end_p["lat"], end_p["lng"], start_p["lat"], start_p["lng"])
 
-        if dist >= 35.0:
+        if dist >= P.HOTEL_FAR_ONE_WAY_KM:
             switches.append({
                 "from_day": d + 1,
                 "to_day": d + 2,
@@ -947,13 +938,13 @@ def evaluate_hotel_switching(day_routes: List[List[Dict[str, Any]]]) -> Dict[str
         return {
             "should_switch": True,
             "switches": switches,
-            "summary": f"Phát hiện {len(switches)} chặng cách xa >= 35km. Gợi ý đổi khách sạn để chuyến đi thảnh thơi hơn."
+            "summary": f"Phát hiện {len(switches)} chặng cách xa >= {P.HOTEL_FAR_ONE_WAY_KM:.0f}km. Gợi ý đổi khách sạn để chuyến đi thảnh thơi hơn."
         }
 
     return {
         "should_switch": False,
         "switches": [],
-        "summary": "Khoảng cách giữa các ngày đều thuận tiện (< 30km). Khuyên bạn nên giữ nguyên 1 khách sạn cố định để tránh mất thời gian check-in/out."
+        "summary": f"Khoảng cách giữa các ngày đều thuận tiện (< {P.HOTEL_FAR_ONE_WAY_KM:.0f}km). Khuyên bạn nên giữ nguyên 1 khách sạn cố định để tránh mất thời gian check-in/out."
     }
 
 # ==============================================================================
@@ -964,60 +955,52 @@ def generate_multi_day_plan(
     days: int = 1,
     group_size: int = 2,
     vehicle_type: str = "car",
-    db_path: str = r"d:\vn-travel-planner\travel_db.db"
+    selected_hotel_id: Optional[int] = None,
+    include_ai_explanation: bool = False,
+    ai_mode: str = "inline",                 # "inline" (cũ, chặn) | "deferred" (router chạy nền + SSE)
+    route_wait_ms: Optional[float] = None,   # None = chờ mọi chặng Goong; N = chờ tối đa N ms rồi trả "partial"
+    route_epsilon_m: float = 0.0,            # >0: nén polyline bằng RDP (mét); 0 = giữ nguyên
+    db_path: Optional[str] = None            # None = chỉ mục RAM toàn cục; đường dẫn tường minh = chỉ mục riêng theo DB đó
 ) -> Dict[str, Any]:
     """
-    Tạo lịch trình du lịch thông minh đa ngày (1 - 5 ngày):
+    Tạo lịch trình du lịch thông minh đa ngày (1 - 14 ngày):
     - Đọc dữ liệu thực tế 100% từ travel_db.db
     - Phân cụm địa lý theo từng ngày
     - Xếp theo nhịp sinh học du lịch Việt Nam
     - Tự động điền khuyết quán ăn/danh thắng
-    - Đánh giá chuyển khách sạn
-    - Tạo link Goong Static Map lộ trình đường thật
+    - Neo khách sạn đã chọn (nếu có) và cảnh báo cự ly kèm phương án A/B
+    - Tạo đa tuyến đường bộ thực tế qua Goong Directions API
     - Tính toán chi phí cả đoàn và bình quân đầu người
-    """
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
 
-    valid_days = max(1, min(days, 5))
+    Tham số v2 (mặc định = hành vi cũ, kết quả giống hệt bản trước):
+    - ai_mode: "inline" (cũ) gọi LLM ngay trong hàm khi include_ai_explanation=True;
+               "deferred" KHÔNG gọi LLM, chỉ ghi spec vào kết quả["_ai_jobs"] để router chạy nền + SSE.
+    - route_wait_ms: None = chờ mọi chặng Goong; N = chờ tối đa N ms, chặng chưa xong -> days[i]["route_status"]="partial"
+               và DayRoute tương ứng nằm trong kết quả["_route_jobs"].
+    - route_epsilon_m: >0 nén polyline từng chặng bằng RDP (mét), giữ nguyên các điểm dừng; 0 = giữ nguyên.
+    Các khóa private "_route_jobs"/"_ai_jobs" CHỈ xuất hiện khi ai_mode="deferred" hoặc route_wait_ms is not None,
+    để người gọi cũ (json.dumps kết quả) không bao giờ gặp đối tượng Future.
+    """
+    idx = _index_for(db_path)                      # chỉ mục RAM nạp 1 lần ở lifespan — không còn SQLite trong hot-path
+    ai_jobs: List[Dict[str, Any]] = []
+
+    valid_days = max(P.MIN_TRIP_DAYS, min(days, P.MAX_TRIP_DAYS))
     needed_per_kw = max(1, math.ceil(valid_days / max(1, len(prompt_keywords))))
     matched_places = []
     seen_ids = set()
     for kw in prompt_keywords:
-        c.execute("""
-            SELECT id, name, category, lat, lng, address, rating, price_range, prices, 
-                   phone_number, website, image_url, google_maps_url, typical_time_spent, google_place_id 
-            FROM places 
-            WHERE name LIKE ? OR address LIKE ?
-            LIMIT ?
-        """, (f"%{kw}%", f"%{kw}%", needed_per_kw))
-        rows = c.fetchall()
-        for row in rows:
-            if row[0] not in seen_ids:
-                seen_ids.add(row[0])
-                matched_places.append({
-                    "id": row[0],
-                    "name": row[1],
-                    "category": row[2],
-                    "lat": row[3],
-                    "lng": row[4],
-                    "address": row[5],
-                    "rating": row[6],
-                    "price_range_db": row[7],
-                    "prices_json_db": row[8],
-                    "phone_number": row[9],
-                    "website": row[10],
-                    "image_url": row[11],
-                    "google_maps_url": row[12],
-                    "typical_time_spent": row[13],
-                    "google_place_id": row[14]
-                })
-    conn.close()
+        for place in idx.search_keyword(kw, needed_per_kw):
+            if place["id"] not in seen_ids:
+                seen_ids.add(place["id"])
+                matched_places.append(place)
+
+    # Khách sạn được neo (nếu khách đã chọn trước)
+    selected_hotel = idx.get(selected_hotel_id) if selected_hotel_id else None
 
     if not matched_places:
         return {"error": "Không tìm thấy địa điểm phù hợp trong Database."}
 
-    days = max(1, min(days, 5))
+    days = valid_days
     group_size = max(1, group_size)
 
     # 1. Phân cụm theo số ngày
@@ -1026,14 +1009,20 @@ def generate_multi_day_plan(
     total_trip_km = 0.0
     days_itinerary = []
     day_routes_for_eval = []
+    far_hotel_days = []
 
-    # 2. Xử lý từng ngày theo nhịp sinh học & điền khuyết
+    # 2a. Giai đoạn CPU thuần (không I/O): điền khuyết + nhịp sinh học cho MỌI ngày,
+    #     rồi bắn TẤT CẢ chặng Goong của TẤT CẢ ngày cùng lúc (fan-out toàn chuyến).
+    prepared = [sequence_by_human_rhythm(_fill_gaps_indexed(_cl, target_count=3, index=idx)) for _cl in clusters]
+    _coords_by_day = []
+    for _seq in prepared:
+        _c = [(p["lat"], p["lng"]) for p in _seq if p.get("lat") and p.get("lng")]
+        _coords_by_day.append(_c if len(_c) >= 2 else [])
+    route_objs = plan_routes(_coords_by_day, vehicle_type, wait_budget_ms=0)   # chỉ bắn, không chờ
+
+    # 2b. Dựng từng ngày trong lúc mạng đang chạy nền
     for day_idx, cluster in enumerate(clusters, 1):
-        # Điền khuyết nếu cụm ít hơn 3 điểm
-        filled_cluster = fill_gaps_from_db(cluster, target_count=3, db_path=db_path)
-        
-        # Sắp xếp theo nhịp sinh học
-        sequenced = sequence_by_human_rhythm(filled_cluster)
+        sequenced = prepared[day_idx - 1]
         day_routes_for_eval.append(sequenced)
 
         # Đo tổng quãng đường ngày hôm đó theo đúng thứ tự đã định tuyến
@@ -1045,6 +1034,37 @@ def generate_multi_day_plan(
         else:
             day_km = 0.0
         total_trip_km += day_km
+
+        # Lấy đa tuyến đường bộ thực tế (Goong Directions) cho các điểm trong ngày
+        # (đường bộ thực tế đã được bắn song song ở bước 2a; polyline gắn sau vòng lặp ở bước 2c)
+
+        # Kiểm tra khoảng cách từ khách sạn đã chọn tới cụm trong ngày
+        hotel_commute_info = None
+        if selected_hotel and sequenced:
+            out_km = haversine_distance(selected_hotel["lat"], selected_hotel["lng"], sequenced[0]["lat"], sequenced[0]["lng"])
+            back_km = haversine_distance(sequenced[-1]["lat"], sequenced[-1]["lng"], selected_hotel["lat"], selected_hotel["lng"])
+            round_km = out_km + back_km
+            commute_mins = max(10, int(round((round_km / 35.0) * 60)))
+            is_far = (out_km >= P.HOTEL_FAR_ONE_WAY_KM or back_km >= P.HOTEL_FAR_ONE_WAY_KM)
+            
+            commute_note = None
+            if is_far:
+                commute_note = f"Khoảng cách từ khách sạn đến cụm này ~{out_km:.1f} km một chiều (ước tính ~{commute_mins} phút khứ hồi)."
+                far_hotel_days.append({
+                    "day": day_idx,
+                    "cluster_name": sequenced[0]["name"],
+                    "outbound_km": round(out_km, 1),
+                    "commute_mins": commute_mins
+                })
+
+            hotel_commute_info = {
+                "hotel_name": selected_hotel["name"],
+                "outbound_km": round(out_km, 1),
+                "round_trip_km": round(round_km, 1),
+                "commute_minutes": commute_mins,
+                "is_far": is_far,
+                "commute_note": commute_note
+            }
 
         # Tạo link ảnh bản đồ tĩnh Goong Map qua Backend Proxy
         static_map_url = None
@@ -1096,8 +1116,18 @@ def generate_multi_day_plan(
             "places_count": len(sequenced),
             "day_distance_km": round(day_km, 2),
             "static_map_url": static_map_url,
+            "route_polyline": [],          # được gắn ở bước 2c
+            "route_status": "pending",
+            "hotel_commute": hotel_commute_info,
             "itinerary": day_steps
         })
+
+    # 2c. Chờ tối đa route_wait_ms (None = chờ hết như bản cũ) rồi gắn polyline; chặng chưa xong -> 'partial'
+    wait_routes(route_objs, route_wait_ms)
+    for _d, _ro in zip(days_itinerary, route_objs):
+        _a = _ro.assemble(route_epsilon_m)
+        _d["route_polyline"] = _a["polyline"]
+        _d["route_status"] = _a["status"]
 
     # 3. Tính toán chi phí di chuyển toàn chuyến đi
     transport_info = calculate_transport_cost(total_trip_km, vehicle_type, group_size)
@@ -1107,31 +1137,94 @@ def generate_multi_day_plan(
     if days > 1:
         nights = days - 1
         rooms_count = math.ceil(group_size / 2)
-        room_rate_est = 750000  # Đơn giá phòng tham khảo
+        room_rate_est = P.DEFAULT_ROOM_RATE_VND
+        hotel_name_display = "Khách sạn tiêu chuẩn 3-4 sao"
+        if selected_hotel:
+            hotel_name_display = selected_hotel["name"]
+
         total_hotel_cost = rooms_count * room_rate_est * nights
         hotel_per_person = round(total_hotel_cost / group_size, -2)
         hotel_info = {
             "nights": nights,
             "rooms_count": rooms_count,
+            "hotel_name": hotel_name_display,
+            "selected_hotel": selected_hotel,
             "estimated_room_rate_vnd": room_rate_est,
             "total_hotel_cost_vnd": total_hotel_cost,
             "cost_per_person_vnd": int(hotel_per_person),
-            "formula_note": f"{rooms_count} phòng đôi ({math.ceil(group_size/2)} phòng cho đoàn {group_size} người) x {room_rate_est:,}đ/đêm x {nights} đêm"
+            "formula_note": f"{rooms_count} phòng ({rooms_count} phòng cho đoàn {group_size} người) x {room_rate_est:,}đ/đêm x {nights} đêm"
         }
 
-    # 5. Đánh giá đổi khách sạn
+    # 5. Đánh giá đổi khách sạn & Tư vấn khách sạn neo
     hotel_switch_advice = evaluate_hotel_switching(day_routes_for_eval)
+
+    # Nếu khách đã chọn 1 khách sạn nhưng có ngày cách xa >= 35 km -> Kích hoạt Smart Hotel Advisory
+    selected_hotel_advisory = None
+    if selected_hotel and far_hotel_days:
+        first_far = far_hotel_days[0]
+        # Tìm khách sạn thay thế lân cận cụm đó từ travel_db.db
+        ref_day_p = clusters[first_far["day"] - 1][0]
+        alt_hotel = idx.nearest_hotel(ref_day_p["lat"], ref_day_p["lng"], exclude_id=selected_hotel["id"])
+        alt_candidate = None
+        if alt_hotel:
+            alt_candidate = {
+                "id": alt_hotel["id"], "name": alt_hotel["name"], "address": alt_hotel["address"],
+                "rating": alt_hotel["rating"], "price_range": alt_hotel["price_range_db"]
+            }
+
+        # Lời khuyên AI. ai_mode="inline": hành vi cũ (chặn request). ai_mode="deferred": chỉ ghi spec,
+        # router chạy nền và đẩy kết quả qua SSE.
+        ai_advice = None
+        if include_ai_explanation:
+            _kw = dict(
+                hotel_name=selected_hotel["name"],
+                day_num=first_far["day"],
+                cluster_name=first_far["cluster_name"],
+                distance_km=first_far["outbound_km"],
+                commute_mins=first_far["commute_mins"],
+                alt_hotel_name=alt_candidate["name"] if alt_candidate else None
+            )
+            if ai_mode == "deferred":
+                ai_jobs.append({"id": "hotel_tradeoff", "fn": "explain_hotel_tradeoff",
+                                "fallback": "hotel_tradeoff_fallback", "kwargs": _kw})
+            else:
+                try:
+                    from app.services.llm_service import explain_hotel_tradeoff
+                    ai_advice = explain_hotel_tradeoff(**_kw)
+                except Exception:
+                    pass
+
+        selected_hotel_advisory = {
+            "has_advisory": True,
+            "selected_hotel_name": selected_hotel["name"],
+            "far_days_count": len(far_hotel_days),
+            "far_days": far_hotel_days,
+            "alternative_hotel": alt_candidate,
+            "claude_ai_explanation": ai_advice,
+            "options": [
+                {
+                    "option": "A",
+                    "title": f"Đổi phòng Ngày {first_far['day']} sang gần cụm tham quan",
+                    "description": f"Gợi ý: {alt_candidate['name'] if alt_candidate else 'Khách sạn khu vực lân cận'}. Tiết kiệm ~{first_far['commute_mins']} phút ngồi xe."
+                },
+                {
+                    "option": "B",
+                    "title": f"Giữ nguyên {selected_hotel['name']}",
+                    "description": "Không cần thu dọn chuyển hành lý, nhưng cần khởi hành sớm hơn để đảm bảo lịch trình."
+                }
+            ]
+        }
+
 
     # 6. Tổng hợp chi phí dự kiến cả chuyến đi
     grand_total_group = transport_info["total_group_cost_vnd"] + (hotel_info["total_hotel_cost_vnd"] if hotel_info else 0)
     grand_total_per_person = transport_info["cost_per_person_vnd"] + (hotel_info["cost_per_person_vnd"] if hotel_info else 0)
 
-    # Hỗ trợ cấu trúc trả về đơn ngày tương thích ngược (Flat itinerary)
     flat_itinerary = []
     for d in days_itinerary:
         flat_itinerary.extend(d["itinerary"])
 
-    return {
+    plan_result: Dict[str, Any] = {
         "summary": {
             "total_days": days,
             "group_size": group_size,
@@ -1143,12 +1236,16 @@ def generate_multi_day_plan(
         "transport_cost": transport_info,
         "accommodation_cost": hotel_info,
         "hotel_switch_advice": hotel_switch_advice,
+        "selected_hotel_advisory": selected_hotel_advisory,
         "days": days_itinerary,
-        # Giữ lại các trường cũ cho frontend hiện tại không bị lỗi
         "prompt_summary": f"Lịch trình {days} ngày ({len(flat_itinerary)} địa điểm) qua quãng đường {round(total_trip_km, 2)} km bằng {transport_info['vehicle']}",
         "total_distance_km": round(total_trip_km, 2),
         "itinerary": flat_itinerary
     }
+    if ai_mode == "deferred" or route_wait_ms is not None:
+        plan_result["_route_jobs"] = route_objs   # private (tiền tố "_"): router tách ra trước khi serialize
+        plan_result["_ai_jobs"] = ai_jobs
+    return plan_result
 
 # ==============================================================================
 # 10. HÀM TƯƠNG THÍCH NGƯỢC CHO TOUR ĐƠN NGÀY
@@ -1156,7 +1253,7 @@ def generate_multi_day_plan(
 def generate_trip_plan(
     prompt_keywords: List[str],
     vehicle_type: str = "car",
-    db_path: str = r"d:\vn-travel-planner\travel_db.db"
+    db_path: Optional[str] = None
 ) -> Dict[str, Any]:
     """Hàm wrapper tương thích ngược cho các gọi hàm cũ"""
     return generate_multi_day_plan(

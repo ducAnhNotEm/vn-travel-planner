@@ -30,6 +30,16 @@ Build a production-grade, AI-assisted domestic travel planning system ("VNTravel
 - **API Routers**:
   - `app/routers/planner_router.py`: `POST /api/plan/calculate`.
 
+### 3.1. NLU Parsing Contract & Origin vs Destination Disambiguation
+Để triệt tiêu lỗi nhầm lẫn tai hại (như người dùng gõ *"Tới Quảng Nam đi máy bay xuất phát từ Bắc Ninh"* nhưng hệ thống lại xếp lịch trình *Bắc Ninh ➔ Bắc Ninh*):
+1. **Ranh giới thực thể bắt buộc**:
+   - `origin`: Tỉnh/Điểm xuất phát (Điểm đón đầu tiên & Điểm kết thúc).
+   - `destination`: Tỉnh/Điểm đến thực sự nơi các hoạt động du lịch, khách sạn, ẩm thực diễn ra.
+   - `prefer_flight`: `True` nếu người dùng yêu cầu đi máy bay hoặc khoảng cách liên tỉnh $\ge 300\text{km}$.
+2. **Quy tắc điều hướng dữ liệu**:
+   - Toàn bộ danh lam, nhà hàng, khách sạn truy vấn từ SQLite `travel_db.db` **BẮT BUỘC thuộc về `destination`**.
+   - `origin` tuyệt đối không được đưa vào danh sách tham quan trong ngày, mà chỉ dùng để dựng chặng First-mile (xe đón từ Origin ra Sân bay cửa ngõ hoặc chạy cao tốc đến Destination).
+
 ---
 
 ## 4. Ground-Truth Data & Fallback Rules
@@ -74,22 +84,25 @@ Build a production-grade, AI-assisted domestic travel planning system ("VNTravel
 
 ## 5. Transportation Cost Model
 - **Ô tô cá nhân (`car`)**: $\text{Cost} = (\text{Distance km} \times 1.800\text{đ}) + 30.000\text{đ (gửi xe)}$.
-- **Thuê xe du lịch riêng (`chartered_van`)**: $\text{Cost} = 1.000.000\text{đ base} + (\text{Distance km} \times 2.500\text{đ})$ trọn gói cả xe (chia đều cho cả nhóm).
+- **Thuê xe du lịch riêng (`van`)**: $\text{Cost} = 1.000.000\text{đ base} + (\text{Distance km} \times 2.500\text{đ})$ trọn gói cả xe (chia đều cho cả nhóm).
 - **Taxi / GrabCar (`taxi`)**: $\text{Cost} = 12.000\text{đ} + (\text{Distance km} \times 14.000\text{đ})$.
 - **Xe máy (`motorbike`)**: $\text{Cost} = (\text{Distance km} \times 600\text{đ}) + 10.000\text{đ (gửi xe)}$.
 
 
 ---
 
-## 6. Hotel Anchor Optimization Logic
+## 6. Hotel Anchor Optimization Logic (Single Source: `travel_params.py`)
 For a multi-day trip with days $D_1, D_2, \dots, D_N$:
 - Let $E_i$ be the final destination of Day $i$.
 - Let $S_{i+1}$ be the first destination of Day $i+1$.
-- Let $H_{current}$ be the currently selected hotel.
-- If $\text{dist}(E_i, H_{current}) + \text{dist}(H_{current}, S_{i+1}) \ge 40\text{ km}$:
-  - Query all hotels in DB near $S_{i+1}$.
-  - Find $H_{candidate}$ that minimizes travel distance.
-  - If distance saved $\ge 25\text{ km}$ and time saved $\ge 45\text{ mins}$, trigger **Switch Hotel Recommendation Alert**.
+- Let $H_{current}$ be the currently selected/pinned hotel (`selected_hotel_id`).
+- If one-way distance between hotel and day's cluster $\ge 35\text{ km}$ (`HOTEL_FAR_ONE_WAY_KM`):
+  - Retain user's chosen hotel as hard anchor (Zero-forcing, respect customer choice).
+  - Query alternative hotels in `travel_db.db` near $S_{i+1}$.
+  - If a candidate $H_{candidate}$ saves $\ge 20\text{ km}$ (`HOTEL_MIN_SAVING_KM`), activate **Smart Hotel Advisory Card**:
+    - **Phương án A (Khuyên dùng)**: Gợi ý đổi sang $H_{candidate}$ để tiết kiệm thời gian ngồi xe.
+    - **Phương án B (Tôn trọng khách)**: Giữ nguyên $H_{current}$, đề xuất xuất phát sớm hơn.
+    - Làm giàu văn phong tự nhiên qua **Claude 4.6 AI Advisor** (`app/services/llm_service.py`).
 
 ---
 
@@ -180,20 +193,33 @@ When an auxiliary place is $\ge 15 - 20\text{ km}$ ($> 35 - 45\text{ mins}$) awa
 
 ---
 
-## 11. Local-First Sovereign AI Architecture
-- **Primary Model**: Local Ollama instance serving `vn-travel-qwen:7b` (Fine-tuned Qwen 2.5 7B on Vietnam Travel Domain dataset).
-  - High privacy, 100% offline resilient, domain slang & bio-rhythm aware.
-- **Secondary Fallback**: Google Gemini 2.0 Flash via circuit-breaker (triggered on connection failure or $> 4\text{s}$ timeout).
-- **Contract Enforcement**: Pydantic schema validation for 100% predictable, non-hallucinated JSON outputs.
+## 11. Multi-Tier AI Architecture (AI Sandwich Bottom Layer)
+- **LÕI 1 (PRIMARY CLOUD LLM - ĐÃ TRIỂN KHAI)**: **Claude 4.6** (`claude-sonnet-4-6` qua VyceAI API tại `https://vyceai.com/v1/chat/completions`).
+  - Đảm nhiệm: Tạo lời khuyên đánh đổi khách sạn (`explain_hotel_tradeoff`) và tư vấn an toàn đường dài (`explain_roadtrip_tradeoff`).
+  - Cache: In-memory LRU `_LLM_CACHE`.
+  - Hiệu năng: Kiểm soát bởi cờ `include_ai_explanation: bool = False` tại API `/api/plan/calculate` để bảo toàn benchmark $< 100\text{ms}$.
+- **LÕI 2 (LOCAL DUAL-GGUF ENSEMBLE ENGINE - ĐÃ TẠO MÔ HÌNH VÀ SẴN SÀNG TÍCH HỢP)**: Chạy trên Ollama cục bộ (`localhost:11434`):
+  - **LÕI 2A (Strict Contract NLU Parser)**: **`vn-travel-qwen-v2`** (`Qwen2.5-7B-Instruct-v2.Q4_K_M.gguf`, `temperature = 0.0`).
+    - Huấn luyện trên tập đối kháng thuần 128 mẫu (`train_nlu_v2_pure.jsonl`).
+    - Nhiệm vụ: Bóc tách cấu trúc khế ước NLU, đảo ngữ (Điểm đến trước Điểm xuất phát), phủ định (*"không đi máy bay"*), Reference Tokens (`CURRENT_LOCATION`), cam kết Zero Semantic Mutation.
+  - **LÕI 2B (Travel Domain Reasoner & Advisory Explainer)**: **`vn-travel-qwen:7b`** (`Qwen2.5-7B-Instruct.Q4_K_M.gguf`, `temperature = 0.1`).
+    - Nhiệm vụ: Thuyết minh lịch trình, đàm thoại du lịch tự nhiên, thẩm định ý kiến thứ hai (Second Opinion) khi V2 cần kiểm chứng.
+  - **Cơ chế Phối hợp Song hành (Synergy & Orchestration)**:
+    - *Cascade Mode*: V2 trích xuất cấu trúc dữ liệu $\to$ Nếu format lỗi hoặc V2 offline $\to$ V1 tiếp quản dự phòng.
+    - *Consensus Mode*: Cả hai cùng bỏ phiếu intent và điểm đến/xuất phát. Nếu có sự lệch pha, quyền quyết định khế ước thuộc về V2 (dựa trên ma trận đối kháng TC01-TC10).
+- **LÕI 3 (DETERMINISTIC FALLBACK - ĐÃ TRIỂN KHAI)**: Mẫu câu xác định không phụ thuộc AI khi offline hoàn toàn $\rightarrow$ **Zero-Crash Resiliency (Không bao giờ crash 500)**.
+- **[KẾ HOẠCH - ROADMAP] NLU Intent Request Router**: Thay thế parsing keywords bằng mô hình NLU phân tách tự động `origin`, `destination`, `days`, `vehicle` từ văn bản tự do trước khi query database.
+- **[KẾ HOẠCH - ROADMAP] Conversational Re-planner**: Chatbot đa lượt hỗ trợ sửa đổi lịch trình theo thời gian thực.
 
 ---
 
 ## 12. Operations Research Optimization & Real-World Export
-- **Routing Engine**: 2-Opt local search refinement to eliminate crossing edges.
-- **Hard Time-Window Scheduling**: Strict validation against place `working_hours` intervals.
-  - Constraint formula: $\text{Arrival}_i + \text{Dwell}_i + \text{TravelTime}_{i \to j} \le \text{CloseTime}_j$
-  - On violation: Push conflicting place to the nearest feasible time window, never silently drop or reorder without warning.
-- **1-Click Hand-off**:
+- **Routing Engine (ĐÃ TRIỂN KHAI)**: 2-Opt local search refinement triệt tiêu crossing edges, cải thiện 21.9% - 38.2% quãng đường thừa.
+- **Hard Time-Window Scheduling (ĐÃ TRIỂN KHAI)**: Đối chiếu giờ mở cửa `working_hours`, giờ đóng cửa, giờ nghỉ trưa từ `travel_db.db` và 3 nhịp sinh học du lịch Việt Nam.
+  - Ràng buộc: $\text{Arrival}_i + \text{Dwell}_i + \text{TravelTime}_{i \to j} \le \text{CloseTime}_j$.
+  - Khi xung đột: Điều chỉnh lịch trình theo cửa sổ thời gian khả thi gần nhất, gắn cờ cảnh báo trên giao diện.
+- **Bản đồ Goong Real Polylines (ĐÃ TRIỂN KHAI)**: Tích hợp Goong Directions API (`/api/map/directions`) với bộ đệm kép RAM + MD5 Disk Cache, Leaflet vẽ đường uốn lượn thực tế theo mạng lưới giao thông.
+- **1-Click Hand-off (KẾ HOẠCH - ROADMAP P2)**:
   - Google Maps multi-waypoint direct navigation deep links.
   - iCal (`.ics`) file export with 15-minute advance reminder notifications.
 

@@ -271,3 +271,20 @@ def test_assurance_matrix_schema():
         assert "expected" in tc
         assert "forbidden_inferences" in tc
         assert "semantic_axes" in tc
+
+
+def test_gguf_v2_contract_scorer_offline():
+    """Kiểm tra logic thẩm định khế ước của ContractAssuranceScorer trên tập đối nghịch mẫu."""
+    scorer = ContractAssuranceScorer()
+    for tc in ASSURANCE_TEST_CASES:
+        scorer.evaluate_sample(tc, tc["expected"])
+    assert scorer.total == 10
+    assert scorer.passed_exact == 10
+    assert len(scorer.contract_violations) == 0
+
+    # Kiểm tra phát hiện vi phạm khi model đưa ra forbidden inference
+    bad_output = {"prefer_flight": True}  # Vi phạm TC01
+    scorer.evaluate_sample(ASSURANCE_TEST_CASES[0], bad_output)
+    assert len(scorer.contract_violations) == 1
+    assert "Forbidden value detected" in scorer.contract_violations[0]["violation"]
+

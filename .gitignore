@@ -31,3 +31,4 @@ data/map_cache/
 *.gguf
 *.safetensors
 checkpoints*/
+*.bak
