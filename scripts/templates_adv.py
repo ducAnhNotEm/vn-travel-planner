@@ -19,24 +19,28 @@ MINIMAL_PAIR_TEMPLATES = [
         "pair_type": "pin_vs_excl",
         "pattern_pin": "Lập kế hoạch du hí {dest_mention} trong {duration_days} ngày từ {origin_mention}, nhất quyết ghé {target_poi}",
         "pattern_excl": "Lập kế hoạch du hí {dest_mention} trong {duration_days} ngày từ {origin_mention}, nhất quyết trừ {target_poi} ra",
+        "has_group_size": False,
         "kind": "province",
     },
     {
         "pair_type": "pin_vs_excl",
-        "pattern_pin": "Lên tour trải nghiệm {dest_mention} {duration_days} hôm đón tại {origin_mention} cho {group_size} người, ghé thăm {target_poi}",
-        "pattern_excl": "Lên tour trải nghiệm {dest_mention} {duration_days} hôm đón tại {origin_mention} cho {group_size} người, né {target_poi} giúp mình",
+        "pattern_pin": "Lên tour trải nghiệm {dest_mention} {duration_days} hôm khởi hành từ {origin_mention} cho {group_size} người, ghé thăm {target_poi}",
+        "pattern_excl": "Lên tour trải nghiệm {dest_mention} {duration_days} hôm khởi hành từ {origin_mention} cho {group_size} người, né {target_poi} giúp mình",
+        "has_group_size": True,
         "kind": "province",
     },
     {
         "pair_type": "pin_vs_excl",
         "pattern_pin": "Chuyến đi {dest_mention} {duration_days} ngày từ {origin_mention}, nhớ ghé {target_poi} nhé",
         "pattern_excl": "Chuyến đi {dest_mention} {duration_days} ngày từ {origin_mention}, bỏ qua {target_poi} nhé",
+        "has_group_size": False,
         "kind": "province",
     },
     {
         "pair_type": "pin_vs_excl",
         "pattern_pin": "Lộ trình tham quan {dest_mention} {duration_days} ngày xuất phát từ {origin_mention}, chọn ghé {target_poi}",
         "pattern_excl": "Lộ trình tham quan {dest_mention} {duration_days} ngày xuất phát từ {origin_mention}, khỏi ghé {target_poi}",
+        "has_group_size": False,
         "kind": "province",
     },
 ]
@@ -53,7 +57,7 @@ ADV_INVERTED_TEMPLATES = [
     {
         "id": "adv_inv_02",
         "intent": "plan_itinerary",
-        "pattern": "Điểm đón tại {origin_mention}, mục tiêu khám phá {dest_mention} {duration_days} hôm {vehicle_phrase}",
+        "pattern": "Khởi hành từ {origin_mention}, mục tiêu khám phá {dest_mention} {duration_days} hôm {vehicle_phrase}",
         "slots": ["origin_mention", "dest_mention", "duration_days", "vehicle_type"],
         "kind": "province",
     },
@@ -67,7 +71,7 @@ ADV_INVERTED_TEMPLATES = [
     {
         "id": "adv_inv_04",
         "intent": "plan_itinerary",
-        "pattern": "Xuất phát điểm ở {origin_mention}, tour {dest_mention} kéo dài {duration_days} ngày với {budget_phrase}",
+        "pattern": "Xuất phát từ {origin_mention}, tour {dest_mention} kéo dài {duration_days} ngày với {budget_phrase}",
         "slots": ["origin_mention", "dest_mention", "duration_days", "budget_total_vnd"],
         "kind": "province",
     },
