@@ -65,3 +65,16 @@ def test_none_or_empty():
     assert resolve_mention("") is None
     assert resolve_mention("   ") is None
     assert resolve_mention("nơi nào đó không có thật xyz123") is None
+
+def test_strict_rejects_overcaptured_span():
+    g = Gazetteer("travel_db.db")
+    assert g.resolve_mention("Phú Quốc bằng máy bay", strict=True) is None
+    assert g.resolve_mention("Phú Quốc", strict=True) is not None
+
+def test_ambiguous_returns_none_code():
+    g = Gazetteer("travel_db.db")
+    res = g.resolve_mention("qn")
+    assert res is not None
+    assert res["is_ambiguous"] is True
+    assert res["province_code"] is None
+

@@ -65,12 +65,6 @@ AMBIGUOUS_ACRONYMS: Dict[str, List[Dict[str, Any]]] = {
         {"province_code": 48, "province_name": "Thành phố Đà Nẵng", "clean_name": "Đà Nẵng"},
         {"province_code": 75, "province_name": "Tỉnh Đồng Nai", "clean_name": "Đồng Nai"}
     ],
-    "vt": [
-        {"province_code": 79, "province_name": "Thành phố Hồ Chí Minh", "clean_name": "Vũng Tàu"}
-    ],
-    "hl": [
-        {"province_code": 22, "province_name": "Tỉnh Quảng Ninh", "clean_name": "Hạ Long"}
-    ],
 }
 
 
@@ -413,7 +407,7 @@ class Gazetteer:
     """
     Gazetteer singleton loaded deterministically from travel_db.db + static knowledge.
     """
-    _instance: Optional["Gazetteer"] = None
+    _instances: Dict[str, "Gazetteer"] = {}
 
     def __init__(self, db_path: str = "travel_db.db"):
         self.db_path = db_path
@@ -443,20 +437,20 @@ class Gazetteer:
 
     @classmethod
     def get_instance(cls, db_path: str = "travel_db.db") -> "Gazetteer":
-        if cls._instance is None:
-            cls._instance = Gazetteer(db_path)
-        return cls._instance
+        if db_path not in cls._instances:
+            cls._instances[db_path] = Gazetteer(db_path)
+        return cls._instances[db_path]
 
     def _load_from_db(self):
-        """Tải toàn bộ 34 tỉnh và 2.396 địa danh từ travel_db.db."""
+        """Tải toàn bộ 34 tỉnh và 2.396 địa danh từ travel_db.db với thứ tự xác định."""
         if not os.path.exists(self.db_path):
             return
 
         conn = sqlite3.connect(self.db_path)
         cur = conn.cursor()
 
-        # 1. Load provinces
-        cur.execute("SELECT code, name, codename FROM provinces")
+        # 1. Load provinces (ORDER BY code để xác định)
+        cur.execute("SELECT code, name, codename FROM provinces ORDER BY code")
         for code, name, codename in cur.fetchall():
             clean_name = name.replace("Thành phố", "").replace("Tỉnh", "").strip()
             self.provinces_by_code[code] = {
@@ -481,8 +475,8 @@ class Gazetteer:
             norm_no_acc = strip_accents(norm)
             self._add_alias(norm_no_acc, code, 'manual')
 
-        # 3. Load places from DB
-        cur.execute("SELECT id, name, province_code FROM places")
+        # 3. Load places from DB (ORDER BY id để xác định)
+        cur.execute("SELECT id, name, province_code FROM places ORDER BY id")
         for pid, name, pcode in cur.fetchall():
             norm = normalize_text(name)
             if norm:
@@ -493,16 +487,18 @@ class Gazetteer:
 
         conn.close()
 
-        # In ra số đụng khóa và lưu vào audit_out/collisions.txt
-        os.makedirs("audit_out", exist_ok=True)
-        with open("audit_out/collisions.txt", "w", encoding="utf-8") as f:
+    def dump_collisions(self, path: str = "audit_out/collisions.txt"):
+        """Ghi nhận các vụ va chạm khóa alias/place ra file log."""
+        os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
             f.write(f"Total collisions: {len(self.collisions)}\n")
             for item in self.collisions:
                 f.write(f"{item[0]}\told:{item[1]}\tnew:{item[2]}\tsource:{item[3]}\n")
 
-    def resolve_mention(self, mention: Optional[str]) -> Optional[Dict[str, Any]]:
+    def resolve_mention(self, mention: Optional[str], strict: bool = False) -> Optional[Dict[str, Any]]:
         """
         Phân giải text span (mention) thành metadata tỉnh thành chuẩn.
+        Ở chế độ strict=True: cấm substring matching, chỉ khớp nguyên cụm.
         Trả về:
             {
                 "province_code": int,
@@ -596,6 +592,10 @@ class Gazetteer:
                 "match_type": "place_lookup"
             }
 
+        # Nếu strict=True: không cho phép substring matching, chỉ chấp nhận khớp nguyên cụm
+        if strict:
+            return None
+
         # 3. Substring matching (nếu chuỗi chứa tên tỉnh hoặc địa danh)
         sorted_aliases = sorted(self.alias_to_code.keys(), key=len, reverse=True)
         for alias in sorted_aliases:
@@ -614,6 +614,6 @@ class Gazetteer:
         return None
 
 
-def resolve_mention(mention: Optional[str], db_path: str = "travel_db.db") -> Optional[Dict[str, Any]]:
+def resolve_mention(mention: Optional[str], db_path: str = "travel_db.db", strict: bool = False) -> Optional[Dict[str, Any]]:
     """Hàm tiện ích toàn cục gọi singleton Gazetteer."""
-    return Gazetteer.get_instance(db_path).resolve_mention(mention)
+    return Gazetteer.get_instance(db_path).resolve_mention(mention, strict=strict)
