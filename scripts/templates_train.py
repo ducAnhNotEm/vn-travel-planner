@@ -313,3 +313,24 @@ TRAIN_CLARIFY_TEMPLATES = [
         "slots": [],
     },
 ]
+
+# ---------------------------------------------------------------------------
+# TÍCH HỢP TỔ HỢP CÚ PHÁP (scripts/compose.py) ĐẠT >= 100 KHUÔN / INTENT (>= 400 TỔNG)
+# ---------------------------------------------------------------------------
+import sys, os
+_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if _ROOT not in sys.path:
+    sys.path.insert(0, _ROOT)
+
+from scripts.compose import (
+    compose_train_plan_templates,
+    compose_train_search_templates,
+    compose_train_advisory_templates,
+    compose_train_clarify_templates,
+)
+
+TRAIN_PLAN_TEMPLATES.extend(compose_train_plan_templates(85))
+TRAIN_SEARCH_TEMPLATES.extend(compose_train_search_templates(95))
+TRAIN_ADVISORY_TEMPLATES.extend(compose_train_advisory_templates(95))
+TRAIN_CLARIFY_TEMPLATES.extend(compose_train_clarify_templates(95))
+

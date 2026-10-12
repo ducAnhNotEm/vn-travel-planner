@@ -476,7 +476,9 @@ def generate_train_set(data_pool: Dict[str, Any], gaz: Gazetteer, target_count: 
         else:
             orig_mention = None
 
-        duration_days = rng.choice([1, 2, 3, 4, 5, 6, 7]) if "duration_days" in tpl["slots"] else None
+        min_days = tpl.get("min_days", 1)
+        valid_days = [d for d in [1, 2, 3, 4, 5, 6, 7] if d >= min_days]
+        duration_days = rng.choice(valid_days) if "duration_days" in tpl["slots"] else None
         group_size = rng.choice([2, 4, 5, 6, 8, 10, 12]) if "group_size" in tpl["slots"] else None
 
         # Vehicle
@@ -558,10 +560,12 @@ def generate_train_set(data_pool: Dict[str, Any], gaz: Gazetteer, target_count: 
             prefer_flight=prefer_flight,
         )
 
+        nights_val = str(duration_days - 1) if (duration_days and duration_days >= 2) else ""
         values = {
             "dest_mention": dest_mention or "",
             "origin_mention": orig_mention or "",
             "duration_days": duration_days or "",
+            "nights": nights_val,
             "group_size": group_size or "",
             "vehicle_phrase": veh_phrase,
             "budget_phrase": budget_phrase,
@@ -683,7 +687,9 @@ def generate_val_set(
         else:
             orig_mention = None
 
-        duration_days = rng.choice([1, 2, 3, 4, 5, 6, 7]) if "duration_days" in tpl["slots"] else None
+        min_days = tpl.get("min_days", 1)
+        valid_days = [d for d in [1, 2, 3, 4, 5, 6, 7] if d >= min_days]
+        duration_days = rng.choice(valid_days) if "duration_days" in tpl["slots"] else None
         group_size = rng.choice([2, 4, 5, 6, 8, 10]) if "group_size" in tpl["slots"] else None
 
         veh_type, veh_phrase = None, ""
@@ -757,10 +763,12 @@ def generate_val_set(
             prefer_flight=prefer_flight,
         )
 
+        nights_val = str(duration_days - 1) if (duration_days and duration_days >= 2) else ""
         values = {
             "dest_mention": dest_mention or "",
             "origin_mention": orig_mention or "",
             "duration_days": duration_days or "",
+            "nights": nights_val,
             "group_size": group_size or "",
             "vehicle_phrase": veh_phrase,
             "budget_phrase": budget_phrase,
@@ -801,11 +809,18 @@ def generate_val_set(
             dest_mention = p_obj["name"]
 
         prefs = []
-        if "preferences" in tpl["slots"]:
-            prefs = ["yên tĩnh"]
+        pref_phrase = ""
+        if "preferences" in tpl.get("slots", []):
+            pref_phrase = "yên tĩnh"
+            prefs = [pref_phrase]
+        group_size = rng.choice([2, 4, 6]) if "group_size" in tpl.get("slots", []) else None
 
-        spec = SlotSpec(intent="search_place", dest_mention=dest_mention, preferences=prefs)
-        values = {"dest_mention": dest_mention}
+        spec = SlotSpec(intent="search_place", dest_mention=dest_mention, preferences=prefs, group_size=group_size)
+        values = {
+            "dest_mention": dest_mention,
+            "pref_phrase": pref_phrase,
+            "group_size": group_size or "",
+        }
         rendered_text, spans = render(pattern, values)
         check_row(rendered_text, spans, values, spec)
         meta = {"template_id": tpl["id"], "generator_version": "5.2", "seed": 42, "spans": spans}
@@ -825,11 +840,16 @@ def generate_val_set(
             dest_mention = p_obj["name"]
 
         prefs = []
-        if "preferences" in tpl["slots"]:
-            prefs = ["hoạt động trong nhà"]
+        pref_phrase = ""
+        if "preferences" in tpl.get("slots", []):
+            pref_phrase = "hoạt động trong nhà"
+            prefs = [pref_phrase]
 
         spec = SlotSpec(intent="ask_advisory", dest_mention=dest_mention, preferences=prefs)
-        values = {"dest_mention": dest_mention}
+        values = {
+            "dest_mention": dest_mention,
+            "pref_phrase": pref_phrase,
+        }
         rendered_text, spans = render(pattern, values)
         check_row(rendered_text, spans, values, spec)
         meta = {"template_id": tpl["id"], "generator_version": "5.2", "seed": 42, "spans": spans}
@@ -885,8 +905,11 @@ def generate_adv_set(data_pool: Dict[str, Any], gaz: Gazetteer, target_count: in
             "dest_mention": dest_mention,
             "origin_mention": orig_mention,
             "duration_days": duration_days,
+            "nights": str(duration_days - 1),
             "group_size": group_size or "",
             "target_poi": target_poi,
+            "pin_mention": target_poi,
+            "excl_mention": target_poi,
         }
 
         # Cặp PIN
@@ -935,6 +958,11 @@ def generate_adv_set(data_pool: Dict[str, Any], gaz: Gazetteer, target_count: in
         veh_type, veh_phrase = rng.choice(VEHICLE_CHOICES)
         budget_vnd, budget_phrase = rng.choice(BUDGET_CHOICES)
 
+        prefs = [rng.choice(PREFERENCE_CHOICES)] if "preferences" in tpl["slots"] else []
+        pref_phrase = prefs[0] if prefs else ""
+        pin_mentions = [excl_poi] if "pinned_mentions" in tpl["slots"] else []
+        pin_mention_val = pin_mentions[0] if pin_mentions else ""
+
         spec = SlotSpec(
             intent="plan_itinerary",
             dest_mention=dest_mention,
@@ -944,15 +972,20 @@ def generate_adv_set(data_pool: Dict[str, Any], gaz: Gazetteer, target_count: in
             vehicle_type=veh_type if "vehicle_type" in tpl["slots"] else None,
             budget_total_vnd=budget_vnd if "budget_total_vnd" in tpl["slots"] else None,
             excluded_mentions=[excl_poi] if "excluded_mentions" in tpl["slots"] else [],
+            pinned_mentions=pin_mentions,
+            preferences=prefs,
         )
         values = {
             "origin_mention": orig_mention,
             "dest_mention": dest_mention,
             "duration_days": duration_days,
+            "nights": str(duration_days - 1),
             "group_size": group_size,
             "vehicle_phrase": veh_phrase,
             "budget_phrase": budget_phrase,
             "excl_mention": excl_poi,
+            "pin_mention": pin_mention_val,
+            "pref_phrase": pref_phrase,
         }
         rendered_text, spans = render(tpl["pattern"], values)
         check_row(rendered_text, spans, values, spec)
@@ -1042,6 +1075,7 @@ def generate_adv_set(data_pool: Dict[str, Any], gaz: Gazetteer, target_count: in
             "dest_mention": dest_mention or "",
             "origin_mention": orig_mention or "",
             "duration_days": duration_days or "",
+            "nights": str(duration_days - 1) if duration_days else "",
             "group_size": group_size or "",
             "vehicle_phrase": veh_phrase,
             "excl_mention": excl_mentions[0] if excl_mentions else "",
