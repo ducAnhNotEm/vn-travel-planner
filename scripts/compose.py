@@ -732,6 +732,7 @@ def compose_adv_templates() -> Dict[str, Any]:
     minimal_pairs = [
         # Cặp 1: Standard P1 (DEST -> DAYS -> ORIG -> POI) [Match Train]
         {
+            "id": "adv_pair_01",
             "pair_type": "pin_vs_excl",
             "pattern_pin": "Lập kế hoạch du hí {dest_mention} trong {duration_days} ngày từ {origin_mention}, nhất quyết ghé {target_poi}",
             "pattern_excl": "Lập kế hoạch du hí {dest_mention} trong {duration_days} ngày từ {origin_mention}, nhất quyết trừ {target_poi} ra",
@@ -740,6 +741,7 @@ def compose_adv_templates() -> Dict[str, Any]:
         },
         # Cặp 2: Standard P1 có group_size [Match Train]
         {
+            "id": "adv_pair_02",
             "pair_type": "pin_vs_excl",
             "pattern_pin": "Lên tour trải nghiệm {dest_mention} {duration_days} hôm khởi hành từ {origin_mention} cho {group_size} người, ghé thăm {target_poi}",
             "pattern_excl": "Lên tour trải nghiệm {dest_mention} {duration_days} hôm khởi hành từ {origin_mention} cho {group_size} người, né {target_poi} giúp mình",
@@ -748,6 +750,7 @@ def compose_adv_templates() -> Dict[str, Any]:
         },
         # Cặp 3: P2 Origin-first (ORIG -> DEST -> DAYS -> POI) [KHÔNG MATCH TRAIN]
         {
+            "id": "adv_pair_03",
             "pair_type": "pin_vs_excl",
             "pattern_pin": "Khởi hành từ {origin_mention} đi {dest_mention} {duration_days} ngày, nhớ ghé {target_poi} nhé",
             "pattern_excl": "Khởi hành từ {origin_mention} đi {dest_mention} {duration_days} ngày, bỏ qua {target_poi} nhé",
@@ -756,6 +759,7 @@ def compose_adv_templates() -> Dict[str, Any]:
         },
         # Cặp 4: P2 Origin-first có group_size (ORIG -> DEST -> DAYS -> GRP -> POI) [KHÔNG MATCH TRAIN]
         {
+            "id": "adv_pair_04",
             "pair_type": "pin_vs_excl",
             "pattern_pin": "Bắt đầu ở {origin_mention} tới {dest_mention} {duration_days} hôm cho {group_size} người, nhất định ghé {target_poi}",
             "pattern_excl": "Bắt đầu ở {origin_mention} tới {dest_mention} {duration_days} hôm cho {group_size} người, trừ hẳn {target_poi}",
@@ -764,6 +768,7 @@ def compose_adv_templates() -> Dict[str, Any]:
         },
         # Cặp 5: P3 POI-first (POI -> DEST -> DAYS -> ORIG) [KHÔNG MATCH TRAIN]
         {
+            "id": "adv_pair_05",
             "pair_type": "pin_vs_excl",
             "pattern_pin": "Điểm đến {target_poi} phải ghé qua trong chuyến dạo chơi {dest_mention} {duration_days} ngày đi từ {origin_mention}",
             "pattern_excl": "Điểm đến {target_poi} phải gạch bỏ trong chuyến dạo chơi {dest_mention} {duration_days} ngày đi từ {origin_mention}",
@@ -772,6 +777,7 @@ def compose_adv_templates() -> Dict[str, Any]:
         },
         # Cặp 6: P4 Duration-first (DAYS -> DEST -> ORIG -> POI) [KHÔNG MATCH TRAIN]
         {
+            "id": "adv_pair_06",
             "pair_type": "pin_vs_excl",
             "pattern_pin": "Tận dụng {duration_days} ngày vi vu {dest_mention} từ {origin_mention}, ưu tiên ghé {target_poi}",
             "pattern_excl": "Tận dụng {duration_days} ngày vi vu {dest_mention} từ {origin_mention}, né xa {target_poi}",
@@ -780,6 +786,7 @@ def compose_adv_templates() -> Dict[str, Any]:
         },
         # Cặp 7: P3 Group-first (GRP -> ORIG -> DEST -> DAYS -> POI) [KHÔNG MATCH TRAIN]
         {
+            "id": "adv_pair_07",
             "pair_type": "pin_vs_excl",
             "pattern_pin": "Đoàn {group_size} người từ {origin_mention} lên đường đi {dest_mention} {duration_days} hôm, nhất định ghé {target_poi}",
             "pattern_excl": "Đoàn {group_size} người từ {origin_mention} lên đường đi {dest_mention} {duration_days} hôm, tránh xa {target_poi}",
@@ -788,9 +795,139 @@ def compose_adv_templates() -> Dict[str, Any]:
         },
         # Cặp 8: P5 Dest-Orig-Days (DEST -> ORIG -> DAYS -> POI) [KHÔNG MATCH TRAIN]
         {
+            "id": "adv_pair_08",
             "pair_type": "pin_vs_excl",
             "pattern_pin": "Lộ trình tham quan {dest_mention} xuất phát từ {origin_mention} kéo dài {duration_days} ngày, chọn ghé {target_poi}",
             "pattern_excl": "Lộ trình tham quan {dest_mention} xuất phát từ {origin_mention} kéo dài {duration_days} ngày, khỏi ghé {target_poi}",
+            "has_group_size": False,
+            "kind": "province",
+        },
+        # =====================================================================
+        # CATEGORY A: ACTIVITY EXCLUSION VS INCLUSION (PREFERENCE)
+        # =====================================================================
+        # Cặp 9: P2 Origin-first (ORIG -> DEST -> DAYS -> ACT)
+        {
+            "id": "adv_pair_09",
+            "pair_type": "activity_inc_vs_excl",
+            "pattern_pos": "Khởi hành từ {origin_mention} đi {dest_mention} {duration_days} ngày, rất muốn trải nghiệm {target_activity}",
+            "pattern_neg": "Khởi hành từ {origin_mention} đi {dest_mention} {duration_days} ngày, muốn tránh trải nghiệm {target_activity}",
+            "has_group_size": False,
+            "kind": "province",
+        },
+        # Cặp 10: P2 Origin-first có group_size (ORIG -> DEST -> DAYS -> GRP -> ACT)
+        {
+            "id": "adv_pair_10",
+            "pair_type": "activity_inc_vs_excl",
+            "pattern_pos": "Xuất phát tại {origin_mention} ghé {dest_mention} {duration_days} hôm cho {group_size} người, ưu tiên tham gia {target_activity}",
+            "pattern_neg": "Xuất phát tại {origin_mention} ghé {dest_mention} {duration_days} hôm cho {group_size} người, lưu ý né {target_activity}",
+            "has_group_size": True,
+            "kind": "province",
+        },
+        # Cặp 11: P4 Duration-first (DAYS -> DEST -> ORIG -> ACT)
+        {
+            "id": "adv_pair_11",
+            "pair_type": "activity_inc_vs_excl",
+            "pattern_pos": "Dành trọn {duration_days} ngày khám phá {dest_mention} từ {origin_mention}, hào hứng với hoạt động {target_activity}",
+            "pattern_neg": "Dành trọn {duration_days} ngày khám phá {dest_mention} từ {origin_mention}, không thích hoạt động {target_activity}",
+            "has_group_size": False,
+            "kind": "province",
+        },
+        # Cặp 12: P5 Dest-Orig-Days (DEST -> ORIG -> DAYS -> ACT)
+        {
+            "id": "adv_pair_12",
+            "pair_type": "activity_inc_vs_excl",
+            "pattern_pos": "Tour du ngoạn {dest_mention} đón tại {origin_mention} trong {duration_days} hôm, cả đoàn thích {target_activity}",
+            "pattern_neg": "Tour du ngoạn {dest_mention} đón tại {origin_mention} trong {duration_days} hôm, cả đoàn kiêng {target_activity}",
+            "has_group_size": False,
+            "kind": "province",
+        },
+        # =====================================================================
+        # CATEGORY B: PREFERENCE ATTRIBUTES (POSITIVE VS NEGATIVE CONSTRAINT)
+        # =====================================================================
+        # Cặp 13: P2 Origin-first (ORIG -> DEST -> DAYS)
+        {
+            "id": "adv_pair_13",
+            "pair_type": "pref_pos_vs_neg",
+            "pattern_pos": "Bắt đầu từ {origin_mention} đi nghỉ mát {dest_mention} {duration_days} ngày, ưu tiên chỗ ở gần biển",
+            "pattern_neg": "Bắt đầu từ {origin_mention} đi nghỉ mát {dest_mention} {duration_days} ngày, ưu tiên chỗ ở không gần biển",
+            "pref_pos_val": "gần biển",
+            "pref_neg_val": "không gần biển",
+            "has_group_size": False,
+            "kind": "province",
+        },
+        # Cặp 14: P2 Origin-first có group_size (ORIG -> DEST -> DAYS -> GRP)
+        {
+            "id": "adv_pair_14",
+            "pair_type": "pref_pos_vs_neg",
+            "pattern_pos": "Từ {origin_mention} du lịch {dest_mention} {duration_days} hôm cho {group_size} khách, chọn không gian náo nhiệt",
+            "pattern_neg": "Từ {origin_mention} du lịch {dest_mention} {duration_days} hôm cho {group_size} khách, chọn không gian không quá náo nhiệt",
+            "pref_pos_val": "không gian náo nhiệt",
+            "pref_neg_val": "không quá náo nhiệt",
+            "has_group_size": True,
+            "kind": "province",
+        },
+        # Cặp 15: P4 Duration-first (DAYS -> DEST -> ORIG)
+        {
+            "id": "adv_pair_15",
+            "pair_type": "pref_pos_vs_neg",
+            "pattern_pos": "Kỳ nghỉ {duration_days} ngày tại {dest_mention} đón ở {origin_mention}, yêu cầu phòng có hút thuốc",
+            "pattern_neg": "Kỳ nghỉ {duration_days} ngày tại {dest_mention} đón ở {origin_mention}, yêu cầu phòng không khói thuốc",
+            "pref_pos_val": "phòng có hút thuốc",
+            "pref_neg_val": "không khói thuốc",
+            "has_group_size": False,
+            "kind": "province",
+        },
+        # Cặp 16: P5 Dest-Orig-Days (DEST -> ORIG -> DAYS)
+        {
+            "id": "adv_pair_16",
+            "pair_type": "pref_pos_vs_neg",
+            "pattern_pos": "Hành trình thăm thú {dest_mention} khởi hành ở {origin_mention} kéo dài {duration_days} hôm, mong muốn ở gần trung tâm",
+            "pattern_neg": "Hành trình thăm thú {dest_mention} khởi hành ở {origin_mention} kéo dài {duration_days} hôm, mong muốn ở không gần trung tâm",
+            "pref_pos_val": "gần trung tâm",
+            "pref_neg_val": "không gần trung tâm",
+            "has_group_size": False,
+            "kind": "province",
+        },
+        # =====================================================================
+        # CATEGORY C: REVERSE POLARITY MINIMAL PAIRS ('không' != exclusion)
+        # =====================================================================
+        # Cặp 17: POI Reverse Polarity Pin vs Exclusion (ORIG -> DEST -> DAYS -> POI)
+        {
+            "id": "adv_pair_17",
+            "pair_type": "reverse_polarity",
+            "sub_type": "poi",
+            "pattern_pos": "Từ {origin_mention} lên tour đi {dest_mention} {duration_days} ngày, không thể bỏ qua {target_poi}",
+            "pattern_neg": "Từ {origin_mention} lên tour đi {dest_mention} {duration_days} ngày, nhất quyết bỏ qua {target_poi}",
+            "has_group_size": False,
+            "kind": "province",
+        },
+        # Cặp 18: POI Reverse Polarity Pin vs Exclusion có group_size (ORIG -> DEST -> DAYS -> GRP -> POI)
+        {
+            "id": "adv_pair_18",
+            "pair_type": "reverse_polarity",
+            "sub_type": "poi",
+            "pattern_pos": "Bắt đầu tại {origin_mention} ghé {dest_mention} {duration_days} hôm cho {group_size} người, không thể không tới {target_poi}",
+            "pattern_neg": "Bắt đầu tại {origin_mention} ghé {dest_mention} {duration_days} hôm cho {group_size} người, dặn trước không tới {target_poi}",
+            "has_group_size": True,
+            "kind": "province",
+        },
+        # Cặp 19: Activity Reverse Polarity Preference vs Exclusion (DAYS -> DEST -> ORIG -> ACT)
+        {
+            "id": "adv_pair_19",
+            "pair_type": "reverse_polarity",
+            "sub_type": "activity",
+            "pattern_pos": "Khoảng {duration_days} ngày dạo chơi {dest_mention} đi từ {origin_mention}, cả đoàn không ngại {target_activity}",
+            "pattern_neg": "Khoảng {duration_days} ngày dạo chơi {dest_mention} đi từ {origin_mention}, cả đoàn rất ngại {target_activity}",
+            "has_group_size": False,
+            "kind": "province",
+        },
+        # Cặp 20: Budget Reverse Polarity (Unlimited) vs Budget Constraint (DEST -> ORIG -> DAYS [-> BUD])
+        {
+            "id": "adv_pair_20",
+            "pair_type": "reverse_polarity",
+            "sub_type": "budget",
+            "pattern_pos": "Lộ trình khám phá {dest_mention} xuất phát từ {origin_mention} {duration_days} hôm, không giới hạn ngân sách chi tiêu",
+            "pattern_neg": "Lộ trình khám phá {dest_mention} xuất phát từ {origin_mention} {duration_days} hôm, có giới hạn {budget_phrase} chi tiêu",
             "has_group_size": False,
             "kind": "province",
         },

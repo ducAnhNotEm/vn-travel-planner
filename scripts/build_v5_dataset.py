@@ -883,10 +883,14 @@ def generate_adv_set(data_pool: Dict[str, Any], gaz: Gazetteer, target_count: in
     provinces = data_pool["provinces"]
     p_by_code = data_pool["places_by_pcode"]
 
-    # 1. MINIMAL PAIRS (Ghép cặp với pair_id) (~300 mẫu = 150 cặp)
-    for pair_idx in range(150):
-        pair_id = f"pair_{pair_idx:04d}"
+    # 1. MINIMAL PAIRS (Ghép cặp với pair_id đồng bộ) (~300 mẫu = 150 cặp)
+    pair_count = 0
+    target_pairs = 150
+    while pair_count < target_pairs:
+        pair_id = f"pair_{pair_count:04d}"
         tpl = rng.choice(MINIMAL_PAIR_TEMPLATES)
+        pair_type = tpl.get("pair_type", "pin_vs_excl")
+
         p_obj = rng.choice(provinces)
         dest_mention = p_obj["name"]
         dest_pcode = p_obj["code"]
@@ -896,51 +900,267 @@ def generate_adv_set(data_pool: Dict[str, Any], gaz: Gazetteer, target_count: in
         has_group = tpl.get("has_group_size", False)
         group_size = rng.choice([2, 4, 5, 6]) if has_group else None
 
-        cand_pois = [p["name"] for p in p_by_code.get(dest_pcode, []) if p["name"] != dest_mention]
-        if not cand_pois:
-            continue
-        target_poi = rng.choice(cand_pois)
+        if pair_type == "pin_vs_excl":
+            cand_pois = [p["name"] for p in p_by_code.get(dest_pcode, []) if p["name"] != dest_mention]
+            if not cand_pois:
+                continue
+            target_poi = rng.choice(cand_pois)
 
-        values = {
-            "dest_mention": dest_mention,
-            "origin_mention": orig_mention,
-            "duration_days": duration_days,
-            "nights": str(duration_days - 1),
-            "group_size": group_size or "",
-            "target_poi": target_poi,
-            "pin_mention": target_poi,
-            "excl_mention": target_poi,
-        }
+            values = {
+                "dest_mention": dest_mention,
+                "origin_mention": orig_mention,
+                "duration_days": duration_days,
+                "nights": str(duration_days - 1),
+                "group_size": group_size or "",
+                "target_poi": target_poi,
+                "pin_mention": target_poi,
+                "excl_mention": target_poi,
+            }
 
-        # Cặp PIN
-        spec_pin = SlotSpec(
-            intent="plan_itinerary",
-            dest_mention=dest_mention,
-            orig_mention=orig_mention,
-            duration_days=duration_days,
-            group_size=group_size,
-            pinned_mentions=[target_poi],
-            pair_id=pair_id,
-        )
-        text_pin, spans_pin = render(tpl["pattern_pin"], values)
-        check_row(text_pin, spans_pin, values, spec_pin)
-        meta_pin = {"template_id": "adv_min_pair_pin", "generator_version": "5.2", "seed": 42, "spans": spans_pin, "pair_id": pair_id}
-        records.append(make_record_dict(spec_pin, text_pin, meta_pin))
+            # Cặp PIN
+            spec_pin = SlotSpec(
+                intent="plan_itinerary",
+                dest_mention=dest_mention,
+                orig_mention=orig_mention,
+                duration_days=duration_days,
+                group_size=group_size,
+                pinned_mentions=[target_poi],
+                pair_id=pair_id,
+            )
+            pat_pin = tpl.get("pattern_pin") or tpl.get("pattern_pos")
+            text_pin, spans_pin = render(pat_pin, values)
+            check_row(text_pin, spans_pin, values, spec_pin)
+            meta_pin = {"template_id": tpl.get("id", "adv_min_pair_pin") + ":pin", "generator_version": "5.2", "seed": 42, "spans": spans_pin, "pair_id": pair_id}
+            records.append(make_record_dict(spec_pin, text_pin, meta_pin))
 
-        # Cặp EXCL
-        spec_excl = SlotSpec(
-            intent="plan_itinerary",
-            dest_mention=dest_mention,
-            orig_mention=orig_mention,
-            duration_days=duration_days,
-            group_size=group_size,
-            excluded_mentions=[target_poi],
-            pair_id=pair_id,
-        )
-        text_excl, spans_excl = render(tpl["pattern_excl"], values)
-        check_row(text_excl, spans_excl, values, spec_excl)
-        meta_excl = {"template_id": "adv_min_pair_excl", "generator_version": "5.2", "seed": 42, "spans": spans_excl, "pair_id": pair_id}
-        records.append(make_record_dict(spec_excl, text_excl, meta_excl))
+            # Cặp EXCL
+            spec_excl = SlotSpec(
+                intent="plan_itinerary",
+                dest_mention=dest_mention,
+                orig_mention=orig_mention,
+                duration_days=duration_days,
+                group_size=group_size,
+                excluded_mentions=[target_poi],
+                pair_id=pair_id,
+            )
+            pat_excl = tpl.get("pattern_excl") or tpl.get("pattern_neg")
+            text_excl, spans_excl = render(pat_excl, values)
+            check_row(text_excl, spans_excl, values, spec_excl)
+            meta_excl = {"template_id": tpl.get("id", "adv_min_pair_excl") + ":excl", "generator_version": "5.2", "seed": 42, "spans": spans_excl, "pair_id": pair_id}
+            records.append(make_record_dict(spec_excl, text_excl, meta_excl))
+            pair_count += 1
+
+        elif pair_type == "activity_inc_vs_excl":
+            target_act = rng.choice(ACTIVITY_EXCLUSION_CHOICES)
+            values = {
+                "dest_mention": dest_mention,
+                "origin_mention": orig_mention,
+                "duration_days": duration_days,
+                "nights": str(duration_days - 1),
+                "group_size": group_size or "",
+                "target_activity": target_act,
+            }
+
+            # Cặp POS (Inclusion / Preference)
+            spec_pos = SlotSpec(
+                intent="plan_itinerary",
+                dest_mention=dest_mention,
+                orig_mention=orig_mention,
+                duration_days=duration_days,
+                group_size=group_size,
+                preferences=[target_act],
+                pair_id=pair_id,
+            )
+            text_pos, spans_pos = render(tpl["pattern_pos"], values)
+            check_row(text_pos, spans_pos, values, spec_pos)
+            meta_pos = {"template_id": tpl.get("id", "adv_min_pair_act") + ":pos", "generator_version": "5.2", "seed": 42, "spans": spans_pos, "pair_id": pair_id}
+            records.append(make_record_dict(spec_pos, text_pos, meta_pos))
+
+            # Cặp NEG (Activity Exclusion)
+            spec_neg = SlotSpec(
+                intent="plan_itinerary",
+                dest_mention=dest_mention,
+                orig_mention=orig_mention,
+                duration_days=duration_days,
+                group_size=group_size,
+                excluded_activities=[target_act],
+                pair_id=pair_id,
+            )
+            text_neg, spans_neg = render(tpl["pattern_neg"], values)
+            check_row(text_neg, spans_neg, values, spec_neg)
+            meta_neg = {"template_id": tpl.get("id", "adv_min_pair_act") + ":neg", "generator_version": "5.2", "seed": 42, "spans": spans_neg, "pair_id": pair_id}
+            records.append(make_record_dict(spec_neg, text_neg, meta_neg))
+            pair_count += 1
+
+        elif pair_type == "pref_pos_vs_neg":
+            pref_pos = tpl["pref_pos_val"]
+            pref_neg = tpl["pref_neg_val"]
+            values = {
+                "dest_mention": dest_mention,
+                "origin_mention": orig_mention,
+                "duration_days": duration_days,
+                "nights": str(duration_days - 1),
+                "group_size": group_size or "",
+            }
+
+            # Cặp POS (Positive Preference Attribute)
+            spec_pos = SlotSpec(
+                intent="plan_itinerary",
+                dest_mention=dest_mention,
+                orig_mention=orig_mention,
+                duration_days=duration_days,
+                group_size=group_size,
+                preferences=[pref_pos],
+                pair_id=pair_id,
+            )
+            text_pos, spans_pos = render(tpl["pattern_pos"], values)
+            check_row(text_pos, spans_pos, values, spec_pos)
+            meta_pos = {"template_id": tpl.get("id", "adv_min_pair_pref") + ":pos", "generator_version": "5.2", "seed": 42, "spans": spans_pos, "pair_id": pair_id}
+            records.append(make_record_dict(spec_pos, text_pos, meta_pos))
+
+            # Cặp NEG (Negative Constraint Preference Attribute)
+            spec_neg = SlotSpec(
+                intent="plan_itinerary",
+                dest_mention=dest_mention,
+                orig_mention=orig_mention,
+                duration_days=duration_days,
+                group_size=group_size,
+                preferences=[pref_neg],
+                pair_id=pair_id,
+            )
+            text_neg, spans_neg = render(tpl["pattern_neg"], values)
+            check_row(text_neg, spans_neg, values, spec_neg)
+            meta_neg = {"template_id": tpl.get("id", "adv_min_pair_pref") + ":neg", "generator_version": "5.2", "seed": 42, "spans": spans_neg, "pair_id": pair_id}
+            records.append(make_record_dict(spec_neg, text_neg, meta_neg))
+            pair_count += 1
+
+        elif pair_type == "reverse_polarity":
+            sub_type = tpl.get("sub_type", "poi")
+            if sub_type == "poi":
+                cand_pois = [p["name"] for p in p_by_code.get(dest_pcode, []) if p["name"] != dest_mention]
+                if not cand_pois:
+                    continue
+                target_poi = rng.choice(cand_pois)
+                values = {
+                    "dest_mention": dest_mention,
+                    "origin_mention": orig_mention,
+                    "duration_days": duration_days,
+                    "nights": str(duration_days - 1),
+                    "group_size": group_size or "",
+                    "target_poi": target_poi,
+                }
+                # POS: 'không thể bỏ qua {poi}' -> PINNED
+                spec_pos = SlotSpec(
+                    intent="plan_itinerary",
+                    dest_mention=dest_mention,
+                    orig_mention=orig_mention,
+                    duration_days=duration_days,
+                    group_size=group_size,
+                    pinned_mentions=[target_poi],
+                    pair_id=pair_id,
+                )
+                text_pos, spans_pos = render(tpl["pattern_pos"], values)
+                check_row(text_pos, spans_pos, values, spec_pos)
+                meta_pos = {"template_id": tpl.get("id", "adv_min_pair_rev_poi") + ":pos", "generator_version": "5.2", "seed": 42, "spans": spans_pos, "pair_id": pair_id}
+                records.append(make_record_dict(spec_pos, text_pos, meta_pos))
+
+                # NEG: 'nhất quyết bỏ qua {poi}' -> EXCLUDED
+                spec_neg = SlotSpec(
+                    intent="plan_itinerary",
+                    dest_mention=dest_mention,
+                    orig_mention=orig_mention,
+                    duration_days=duration_days,
+                    group_size=group_size,
+                    excluded_mentions=[target_poi],
+                    pair_id=pair_id,
+                )
+                text_neg, spans_neg = render(tpl["pattern_neg"], values)
+                check_row(text_neg, spans_neg, values, spec_neg)
+                meta_neg = {"template_id": tpl.get("id", "adv_min_pair_rev_poi") + ":neg", "generator_version": "5.2", "seed": 42, "spans": spans_neg, "pair_id": pair_id}
+                records.append(make_record_dict(spec_neg, text_neg, meta_neg))
+                pair_count += 1
+
+            elif sub_type == "activity":
+                target_act = rng.choice(ACTIVITY_EXCLUSION_CHOICES)
+                values = {
+                    "dest_mention": dest_mention,
+                    "origin_mention": orig_mention,
+                    "duration_days": duration_days,
+                    "nights": str(duration_days - 1),
+                    "group_size": group_size or "",
+                    "target_activity": target_act,
+                }
+                # POS: 'không ngại {activity}' -> PREFERENCE (không phải exclusion)
+                spec_pos = SlotSpec(
+                    intent="plan_itinerary",
+                    dest_mention=dest_mention,
+                    orig_mention=orig_mention,
+                    duration_days=duration_days,
+                    group_size=group_size,
+                    preferences=["không ngại " + target_act],
+                    pair_id=pair_id,
+                )
+                text_pos, spans_pos = render(tpl["pattern_pos"], values)
+                check_row(text_pos, spans_pos, values, spec_pos)
+                meta_pos = {"template_id": tpl.get("id", "adv_min_pair_rev_act") + ":pos", "generator_version": "5.2", "seed": 42, "spans": spans_pos, "pair_id": pair_id}
+                records.append(make_record_dict(spec_pos, text_pos, meta_pos))
+
+                # NEG: 'rất ngại {activity}' -> EXCLUDED ACTIVITIES
+                spec_neg = SlotSpec(
+                    intent="plan_itinerary",
+                    dest_mention=dest_mention,
+                    orig_mention=orig_mention,
+                    duration_days=duration_days,
+                    group_size=group_size,
+                    excluded_activities=[target_act],
+                    pair_id=pair_id,
+                )
+                text_neg, spans_neg = render(tpl["pattern_neg"], values)
+                check_row(text_neg, spans_neg, values, spec_neg)
+                meta_neg = {"template_id": tpl.get("id", "adv_min_pair_rev_act") + ":neg", "generator_version": "5.2", "seed": 42, "spans": spans_neg, "pair_id": pair_id}
+                records.append(make_record_dict(spec_neg, text_neg, meta_neg))
+                pair_count += 1
+
+            elif sub_type == "budget":
+                budget_vnd, budget_phrase = rng.choice(BUDGET_CHOICES)
+                values = {
+                    "dest_mention": dest_mention,
+                    "origin_mention": orig_mention,
+                    "duration_days": duration_days,
+                    "nights": str(duration_days - 1),
+                    "group_size": group_size or "",
+                    "budget_phrase": budget_phrase,
+                }
+                # POS: 'không giới hạn ngân sách chi tiêu' -> UNLIMITED (budget=None, pref='không giới hạn ngân sách')
+                spec_pos = SlotSpec(
+                    intent="plan_itinerary",
+                    dest_mention=dest_mention,
+                    orig_mention=orig_mention,
+                    duration_days=duration_days,
+                    group_size=group_size,
+                    preferences=["không giới hạn ngân sách"],
+                    pair_id=pair_id,
+                )
+                text_pos, spans_pos = render(tpl["pattern_pos"], values)
+                check_row(text_pos, spans_pos, values, spec_pos)
+                meta_pos = {"template_id": tpl.get("id", "adv_min_pair_rev_bud") + ":pos", "generator_version": "5.2", "seed": 42, "spans": spans_pos, "pair_id": pair_id}
+                records.append(make_record_dict(spec_pos, text_pos, meta_pos))
+
+                # NEG: 'có giới hạn {budget_phrase} chi tiêu' -> BUDGET TOTAL VND
+                spec_neg = SlotSpec(
+                    intent="plan_itinerary",
+                    dest_mention=dest_mention,
+                    orig_mention=orig_mention,
+                    duration_days=duration_days,
+                    group_size=group_size,
+                    budget_total_vnd=budget_vnd,
+                    pair_id=pair_id,
+                )
+                text_neg, spans_neg = render(tpl["pattern_neg"], values)
+                check_row(text_neg, spans_neg, values, spec_neg)
+                meta_neg = {"template_id": tpl.get("id", "adv_min_pair_rev_bud") + ":neg", "generator_version": "5.2", "seed": 42, "spans": spans_neg, "pair_id": pair_id}
+                records.append(make_record_dict(spec_neg, text_neg, meta_neg))
+                pair_count += 1
 
     # 2. ĐẢO NGỮ CÚ PHÁP (Origin xuất hiện trước Destination) (~150 mẫu)
     for i in range(150):
@@ -1162,10 +1382,11 @@ def main():
     }
 
     for path, recs in out_paths.items():
-        with open(path, "w", encoding="utf-8") as f:
+        norm_p = os.path.normpath(path)
+        with open(norm_p, "w", encoding="utf-8") as f:
             for r in recs:
                 f.write(json.dumps(r, ensure_ascii=False) + "\n")
-        print(f"Đã ghi: {path} ({len(recs)} dòng)")
+        print(f"Đã ghi: {norm_p} ({len(recs)} dòng)")
 
     print("\n✓ Hoàn tất sinh dataset v5.2 thành công mỹ mãn!")
 
