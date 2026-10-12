@@ -132,7 +132,7 @@ ADV_ADVISORY_TEMPLATES = [
     {
         "id": "adv_advisory_02",
         "intent": "ask_advisory",
-        "pattern": "Thời điểm nào ghé {dest_mention} không bị quá lạnh và sương mù?",
+        "pattern": "Thời điểm nào ghé {dest_mention} thì không quá lạnh và sương mù?",
         "slots": ["dest_mention"],
         "pref_val": "không quá lạnh",
         "kind": "province",

@@ -17,9 +17,10 @@ TRAIN_PLAN_TEMPLATES = [
     },
     {
         "id": "train_plan_02",
-        "pattern": "Nhờ bạn xếp lịch trình đi {dest_mention} {duration_days} ngày 2 đêm khởi hành từ {origin_mention}",
+        "pattern": "Nhờ bạn xếp lịch trình đi {dest_mention} {duration_days} ngày {nights} đêm khởi hành từ {origin_mention}",
         "slots": ["dest_mention", "duration_days", "origin_mention"],
         "kind": "province",
+        "min_days": 2,
     },
     {
         "id": "train_plan_03",
