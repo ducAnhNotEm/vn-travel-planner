@@ -32,3 +32,8 @@ data/map_cache/
 *.safetensors
 checkpoints*/
 *.bak
+
+# Audit & Backups
+audit_out/
+data/backup*/
+data/*_v4.jsonl
