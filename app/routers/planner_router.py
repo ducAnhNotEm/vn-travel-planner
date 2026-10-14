@@ -297,7 +297,7 @@ def calculate_plan(req: TripPlanRequest):
 
 class ParsePromptRequest(BaseModel):
     prompt: str = Field(..., description="Câu yêu cầu tự do của người dùng")
-    engine: Optional[str] = Field("v2", description="Mô hình NLU: 'v2', 'v1', 'fusion', 'claude'")
+    engine: Optional[str] = Field("auto", description="Mô hình NLU: 'auto', 'v2', 'v1', 'fusion', 'claude'")
 
 
 @router.post("/parse-prompt")

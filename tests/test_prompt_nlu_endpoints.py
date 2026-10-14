@@ -130,3 +130,80 @@ def test_schema_v3_fusion_negative_constraint_filtering():
     assert "Bãi Cháy" in fused["hard_pinned_locations"]
     assert "Vịnh Hạ Long" in fused["hard_pinned_locations"]
 
+
+def test_diff_slots():
+    """Kiểm tra so sánh slot chuẩn hóa (Gazetteer province resolution + text place slot)."""
+    from app.services.prompt_nlu_service import diff_slots
+
+    a = {"intent": "plan_itinerary", "origin": "Sài Gòn", "days": "3", "prefer_flight": True}
+    b = {"intent": "PLAN_TRIP", "origin": "TP.HCM", "days": 3, "prefer_flight": "true"}
+    assert diff_slots(a, b) == []
+
+    assert diff_slots(
+        {"origin": "Hà Nội", "destination": "Đà Nẵng"},
+        {"origin": "Đà Nẵng", "destination": "Hà Nội"}
+    ) == ["destination", "origin"]
+
+    assert diff_slots(
+        {"excluded_places": ["Bà Nà"]},
+        {"excluded_places": ["Hội An"]}
+    ) == ["excluded_places"]
+
+
+def test_auto_fallback_chain_cloud_timeout(monkeypatch):
+    """Khi Cloud bị lỗi/timeout, hệ thống tự động fallback sang Ollama."""
+    import app.services.prompt_nlu_service as nlu_mod
+
+    # Mock Cloud fail
+    monkeypatch.setattr(nlu_mod, "call_claude_nlu", lambda prompt, timeout=25.0: ("", 6000.0, "timeout"))
+    # Mock Ollama success
+    ollama_mock = (
+        '{"intent": "plan_itinerary", "origin": "Bắc Ninh", "destination": "Quảng Nam", "days": 3}',
+        850.0,
+        None
+    )
+    monkeypatch.setattr(nlu_mod, "call_ollama_chat", lambda model, prompt: ollama_mock)
+
+    res = nlu_mod.parse_prompt_auto("Tới Quảng Nam 3 ngày từ Bắc Ninh")
+    assert res["success"] is True
+    assert "Ollama" in res["engine_used"]
+    assert res["fallback_chain"] == ["cloud_failed", "ollama"]
+    assert res["extracted"]["destination"] == "Quảng Nam"
+
+
+def test_auto_fallback_chain_both_failed_regex(monkeypatch):
+    """Khi cả Cloud và Ollama đều lỗi, hệ thống kích hoạt Regex fallback thuần Python (Zero-Crash)."""
+    import app.services.prompt_nlu_service as nlu_mod
+
+    monkeypatch.setattr(nlu_mod, "call_claude_nlu", lambda prompt, timeout=25.0: ("", 5000.0, "network down"))
+    monkeypatch.setattr(nlu_mod, "call_ollama_chat", lambda model, prompt: ("", 0.0, "connection refused"))
+
+    res = nlu_mod.parse_prompt_auto("Tới Quảng Nam 3 ngày đi bằng máy bay xuất phát từ Bắc Ninh nhóm 4 người")
+    assert res["success"] is True
+    assert res["engine_used"] == "Regex fallback"
+    assert res["fallback_chain"] == ["cloud_failed", "ollama_failed", "regex"]
+    assert res["extracted"]["destination"] == "Quảng Nam"
+    assert res["extracted"]["origin"] == "Bắc Ninh"
+    assert res["extracted"]["days"] == 3
+    assert res["extracted"]["group_size"] == 4
+    assert res["extracted"]["prefer_flight"] is True
+
+
+def test_write_audit_logging_resilient(tmp_path, monkeypatch):
+    """Ghi log audit vào file jsonl an toàn, thư mục lỗi không làm sập chương trình."""
+    import app.services.prompt_nlu_service as nlu_mod
+
+    log_file = tmp_path / "nlu_comparison.jsonl"
+    monkeypatch.setattr(nlu_mod, "NLU_AUDIT_PATH", log_file)
+    monkeypatch.setattr(nlu_mod, "NLU_LOG_RAW_PROMPT", True)
+
+    cloud = {"ok": True, "latency_ms": 1200.0, "error": None, "extracted": {"origin": "Sài Gòn", "destination": "Đà Lạt"}}
+    ollama = {"ok": True, "latency_ms": 750.0, "error": None, "extracted": {"origin": "TP.HCM", "destination": "Đà Lạt"}}
+
+    nlu_mod._write_audit("Từ Sài Gòn đi Đà Lạt", cloud, ollama)
+    assert log_file.exists()
+    content = log_file.read_text(encoding="utf-8")
+    assert "discrepant_slots" in content
+    assert '"discrepant_slots": []' in content
+
+
