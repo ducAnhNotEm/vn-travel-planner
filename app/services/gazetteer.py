@@ -26,7 +26,8 @@ import os
 import re
 import sqlite3
 import unicodedata
-from typing import Dict, Any, Optional, List, Tuple
+from dataclasses import dataclass
+from typing import Dict, Any, Optional, List, Sequence, Tuple
 
 
 def normalize_text(text: str) -> str:
@@ -403,6 +404,135 @@ MANUAL_ALIASES: Dict[str, Tuple[int, str]] = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# GỢI Ý ĐIỂM ĐẾN THEO HINTS (Lát 2 - PRODUCT_SPEC Mục 6/7: source "gazetteer_by_hints")
+# ═══════════════════════════════════════════════════════════════════════════════
+# `travel_db.db` không có dữ liệu vùng miền / địa hình, nên danh mục gợi ý là dữ liệu tĩnh,
+# xác định 100% (không phụ thuộc DB, không ngẫu nhiên). Mỗi nhãn PHẢI phân giải được qua
+# `resolve_mention` về đúng `province_code` đã khai báo (có test kiểm tra).
+
+# Vùng cha -> vùng lá. Dữ liệu điểm đến chỉ gắn nhãn vùng lá; hint vùng cha tự bung ra vùng lá.
+REGION_CHILDREN: Dict[str, Tuple[str, ...]] = {
+    "mien_bac": ("tay_bac", "dong_bac", "dong_bang_song_hong"),
+    "mien_trung": ("bac_trung_bo", "nam_trung_bo", "tay_nguyen"),
+    "mien_nam": ("dong_nam_bo", "tay_nam_bo"),
+}
+LEAF_REGIONS = frozenset(r for children in REGION_CHILDREN.values() for r in children)
+TERRAIN_TYPES = frozenset({"nui", "bien", "dao", "dong_bang", "cao_nguyen"})
+
+
+@dataclass(frozen=True)
+class DestinationEntry:
+    label: str                      # nhãn hiển thị VÀ giá trị ghi vào destination_mention
+    province_code: int              # mã tỉnh chứa nó (34 tỉnh hiện hành)
+    regions: Tuple[str, ...]        # vùng lá
+    terrains: Tuple[str, ...]
+    rank: int                       # độ phổ biến, nhỏ = ưu tiên trước; DUY NHẤT để sắp xếp ổn định
+    level: str = "locality"         # "province" (tên tỉnh/thành) | "locality" (điểm/thành phố nhỏ hơn tỉnh)
+
+
+def _e(rank: int, label: str, code: int, regions: str, terrains: str, level: str = "locality") -> DestinationEntry:
+    return DestinationEntry(label, code, tuple(regions.split()), tuple(terrains.split()), rank, level)
+
+
+DESTINATION_CATALOG: Tuple[DestinationEntry, ...] = (
+    _e(1, "Đà Nẵng", 48, "nam_trung_bo", "bien", "province"),
+    _e(2, "Phú Quốc", 91, "tay_nam_bo", "bien dao"),
+    _e(3, "Đà Lạt", 68, "tay_nguyen", "nui cao_nguyen"),
+    _e(4, "Hạ Long", 22, "dong_bac", "bien dao"),
+    _e(5, "Nha Trang", 56, "nam_trung_bo", "bien"),
+    _e(6, "Sa Pa", 15, "tay_bac", "nui"),
+    _e(7, "Hà Giang", 8, "dong_bac", "nui"),
+    _e(8, "Hội An", 48, "nam_trung_bo", "bien"),
+    _e(9, "Ninh Bình", 37, "dong_bang_song_hong", "dong_bang", "province"),
+    _e(10, "Huế", 46, "bac_trung_bo", "dong_bang", "province"),
+    _e(11, "Hà Nội", 1, "dong_bang_song_hong", "dong_bang", "province"),
+    _e(12, "Mộc Châu", 14, "tay_bac", "nui cao_nguyen"),
+    _e(13, "Vũng Tàu", 79, "dong_nam_bo", "bien"),
+    _e(14, "Quy Nhơn", 52, "nam_trung_bo", "bien"),
+    _e(15, "Mù Cang Chải", 15, "tay_bac", "nui"),
+    _e(16, "Phong Nha", 44, "bac_trung_bo", "nui"),
+    _e(17, "Cát Bà", 31, "dong_bang_song_hong", "bien dao"),
+    _e(18, "Côn Đảo", 79, "dong_nam_bo", "bien dao"),
+    _e(19, "Cần Thơ", 92, "tay_nam_bo", "dong_bang", "province"),
+    _e(20, "TP. Hồ Chí Minh", 79, "dong_nam_bo", "dong_bang", "province"),
+    _e(21, "Mai Châu", 25, "tay_bac", "nui"),
+    _e(22, "Điện Biên", 11, "tay_bac", "nui", "province"),
+    _e(23, "Cao Bằng", 4, "dong_bac", "nui", "province"),
+    _e(24, "Lý Sơn", 51, "nam_trung_bo", "bien dao"),
+    _e(25, "Mũi Né", 68, "nam_trung_bo", "bien"),
+    _e(26, "Buôn Ma Thuột", 66, "tay_nguyen", "cao_nguyen"),
+    _e(27, "Tam Đảo", 25, "dong_bac", "nui"),
+    _e(28, "Pù Luông", 38, "bac_trung_bo", "nui"),
+    _e(29, "Sầm Sơn", 38, "bac_trung_bo", "bien"),
+    _e(30, "Cô Tô", 22, "dong_bac", "bien dao"),
+    _e(31, "Lạng Sơn", 20, "dong_bac", "nui", "province"),
+    _e(32, "Ba Bể", 19, "dong_bac", "nui"),
+    _e(33, "Tà Xùa", 14, "tay_bac", "nui"),
+    _e(34, "Kon Tum", 51, "tay_nguyen", "cao_nguyen nui"),
+    _e(35, "Pleiku", 52, "tay_nguyen", "cao_nguyen"),
+    _e(36, "Cà Mau", 96, "tay_nam_bo", "bien dong_bang", "province"),
+    _e(37, "Hà Tiên", 91, "tay_nam_bo", "bien"),
+    _e(38, "Châu Đốc", 91, "tay_nam_bo", "dong_bang"),
+    _e(39, "Tây Ninh", 80, "dong_nam_bo", "nui", "province"),
+    _e(40, "Bến Tre", 86, "tay_nam_bo", "dong_bang"),
+)
+
+# Khóa (không dấu) của các nhãn cấp điểm/thành phố nhỏ hơn tỉnh: dùng cho Gazetteer.same_entity
+_LOCALITY_KEYS = frozenset(
+    strip_accents(normalize_text(e.label)) for e in DESTINATION_CATALOG if e.level == "locality"
+)
+
+
+def _norm_hint_tokens(values: Optional[Sequence[str]]) -> List[str]:
+    return [str(v).strip().lower() for v in (values or []) if str(v).strip()]
+
+
+def expand_regions(regions: Optional[Sequence[str]]) -> frozenset:
+    """Bung hint vùng (cha hoặc lá) thành tập vùng lá. Giá trị lạ bị bỏ qua."""
+    out = set()
+    for r in _norm_hint_tokens(regions):
+        if r in REGION_CHILDREN:
+            out.update(REGION_CHILDREN[r])
+        elif r in LEAF_REGIONS:
+            out.add(r)
+    return frozenset(out)
+
+
+def rank_destinations(
+    destination_regions: Optional[Sequence[str]] = None,
+    terrain_types: Optional[Sequence[str]] = None,
+) -> List[DestinationEntry]:
+    """
+    Danh sách điểm đến phù hợp hints, sắp xếp ỔN ĐỊNH theo (rank, nhãn). Thuần túy, không DB.
+    - Có cả vùng và địa hình: phải khớp CẢ HAI. Nếu rỗng thì nới lỏng: chỉ vùng, rồi chỉ địa hình.
+    - Không có hint hợp lệ nào: toàn bộ danh mục theo độ phổ biến.
+    """
+    regions = expand_regions(destination_regions)
+    terrains = frozenset(t for t in _norm_hint_tokens(terrain_types) if t in TERRAIN_TYPES)
+
+    def by_region(e: DestinationEntry) -> bool:
+        return bool(regions.intersection(e.regions))
+
+    def by_terrain(e: DestinationEntry) -> bool:
+        return bool(terrains.intersection(e.terrains))
+
+    attempts = []
+    if regions and terrains:
+        attempts.append(lambda e: by_region(e) and by_terrain(e))
+    if regions:
+        attempts.append(by_region)
+    if terrains:
+        attempts.append(by_terrain)
+    attempts.append(lambda e: True)
+
+    for pred in attempts:
+        found = [e for e in DESTINATION_CATALOG if pred(e)]
+        if found:
+            return sorted(found, key=lambda e: (e.rank, strip_accents(e.label).lower()))
+    return []
+
+
 class Gazetteer:
     """
     Gazetteer singleton loaded deterministically from travel_db.db + static knowledge.
@@ -612,6 +742,79 @@ class Gazetteer:
                 }
 
         return None
+
+
+    # ── Lát 2: gợi ý điểm đến & so khớp thực thể ────────────────────────────────
+
+    def _is_province_level(self, mention: str, resolved: Dict[str, Any]) -> bool:
+        """Tên cấp tỉnh/thành (Hà Nội, HN, Sài Gòn...) chứ không phải điểm cụ thể nhỏ hơn tỉnh."""
+        if resolved.get("match_type") != "exact_alias":
+            return False  # place_lookup = điểm tham quan cụ thể (chùa Hương...)
+        return strip_accents(normalize_text(mention)) not in _LOCALITY_KEYS
+
+    def same_entity(self, a: Optional[str], b: Optional[str]) -> bool:
+        """
+        Hai mention có cùng MỘT thực thể không? (dùng cho "điểm đến trùng điểm xuất phát" và làm
+        hook `same_place` cho dialogue_state).
+        - Cùng văn bản (không phân biệt hoa/thường/dấu) -> True.
+        - Cùng tỉnh VÀ cả hai đều là tên cấp tỉnh (TP.HCM = Sài Gòn = HCM) -> True.
+        - Điểm cụ thể (chùa Hương) hoặc điểm nhỏ hơn tỉnh (Hội An vs Đà Nẵng) -> False.
+        - Không phân giải được / mơ hồ -> False (không chặn nhầm người dùng).
+        Dùng strict=True: không để substring matching nuốt "chùa Hương" thành "Hương...".
+        """
+        ka, kb = strip_accents(normalize_text(a or "")), strip_accents(normalize_text(b or ""))
+        if not ka or not kb:
+            return False
+        if ka == kb:
+            return True
+        ra, rb = self.resolve_mention(a, strict=True), self.resolve_mention(b, strict=True)
+        if not ra or not rb or ra.get("is_ambiguous") or rb.get("is_ambiguous"):
+            return False
+        if ra["province_code"] != rb["province_code"]:
+            return False
+        return self._is_province_level(a, ra) and self._is_province_level(b, rb)
+
+    def suggest_destinations_by_hints(
+        self,
+        destination_regions: Optional[Sequence[str]] = None,
+        terrain_types: Optional[Sequence[str]] = None,
+        limit: int = 6,
+        exclude: Optional[Sequence[str]] = None,
+        avoid: Optional[Sequence[str]] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Gợi ý điểm đến theo hints (source "gazetteer_by_hints"). Kết quả xác định, sắp xếp ổn định
+        (rank, nhãn) - tương đương ORDER BY. Mỗi phần tử: {"label", "province_code", "level", "regions", "terrains"}.
+
+        exclude: địa danh người dùng đã loại trừ. Loại cùng thực thể; nếu mục loại trừ là tên cấp tỉnh
+                 thì loại luôn mọi điểm thuộc tỉnh đó (loại trừ "Lào Cai" -> không gợi ý Sa Pa).
+        avoid:   địa danh chỉ cần tránh trùng chính nó (vd điểm xuất phát): chỉ loại cùng thực thể,
+                 không loại cả tỉnh (xuất phát Đà Nẵng vẫn có thể đi Hội An).
+        """
+        if limit is None or limit <= 0:
+            return []
+        excluded_codes = set()
+        for ex in exclude or []:
+            res = self.resolve_mention(ex, strict=True)
+            if res and not res.get("is_ambiguous") and self._is_province_level(ex, res):
+                excluded_codes.add(res["province_code"])
+
+        out: List[Dict[str, Any]] = []
+        for e in rank_destinations(destination_regions, terrain_types):
+            if e.province_code in excluded_codes:
+                continue
+            if any(self.same_entity(e.label, x) for x in list(exclude or []) + list(avoid or [])):
+                continue
+            out.append({
+                "label": e.label,
+                "province_code": e.province_code,
+                "level": e.level,
+                "regions": list(e.regions),
+                "terrains": list(e.terrains),
+            })
+            if len(out) >= limit:
+                break
+        return out
 
 
 def resolve_mention(mention: Optional[str], db_path: str = "travel_db.db", strict: bool = False) -> Optional[Dict[str, Any]]:

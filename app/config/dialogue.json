@@ -1,0 +1,25 @@
+{
+  "max_questions_per_turn": 2,
+  "critical_slots": [
+    {
+      "slot": "destination_mention",
+      "ask": "Quý khách muốn đi điểm cụ thể nào{region_suffix}?",
+      "suggest": {"source": "gazetteer_by_hints", "limit": 6}
+    },
+    {
+      "slot": "origin_mention",
+      "ask": "Quý khách dự định khởi hành từ tỉnh/thành nào?",
+      "suggest": {"source": "popular_origins", "include_current_location": true, "limit": 5}
+    },
+    {
+      "slot": "duration_days",
+      "ask": "Quý khách dự định đi mấy ngày?",
+      "suggest": {"source": "static", "values": [1, 2, 3, 4, 5]}
+    }
+  ],
+  "extra_slots": [
+    {"slot": "group_size", "default": 2},
+    {"slot": "budget_total_vnd", "default": null}
+  ],
+  "after_ready": "auto_plan"
+}

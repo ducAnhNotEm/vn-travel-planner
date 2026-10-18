@@ -8,8 +8,8 @@ Tuân thủ:
 - defaulted: ghi nhận danh sách tên các slot đang dùng giá trị mặc định để
   phân biệt rõ ràng với slot do người dùng thực sự nói ra.
 """
-from typing import Any, Dict, List, Literal, Optional
-from pydantic import BaseModel, Field
+from typing import Any, Dict, List, Literal, Optional, Union
+from pydantic import BaseModel, Field, computed_field
 import uuid
 
 
@@ -70,3 +70,35 @@ class NLUFlatOutput(BaseModel):
     pinned_mentions: List[str] = Field(default_factory=list)
     prefer_flight: Optional[bool] = None
     raw_query: Optional[str] = None
+
+
+# ───────────────────────────────────────────────────────────────────────────────
+# Lát 2: Hỏi làm rõ & nút gợi ý (chip) - PRODUCT_SPEC Mục 6, 7
+# ───────────────────────────────────────────────────────────────────────────────
+class ChipItem(BaseModel):
+    """Một nút gợi ý. Bấm nút -> frontend gửi {"type": "chip", "slot": ..., "value": ...}."""
+    id: str = Field(..., description="Định danh ổn định, vd chip_dest_sapa")
+    label: str = Field(..., description="Chữ hiển thị trên nút")
+    slot: str = Field(..., description="Slot sẽ được điền khi bấm, vd destination_mention")
+    value: Union[bool, int, str] = Field(..., description="Giá trị ghi thẳng vào slot (không qua NLU)")
+
+
+class ClarificationQuestion(BaseModel):
+    slot: str = Field(..., description="Slot đang được hỏi")
+    text: str = Field(..., description="Câu hỏi hiển thị cho người dùng (đọc từ config/dialogue.json)")
+    reason: Literal["missing", "conflict"] = Field("missing", description="Hỏi vì thiếu slot hay vì điểm đến trùng điểm xuất phát")
+    chips: List[ChipItem] = Field(default_factory=list, description="Nút gợi ý cho riêng câu hỏi này")
+
+
+class ClarificationTurn(BaseModel):
+    """Kết quả một lượt 'còn thiếu gì': hoặc hỏi tiếp (collecting) hoặc đủ thông tin (ready)."""
+    status: Literal["collecting", "ready"]
+    questions: List[ClarificationQuestion] = Field(default_factory=list, description="Tối đa max_questions_per_turn câu")
+    missing_slots: List[str] = Field(default_factory=list, description="TẤT CẢ slot quan trọng còn thiếu (kể cả phần vượt giới hạn câu hỏi/lượt)")
+    next_action: Optional[str] = Field(None, description="Khi ready: giá trị after_ready trong config (vd auto_plan)")
+
+    @computed_field  # type: ignore[misc]
+    @property
+    def chips(self) -> List[ChipItem]:
+        """Hàng nút gợi ý phẳng theo thứ tự câu hỏi (mỗi chip mang sẵn `slot`)."""
+        return [c for q in self.questions for c in q.chips]
