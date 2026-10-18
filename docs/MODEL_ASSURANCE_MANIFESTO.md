@@ -88,8 +88,8 @@ Trong một hệ thống Machine Learning Production nghiêm túc:
 ## 3. HỆ THỐNG ĐÁNH GIÁ TỰ ĐỘNG (ASSURANCE BENCHMARK)
 
 - 🧪 **Pytest Harness:** [`tests/test_semantic_nlu_benchmarks.py`](file:///d:/vn-travel-planner/tests/test_semantic_nlu_benchmarks.py)
-- 🚀 **Ollama Evaluation Runner:** [`test_gguf_v2.py`](file:///d:/vn-travel-planner/test_gguf_v2.py)
-- 📂 **Unified Master Benchmark Dataset:** [`data/train_nlu_master.jsonl`](file:///d:/vn-travel-planner/data/train_nlu_master.jsonl)
+- 🚀 **Ollama Evaluation Runner:** [`scripts/test_gguf_v2.py`](file:///d:/vn-travel-planner/scripts/test_gguf_v2.py)
+- 📂 **Unified Master Benchmark Dataset:** [`data/train_nlu_master_v5.jsonl`](file:///d:/vn-travel-planner/data/train_nlu_master_v5.jsonl)
 
 ---
 

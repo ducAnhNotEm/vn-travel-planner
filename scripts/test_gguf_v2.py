@@ -21,11 +21,16 @@ import urllib.request
 import urllib.error
 from typing import Dict, Any, List, Optional, Tuple
 
+# Đảm bảo import được từ thư mục gốc
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 # Import ma trận ca kiểm thử chuẩn từ test suite
 from tests.test_semantic_nlu_benchmarks import ASSURANCE_TEST_CASES, ContractAssuranceScorer
 
-GGUF_V2_FILE = "Qwen2.5-7B-Instruct-v2.Q4_K_M.gguf"
-MODELFILE_V2 = "Modelfile_v2"
+GGUF_V2_FILE = os.path.join(PROJECT_ROOT, "Qwen2.5-7B-Instruct-v2.Q4_K_M.gguf")
+MODELFILE_V2 = os.path.join(PROJECT_ROOT, "Modelfile_v2")
 DEFAULT_MODEL_NAME = "vn-travel-qwen-v2"
 OLLAMA_BASE_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 

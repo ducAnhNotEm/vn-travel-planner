@@ -53,7 +53,7 @@
   - Model V2: `Qwen2.5-7B-Instruct-v2.Q4_K_M.gguf` (4.68 GB) kèm `Modelfile_v2` (`vn-travel-qwen-v2`).
   - Bộ dữ liệu Schema V3 hợp nhất chuẩn mực: `data/train_nlu_master_v3.jsonl` (966 mẫu câu chuẩn 15 trường), `data/train_nlu_adversarial_v3.jsonl` (29 ca đối kháng vùng miền/phủ định), pipeline `scripts/build_v3_dataset.py`.
   - Google Colab QLoRA Unsloth Notebook: `notebooks/train_qwen_v2_unsloth_colab.ipynb` sẵn sàng train V3.
-  - Test Suite kiểm định GGUF v2 độc lập: `test_gguf_v2.py` và Terminal CLI `test_prompt_cli.py`.
+  - Test Suite kiểm định GGUF v2 độc lập: `scripts/test_gguf_v2.py` và Terminal CLI `scripts/test_prompt_cli.py`.
 - [x] **Schema V3 NLU Pipeline & Dual-Engine Fusion**:
   - Hỗ trợ đầy đủ 15 trường: `intent`, `destination`, `destination_regions`, `terrain_types`, `excluded_destinations`, `excluded_places`, `origin`, `duration_days`, `group_size`, `vehicle_type`, `budget_total_vnd`, `preferences`, `excluded_activities`, `hard_pinned_locations`, `prefer_flight`.
   - Slot-Level Fusion giữa V2 (khế ước chặt) và V1 (vốn từ du lịch phong phú), tự động loại trừ địa danh thuộc `excluded_destinations` khỏi danh sách tham quan.
