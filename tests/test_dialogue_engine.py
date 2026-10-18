@@ -3,8 +3,8 @@ tests/test_dialogue_engine.py
 ===============================================================================
 Kiểm thử Lát 2: hỏi làm rõ + nút gợi ý (PRODUCT_SPEC Mục 3, 4, 6, 7, 10).
 
-Lưu ý: bản PRODUCT_SPEC.md được cung cấp dừng ở Mục 11 và chỉ viện dẫn "Mục 12" của Đặc tả dự án, nên các ca dưới
-đây suy ra từ Mục 3, 4, 6, 7, 10. Khi có Mục 12B chính thức, đối chiếu và bổ sung ca còn thiếu.
+Lớp TestAcceptance12B ở cuối file bám sát từng câu Given/Then của Mục 12B (Hỏi lại và chip).
+Các lớp còn lại phủ thêm Mục 3, 4, 6, 7, 10.
 
 Gazetteer dùng một travel_db.db GIẢ dựng trong tmp_path (không phụ thuộc DB thật): đủ bảng provinces/places.
 """
@@ -589,3 +589,72 @@ class TestSameEntity:
         r = merge_nlu_slots(TripRequest(), {"destination_mention": "Sài Gòn"})
         r = merge_nlu_slots(r, {"excluded_mentions": ["TP.HCM"]}, same_place=gaz.same_entity)
         assert r.critical.destination_mention is None  # bất biến 6: loại trừ mới thắng, tương đương mức thực thể
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MỤC 12B - Tiêu chí nghiệm thu: Hỏi lại và chip (Given / When / Then)
+# ═══════════════════════════════════════════════════════════════════════════════
+class TestAcceptance12B:
+    NLU_NORTH_MOUNTAINS = {"destination_regions": ["mien_bac"], "terrain_types": ["nui"]}  # "du lịch miền núi phía bắc"
+
+    def test_given_typing_northern_mountains_then_hints_set_and_two_questions_with_regional_chips(self, gaz):
+        r = merge_nlu_slots(TripRequest(), self.NLU_NORTH_MOUNTAINS)
+        # hints.destination_regions có vùng phù hợp, critical còn null
+        assert r.hints.destination_regions == ["mien_bac"]
+        assert (r.critical.destination_mention, r.critical.origin_mention, r.critical.duration_days) == (None, None, None)
+
+        t = generate_clarification_turn(r, gaz)
+        # bot hỏi tối đa 2 câu: điểm đến cụ thể và điểm xuất phát
+        assert len(t.questions) <= 2
+        assert {q.slot for q in t.questions} == {"destination_mention", "origin_mention"}
+        # chip điểm đến đều thuộc vùng núi phía Bắc
+        dest_q = next(q for q in t.questions if q.slot == "destination_mention")
+        by_label = {e.label: e for e in DESTINATION_CATALOG}
+        north = {"tay_bac", "dong_bac", "dong_bang_song_hong"}
+        assert dest_q.chips
+        for chip in dest_q.chips:
+            entry = by_label[chip.value]
+            assert set(entry.regions) <= north and "nui" in entry.terrains, chip.label
+        assert {"Sa Pa", "Hà Giang"} <= set(labels(dest_q.chips))
+
+    def test_given_clicking_sapa_chip_then_destination_set_without_nlu_and_hints_cleared(self, gaz):
+        import app.services.dialogue_state as ds
+        r = merge_nlu_slots(TripRequest(), self.NLU_NORTH_MOUNTAINS)
+        sapa = next(c for c in generate_clarification_turn(r, gaz).chips if c.label == "Sa Pa")
+
+        real = ds.merge_nlu_slots
+        def boom(*a, **k):
+            raise AssertionError("NLU/merge không được gọi khi bấm chip")
+        ds.merge_nlu_slots = boom  # mọi đường đi qua bước gộp NLU sẽ làm test nổ
+        try:
+            out = apply_chip_event(r, {"type": "chip", "slot": sapa.slot, "value": sapa.value})
+        finally:
+            ds.merge_nlu_slots = real
+
+        assert out.critical.destination_mention == "Sa Pa"
+        assert out.hints.destination_regions == [] and out.hints.terrain_types == []
+
+    def test_given_then_typing_from_hanoi_then_origin_set_and_destination_kept(self, gaz):
+        r = apply_chip_event(merge_nlu_slots(TripRequest(), self.NLU_NORTH_MOUNTAINS),
+                             {"slot": "destination_mention", "value": "Sa Pa"})
+        # NLU của lượt "từ Hà Nội": destination_mention = None (không nói tới)
+        r = merge_nlu_slots(r, {"origin_mention": "Hà Nội", "destination_mention": None})
+        assert r.critical.origin_mention == "Hà Nội"
+        assert r.critical.destination_mention == "Sa Pa"  # không bị ghi đè bằng null
+
+    def test_given_duration_missing_then_bot_asks_days_with_chips_1_to_5(self, gaz):
+        r = req(dest="Sa Pa", origin="Hà Nội")
+        t = generate_clarification_turn(r, gaz)
+        assert t.missing_slots == ["duration_days"]
+        assert [q.slot for q in t.questions] == ["duration_days"]
+        assert "mấy ngày" in t.questions[0].text
+        assert [c.value for c in t.questions[0].chips] == [1, 2, 3, 4, 5]
+
+    def test_full_12b_chain(self, gaz):
+        r = merge_nlu_slots(TripRequest(), self.NLU_NORTH_MOUNTAINS)
+        r = apply_chip_event(r, {"type": "chip", "slot": "destination_mention", "value": "Sa Pa"})
+        r = merge_nlu_slots(r, {"origin_mention": "Hà Nội"})
+        t = generate_clarification_turn(r, gaz)
+        assert (r.critical.destination_mention, r.critical.origin_mention) == ("Sa Pa", "Hà Nội")
+        assert [q.slot for q in t.questions] == ["duration_days"]
+        assert [c.value for c in t.chips] == [1, 2, 3, 4, 5]
