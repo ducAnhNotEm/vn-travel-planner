@@ -14,6 +14,8 @@ Tuân thủ Tiêu chuẩn Kỹ thuật Top 0.1% & AGENTS.md:
 import os
 import re
 import json
+import logging
+import math
 import time
 import hashlib
 import threading
@@ -32,7 +34,11 @@ NLU_OLLAMA_MODEL = os.getenv("NLU_OLLAMA_MODEL", "vn-travel-qwen-v2")
 NLU_AUDIT_PATH = Path(os.getenv("NLU_AUDIT_PATH", "audit_out/nlu_comparison.jsonl"))
 NLU_LOG_RAW_PROMPT = os.getenv("NLU_LOG_RAW_PROMPT", "0") == "1"
 
+logger = logging.getLogger("prompt_nlu")
+
 _POOL = ThreadPoolExecutor(max_workers=8, thread_name_prefix="nlu")
+# Pool riêng cho shadow (Ollama có thể chiếm worker tới 75s): tránh làm đói các lệnh gọi cloud ở _POOL.
+_SHADOW_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="nlu-shadow")
 _LOG_LOCK = threading.Lock()
 
 SYSTEM_PROMPT = (
@@ -48,27 +54,57 @@ SYSTEM_PROMPT = (
 )
 
 
-def extract_json_from_text(raw_text: str) -> Optional[Dict[str, Any]]:
-    """Trích xuất và làm sạch chuỗi JSON từ phản hồi LLM."""
-    if not raw_text:
+# SYSTEM_PROMPT KHÔNG nêu tên các khóa JSON đầu ra (các model GGUF đã học schema khi fine-tune). Model cloud thì không,
+# nên chỉ nhánh cloud nhận thêm khối schema này. SYSTEM_PROMPT giữ nguyên cho Ollama để không lệch phân phối huấn luyện.
+CLOUD_SCHEMA_PROMPT = (
+    "\nĐịnh dạng đầu ra: MỘT đối tượng JSON với ĐÚNG các khóa sau; thông tin không có thì null (hoặc [] với mảng):\n"
+    '{"intent": str, "origin": str|null, "destination": str|null, "destination_regions": [str], "terrain_types": [str], '
+    '"excluded_destinations": [str], "excluded_places": [str], "duration_days": int|null, "group_size": int|null, '
+    '"vehicle_type": str|null, "budget_total_vnd": int|null, "prefer_flight": bool|null, "hard_pinned_locations": [str], '
+    '"preferences": [str], "excluded_activities": [str]}\n'
+    "Quy tắc bổ sung:\n"
+    "7. 'origin' chỉ điền khi người dùng nói rõ nơi xuất phát ('từ Hà Nội', 'xuất phát ở ...'). 'Đi Đà Nẵng' KHÔNG cho biết điểm xuất phát. "
+    "Nếu xuất phát từ vị trí hiện tại của người dùng ('chỗ tôi đang đứng', 'vị trí hiện tại') thì origin = \"CURRENT_LOCATION\".\n"
+    "8. 'duration_days' là số ngày người dùng nói; không nói thì null, không mặc định 1.\n"
+    "9. 'group_size' là số NGƯỜI đi. '7 chỗ', 'xe 16 chỗ' là loại xe, KHÔNG phải số người. Không nói thì null.\n"
+    "10. 'budget_total_vnd' là tổng ngân sách quy ra số nguyên VND (vd '5 triệu' -> 5000000); không nói thì null.\n"
+    "11. 'prefer_flight': true nếu muốn đi máy bay; false nếu từ chối máy bay ('không đi máy bay'); null nếu không đề cập. "
+    "'vehicle_type' là phương tiện người dùng CHỌN, viết tiếng Anh chữ thường (car, motorbike, taxi, van, train, bus...) hoặc null; "
+    "phương tiện bị từ chối không được ghi vào đây.\n"
+    "12. Người dùng đổi ý ('không phải Đà Nẵng, tao muốn Huế'): destination là nơi muốn đi cuối cùng (Huế), nơi bị bác bỏ vào excluded_destinations.\n"
+    "13. 'hard_pinned_locations' là địa danh cụ thể người dùng muốn ghé; 'preferences' là sở thích/điều kiện mong muốn "
+    "(vd 'biển', 'tránh chỗ đông'); 'excluded_activities' là hoạt động muốn tránh.\n"
+    "14. Câu hỏi tư vấn/kiến thức không yêu cầu lập lịch -> 'ask_advisory'; tìm/hỏi về một địa điểm cụ thể -> 'search_place'; "
+    "quá thiếu thông tin để hiểu -> 'clarify_needed'.\n"
+)
+CLOUD_SYSTEM_PROMPT = SYSTEM_PROMPT + CLOUD_SCHEMA_PROMPT
+
+
+_FENCE_RE = re.compile(r"```(?:json)?\s*(.*?)```", re.S | re.I)
+
+
+def extract_json_from_text(raw_text: Any) -> Optional[Dict[str, Any]]:
+    """Trích xuất đối tượng JSON (dict) từ phản hồi LLM. Trả None nếu không có đối tượng hợp lệ.
+
+    Dùng raw_decode từ từng '{' thay vì cắt từ '{' đầu tới '}' cuối: nhờ vậy văn bản có dấu ngoặc nhọn
+    trước/sau JSON không làm hỏng một JSON hợp lệ. JSON bị cắt cụt vẫn trả None (không vá).
+    """
+    if not isinstance(raw_text, str) or not raw_text.strip():
         return None
     text = raw_text.strip()
-    if text.startswith("```json"):
-        text = text[7:]
-    elif text.startswith("```"):
-        text = text[3:]
-    if text.endswith("```"):
-        text = text[:-3]
-    text = text.strip()
-
-    start_idx = text.find("{")
-    end_idx = text.rfind("}")
-    if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
-        json_str = text[start_idx:end_idx + 1]
-        try:
-            return json.loads(json_str)
-        except Exception:
-            return None
+    candidates = [m.group(1) for m in _FENCE_RE.finditer(text)] + [text]
+    decoder = json.JSONDecoder()
+    for cand in candidates:
+        pos = cand.find("{")
+        while pos != -1:
+            try:
+                obj, _ = decoder.raw_decode(cand, pos)
+            except ValueError:
+                pos = cand.find("{", pos + 1)
+                continue
+            if isinstance(obj, dict):
+                return obj
+            pos = cand.find("{", pos + 1)
     return None
 
 
@@ -84,8 +120,8 @@ def get_ollama_status() -> Dict[str, Any]:
                 "online": True,
                 "url": OLLAMA_BASE_URL,
                 "models": models,
-                "has_v2": any("v2" in m for m in models),
-                "has_v1": any("vn-travel-qwen:7b" in m or ("qwen" in m and "v2" not in m) for m in models),
+                "has_v2": any(m.split(":")[0] == "vn-travel-qwen-v2" for m in models),
+                "has_v1": any(m == "vn-travel-qwen:7b" for m in models),
             }
     except Exception as e:
         return {
@@ -122,6 +158,10 @@ def call_ollama_chat(model: str, prompt: str, temperature: float = 0.0, timeout:
             raw_body = json.loads(resp.read().decode("utf-8"))
             content = raw_body.get("message", {}).get("content", "").strip()
             return content, dur_ms, None
+    except urllib.error.HTTPError as e:
+        # Server Ollama đang chạy nhưng trả lỗi HTTP (vd 404: chưa có model) -> không nói "hãy chạy ollama serve".
+        dur_ms = (time.perf_counter() - t0) * 1000.0
+        return "", dur_ms, f"Ollama trả HTTP {e.code} cho model '{model}'"
     except urllib.error.URLError as e:
         dur_ms = (time.perf_counter() - t0) * 1000.0
         return "", dur_ms, f"Không thể kết nối Ollama tại {OLLAMA_BASE_URL}. Hãy chạy 'ollama serve'. Chi tiết: {e}"
@@ -135,7 +175,7 @@ def call_claude_nlu(prompt: str, timeout: float = 25.0) -> Tuple[str, float, Opt
     from app.services.llm_service import call_llm
     t0 = time.perf_counter()
     try:
-        raw_res = call_llm(prompt=prompt, system_prompt=SYSTEM_PROMPT, temperature=0.0, timeout=timeout)
+        raw_res = call_llm(prompt=prompt, system_prompt=CLOUD_SYSTEM_PROMPT, temperature=0.0, timeout=timeout)
         dur_ms = (time.perf_counter() - t0) * 1000.0
         return raw_res, dur_ms, None
     except Exception as e:
@@ -174,8 +214,8 @@ def _canon_province(s: str):
         res = resolve_mention(s)
         if res and not res.get("is_ambiguous") and res.get("province_code"):
             return ("prov", int(res["province_code"]))
-    except Exception:
-        pass
+    except Exception as e:
+        logger.debug("gazetteer không khả dụng, so khớp theo văn bản: %s", e)
     return ("txt", _strip_accents(s))
 
 
@@ -235,62 +275,105 @@ def _run_ollama(prompt: str) -> Dict[str, Any]:
     return _pack("ollama", raw, ms, err, None if err else extract_json_from_text(raw))
 
 
+_NEG_CUES = r"(?:không|khong|ko|khg|chẳng|đừng|tránh)"
+_FLIGHT_RE = re.compile(r"máy bay|may bay|vé bay|ve bay")
+# phủ định + tối đa 3 từ đệm (không muốn đi máy bay / không đi bằng máy bay); dấu phẩy cắt phạm vi phủ định
+_NEG_FLIGHT_RE = re.compile(_NEG_CUES + r"(?!\s+ngại)\s+(?:[^\s,;.!?]+\s+){0,3}?(?:máy bay|may bay|vé bay|ve bay)")
+_DAYS_RE = re.compile(r"(\d+)\s*(?:ngày|ngay|n(?:\b|gày))")
+_GROUP_RE = re.compile(r"(?:nhóm|đoàn)\s*(\d+)|(\d+)\s*(?:người|nguoi|khách|khach|thành viên|bạn|\bng\b)")
+_REV_RE = re.compile(
+    r"(?P<neg>(?<!\w)" + _NEG_CUES + r"\s+(?:muốn\s+)?)?(?<!\w)(?:tới|đến|đi|den|di)\s+(?P<dest>[^,;]+?)\s+"
+    r"(?:xuất phát từ|khởi hành từ|xuat phat tu|khoi hanh tu|từ|tu)\s+(?P<orig>[^,;]+)", re.I)
+_FWD_RE = re.compile(
+    r"(?<!\w)(?:từ|tu)\s+(?P<orig>[^,;]+?)\s+(?:đi|di|đến|den|tới|sang)\s+(?P<dest>[^,;]+)", re.I)
+# Chỉ cắt đuôi ở các từ nối KHÔNG xuất hiện trong tên tỉnh/địa danh ("bằng" bị loại vì có "Cao Bằng").
+_STOP_RE = re.compile(r"\s+(?:cho|với|trong|vào|nhé|nhưng|rồi|khoảng|tầm|để|mà|ạ)(?!\w).*$", re.I | re.S)
+_LEAD_RE = re.compile(r"^(?:du lịch|đi chơi|chơi|tham quan|thăm|nghỉ dưỡng|nghỉ mát)\s+", re.I)
+
+
+def _gazetteer_confirms(text: str) -> Optional[bool]:
+    """True/False nếu gazetteer xác nhận/bác bỏ cụm là địa danh; None nếu gazetteer không dùng được."""
+    try:
+        from app.services.gazetteer import Gazetteer, resolve_mention
+        if not Gazetteer.get_instance().alias_to_code:
+            # Thiếu travel_db.db -> bảng alias rỗng, resolve_mention trả None cho MỌI chuỗi (không ném lỗi).
+            # Gazetteer rỗng không có quyền bác bỏ địa danh.
+            return None
+        res = resolve_mention(text)
+    except Exception as e:
+        logger.debug("gazetteer không khả dụng cho regex fallback: %s", e)
+        return None
+    return bool(res and (res.get("province_code") or res.get("is_ambiguous")))
+
+
+def _clean_place_candidate(s: Optional[str]) -> Optional[str]:
+    """Làm sạch cụm bắt được bằng regex; chỉ giữ lại nếu gazetteer không bác bỏ. Không bịa giá trị."""
+    if not s:
+        return None
+    s = re.sub(r"\d+\s*(?:ngày|ngay|n(?:\b|gày))", " ", s, flags=re.I)
+    s = re.sub(r"(?:nhóm|đoàn|đi)?\s*\d+\s*(?:người|nguoi|ng|khách|khach|bạn|thành viên)", " ", s, flags=re.I)
+    s = re.sub(r"(?:đi\s+bằng|bằng)?\s*(?:máy\s*bay|may\s*bay|ô\s*tô|o\s*to|xe\s*máy|xe\s*may|tàu\s*hỏa|tau\s*hoa)", " ", s, flags=re.I)
+    s = re.sub(r"\s+", " ", s).strip()
+    s = _STOP_RE.sub("", s)
+    s = _LEAD_RE.sub("", s).strip(" -,")
+    if not s:
+        return None
+    return None if _gazetteer_confirms(s) is False else s
+
+
 def _run_regex_fallback(prompt: str) -> Dict[str, Any]:
+    """Fallback cuối cùng, độ tin cậy THẤP: chỉ trích các slot hiển nhiên, slot không chắc để null.
+    Không xác định được intent (không phân biệt được hỏi tư vấn / tìm địa điểm) nên chỉ trả
+    plan_itinerary khi bắt được điểm đi/đến, ngược lại trả clarify_needed và success=False."""
     t0 = time.perf_counter()
-    p_lower = prompt.lower()
+    text = unicodedata.normalize("NFC", prompt or "")
+    p_lower = text.lower()
 
     days = None
-    m_days = re.search(r'(\d+)\s*(?:ngày|ngay|n(?:\b|gày))', p_lower)
+    m_days = _DAYS_RE.search(p_lower)
     if m_days:
-        try:
-            days = int(m_days.group(1))
-        except (ValueError, TypeError):
-            pass
+        days = int(m_days.group(1)) or None
 
     group = None
-    m_grp = re.search(r'(?:nhóm|đoàn)\s*(\d+)|(\d+)\s*(?:người|khách|thành viên|bạn|\bng\b)', p_lower)
+    m_grp = _GROUP_RE.search(p_lower)
     if m_grp:
-        try:
-            val = m_grp.group(1) or m_grp.group(2)
-            group = int(val)
-        except (ValueError, TypeError):
-            pass
+        group = int(m_grp.group(1) or m_grp.group(2)) or None
 
-    has_flight = bool(re.search(r'máy bay|may bay|vé bay', p_lower))
-    neg_flight = bool(re.search(r'(?:không|chẳng|ko|khg|đừng)\s*(?:đi|chọn)?\s*(?:máy bay|may bay)', p_lower))
-    prefer_flight = True if (has_flight and not neg_flight) else False
+    if _NEG_FLIGHT_RE.search(p_lower):
+        prefer_flight: Optional[bool] = False
+    elif _FLIGHT_RE.search(p_lower):
+        prefer_flight = True
+    else:
+        prefer_flight = None          # không đề cập != False
 
-    origin, destination = None, None
-    m_rev = re.search(r'(?:tới|đến|đi)\s+([^,]+?)\s+(?:xuất phát từ|khởi hành từ|từ)\s+([^,]+)', prompt, re.I)
-    m_fwd = re.search(r'từ\s+([^,]+?)\s+(?:đi|đến|tới|sang)\s+([^,]+)', prompt, re.I)
-
-    def _clean_cand(s: Optional[str]) -> Optional[str]:
-        if not s:
-            return None
-        s = re.sub(r'\d+\s*(?:ngày|ngay|n(?:\b|gày))', ' ', s, flags=re.I)
-        s = re.sub(r'(?:đi\s+bằng|bằng)?\s*(?:máy\s*bay|ô\s*tô|xe\s*máy|tàu\s*hỏa)', ' ', s, flags=re.I)
-        s = re.sub(r'(?:nhóm|đoàn|đi)?\s*\d+\s*(?:người|ng|khách|bạn|thành viên)', ' ', s, flags=re.I)
-        s = re.sub(r'\s+', ' ', s).strip()
-        return s or None
-
+    origin, destination, excluded = None, None, []
+    m_rev = _REV_RE.search(text)
+    m_fwd = None if m_rev else _FWD_RE.search(text)
     if m_rev:
-        destination = _clean_cand(m_rev.group(1))
-        origin = _clean_cand(m_rev.group(2))
+        origin = _clean_place_candidate(m_rev.group("orig"))
+        dest = _clean_place_candidate(m_rev.group("dest"))
+        if m_rev.group("neg"):        # "không muốn đi X từ Y": X là địa danh bị loại, không phải điểm đến
+            excluded = [dest] if dest else []
+        else:
+            destination = dest
     elif m_fwd:
-        origin = _clean_cand(m_fwd.group(1))
-        destination = _clean_cand(m_fwd.group(2))
+        origin = _clean_place_candidate(m_fwd.group("orig"))
+        destination = _clean_place_candidate(m_fwd.group("dest"))
 
     parsed = {
-        "intent": "plan_itinerary",
+        "intent": "plan_itinerary" if (origin or destination) else "clarify_needed",
         "origin": origin,
         "destination": destination,
         "duration_days": days,
         "group_size": group,
         "prefer_flight": prefer_flight,
-        "vehicle_type": "plane" if prefer_flight else None,
+        "vehicle_type": None,         # "plane" nằm ngoài tập vehicle_type của planner (car/motorbike/taxi/van); chuyến bay đã có prefer_flight
+        "excluded_destinations": excluded,
     }
+    has_slot = bool(origin or destination or days or group or excluded or prefer_flight is not None)
+    err = None if has_slot else "regex_fallback_no_slots"
     ms = (time.perf_counter() - t0) * 1000.0
-    return _pack("regex", json.dumps(parsed, ensure_ascii=False), ms, None, parsed)
+    return _pack("regex", json.dumps(parsed, ensure_ascii=False), ms, err, parsed)
 
 
 def _write_audit(prompt: str, cloud: Dict[str, Any], ollama: Dict[str, Any]) -> None:
@@ -308,11 +391,11 @@ def _write_audit(prompt: str, cloud: Dict[str, Any], ollama: Dict[str, Any]) -> 
         NLU_AUDIT_PATH.parent.mkdir(parents=True, exist_ok=True)
         with _LOG_LOCK, NLU_AUDIT_PATH.open("a", encoding="utf-8") as f:
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning("Không ghi được audit NLU: %s", e)
 
 
-def _response(res: Dict[str, Any], chain: List[str], shadow: bool) -> Dict[str, Any]:
+def _response(res: Dict[str, Any], chain: List[str], shadow: bool, degraded: bool = False) -> Dict[str, Any]:
     names = {"cloud": "Claude 4.6 (Cloud)", "ollama": f"Ollama ({NLU_OLLAMA_MODEL})", "regex": "Regex fallback"}
     return {
         "success": res.get("ok", False),
@@ -324,12 +407,13 @@ def _response(res: Dict[str, Any], chain: List[str], shadow: bool) -> Dict[str, 
         "error": res.get("error"),
         "fallback_chain": chain,
         "shadow_enabled": shadow,
+        "degraded": degraded,   # True khi kết quả đến từ regex fallback (độ tin cậy thấp)
     }
 
 
 def parse_prompt_auto(prompt: str) -> Dict[str, Any]:
     cloud_f = _POOL.submit(_run_cloud, prompt, NLU_CLOUD_TIMEOUT_S)
-    shadow_f = _POOL.submit(_run_ollama, prompt) if NLU_SHADOW_ENABLED else None
+    shadow_f = _SHADOW_POOL.submit(_run_ollama, prompt) if NLU_SHADOW_ENABLED else None
 
     try:
         cloud = cloud_f.result(timeout=NLU_CLOUD_TIMEOUT_S + 1)
@@ -357,7 +441,34 @@ def parse_prompt_auto(prompt: str) -> Dict[str, Any]:
     # Cả hai rớt -> regex fallback
     chain.append("ollama_failed")
     r_regex = _run_regex_fallback(prompt)
-    return _response(r_regex, chain + ["regex"], NLU_SHADOW_ENABLED)
+    return _response(r_regex, chain + ["regex"], NLU_SHADOW_ENABLED, degraded=True)
+
+
+def _single_response(engine_used: str, raw: str, ms: float, err: Optional[str],
+                     parsed: Optional[Dict[str, Any]], **extra: Any) -> Dict[str, Any]:
+    """Đường đơn engine (claude/v1/v2/fusion) dùng chung _pack với nhánh auto: cùng quy tắc hợp lệ intent/schema."""
+    packed = _pack("single", raw, ms, err, None if err else parsed)
+    res = {
+        "success": packed["ok"],
+        "engine_used": engine_used,
+        "latency_ms": packed["latency_ms"],
+        "raw_response": raw,
+        "parsed_json": packed["parsed"],
+        "extracted": packed["extracted"],
+        "error": packed["error"],
+    }
+    res.update(extra)
+    return res
+
+
+_SUPPORTED_ENGINES = ("auto", "claude", "v1", "v2", "fusion")
+
+
+def _first_valid_intent(*candidates: Any) -> Optional[str]:
+    for c in candidates:
+        if _canon_intent(c):
+            return _canon_intent(c)
+    return None
 
 
 def parse_prompt_unified(prompt: str, engine: str = "auto") -> Dict[str, Any]:
@@ -368,57 +479,45 @@ def parse_prompt_unified(prompt: str, engine: str = "auto") -> Dict[str, Any]:
     - 'v1': Ollama vn-travel-qwen:7b
     - 'fusion': Gộp khối V1 + V2 (V2 quyết định origin/destination/flight, V1 bổ sung preferences/places)
     - 'claude': Claude 4.6 Sonnet
+    Engine không hỗ trợ -> success=False (không âm thầm chạy model khác).
     """
-    engine = (engine or "auto").lower()
+    engine = (engine or "auto").strip().lower()
+
+    if engine not in _SUPPORTED_ENGINES:
+        return _single_response(f"unsupported:{engine}", "", 0.0,
+                                f"engine '{engine}' không được hỗ trợ; dùng một trong {list(_SUPPORTED_ENGINES)}", None)
 
     if engine == "auto":
         return parse_prompt_auto(prompt)
 
     if engine == "claude":
         raw, dur_ms, err = call_claude_nlu(prompt)
-        parsed = extract_json_from_text(raw)
-        return {
-            "success": parsed is not None,
-            "engine_used": "Claude 4.6 (Cloud)",
-            "latency_ms": round(dur_ms, 1),
-            "raw_response": raw,
-            "parsed_json": parsed,
-            "extracted": _normalize_extracted_slots(parsed) if parsed else {},
-            "error": err,
-        }
+        return _single_response("Claude 4.6 (Cloud)", raw, dur_ms, err, extract_json_from_text(raw))
 
-    elif engine == "fusion":
-        # Gọi cả 2 model V2 và V1
+    if engine == "fusion":
         raw_v2, dur_v2, err_v2 = call_ollama_chat("vn-travel-qwen-v2", prompt, temperature=0.0)
         raw_v1, dur_v1, err_v1 = call_ollama_chat("vn-travel-qwen:7b", prompt, temperature=0.1)
 
         parsed_v2 = extract_json_from_text(raw_v2)
         parsed_v1 = extract_json_from_text(raw_v1)
-
         total_dur = dur_v2 + dur_v1
 
         if not parsed_v2 and not parsed_v1:
             err_msg = err_v2 or err_v1 or "Cả 2 mô hình V1 và V2 đều không trích xuất được JSON hợp lệ."
-            return {
-                "success": False,
-                "engine_used": "Slot-Level Fusion (V1 + V2)",
-                "latency_ms": round(total_dur, 1),
-                "raw_response": f"V2 Output:\n{raw_v2}\n\n---\nV1 Output:\n{raw_v1}",
-                "parsed_json": None,
-                "extracted": {},
-                "error": err_msg,
-            }
+            return _single_response("Slot-Level Fusion (V1 + V2)", f"V2 Output:\n{raw_v2}\n\n---\nV1 Output:\n{raw_v1}",
+                                    total_dur, err_msg, None)
 
-        # Gộp khối thông minh (Slot-Level Fusion):
-        # - V2 làm chủ: origin, destination, destination_regions, terrain_types, excluded_destinations,
-        #   excluded_places, prefer_flight, vehicle_type, duration_days, budget_total_vnd
+        # Gộp khối (Slot-Level Fusion):
+        # - V2 làm chủ: origin, destination, destination_regions, terrain_types, excluded_*, prefer_flight, vehicle_type,
+        #   duration_days, budget_total_vnd
         # - V1 bổ sung: must_visit_places / hard_pinned_locations, preferences
         fused: Dict[str, Any] = {}
-        base = parsed_v2 or parsed_v1 or {}
-        fused.update(base)
+        fused.update(parsed_v2 or parsed_v1 or {})
+
+        # Intent: lấy intent hợp lệ đầu tiên (V2 rồi V1); không bịa mặc định. Thiếu cả hai -> _pack báo lỗi.
+        fused["intent"] = _first_valid_intent((parsed_v2 or {}).get("intent"), (parsed_v1 or {}).get("intent"))
 
         if parsed_v2:
-            fused["intent"] = parsed_v2.get("intent", "PLAN_TRIP")
             fused["origin"] = parsed_v2.get("origin")
             fused["destination"] = parsed_v2.get("destination")
             fused["destination_regions"] = parsed_v2.get("destination_regions") or []
@@ -439,109 +538,154 @@ def parse_prompt_unified(prompt: str, engine: str = "auto") -> Dict[str, Any]:
                 fused["excluded_activities"] = parsed_v2.get("excluded_activities")
 
         if parsed_v1:
-            # Hợp nhất danh sách must_visit_places / hard_pinned_locations
-            places_v2 = (parsed_v2.get("hard_pinned_locations") or parsed_v2.get("must_visit_places") or []) if parsed_v2 else []
-            places_v1 = parsed_v1.get("hard_pinned_locations") or parsed_v1.get("must_visit_places") or []
+            places_v2 = _as_str_list((parsed_v2 or {}).get("hard_pinned_locations") or (parsed_v2 or {}).get("must_visit_places"))
+            places_v1 = _as_str_list(parsed_v1.get("hard_pinned_locations") or parsed_v1.get("must_visit_places"))
             combined_places = list(dict.fromkeys(places_v2 + places_v1))
-            # Lọc bỏ các điểm trùng với excluded_destinations hoặc excluded_places
-            excluded_all = set((fused.get("excluded_destinations") or []) + (fused.get("excluded_places") or []))
-            combined_places = [p for p in combined_places if p not in excluded_all]
+            excluded_all = {_strip_accents(x) for x in _as_str_list(fused.get("excluded_destinations")) + _as_str_list(fused.get("excluded_places"))}
+            combined_places = [p for p in combined_places if _strip_accents(p) not in excluded_all]
             if combined_places:
                 fused["hard_pinned_locations"] = combined_places
                 fused["must_visit_places"] = combined_places
 
-            # Hợp nhất preferences
-            pref_v2 = (parsed_v2.get("preferences") or []) if parsed_v2 else []
-            pref_v1 = parsed_v1.get("preferences") or []
+            pref_v2 = _as_str_list((parsed_v2 or {}).get("preferences"))
+            pref_v1 = _as_str_list(parsed_v1.get("preferences"))
             combined_pref = list(dict.fromkeys(pref_v2 + pref_v1))
             if combined_pref:
                 fused["preferences"] = combined_pref
 
-        return {
-            "success": True,
-            "engine_used": "Slot-Level Fusion (V1 + V2)",
-            "latency_ms": round(total_dur, 1),
-            "raw_response": json.dumps(fused, ensure_ascii=False, indent=2),
-            "parsed_json": fused,
-            "fusion_details": {
-                "v2_json": parsed_v2,
-                "v1_json": parsed_v1,
-            },
-            "extracted": _normalize_extracted_slots(fused),
-            "error": None,
-        }
+        return _single_response("Slot-Level Fusion (V1 + V2)", json.dumps(fused, ensure_ascii=False, indent=2), total_dur, None, fused,
+                                fusion_details={"v2_json": parsed_v2, "v1_json": parsed_v1, "v2_error": err_v2, "v1_error": err_v1})
 
+    # Engine đơn lẻ: V2 hoặc V1
+    model_name = "vn-travel-qwen-v2" if engine == "v2" else "vn-travel-qwen:7b"
+    temp = 0.0 if engine == "v2" else 0.1
+    raw, dur_ms, err = call_ollama_chat(model_name, prompt, temperature=temp)
+    return _single_response(f"Ollama ({model_name})", raw, dur_ms, err, extract_json_from_text(raw))
+
+
+_REGION_ENUM = {"NORTH", "NORTHWEST", "NORTHEAST", "RED_RIVER_DELTA", "NORTH_CENTRAL", "CENTRAL", "SOUTH_CENTRAL",
+                "CENTRAL_HIGHLANDS", "SOUTH", "SOUTHEAST", "MEKONG_DELTA"}
+_TERRAIN_ENUM = {"BEACH", "ISLAND", "MOUNTAIN", "HIGHLAND", "FOREST", "CAVE", "RIVER"}
+
+
+def _as_str(v: Any) -> Optional[str]:
+    if isinstance(v, str):
+        v = v.strip()
+        return v or None
+    return None
+
+
+def _as_str_list(v: Any) -> List[str]:
+    """Chuỗi đơn -> [chuỗi]; kiểu lạ -> []. Không bao giờ list() một chuỗi thành các ký tự."""
+    if v is None:
+        return []
+    if isinstance(v, str):
+        v = [v]
+    elif not isinstance(v, (list, tuple, set)):
+        return []
+    out: List[str] = []
+    for x in v:
+        s = _as_str(x)
+        if s and s not in out:
+            out.append(s)
+    return out
+
+
+def _as_number(v: Any) -> Optional[float]:
+    if isinstance(v, bool):
+        return None
+    if isinstance(v, (int, float)):
+        x = float(v)
+    elif isinstance(v, str):
+        try:
+            x = float(v.replace(",", "").strip())
+        except ValueError:
+            return None
     else:
-        # Engine đơn lẻ: V2 hoặc V1
-        model_name = "vn-travel-qwen-v2" if engine == "v2" else "vn-travel-qwen:7b"
-        temp = 0.0 if engine == "v2" else 0.1
-        raw, dur_ms, err = call_ollama_chat(model_name, prompt, temperature=temp)
-        parsed = extract_json_from_text(raw)
+        return None
+    return x if math.isfinite(x) else None
 
-        return {
-            "success": parsed is not None,
-            "engine_used": f"Ollama ({model_name})",
-            "latency_ms": round(dur_ms, 1),
-            "raw_response": raw,
-            "parsed_json": parsed,
-            "extracted": _normalize_extracted_slots(parsed) if parsed else {},
-            "error": err,
-        }
+
+def _as_int(v: Any, minimum: int) -> Optional[int]:
+    """Số nguyên >= minimum; giá trị không hợp lệ -> None (chưa biết), không giữ chuỗi rác, không làm tròn 3.7 -> 3."""
+    x = _as_number(v)
+    if x is None or x != int(x) or x < minimum:
+        return None
+    return int(x)
+
+
+def _as_bool(v: Any) -> Optional[bool]:
+    if isinstance(v, bool):
+        return v
+    if isinstance(v, (int, float)) and v in (0, 1):
+        return bool(v)
+    if isinstance(v, str):
+        s = v.strip().lower()
+        if s in ("true", "1", "yes", "có"):
+            return True
+        if s in ("false", "0", "no", "không"):
+            return False
+    return None
+
+
+def _in_list(name: str, items: List[str]) -> bool:
+    key = _strip_accents(name)
+    return any(_strip_accents(x) == key for x in items)
 
 
 def _normalize_extracted_slots(data: Optional[Dict[str, Any]]) -> Dict[str, Any]:
-    """Chuẩn hóa các trường cốt lõi theo Schema V3 để frontend tự động điền form và so sánh slot đồng nhất."""
-    d = data or {}
-    raw_intent = _canon_intent(d.get("intent")) or str(d.get("intent") or "plan_itinerary").lower()
+    """Chuẩn hóa các trường cốt lõi theo Schema V3 để frontend tự động điền form và so sánh slot đồng nhất.
+    Giá trị sai kiểu/ngoài tập hợp lệ -> null/[] (chưa biết). intent không hợp lệ -> None (KHÔNG mặc định plan_itinerary)."""
+    d = data if isinstance(data, dict) else {}
 
-    days = d.get("duration_days") or d.get("days") or d.get("trip_days")
-    if days is not None:
-        try:
-            days = int(float(str(days).replace(",", "").strip()))
-        except (ValueError, TypeError):
-            pass
+    days = None
+    for key in ("duration_days", "days", "trip_days"):
+        days = _as_int(d.get(key), 1)
+        if days is not None:
+            break
 
-    group_size = d.get("group_size")
-    if group_size is not None:
-        try:
-            group_size = int(float(str(group_size).replace(",", "").strip()))
-        except (ValueError, TypeError):
-            pass
+    must_visit = _as_str_list(d.get("hard_pinned_locations") or d.get("must_visit_places"))
+    excluded_destinations = _as_str_list(d.get("excluded_destinations"))
+    excluded_places = _as_str_list(d.get("excluded_places"))
+    destination = _as_str(d.get("destination"))
 
-    budget = d.get("budget_total_vnd")
-    if budget is not None:
-        try:
-            budget = int(float(str(budget).replace(",", "").strip()))
-        except (ValueError, TypeError):
-            pass
+    # Mâu thuẫn nội bộ: địa danh bị loại không được là điểm đến / điểm bắt buộc (quy tắc 6 của prompt).
+    if destination:
+        dest_key = _canon_province(destination)
+        if any(_canon_province(x) == dest_key for x in excluded_destinations) or _in_list(destination, excluded_places):
+            logger.warning("NLU mâu thuẫn: destination %r nằm trong danh sách loại trừ -> destination=None", destination)
+            destination = None
+    excluded_all = excluded_destinations + excluded_places
+    kept = [p for p in must_visit if not _in_list(p, excluded_all)]
+    if len(kept) != len(must_visit):
+        logger.warning("NLU mâu thuẫn: bỏ %d địa điểm bắt buộc trùng danh sách loại trừ", len(must_visit) - len(kept))
+    must_visit = kept
 
-    must_visit = d.get("hard_pinned_locations") or d.get("must_visit_places") or []
-    if isinstance(must_visit, str):
-        must_visit = [must_visit]
+    regions = sorted({x.strip().upper() for x in _as_str_list(d.get("destination_regions"))} & _REGION_ENUM)
+    terrain = sorted({x.strip().upper() for x in _as_str_list(d.get("terrain_types"))} & _TERRAIN_ENUM)
+    if destination:                    # quy tắc 5: đã có điểm đến cụ thể thì hints để []
+        regions, terrain = [], []
 
-    prefer_flight = d.get("prefer_flight")
-    if isinstance(prefer_flight, str):
-        prefer_flight = prefer_flight.strip().lower() in ("true", "1", "yes", "có")
-    elif prefer_flight is not None:
-        prefer_flight = bool(prefer_flight)
+    budget = _as_number(d.get("budget_total_vnd"))
+    budget = int(budget) if budget is not None and budget > 0 else None
+    vehicle = _as_str(d.get("vehicle_type"))
 
     return {
-        "intent": raw_intent,
-        "origin": d.get("origin") or None,
-        "destination": d.get("destination") or None,
-        "destination_regions": list(d.get("destination_regions") or []),
-        "terrain_types": list(d.get("terrain_types") or []),
-        "excluded_destinations": list(d.get("excluded_destinations") or []),
-        "excluded_places": list(d.get("excluded_places") or []),
+        "intent": _canon_intent(d.get("intent")),
+        "origin": _as_str(d.get("origin")),
+        "destination": destination,
+        "destination_regions": regions,
+        "terrain_types": terrain,
+        "excluded_destinations": excluded_destinations,
+        "excluded_places": excluded_places,
         "days": days,
         "duration_days": days,
-        "group_size": group_size,
-        "vehicle_type": d.get("vehicle_type") or None,
+        "group_size": _as_int(d.get("group_size"), 1),
+        "vehicle_type": vehicle.lower() if vehicle else None,
         "budget_total_vnd": budget,
-        "prefer_flight": prefer_flight,
+        "prefer_flight": _as_bool(d.get("prefer_flight")),
         "must_visit_places": list(must_visit),
         "hard_pinned_locations": list(must_visit),
-        "preferences": list(d.get("preferences") or []),
-        "excluded_activities": list(d.get("excluded_activities") or []),
+        "preferences": _as_str_list(d.get("preferences")),
+        "excluded_activities": _as_str_list(d.get("excluded_activities")),
     }
-

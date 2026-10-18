@@ -11,9 +11,66 @@ Tuân thủ nghiêm ngặt 5 quy tắc gộp của Mục 5 & Mục 10 trong docs
 4. Nếu destination_mention đã có thì XÓA hints.destination_regions và hints.terrain_types.
 5. Quản lý danh sách defaulted: nếu người dùng nói ra một slot đang nằm trong defaulted,
    slot đó phải được loại khỏi defaulted.
+
+Bất biến loại trừ (bổ sung, hợp với quy tắc 2 "đổi ý thì giá trị mới thắng"):
+6. Điểm đến / điểm bắt buộc KHÔNG được đồng thời nằm trong excluded_mentions. Lượt nói sau thắng:
+   - Loại trừ mới trùng destination_mention hiện có -> destination_mention bị xóa (hỏi lại điểm đến);
+     trùng pinned_mentions hiện có -> bị gỡ khỏi pinned_mentions.
+   - Điểm đến / điểm bắt buộc mới trùng một loại trừ CŨ -> loại trừ cũ bị gỡ (người dùng đã đổi ý).
+   - Mâu thuẫn ngay trong MỘT lượt (vừa muốn vừa loại trừ cùng địa danh) -> loại trừ thắng, giá trị muốn bị bỏ qua.
+   So khớp không phân biệt hoa/thường và dấu. Tương đương mức thực thể (TP.HCM = Sài Gòn) thuộc về gazetteer:
+   truyền `same_place(a, b) -> bool` nếu muốn dùng; mặc định chỉ so khớp văn bản, hàm vẫn thuần túy.
+
+intent là intent của lượt gần nhất có intent hợp lệ (không còn "dính"): plan_itinerary ghi đè lại
+ask_advisory/search_place/clarify_needed của lượt trước. Intent thiếu / None / không hợp lệ thì giữ nguyên.
 """
-from typing import Any, Dict, List, Optional, Union
+import logging
+import re
+import unicodedata
+from typing import Any, Callable, Dict, List, Optional, Union
 from app.dialogue_models import TripRequest, NLUFlatOutput, CriticalSlots, ExtraSlots, HintsSlots
+
+logger = logging.getLogger("dialogue_state")
+
+VALID_INTENTS = {"plan_itinerary", "search_place", "ask_advisory", "clarify_needed"}
+_INTENT_ALIASES = {"plan_trip": "plan_itinerary"}
+SamePlace = Callable[[str, str], bool]
+
+
+def _canon_intent(value: Any) -> Optional[str]:
+    s = str(value or "").strip().lower()
+    s = _INTENT_ALIASES.get(s, s)
+    return s if s in VALID_INTENTS else None
+
+
+def _place_key(text: str) -> str:
+    """Khóa so khớp địa danh: không dấu, không hoa/thường, bỏ dấu câu, gộp khoảng trắng."""
+    s = unicodedata.normalize("NFD", str(text).replace("đ", "d").replace("Đ", "D"))
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn").lower()
+    return re.sub(r"[^a-z0-9]+", " ", s).strip()
+
+
+def _same(a: str, b: str, same_place: Optional[SamePlace]) -> bool:
+    if _place_key(a) == _place_key(b):
+        return True
+    if same_place is not None:
+        try:
+            return bool(same_place(a, b))
+        except Exception as e:  # hook lỗi không được làm sập reducer
+            logger.warning("same_place(%r, %r) lỗi: %s", a, b, e)
+    return False
+
+
+def _any_same(name: str, items: List[str], same_place: Optional[SamePlace]) -> bool:
+    return any(_same(name, x, same_place) for x in items)
+
+
+def _drop_same(items: List[str], names: List[str], same_place: Optional[SamePlace]) -> List[str]:
+    return [x for x in items if not _any_same(x, names, same_place)]
+
+
+def _clean_list(items: Optional[List[Any]]) -> List[str]:
+    return [str(x).strip() for x in (items or []) if str(x).strip()]
 
 
 def _merge_list_unique(existing_list: List[str], new_items: Optional[List[str]]) -> List[str]:
@@ -30,9 +87,24 @@ def _merge_list_unique(existing_list: List[str], new_items: Optional[List[str]])
     return result
 
 
+def _apply_new_exclusions(
+    updated: TripRequest,
+    new_excluded: List[str],
+    defaulted_set: set,
+    same_place: Optional[SamePlace],
+) -> None:
+    """Loại trừ mới thắng điểm đến / điểm bắt buộc đã lưu (bất biến 6). Sửa trực tiếp `updated` (đã là bản copy)."""
+    dest = updated.critical.destination_mention
+    if dest and _any_same(dest, new_excluded, same_place):
+        updated.critical.destination_mention = None
+        defaulted_set.discard("destination_mention")
+    updated.extra.pinned_mentions = _drop_same(updated.extra.pinned_mentions, new_excluded, same_place)
+
+
 def merge_nlu_slots(
     current_request: TripRequest,
-    nlu_output: Union[NLUFlatOutput, Dict[str, Any]]
+    nlu_output: Union[NLUFlatOutput, Dict[str, Any]],
+    same_place: Optional[SamePlace] = None,
 ) -> TripRequest:
     """
     Gộp kết quả NLU phẳng vào TripRequest theo 5 quy tắc chuẩn.
@@ -47,15 +119,23 @@ def merge_nlu_slots(
     updated = current_request.model_copy(deep=True)
     defaulted_set = set(updated.defaulted)
 
+    # Loại trừ của LƯỢT NÀY (thắng mọi thứ cùng lượt, xem bất biến 6)
+    new_excluded = _clean_list(nlu_data.excluded_mentions)
+
     # 1. Cập nhật Critical Slots
     # destination_mention
     if nlu_data.destination_mention is not None and str(nlu_data.destination_mention).strip():
         val = str(nlu_data.destination_mention).strip()
-        updated.critical.destination_mention = val
-        defaulted_set.discard("destination_mention")
-        # Quy tắc 4: Khi đã có điểm đến cụ thể thì xóa hints
-        updated.hints.destination_regions = []
-        updated.hints.terrain_types = []
+        if _any_same(val, new_excluded, same_place):
+            logger.warning("NLU mâu thuẫn trong một lượt: %r vừa là điểm đến vừa bị loại trừ -> bỏ qua điểm đến", val)
+        else:
+            updated.critical.destination_mention = val
+            defaulted_set.discard("destination_mention")
+            # Người dùng giờ muốn chính địa danh này: loại trừ cũ (nếu có) hết hiệu lực
+            updated.extra.excluded_mentions = _drop_same(updated.extra.excluded_mentions, [val], same_place)
+            # Quy tắc 4: Khi đã có điểm đến cụ thể thì xóa hints
+            updated.hints.destination_regions = []
+            updated.hints.terrain_types = []
 
     # origin_mention
     if nlu_data.origin_mention is not None and str(nlu_data.origin_mention).strip():
@@ -94,12 +174,17 @@ def merge_nlu_slots(
         defaulted_set.discard("preferences")
 
     if nlu_data.pinned_mentions:
-        updated.extra.pinned_mentions = _merge_list_unique(updated.extra.pinned_mentions, nlu_data.pinned_mentions)
+        new_pinned = [p for p in _clean_list(nlu_data.pinned_mentions) if not _any_same(p, new_excluded, same_place)]
+        if len(new_pinned) != len(_clean_list(nlu_data.pinned_mentions)):
+            logger.warning("NLU mâu thuẫn trong một lượt: bỏ qua điểm bắt buộc trùng danh sách loại trừ")
+        updated.extra.excluded_mentions = _drop_same(updated.extra.excluded_mentions, new_pinned, same_place)
+        updated.extra.pinned_mentions = _merge_list_unique(updated.extra.pinned_mentions, new_pinned)
         defaulted_set.discard("pinned_mentions")
 
     if nlu_data.excluded_mentions:
-        updated.extra.excluded_mentions = _merge_list_unique(updated.extra.excluded_mentions, nlu_data.excluded_mentions)
+        updated.extra.excluded_mentions = _merge_list_unique(updated.extra.excluded_mentions, new_excluded)
         defaulted_set.discard("excluded_mentions")
+        _apply_new_exclusions(updated, new_excluded, defaulted_set, same_place)
 
     if nlu_data.excluded_activities:
         updated.extra.excluded_activities = _merge_list_unique(updated.extra.excluded_activities, nlu_data.excluded_activities)
@@ -112,9 +197,13 @@ def merge_nlu_slots(
         if nlu_data.terrain_types:
             updated.hints.terrain_types = _merge_list_unique(updated.hints.terrain_types, nlu_data.terrain_types)
 
-    # Cập nhật intent nếu NLU nhận diện intent cụ thể
-    if nlu_data.intent and nlu_data.intent != "plan_itinerary":
-        updated.intent = nlu_data.intent
+    # Intent của lượt gần nhất. NLUFlatOutput.intent mặc định "plan_itinerary" nên chỉ tin intent khi nó
+    # THỰC SỰ được cung cấp (model_fields_set); thiếu / None / không hợp lệ -> giữ intent hiện có.
+    fields_set = getattr(nlu_data, "model_fields_set", None)
+    if fields_set is None or "intent" in fields_set:
+        intent = _canon_intent(nlu_data.intent)
+        if intent:
+            updated.intent = intent
 
     updated.defaulted = sorted(list(defaulted_set))
     return updated
@@ -123,7 +212,8 @@ def merge_nlu_slots(
 def apply_chip_selection(
     current_request: TripRequest,
     slot_name: str,
-    value: Any
+    value: Any,
+    same_place: Optional[SamePlace] = None,
 ) -> TripRequest:
     """
     Áp dụng trực tiếp lựa chọn từ nút gợi ý (chip) vào slot tương ứng.
@@ -135,6 +225,8 @@ def apply_chip_selection(
     if slot_name == "destination_mention":
         updated.critical.destination_mention = str(value).strip()
         defaulted_set.discard("destination_mention")
+        # Bấm chọn một địa danh từng bị loại trừ = đổi ý: gỡ loại trừ cũ
+        updated.extra.excluded_mentions = _drop_same(updated.extra.excluded_mentions, [updated.critical.destination_mention], same_place)
         # Xóa hints khi đã chọn điểm đến cụ thể
         updated.hints.destination_regions = []
         updated.hints.terrain_types = []
@@ -154,9 +246,13 @@ def apply_chip_selection(
         updated.extra.prefer_flight = bool(value)
         defaulted_set.discard("prefer_flight")
     elif slot_name == "pinned_mentions":
-        updated.extra.pinned_mentions = _merge_list_unique(updated.extra.pinned_mentions, [str(value).strip()])
+        val = str(value).strip()
+        updated.extra.excluded_mentions = _drop_same(updated.extra.excluded_mentions, [val], same_place)
+        updated.extra.pinned_mentions = _merge_list_unique(updated.extra.pinned_mentions, [val])
     elif slot_name == "excluded_mentions":
-        updated.extra.excluded_mentions = _merge_list_unique(updated.extra.excluded_mentions, [str(value).strip()])
+        val = str(value).strip()
+        updated.extra.excluded_mentions = _merge_list_unique(updated.extra.excluded_mentions, [val])
+        _apply_new_exclusions(updated, [val] if val else [], defaulted_set, same_place)
 
     updated.defaulted = sorted(list(defaulted_set))
     return updated
