@@ -2,6 +2,7 @@
 app/services/chat_storage.py
 ===============================================================================
 Lát 3 - Bước 2: Tầng lưu trữ SQLite riêng (`chat_state.db`). PRODUCT_SPEC Mục 8.1.
+(Bước 3 bổ sung bảng `auth_tokens` + 4 hàm token ở cuối file; không đổi hàm nào của Bước 2.)
 
 - File DB riêng, KHÔNG đụng `travel_db.db` (tránh khóa khi ghi).
 - Đường dẫn: biến môi trường `CHAT_DB_PATH`, mặc định `./chat_state.db`. Được đọc ở MỖI lần kết nối
@@ -81,6 +82,16 @@ CREATE TABLE IF NOT EXISTS chat_messages (
     created_at TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_chat_messages_session ON chat_messages(session_id, created_at);
+
+-- Bước 3: token đăng nhập. Chỉ lưu SHA-256 của token (lộ DB không lộ token dùng được).
+CREATE TABLE IF NOT EXISTS auth_tokens (
+    token_hash TEXT PRIMARY KEY,
+    user_id    TEXT NOT NULL REFERENCES users(id),
+    created_at TEXT NOT NULL,
+    expires_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_auth_tokens_user ON auth_tokens(user_id);
+CREATE INDEX IF NOT EXISTS idx_auth_tokens_expires ON auth_tokens(expires_at);
 """
 
 
@@ -334,6 +345,50 @@ def get_session_messages(session_id: str) -> List[dict]:
     return [_message_row(r) for r in rows]
 
 
+# ───────────────────────────────────────────────────────────────────────────────
+# Auth tokens (Bước 3). Module này chỉ lưu/đọc; việc sinh token, băm, kiểm hạn ở auth_service.
+# ───────────────────────────────────────────────────────────────────────────────
+def save_auth_token(token_hash: str, user_id: str, expires_at: str) -> None:
+    """Lưu một token (đã băm). `expires_at` là chuỗi ISO 8601 UTC. user_id lạ -> UserNotFoundError."""
+    if not token_hash or not expires_at:
+        raise ValueError("token_hash và expires_at không được để trống")
+    with closing(_connect()) as conn:
+        try:
+            with conn:
+                conn.execute(
+                    "INSERT INTO auth_tokens (token_hash, user_id, created_at, expires_at) VALUES (?, ?, ?, ?)",
+                    (token_hash, user_id, _now(), expires_at),
+                )
+        except sqlite3.IntegrityError as exc:
+            if conn.execute("SELECT 1 FROM users WHERE id = ?", (user_id,)).fetchone() is None:
+                raise UserNotFoundError(f"không có user: {user_id}") from exc
+            raise  # lỗi khác (vd. trùng token_hash): không che giấu
+
+
+def get_auth_token(token_hash: str) -> Optional[dict]:
+    with closing(_connect()) as conn:
+        row = conn.execute("SELECT * FROM auth_tokens WHERE token_hash = ?", (token_hash,)).fetchone()
+    if row is None:
+        return None
+    return {k: row[k] for k in ("token_hash", "user_id", "created_at", "expires_at")}
+
+
+def delete_auth_token(token_hash: str) -> bool:
+    """Xóa token. Trả True nếu có xóa, False nếu token không tồn tại (idempotent)."""
+    with closing(_connect()) as conn:
+        with conn:
+            cur = conn.execute("DELETE FROM auth_tokens WHERE token_hash = ?", (token_hash,))
+    return cur.rowcount > 0
+
+
+def delete_expired_auth_tokens(now_iso: str) -> int:
+    """Dọn token có expires_at < now_iso (so sánh chuỗi; cả hai phải cùng định dạng ISO UTC). Trả số dòng xóa."""
+    with closing(_connect()) as conn:
+        with conn:
+            cur = conn.execute("DELETE FROM auth_tokens WHERE expires_at < ?", (now_iso,))
+    return cur.rowcount
+
+
 __all__ = [
     "DEFAULT_DB_PATH", "DB_PATH_ENV", "ACTIVE_STATUSES", "VALID_STATUSES", "VALID_ROLES",
     "DuplicateEmailError", "UserNotFoundError", "SessionNotFoundError",
@@ -341,4 +396,5 @@ __all__ = [
     "create_user", "get_user_by_email", "get_user_by_id",
     "get_or_create_active_session", "get_session_by_id", "update_session_trip_request",
     "add_chat_message", "get_session_messages",
+    "save_auth_token", "get_auth_token", "delete_auth_token", "delete_expired_auth_tokens",
 ]

@@ -480,3 +480,66 @@ class TestPersistence:
         make_user("a@b.com")
         monkeypatch.setenv(cs.DB_PATH_ENV, str(tmp_path / "other.db"))
         assert cs.get_user_by_email("a@b.com") is None
+
+
+# ───────────────────────────── Auth tokens (Bước 3) ─────────────────────────────
+class TestAuthTokensStorage:
+    EXP = "2026-12-01T00:00:00.000000+00:00"
+
+    def test_table_and_columns(self):
+        cs.init_db()
+        assert [r["name"] for r in raw("PRAGMA table_info(auth_tokens)")] == [
+            "token_hash", "user_id", "created_at", "expires_at"]
+
+    def test_save_and_get_roundtrip(self):
+        u = make_user()
+        assert cs.save_auth_token("h1", u["id"], self.EXP) is None
+        rec = cs.get_auth_token("h1")
+        assert rec["token_hash"] == "h1" and rec["user_id"] == u["id"] and rec["expires_at"] == self.EXP
+        datetime.fromisoformat(rec["created_at"])
+
+    def test_get_missing_returns_none(self):
+        assert cs.get_auth_token("nope") is None
+
+    def test_unknown_user_rejected(self):
+        with pytest.raises(cs.UserNotFoundError):
+            cs.save_auth_token("h1", "ghost", self.EXP)
+        assert raw("SELECT * FROM auth_tokens") == []
+
+    def test_duplicate_hash_is_not_reported_as_missing_user(self):
+        u = make_user()
+        cs.save_auth_token("h1", u["id"], self.EXP)
+        with pytest.raises(sqlite3.IntegrityError):
+            cs.save_auth_token("h1", u["id"], self.EXP)
+
+    @pytest.mark.parametrize("h,exp", [("", "x"), ("h", "")])
+    def test_blank_values_rejected(self, h, exp):
+        u = make_user()
+        with pytest.raises(ValueError):
+            cs.save_auth_token(h, u["id"], exp)
+
+    def test_delete_returns_bool_and_is_idempotent(self):
+        u = make_user()
+        cs.save_auth_token("h1", u["id"], self.EXP)
+        assert cs.delete_auth_token("h1") is True
+        assert cs.delete_auth_token("h1") is False
+        assert cs.get_auth_token("h1") is None
+
+    def test_delete_expired_only_removes_expired(self):
+        u = make_user()
+        cs.save_auth_token("old1", u["id"], "2026-01-01T00:00:00.000000+00:00")
+        cs.save_auth_token("old2", u["id"], "2026-06-01T00:00:00.000000+00:00")
+        cs.save_auth_token("fresh", u["id"], "2027-01-01T00:00:00.000000+00:00")
+        assert cs.delete_expired_auth_tokens("2026-10-18T00:00:00.000000+00:00") == 2
+        assert cs.get_auth_token("old1") is None and cs.get_auth_token("old2") is None
+        assert cs.get_auth_token("fresh") is not None
+
+    def test_delete_expired_when_nothing_expired(self):
+        u = make_user()
+        cs.save_auth_token("fresh", u["id"], "2027-01-01T00:00:00.000000+00:00")
+        assert cs.delete_expired_auth_tokens("2026-10-18T00:00:00.000000+00:00") == 0
+
+    def test_foreign_key_enforced_at_db_level(self):
+        with closing(cs._connect()) as conn:
+            with pytest.raises(sqlite3.IntegrityError):
+                conn.execute("INSERT INTO auth_tokens VALUES ('h', 'no-such-user', 'now', 'later')")
