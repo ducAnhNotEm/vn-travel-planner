@@ -70,6 +70,11 @@ def _token_ttl() -> timedelta:
     return timedelta(seconds=_env_int("AUTH_TOKEN_TTL_SECONDS", DEFAULT_TOKEN_TTL_SECONDS))
 
 
+def token_ttl_seconds() -> int:
+    """Hạn dùng của token tính bằng giây (route dùng làm max_age của cookie để hai bên luôn khớp)."""
+    return int(_token_ttl().total_seconds())
+
+
 def _utcnow() -> datetime:
     """Tách riêng để test có thể giả lập thời gian."""
     return datetime.now(timezone.utc)
@@ -222,7 +227,7 @@ def get_current_user(request: Request) -> UserOut:
 
 
 __all__ = [
-    "COOKIE_NAME", "hash_password", "verify_password", "issue_token", "revoke_token",
+    "COOKIE_NAME", "token_ttl_seconds", "hash_password", "verify_password", "issue_token", "revoke_token",
     "get_user_from_token", "register_user", "authenticate_user", "register_and_login",
     "extract_token", "get_current_user",
 ]
