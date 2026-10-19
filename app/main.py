@@ -1,12 +1,23 @@
 import os
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from app.routers import planner_router, map_router, auth_router, chat_router
+from app.services import auth_service, chat_storage
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    chat_storage.init_db()
+    auth_service.warmup()
+    yield
+
 
 app = FastAPI(
     title="Vietnam Travel Planner API",
     description="Hệ thống lập lịch trình du lịch thông minh, tối ưu đường đi & tính toán chi phí di chuyển, ngân sách chuyến đi.",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan,
 )
 
 app.include_router(planner_router.router)

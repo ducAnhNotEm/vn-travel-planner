@@ -24,6 +24,7 @@ import hashlib
 import hmac
 import os
 import secrets
+import threading
 from datetime import datetime, timedelta, timezone
 from functools import lru_cache
 from typing import Optional
@@ -39,6 +40,8 @@ DEFAULT_ITERATIONS = 600_000
 MAX_ITERATIONS = 10_000_000  # chặn hash bị sửa với số vòng lặp khổng lồ (DoS khi verify)
 DEFAULT_TOKEN_TTL_SECONDS = 30 * 24 * 3600
 SALT_BYTES = 16
+DEFAULT_PBKDF2_CONCURRENCY = 4
+_PBKDF2_SEMAPHORE = threading.BoundedSemaphore(DEFAULT_PBKDF2_CONCURRENCY)
 
 INVALID_CREDENTIALS_DETAIL = "email hoặc mật khẩu không đúng"  # Mục 3.2: báo chung
 NOT_AUTHENTICATED_DETAIL = "chưa đăng nhập"
@@ -98,7 +101,8 @@ def hash_password(password: str) -> str:
         raise ValueError("mật khẩu phải là chuỗi không rỗng")
     iterations = _iterations()
     salt = secrets.token_bytes(SALT_BYTES)
-    digest = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations)
+    with _PBKDF2_SEMAPHORE:
+        digest = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations)
     return "$".join(
         (HASH_ALGORITHM, str(iterations), base64.b64encode(salt).decode("ascii"),
          base64.b64encode(digest).decode("ascii"))
@@ -116,7 +120,8 @@ def verify_password(password: str, stored_hash: str) -> bool:
             return False
         salt = base64.b64decode(salt_b64, validate=True)
         expected = base64.b64decode(digest_b64, validate=True)
-        candidate = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations, dklen=len(expected))
+        with _PBKDF2_SEMAPHORE:
+            candidate = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations, dklen=len(expected))
     except (ValueError, TypeError, AttributeError):  # binascii.Error, UnicodeEncodeError là ValueError
         return False
     return hmac.compare_digest(candidate, expected)
@@ -126,9 +131,15 @@ def verify_password(password: str, stored_hash: str) -> bool:
 def _dummy_hash(iterations: int) -> str:
     """Hash giả để vẫn tốn thời gian băm khi email không tồn tại (giảm lộ email qua độ trễ)."""
     salt = b"\x00" * SALT_BYTES
-    digest = hashlib.pbkdf2_hmac("sha256", b"dummy-password", salt, iterations)
+    with _PBKDF2_SEMAPHORE:
+        digest = hashlib.pbkdf2_hmac("sha256", b"dummy-password", salt, iterations)
     return "$".join((HASH_ALGORITHM, str(iterations), base64.b64encode(salt).decode("ascii"),
                      base64.b64encode(digest).decode("ascii")))
+
+
+def warmup() -> None:
+    """Khởi động trước dummy hash và thư viện mật mã lúc server khởi động."""
+    _dummy_hash(_iterations())
 
 
 # ───────────────────────────────────────────────────────────────────────────────
@@ -229,5 +240,5 @@ def get_current_user(request: Request) -> UserOut:
 __all__ = [
     "COOKIE_NAME", "token_ttl_seconds", "hash_password", "verify_password", "issue_token", "revoke_token",
     "get_user_from_token", "register_user", "authenticate_user", "register_and_login",
-    "extract_token", "get_current_user",
+    "extract_token", "get_current_user", "warmup",
 ]

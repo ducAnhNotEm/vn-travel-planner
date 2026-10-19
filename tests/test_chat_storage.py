@@ -281,7 +281,7 @@ class TestUpdateSession:
         s = self._session()
         tr = dict(s["trip_request"], status="ready")
         tr["critical"] = {"destination_mention": "Sa Pa", "origin_mention": "Hà Nội", "duration_days": 3}
-        assert cs.update_session_trip_request(s["id"], json.dumps(tr), "ready") is None
+        assert cs.update_session_trip_request(s["id"], json.dumps(tr), "ready") == 2
         got = cs.get_session_by_id(s["id"])
         assert got["status"] == "ready"
         assert got["trip_request"]["critical"]["duration_days"] == 3
@@ -372,7 +372,7 @@ class TestMessages:
         s = self._session()
         with pytest.raises(ValueError):
             cs.add_chat_message(s["id"], role, "x")
-        assert cs.get_session_messages(s["id"]) == []
+        assert cs.list_messages_unscoped(s["id"]) == []
 
     def test_non_string_content_rejected(self):
         s = self._session()
@@ -388,66 +388,66 @@ class TestMessages:
         s = self._session()
         payload = {"chips": [{"id": "chip_dest_sapa", "label": "Sa Pa", "slot": "destination_mention", "value": "Sa Pa"}]}
         cs.add_chat_message(s["id"], "assistant", "Quý khách muốn đi đâu?", payload)
-        got = cs.get_session_messages(s["id"])[0]
+        got = cs.list_messages_unscoped(s["id"])[0]
         assert got["payload"] == payload
 
     def test_payload_none_stored_as_sql_null(self):
         s = self._session()
         cs.add_chat_message(s["id"], "user", "hi")
         assert raw("SELECT payload FROM chat_messages")[0][0] is None
-        assert cs.get_session_messages(s["id"])[0]["payload"] is None
+        assert cs.list_messages_unscoped(s["id"])[0]["payload"] is None
 
     def test_falsy_payloads_are_preserved_not_dropped(self):
         s = self._session()
         cs.add_chat_message(s["id"], "assistant", "a", {})
         cs.add_chat_message(s["id"], "assistant", "b", [])
-        msgs = cs.get_session_messages(s["id"])
+        msgs = cs.list_messages_unscoped(s["id"])
         assert msgs[0]["payload"] == {} and msgs[1]["payload"] == []
 
     def test_empty_session_has_no_messages(self):
-        assert cs.get_session_messages(self._session()["id"]) == []
+        assert cs.list_messages_unscoped(self._session()["id"]) == []
 
     def test_unknown_session_has_no_messages(self):
-        assert cs.get_session_messages("ghost") == []
+        assert cs.list_messages_unscoped("ghost") == []
 
     def test_messages_ordered_ascending_by_created_at(self):
         s = self._session()
         for i in range(5):
             cs.add_chat_message(s["id"], "user" if i % 2 == 0 else "assistant", f"m{i}")
-        msgs = cs.get_session_messages(s["id"])
+        msgs = cs.list_messages_unscoped(s["id"])
         assert [m["content"] for m in msgs] == [f"m{i}" for i in range(5)]
         times = [m["created_at"] for m in msgs]
         assert times == sorted(times)
 
-    def test_order_follows_created_at_not_insertion(self, monkeypatch):
-        """Chèn sau nhưng có thời gian sớm hơn thì phải đứng trước."""
+    def test_order_follows_seq_not_clock(self, monkeypatch):
+        """A6: đồng hồ nhảy lùi KHÔNG được đảo thứ tự; thứ tự là thứ tự chèn (seq)."""
         s = self._session()
         stamps = iter(["2026-10-18T10:00:03+00:00", "2026-10-18T10:00:01+00:00", "2026-10-18T10:00:02+00:00"])
         monkeypatch.setattr(cs, "_now", lambda: next(stamps))
-        for name in ("third", "first", "second"):
+        for name in ("first", "second", "third"):
             cs.add_chat_message(s["id"], "user", name)
-        assert [m["content"] for m in cs.get_session_messages(s["id"])] == ["first", "second", "third"]
+        assert [m["content"] for m in cs.list_messages_unscoped(s["id"])] == ["first", "second", "third"]
 
     def test_identical_timestamps_keep_insertion_order(self, monkeypatch):
         s = self._session()
         monkeypatch.setattr(cs, "_now", lambda: "2026-10-18T10:00:00+00:00")
         for i in range(20):
             cs.add_chat_message(s["id"], "user", f"m{i}")
-        assert [m["content"] for m in cs.get_session_messages(s["id"])] == [f"m{i}" for i in range(20)]
+        assert [m["content"] for m in cs.list_messages_unscoped(s["id"])] == [f"m{i}" for i in range(20)]
 
     def test_sessions_do_not_leak_messages(self):
         s1 = cs.get_or_create_active_session(make_user("a@b.com")["id"])
         s2 = cs.get_or_create_active_session(make_user("c@d.com")["id"])
         cs.add_chat_message(s1["id"], "user", "của s1")
         cs.add_chat_message(s2["id"], "user", "của s2")
-        assert [m["content"] for m in cs.get_session_messages(s1["id"])] == ["của s1"]
-        assert [m["content"] for m in cs.get_session_messages(s2["id"])] == ["của s2"]
+        assert [m["content"] for m in cs.list_messages_unscoped(s1["id"])] == ["của s1"]
+        assert [m["content"] for m in cs.list_messages_unscoped(s2["id"])] == ["của s2"]
 
     def test_vietnamese_and_quotes_preserved(self):
         s = self._session()
         text = "Tôi muốn đi 'Hội An' & \"Tràng An\"; --\n3 ngày 😀"
         cs.add_chat_message(s["id"], "user", text)
-        assert cs.get_session_messages(s["id"])[0]["content"] == text
+        assert cs.list_messages_unscoped(s["id"])[0]["content"] == text
 
     def test_add_message_bumps_session_updated_at(self):
         s = self._session()
@@ -475,7 +475,7 @@ class TestPersistence:
         # kết nối hoàn toàn mới (mô phỏng khởi động lại server)
         assert cs.get_user_by_email("a@b.com")["id"] == u["id"]
         assert cs.get_or_create_active_session(u["id"])["id"] == s["id"]
-        assert [m["content"] for m in cs.get_session_messages(s["id"])] == ["xin chào"]
+        assert [m["content"] for m in cs.list_messages_unscoped(s["id"])] == ["xin chào"]
 
     def test_two_db_files_are_isolated(self, tmp_path, monkeypatch):
         make_user("a@b.com")
@@ -582,7 +582,7 @@ class TestCommitTurnAndConcurrency:
         assert created_msgs[1]["payload"] == {"chips": [{"label": "3 ngày"}]}
 
         # Kiểm tra đọc lại từ DB
-        db_msgs = cs.get_session_messages(s["id"])
+        db_msgs = cs.list_messages_unscoped(s["id"])
         assert len(db_msgs) == 2
         assert db_msgs[0]["seq"] is not None and db_msgs[1]["seq"] is not None
         assert db_msgs[0]["seq"] < db_msgs[1]["seq"]
@@ -605,7 +605,7 @@ class TestCommitTurnAndConcurrency:
         assert "version hiện tại=1" in str(exc_info.value)
 
         # Chứng minh transaction rollback hoàn toàn: không có tin nhắn nào được ghi, version vẫn là 1
-        assert cs.get_session_messages(s["id"]) == []
+        assert cs.list_messages_unscoped(s["id"]) == []
         assert cs.get_session_by_id(s["id"])["version"] == 1
 
     def test_commit_turn_rejects_wrong_user(self):
@@ -620,7 +620,7 @@ class TestCommitTurnAndConcurrency:
                 trip_request_json=s1["trip_request"],
                 messages=[{"role": "user", "content": "hack"}],
             )
-        assert cs.get_session_messages(s1["id"]) == []
+        assert cs.list_messages_unscoped(s1["id"]) == []
 
     def test_get_session_for_user_and_get_session_messages_authorization(self):
         u1, s1 = self._user_and_session()
@@ -633,18 +633,17 @@ class TestCommitTurnAndConcurrency:
         # get_session_messages
         cs.add_chat_message(s1["id"], "user", "chào")
         assert len(cs.get_session_messages(s1["id"], user_id=u1["id"])) == 1
-        with pytest.raises(PermissionError):
-            cs.get_session_messages(s1["id"], user_id=u2["id"])
+        assert cs.get_session_messages(s1["id"], user_id=u2["id"]) == []  # không phải chủ -> rỗng, không lộ
 
     def test_update_session_with_cas_version(self):
         u, s = self._user_and_session()
         # CAS đúng version
-        cs.update_session_trip_request(s["id"], s["trip_request"], "ready", expected_version=1)
+        cs.update_session_trip_request(s["id"], s["trip_request"], "ready", expected_version=1, user_id=u["id"])
         updated = cs.get_session_by_id(s["id"])
         assert updated["version"] == 2
         assert updated["status"] == "ready"
 
         # CAS sai version ném StaleSessionError
         with pytest.raises(cs.StaleSessionError):
-            cs.update_session_trip_request(s["id"], s["trip_request"], "ready", expected_version=1)
+            cs.update_session_trip_request(s["id"], s["trip_request"], "ready", expected_version=1, user_id=u["id"])
 

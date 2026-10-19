@@ -345,3 +345,49 @@ class TestSection12D_SessionPersistenceAndF5Reload:
             assert s2_data["trip_request"]["critical"]["destination_mention"] is None
         finally:
             app.dependency_overrides.pop(chat_router.get_plan_starter, None)
+
+    def test_f5_cookie_only_session_restoration(self, client, mock_external_deps):
+        """Khách đăng ký/đăng nhập và dùng duy nhất cookie (không header Authorization).
+        Giả lập F5 tải lại trang: GET /api/chat/sessions/{id} chỉ qua cookie httpOnly
+        phải khôi phục đầy đủ phiên và lịch sử hội thoại."""
+        email = "cookie_f5_user@example.com"
+        reg_res = client.post("/api/auth/register", json={"email": email, "password": PASSWORD})
+        assert reg_res.status_code == 201
+        assert "access_token" in client.cookies
+
+        # Tạo phiên chỉ bằng cookie (không gửi Authorization header)
+        s_res = client.post("/api/chat/sessions")
+        assert s_res.status_code == 200
+        session_id = s_res.json()["session_id"]
+
+        # Gửi tin nhắn đầu tiên bằng cookie
+        msg_res = client.post(
+            f"/api/chat/sessions/{session_id}/messages",
+            json={"type": "text", "content": "Đi Đà Nẵng 3 ngày"},
+        )
+        assert msg_res.status_code == 200
+
+        # GIẢ LẬP F5 RELOAD CHỈ DÙNG COOKIE:
+        f5_res = client.get(f"/api/chat/sessions/{session_id}")
+        assert f5_res.status_code == 200
+        f5_data = f5_res.json()
+        assert f5_data["session_id"] == session_id
+        assert f5_data["trip_request"]["critical"]["destination_mention"] == "Đà Nẵng"
+        assert f5_data["trip_request"]["critical"]["duration_days"] == 3
+        assert len(f5_data["messages"]) >= 2
+
+        # Gửi thêm tin nhắn bằng cookie
+        reply_res = client.post(
+            f"/api/chat/sessions/{session_id}/messages",
+            json={"type": "chip", "slot": "origin_mention", "value": "Hà Nội"},
+        )
+        assert reply_res.status_code == 200
+        assert reply_res.json()["trip_request"]["critical"]["origin_mention"] == "Hà Nội"
+
+        # Đăng xuất bằng cookie
+        logout_res = client.post("/api/auth/logout")
+        assert logout_res.status_code == 200
+
+        # Sau khi đăng xuất, gọi lại bị 401
+        after_logout = client.get(f"/api/chat/sessions/{session_id}")
+        assert after_logout.status_code == 401
