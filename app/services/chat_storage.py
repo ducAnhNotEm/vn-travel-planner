@@ -177,7 +177,12 @@ def _apply_schema(conn: sqlite3.Connection) -> None:
 
 
 def _migrate(conn: sqlite3.Connection) -> None:
-    conn.execute("PRAGMA journal_mode=WAL;")  # phải đặt NGOÀI transaction
+    try:
+        mode = str(conn.execute("PRAGMA journal_mode;").fetchone()[0]).lower()
+        if mode != "wal":
+            conn.execute("PRAGMA journal_mode=WAL;")  # phải đặt NGOÀI transaction
+    except sqlite3.OperationalError:
+        pass  # Luồng khác đang giữ khóa độc quyền sẽ hoàn tất bật WAL
     conn.execute("BEGIN IMMEDIATE")
     try:
         current = conn.execute("PRAGMA user_version").fetchone()[0]  # đọc lại trong khoá: có thể bên khác vừa migrate xong

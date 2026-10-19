@@ -46,10 +46,10 @@ def plan_stream_js():
 
 
 @app.get("/api/places")
-def get_places_by_province(province: str = "", limit: int = 20):
+def get_places_by_province(province: str = "", limit: int = 60):
     """Lấy danh sách địa danh thực tế từ database cho khay địa danh trực quan."""
     from app.services.place_index import get_index
     if not province.strip():
         return []
     idx = get_index()
-    return idx.search_keyword(province.strip(), limit=min(limit, 50))
+    return idx.search_keyword(province.strip(), limit=min(limit, 100))
