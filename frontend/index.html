@@ -477,6 +477,7 @@
       status: null,
       busy: false,
       currentDest: null,
+      hasMergedPlaces: false,
       activeCat: 'all',
       allPlaces: [],
       selectedPlaces: new Set(),
@@ -635,6 +636,9 @@
       $('view-home').classList.add('hidden');
       $('view-workspace').classList.remove('hidden');
       setTimeout(() => $('chat-input').focus(), 80);
+      if (!S.currentDest) {
+        setRightCanvas('empty');
+      }
       if (!S.sessionId) initChatSession();
     }
 
@@ -645,11 +649,14 @@
     }
 
     // ===== Chat AI =====
-    async function initChatSession() {
+    async function initChatSession(forceNew = false) {
       await ensureAuth();
       try {
-        const s = await api('/api/chat/sessions', { method: 'POST' });
+        const url = forceNew ? '/api/chat/sessions?force_new=true' : '/api/chat/sessions';
+        const s = await api(url, { method: 'POST' });
         S.sessionId = s.session_id;
+        S.trip = s.trip_request;
+        S.hasMergedPlaces = false;
         renderWelcomeChat();
       } catch (e) {
         console.error('Init session error:', e);
@@ -705,12 +712,31 @@
         });
         S.trip = r.trip_request;
         S.status = r.status;
-        addBotBubble(r.bot_message, r.chips);
+
+        // Cập nhật điểm đến nếu NLU trích xuất được
         handleTripUpdate(r.trip_request);
 
-        // KHI BOT THÔNG BÁO ĐÃ ĐỦ THÔNG TIN ('ready' hoặc 'planned') -> TỰ ĐỘNG LẬP LỊCH TRÌNH VÀ VẼ BẢN ĐỒ NGAY
-        if (r.status === 'ready' || r.status === 'planned') {
-          calculateAndShowPlan();
+        if (!S.hasMergedPlaces) {
+          // Người dùng đang ở bước xem & chọn địa điểm:
+          // Không hiện câu hỏi dồn dập hoặc câu "đã cung cấp đủ thông tin", mà hướng dẫn chọn địa điểm
+          const crit = (r.trip_request && r.trip_request.critical) || {};
+          const dest = crit.destination_mention || S.currentDest;
+          if (dest) {
+            addBotBubble(
+              'Tuyệt vời! Tôi đã tải các danh lam thắng cảnh, khách sạn và ẩm thực tại **' + dest + '** ở khung bên phải.\n\n👉 Bạn hãy chọn những địa điểm muốn đi rồi bấm **"Gộp địa điểm đã chọn"** bên dưới nhé! (Hoặc bấm "Để AI tự chọn" nếu muốn nhanh).',
+              [
+                { label: '⚡ Để AI tự chọn địa điểm', slot: '_auto_places', value: 'auto' }
+              ]
+            );
+          } else {
+            addBotBubble(r.bot_message, r.chips);
+          }
+        } else {
+          // Người dùng đã gộp địa điểm: tiếp tục hỏi làm rõ thông tin chuyến đi (số ngày, nơi đi, phương tiện)
+          addBotBubble(r.bot_message, r.chips);
+          if (r.status === 'ready' || r.status === 'planned') {
+            calculateAndShowPlan();
+          }
         }
       } catch (e) {
         addBotBubble('Xin lỗi, tôi gặp sự cố kết nối: ' + e.message);
@@ -748,10 +774,26 @@
             chipGroup.querySelectorAll('button').forEach((b) => (b.disabled = true));
             if (c.slot === 'destination_mention') {
               selectDestination(c.value);
+            } else if (c.slot === '_auto_places') {
+              autoPickPlacesAndPushToChat();
             } else if (c.slot === '_trigger_calculate') {
               calculateAndShowPlan();
             } else {
+              if (!S.trip) S.trip = { critical: {}, extra: {} };
+              if (!S.trip.critical) S.trip.critical = {};
+              if (!S.trip.extra) S.trip.extra = {};
+
+              if (c.slot === 'duration_days') S.trip.critical.duration_days = c.value;
+              if (c.slot === 'origin_mention') S.trip.critical.origin_mention = c.value;
+              if (c.slot === 'vehicle_type') S.trip.extra.vehicle_type = c.value;
+
               sendChatMessage({ type: 'chip', slot: c.slot, value: c.value }, label);
+
+              if (S.hasMergedPlaces && S.trip.critical.duration_days && S.trip.critical.origin_mention) {
+                setTimeout(() => {
+                  calculateAndShowPlan();
+                }, 800);
+              }
             }
           });
           chipGroup.appendChild(btn);
@@ -777,11 +819,39 @@
       }
     }
 
-    function selectDestination(destName) {
+    async function selectDestination(destName) {
       showWorkspaceView();
+      S.currentDest = destName;
+      S.hasMergedPlaces = false;
+      S.selectedPlaces.clear();
+      updateSelectedBadges();
+
       addUserBubble('Tôi muốn đi ' + destName);
       loadPlacesForDestination(destName);
-      sendChatMessage({ type: 'text', content: 'Tôi muốn đi ' + destName });
+
+      addBotBubble(
+        'Tuyệt vời! Tôi đã tải các danh lam thắng cảnh, khách sạn và ẩm thực nổi tiếng tại **' + destName + '** ở khung bên phải.\n\n👉 Bạn hãy chọn những địa điểm muốn đi rồi bấm **"Gộp địa điểm đã chọn"** bên dưới nhé! (Hoặc bấm "Để AI tự chọn" nếu muốn nhanh).',
+        [
+          { label: '⚡ Để AI tự chọn địa điểm', slot: '_auto_places', value: 'auto' }
+        ]
+      );
+
+      // Đồng bộ thông tin điểm đến xuống backend session
+      await ensureAuth();
+      if (!S.sessionId) {
+        const s = await api('/api/chat/sessions?force_new=true', { method: 'POST' });
+        S.sessionId = s.session_id;
+      }
+      try {
+        const r = await api('/api/chat/sessions/' + enc(S.sessionId) + '/messages', {
+          method: 'POST',
+          body: { type: 'text', content: 'Tôi muốn đi ' + destName }
+        });
+        S.trip = r.trip_request;
+        S.status = r.status;
+      } catch (err) {
+        console.warn('Backend sync warning:', err);
+      }
     }
 
     async function loadPlacesForDestination(dest) {
@@ -901,6 +971,8 @@
         return;
       }
 
+      S.hasMergedPlaces = true;
+
       // Tạo câu nói tự nhiên của người dùng
       const msg = 'Tôi đã chọn ' + selected.length + ' địa điểm muốn ghé thăm: ' + selected.join(', ') + '. Hãy lên kế hoạch tối ưu cho tôi nhé!';
       addUserBubble(msg);
@@ -910,7 +982,7 @@
       setTimeout(() => {
         setChatBusy(false);
         addBotBubble(
-          'Tuyệt vời! Tôi đã ghi nhận ' + selected.length + ' địa điểm bạn muốn đi ở ' + (S.currentDest || 'điểm đến') + '.\n\nĐể tôi sắp xếp lịch trình và lộ trình đường đi tối ưu nhất, bạn dự định đi mấy ngày và xuất phát từ đâu?',
+          'Tuyệt vời! Tôi đã ghi nhận ' + selected.length + ' địa điểm bạn muốn đi tại **' + (S.currentDest || 'điểm đến') + '**! 🌟\n\nĐể tôi sắp xếp lộ trình đường đi và lịch trình tối ưu nhất, bạn dự định đi mấy ngày và xuất phát từ đâu?',
           [
             { label: '📅 3 ngày 2 đêm', slot: 'duration_days', value: 3 },
             { label: '📅 2 ngày 1 đêm', slot: 'duration_days', value: 2 },
@@ -922,7 +994,41 @@
             { label: '✨ Bắt đầu Lập Lịch Trình Ngay', slot: '_trigger_calculate', value: 'now' }
           ]
         );
-      }, 400);
+      }, 350);
+    }
+
+    function autoPickPlacesAndPushToChat() {
+      S.hasMergedPlaces = true;
+      const mustVisits = S.allPlaces.filter(p => {
+        const cat = (p.category || '').toUpperCase();
+        return cat === 'ATTRACTION' || cat === 'HISTORICAL_SITE';
+      });
+      const pool = mustVisits.length >= 3 ? mustVisits : S.allPlaces;
+      const topPlaces = pool.slice(0, 4).map(p => p.name);
+      topPlaces.forEach(p => S.selectedPlaces.add(p));
+      updateSelectedBadges();
+      renderPlacesGrid();
+
+      const names = topPlaces.length ? ' (' + topPlaces.join(', ') + ')' : '';
+      addUserBubble('Hãy giúp tôi tự chọn các địa điểm tiêu biểu nhất tại ' + (S.currentDest || 'điểm đến') + '!');
+
+      setChatBusy(true);
+      setTimeout(() => {
+        setChatBusy(false);
+        addBotBubble(
+          'Tôi đã chọn lọc các điểm đến tiêu biểu nhất tại **' + (S.currentDest || 'điểm đến') + '**' + names + ' cho bạn! 🌟\n\nĐể tôi sắp xếp lộ trình đường đi và lịch trình tối ưu nhất, bạn dự định đi mấy ngày và xuất phát từ đâu?',
+          [
+            { label: '📅 3 ngày 2 đêm', slot: 'duration_days', value: 3 },
+            { label: '📅 2 ngày 1 đêm', slot: 'duration_days', value: 2 },
+            { label: '📅 4 ngày 3 đêm', slot: 'duration_days', value: 4 },
+            { label: '📍 Từ Hà Nội', slot: 'origin_mention', value: 'Hà Nội' },
+            { label: '📍 Từ TP. Hồ Chí Minh', slot: 'origin_mention', value: 'TP. Hồ Chí Minh' },
+            { label: '🚗 Đi bằng Ô tô', slot: 'vehicle_type', value: 'car' },
+            { label: '🏍️ Đi bằng Xe máy', slot: 'vehicle_type', value: 'motorbike' },
+            { label: '✨ Bắt đầu Lập Lịch Trình Ngay', slot: '_trigger_calculate', value: 'now' }
+          ]
+        );
+      }, 350);
     }
 
     // ===== Calculate & Show Optimized Itinerary =====
@@ -1211,11 +1317,9 @@
       });
     });
 
-    // Merge Places Button
+    // Merge & Auto Pick Places Buttons
     $('btn-merge-places').addEventListener('click', mergePlacesAndPushToChat);
-    $('btn-auto-places').addEventListener('click', () => {
-      calculateAndShowPlan([]);
-    });
+    $('btn-auto-places').addEventListener('click', autoPickPlacesAndPushToChat);
     $('btn-rechoose-places').addEventListener('click', () => {
       setRightCanvas('places');
     });
@@ -1232,9 +1336,10 @@
     $('btn-reset-chat').addEventListener('click', () => {
       S.sessionId = null;
       S.currentDest = null;
+      S.hasMergedPlaces = false;
       S.selectedPlaces.clear();
       setRightCanvas('empty');
-      initChatSession();
+      initChatSession(true);
       toast('Đã làm mới phiên hội thoại!');
     });
 

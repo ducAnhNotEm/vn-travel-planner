@@ -412,6 +412,28 @@ def get_or_create_active_session(user_id: str) -> dict:
         return _session_row(row)
 
 
+def create_new_session(user_id: str) -> dict:
+    """Tạo một phiên mới tinh cho user, đóng các phiên dở trước đó nếu có."""
+    with closing(_connect()) as conn:
+        with _write_txn(conn):
+            if conn.execute("SELECT 1 FROM users WHERE id = ?", (user_id,)).fetchone() is None:
+                raise UserNotFoundError(f"không có user: {user_id}")
+            placeholders = ",".join("?" for _ in ACTIVE_STATUSES)
+            conn.execute(
+                f"UPDATE chat_sessions SET status = 'closed', updated_at = ? WHERE user_id = ? AND status IN ({placeholders})",
+                (_now(), user_id, *ACTIVE_STATUSES),
+            )
+            session_id = _new_id()
+            conn.execute(
+                "INSERT INTO chat_sessions (id, user_id, status, trip_request, version, updated_at) "
+                "VALUES (?, ?, 'collecting', ?, 1, ?)",
+                (session_id, user_id, _dumps(default_trip_request(session_id)), _now()),
+            )
+            row = conn.execute("SELECT * FROM chat_sessions WHERE id = ?", (session_id,)).fetchone()
+        return _session_row(row)
+
+
+
 def get_session_for_user(session_id: str, user_id: str) -> Optional[dict]:
     """Phiên của user, hoặc None nếu không tồn tại HOẶC thuộc user khác (không phân biệt ở tầng này)."""
     with closing(_connect()) as conn:

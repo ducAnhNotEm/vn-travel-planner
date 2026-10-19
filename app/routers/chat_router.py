@@ -53,7 +53,7 @@ from dataclasses import dataclass
 from functools import lru_cache
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app.chat_models import (
     ChatMessageOut,
@@ -445,14 +445,20 @@ def _attempt_turn(session_id: str, user: UserOut, payload: Any, is_chip: bool, n
 # Endpoint
 # ───────────────────────────────────────────────────────────────────────────────
 @router.post("/sessions", response_model=CreateSessionResponse)
-def create_or_resume_session(current_user: UserOut = Depends(get_current_user)):
-    """Phiên đang dở ('collecting'/'ready') của user, chưa có thì tạo mới (Mục 8.1).
+def create_or_resume_session(
+    force_new: bool = Query(False, description="Bắt buộc tạo phiên mới tinh thay vì mở lại phiên cũ"),
+    current_user: UserOut = Depends(get_current_user)
+):
+    """Phiên đang dở ('collecting'/'ready') của user, chưa có hoặc force_new=True thì tạo mới (Mục 8.1).
     Phiên đang dở bị hỏng -> cách ly (status='error', giữ nguyên dữ liệu) và mở phiên mới NGAY trong request này,
     nên F5 không bao giờ kẹt ở 500. Phiên vừa tạo mà vẫn không hợp lệ = lỗi hệ thống: dừng, không cách ly tiếp."""
     with _db_busy_as_503():
         for attempt in (0, 1):
             try:
-                session = chat_storage.get_or_create_active_session(current_user.id)
+                if force_new:
+                    session = chat_storage.create_new_session(current_user.id)
+                else:
+                    session = chat_storage.get_or_create_active_session(current_user.id)
             except chat_storage.UserNotFoundError:
                 raise HTTPException(status_code=401, detail="phiên đăng nhập không hợp lệ hoặc đã hết hạn",
                                     headers={"WWW-Authenticate": "Bearer"})
