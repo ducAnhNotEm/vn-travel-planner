@@ -310,9 +310,10 @@ def _clean_place_candidate(s: Optional[str]) -> Optional[str]:
     """Làm sạch cụm bắt được bằng regex; chỉ giữ lại nếu gazetteer không bác bỏ. Không bịa giá trị."""
     if not s:
         return None
-    s = re.sub(r"\d+\s*(?:ngày|ngay|n(?:\b|gày))", " ", s, flags=re.I)
+    s = re.sub(r"\d+\s*(?:ngày|ngay|n(?:\b|gày)|đêm|dem|d(?:\b|êm))", " ", s, flags=re.I)
     s = re.sub(r"(?:nhóm|đoàn|đi)?\s*\d+\s*(?:người|nguoi|ng|khách|khach|bạn|thành viên)", " ", s, flags=re.I)
     s = re.sub(r"(?:đi\s+bằng|bằng)?\s*(?:máy\s*bay|may\s*bay|ô\s*tô|o\s*to|xe\s*máy|xe\s*may|tàu\s*hỏa|tau\s*hoa)", " ", s, flags=re.I)
+    s = re.sub(r"(?:nghỉ dưỡng|nghi duong|nghỉ mát|nghi mat|check-?in|khám phá|kham pha|săn mây|san may|tắm biển|tam bien)", " ", s, flags=re.I)
     s = re.sub(r"\s+", " ", s).strip()
     s = _STOP_RE.sub("", s)
     s = _LEAD_RE.sub("", s).strip(" -,")
@@ -359,6 +360,11 @@ def _run_regex_fallback(prompt: str) -> Dict[str, Any]:
     elif m_fwd:
         origin = _clean_place_candidate(m_fwd.group("orig"))
         destination = _clean_place_candidate(m_fwd.group("dest"))
+    else:
+        first_clause = re.split(r"[,;]", text)[0]
+        m_dest = re.search(r"(?:tới|đến|đi|den|di|du lịch|du lich)\s+(.+)", first_clause, re.I)
+        candidate = m_dest.group(1) if m_dest else first_clause
+        destination = _clean_place_candidate(candidate)
 
     parsed = {
         "intent": "plan_itinerary" if (origin or destination) else "clarify_needed",

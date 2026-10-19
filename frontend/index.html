@@ -172,10 +172,10 @@
     timeoutMs: 30000, planPollMs: 2000, planMaxTries: 60
   }, window.CHAT_CONFIG || {});
   const TRENDS = [
-    ['🏔️', 'Sa Pa săn mây 3N2Đ', 'Đi Sa Pa 3 ngày 2 đêm, thích săn mây'],
-    ['🌊', 'Đà Nẵng - Hội An 4N3Đ', 'Đi Đà Nẵng và Hội An 4 ngày 3 đêm'],
-    ['🌸', 'Hà Giang hùng vĩ 3N2Đ', 'Đi Hà Giang 3 ngày 2 đêm'],
-    ['🏝️', 'Phú Quốc nghỉ dưỡng 4N3Đ', 'Đi Phú Quốc nghỉ dưỡng 4 ngày 3 đêm']
+    ['🏔️', 'Sa Pa săn mây 3N2Đ', 'Đi Sa Pa 3 ngày 2 đêm từ Hà Nội, thích săn mây'],
+    ['🌊', 'Đà Nẵng biển đẹp 3N2Đ', 'Đi Đà Nẵng 3 ngày 2 đêm từ Hà Nội, tắm biển và ăn hải sản'],
+    ['🌸', 'Hà Giang hùng vĩ 3N2Đ', 'Đi Hà Giang 3 ngày 2 đêm từ Hà Nội, ngắm đèo Mã Pí Lèng'],
+    ['🏝️', 'Phú Quốc nghỉ dưỡng 4N3Đ', 'Đi Phú Quốc 4 ngày 3 đêm từ TP. Hồ Chí Minh, nghỉ dưỡng tắm biển']
   ];
   const $ = (id) => document.getElementById(id);
   const h = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
@@ -211,9 +211,14 @@
 
   // ===== Tài khoản =====
   function paintUser() {
-    const u = S.user; $('acc-icon').classList.toggle('hidden', !!u);
-    const i = $('acc-initial'); i.classList.toggle('hidden', !u); i.textContent = u ? String(u.email || '?').charAt(0) : '';
-    $('acc-email').textContent = u ? u.email : ''; if (!u) $('acc-menu').classList.add('hidden');
+    const u = S.user;
+    const isGuest = !u || (u.email && u.email.includes('@guest'));
+    $('acc-icon').classList.toggle('hidden', !!u && !isGuest);
+    const i = $('acc-initial');
+    i.classList.toggle('hidden', !u || isGuest);
+    i.textContent = (u && !isGuest) ? String(u.email || '?').charAt(0) : '';
+    $('acc-email').textContent = isGuest ? 'Khách trải nghiệm' : (u ? u.email : '');
+    if (!u) $('acc-menu').classList.add('hidden');
   }
   let authMode = 'login', authBusy = false;
   const authErr = (t) => { const p = $('auth-error'); p.textContent = t || ''; p.classList.toggle('hidden', !t); };
@@ -229,10 +234,30 @@
   }
   const closeAuth = () => $('auth-modal').classList.replace('flex', 'hidden');
   const cancelAuth = () => { closeAuth(); S.after = null; };
+
+  async function ensureAuth() {
+    if (S.user) return S.user;
+    try {
+      const u = await api('/api/auth/me');
+      S.user = u; paintUser(); return u;
+    } catch (_) {
+      try {
+        const r = await api('/api/auth/guest', { method: 'POST' });
+        S.token = r.access_token || null;
+        S.user = r.user;
+        paintUser();
+        return r.user;
+      } catch (err) {
+        console.warn('Guest login failed', err);
+      }
+    }
+    return null;
+  }
+
   async function requireLogin(next) {
-    await S.meReady;
+    if (!S.user) await ensureAuth();
     if (S.user) return next();
-    S.after = next; openAuth('Đăng nhập để trò chuyện với trợ lý du lịch AI.');
+    S.after = next; openAuth('Đăng nhập để lưu lịch trình và trò chuyện cùng trợ lý AI.');
   }
   async function submitAuth(e) {
     e.preventDefault(); if (authBusy) return;
@@ -313,16 +338,31 @@
   }
 
   // ===== PHA 2: khay địa danh =====
-  function syncDestination() {
-    const dest = S.trip && S.trip.critical && S.trip.critical.destination_mention;
-    if (dest && dest !== S.trayFor) loadTray(dest);
+  function syncDestination(forcedDest) {
+    let dest = forcedDest;
+    if (!dest) {
+      const crit = S.trip && S.trip.critical;
+      const extra = S.trip && S.trip.extra;
+      dest = (crit && crit.destination_mention) || (extra && extra.pinned_mentions && extra.pinned_mentions[0]);
+    }
+    if (dest && typeof dest === 'string') {
+      const primary = dest.split(/\s+(?:và|va|hoặc|hoac|,)\s+/i)[0].trim();
+      if (primary && primary !== S.trayFor) loadTray(primary);
+    }
   }
   async function loadTray(dest) {
     S.trayFor = dest; S.selected = new Set(); S.places = [];
     const grid = $('tray-grid'); $('tray').classList.remove('hidden');
-    $('tray-title').textContent = 'Địa danh nổi tiếng ở ' + dest; grid.replaceChildren(h('p', 'text-sm text-slate-500 py-6', 'Đang tải địa danh…'));
-    try { const d = await api(CFG.placesUrl(dest)); S.places = Array.isArray(d) ? d : ((d && d.places) || []); renderTray(); }
-    catch (e) { grid.replaceChildren(h('p', 'text-sm text-red-600 py-6', 'Chưa tải được danh sách địa danh (' + e.message + ') Bạn vẫn có thể bấm “Để AI tự chọn toàn bộ”.')); }
+    $('tray-title').textContent = 'Địa danh nổi tiếng ở ' + dest;
+    grid.replaceChildren(h('p', 'text-sm text-slate-500 py-6', 'Đang tải địa danh…'));
+    setTimeout(() => $('tray').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
+    try {
+      const d = await api(CFG.placesUrl(dest));
+      S.places = Array.isArray(d) ? d : ((d && d.places) || []);
+      renderTray();
+    } catch (e) {
+      grid.replaceChildren(h('p', 'text-sm text-red-600 py-6', 'Chưa tải được danh sách địa danh (' + e.message + '). Bạn vẫn có thể bấm “Để AI tự chọn toàn bộ”.'));
+    }
   }
   function renderTray() {
     const grid = $('tray-grid');
@@ -352,18 +392,50 @@
   }
   async function planFromTray(keys) {
     const c = (S.trip && S.trip.critical) || {}, x = (S.trip && S.trip.extra) || {};
-    if (!c.duration_days || !c.origin_mention) { toast('Hãy trả lời câu hỏi của trợ lý về nơi xuất phát và số ngày trước.'); $('hub-input').focus(); return; }
-    const btns = [$('btn-optimize'), $('btn-auto')]; btns.forEach((b) => { b.disabled = true; });
+    const dest = (c && c.destination_mention) || S.trayFor || 'Đà Nẵng';
+    const days = (c && c.duration_days) || 3;
+    const originName = (c && c.origin_mention && c.origin_mention !== 'CURRENT_LOCATION') ? c.origin_mention : 'Hà Nội';
+
+    let effectiveKeys = (keys && keys.length) ? keys : [];
+    if (!effectiveKeys.length) {
+      if (S.places && S.places.length) {
+        effectiveKeys = S.places.slice(0, 4).map((p) => p.name);
+      } else {
+        effectiveKeys = [dest];
+      }
+    }
+
+    const btns = [$('btn-optimize'), $('btn-auto')];
+    btns.forEach((b) => { b.disabled = true; });
+    setStatus('Đang tính toán tối ưu lịch trình và bản đồ…');
+
     try {
-      let origin = { origin_name: c.origin_mention };
-      if (c.origin_mention === 'CURRENT_LOCATION') { const g = await geo(); origin = g ? { origin_name: 'Vị trí hiện tại', origin_lat: g.latitude, origin_lng: g.longitude } : { origin_name: 'Hà Nội' }; }
-      const plan = await api('/api/plan/calculate', { method: 'POST', body: Object.assign({
-        prompt_keywords: keys, days: c.duration_days, group_size: x.group_size || 2, vehicle_type: x.vehicle_type || 'car',
-        include_ai_explanation: true, ai_delivery: 'stream', route_wait_ms: 250, polyline_format: 'encoded', simplify_epsilon_m: 5
-      }, origin) });
+      let origin = { origin_name: originName };
+      if (c && c.origin_mention === 'CURRENT_LOCATION') {
+        const g = await geo();
+        origin = g ? { origin_name: 'Vị trí hiện tại', origin_lat: g.latitude, origin_lng: g.longitude } : { origin_name: 'Hà Nội' };
+      }
+      const plan = await api('/api/plan/calculate', {
+        method: 'POST',
+        body: Object.assign({
+          prompt_keywords: effectiveKeys,
+          days: Math.min(Math.max(days, 1), 14),
+          group_size: x.group_size || 2,
+          vehicle_type: x.vehicle_type || 'car',
+          include_ai_explanation: true,
+          ai_delivery: 'stream',
+          route_wait_ms: 250,
+          polyline_format: 'encoded',
+          simplify_epsilon_m: 5
+        }, origin)
+      });
       showPlan(plan);
-    } catch (e) { toast(e.message); }
-    finally { btns.forEach((b) => { b.disabled = false; }); }
+    } catch (e) {
+      toast(e.message || 'Lỗi khi tính toán lịch trình.');
+    } finally {
+      setStatus(null);
+      btns.forEach((b) => { b.disabled = false; });
+    }
   }
 
   // ===== Tác vụ lập lịch nền (status "planning") =====
@@ -454,6 +526,10 @@
       L.marker(c, { icon: L.divIcon({ className: '', html: '<div class="pin">' + (i + 1) + '</div>', iconSize: [26, 26], iconAnchor: [13, 13] }) })
         .on('click', () => openDetail(it)).addTo(S.group);
     });
+    const curDay = (S.plan.days || []).find((x) => x.day === S.day);
+    if (curDay && curDay.route_polyline && typeof drawDayRoute === 'function') {
+      drawDayRoute(S.map, { day: curDay.day, points: curDay.route_polyline, status: curDay.route_status });
+    }
     const ft = S.plan.flight_transit;
     if (ft && ft.is_flight_required) {   // chặng bay: nét đứt tím
       const ll = (o) => { if (!o) return null; const a = num(o.lat != null ? o.lat : o.latitude), b = num(o.lng != null ? o.lng : o.longitude); return a !== null && b !== null ? [a, b] : null; };
@@ -514,7 +590,7 @@
   $('cp-form').addEventListener('submit', (e) => { e.preventDefault(); const t = $('cp-input').value.trim(); if (!t) return; $('cp-input').value = ''; requireLogin(() => sendChat({ type: 'text', content: t }, t)); });
   $('btn-optimize').addEventListener('click', () => { if (!S.selected.size) return toast('Hãy chọn ít nhất một điểm, hoặc để AI tự chọn toàn bộ.'); planFromTray([...S.selected]); });
   $('btn-auto').addEventListener('click', () => planFromTray([]));
-  $('btn-chat').addEventListener('click', () => requireLogin(() => { const i = S.phase === 3 ? $('cp-input') : $('hub-input'); i.focus(); i.scrollIntoView({ block: 'center', behavior: 'smooth' }); }));
+  $('btn-chat').addEventListener('click', () => { const i = S.phase === 3 ? $('cp-input') : $('hub-input'); i.focus(); i.scrollIntoView({ block: 'center', behavior: 'smooth' }); });
   $('btn-account').addEventListener('click', () => { if (!S.user) { S.after = null; openAuth(); } else $('acc-menu').classList.toggle('hidden'); });
   $('btn-logout').addEventListener('click', logout);
   $('auth-form').addEventListener('submit', submitAuth);
@@ -529,8 +605,8 @@
     if (!$('auth-modal').classList.contains('hidden')) cancelAuth(); else closeDetail();
   });
 
-  // Khôi phục đăng nhập qua cookie httpOnly rồi khôi phục phiên chat
-  S.meReady = api('/api/auth/me').then((u) => { S.user = u; paintUser(); return restore(); }).catch(() => paintUser());
+  // Khởi tạo: cấp quyền Guest ẩn danh tức thì để người dùng trải nghiệm ngay
+  S.meReady = ensureAuth().then(() => restore()).catch(() => paintUser());
 })();
 </script>
 </body>

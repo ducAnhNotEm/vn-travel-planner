@@ -60,6 +60,18 @@ def register(payload: UserRegisterRequest, response: Response):
     return result
 
 
+@router.post("/guest", response_model=TokenResponse, status_code=201)
+def guest_login(response: Response):
+    """Cấp tài khoản khách (Guest) ẩn danh tức thì để trải nghiệm sản phẩm mà không bị chặn đăng nhập."""
+    import uuid
+    guest_email = f"guest_{uuid.uuid4().hex[:10]}@guest.vntravel.local"
+    guest_pwd = f"Guest_{uuid.uuid4().hex}"
+    result = auth_service.register_and_login(guest_email, guest_pwd)
+    _set_auth_cookie(response, result.access_token)
+    _no_store(response)
+    return result
+
+
 @router.post("/login", response_model=TokenResponse)
 def login(payload: UserLoginRequest, response: Response):
     """Sai email hoặc mật khẩu -> 401 'email hoặc mật khẩu không đúng' (không phân biệt nguyên nhân)."""
