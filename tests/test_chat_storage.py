@@ -64,12 +64,13 @@ class TestConnectionAndSchema:
 
     @pytest.mark.parametrize("table,expected", [
         ("users", ["id", "email", "password_hash", "created_at"]),
-        ("chat_sessions", ["id", "user_id", "status", "trip_request", "updated_at"]),
-        ("chat_messages", ["id", "session_id", "role", "content", "payload", "created_at"]),
+        ("chat_sessions", ["id", "user_id", "status", "trip_request", "version", "updated_at"]),
+        ("chat_messages", ["seq", "id", "session_id", "role", "content", "payload", "created_at"]),
     ])
     def test_columns(self, table, expected):
         cs.init_db()
         assert [r["name"] for r in raw(f"PRAGMA table_info({table})")] == expected
+
 
     def test_init_is_idempotent(self):
         cs.init_db()
@@ -543,3 +544,107 @@ class TestAuthTokensStorage:
         with closing(cs._connect()) as conn:
             with pytest.raises(sqlite3.IntegrityError):
                 conn.execute("INSERT INTO auth_tokens VALUES ('h', 'no-such-user', 'now', 'later')")
+
+
+# ───────────────────────────── Bước 1 Refactor: CAS & commit_turn ─────────────────────────────
+class TestCommitTurnAndConcurrency:
+    def _user_and_session(self):
+        u = make_user()
+        s = cs.get_or_create_active_session(u["id"])
+        return u, s
+
+    def test_initial_session_has_version_1(self):
+        _, s = self._user_and_session()
+        assert s["version"] == 1
+        fetched = cs.get_session_by_id(s["id"])
+        assert fetched["version"] == 1
+
+    def test_commit_turn_atomic_success_and_bumps_version(self):
+        u, s = self._user_and_session()
+        trip = dict(s["trip_request"], turn=1)
+        trip["critical"]["destination_mention"] = "Đà Nẵng"
+        messages = [
+            {"role": "user", "content": "Đi Đà Nẵng"},
+            {"role": "assistant", "content": "Đi mấy ngày?", "payload": {"chips": [{"label": "3 ngày"}]}},
+        ]
+        updated_s, created_msgs = cs.commit_turn(
+            session_id=s["id"],
+            user_id=u["id"],
+            expected_version=1,
+            new_status="collecting",
+            trip_request_json=trip,
+            messages=messages,
+        )
+        assert updated_s["version"] == 2
+        assert updated_s["trip_request"]["critical"]["destination_mention"] == "Đà Nẵng"
+        assert len(created_msgs) == 2
+        assert created_msgs[0]["content"] == "Đi Đà Nẵng"
+        assert created_msgs[1]["payload"] == {"chips": [{"label": "3 ngày"}]}
+
+        # Kiểm tra đọc lại từ DB
+        db_msgs = cs.get_session_messages(s["id"])
+        assert len(db_msgs) == 2
+        assert db_msgs[0]["seq"] is not None and db_msgs[1]["seq"] is not None
+        assert db_msgs[0]["seq"] < db_msgs[1]["seq"]
+
+    def test_commit_turn_fails_on_stale_version_and_rolls_back(self):
+        u, s = self._user_and_session()
+        trip = dict(s["trip_request"], turn=1)
+        messages = [{"role": "user", "content": "Xin chào"}]
+
+        # Gửi với expected_version=99 (không khớp với version 1 hiện tại)
+        with pytest.raises(cs.StaleSessionError) as exc_info:
+            cs.commit_turn(
+                session_id=s["id"],
+                user_id=u["id"],
+                expected_version=99,
+                new_status="collecting",
+                trip_request_json=trip,
+                messages=messages,
+            )
+        assert "version hiện tại=1" in str(exc_info.value)
+
+        # Chứng minh transaction rollback hoàn toàn: không có tin nhắn nào được ghi, version vẫn là 1
+        assert cs.get_session_messages(s["id"]) == []
+        assert cs.get_session_by_id(s["id"])["version"] == 1
+
+    def test_commit_turn_rejects_wrong_user(self):
+        u1, s1 = self._user_and_session()
+        u2 = make_user("other@b.com")
+        with pytest.raises(PermissionError):
+            cs.commit_turn(
+                session_id=s1["id"],
+                user_id=u2["id"],  # user 2 cố tình ghi vào phiên của user 1
+                expected_version=1,
+                new_status="collecting",
+                trip_request_json=s1["trip_request"],
+                messages=[{"role": "user", "content": "hack"}],
+            )
+        assert cs.get_session_messages(s1["id"]) == []
+
+    def test_get_session_for_user_and_get_session_messages_authorization(self):
+        u1, s1 = self._user_and_session()
+        u2 = make_user("stranger@b.com")
+
+        # get_session_for_user
+        assert cs.get_session_for_user(s1["id"], u1["id"])["id"] == s1["id"]
+        assert cs.get_session_for_user(s1["id"], u2["id"]) is None
+
+        # get_session_messages
+        cs.add_chat_message(s1["id"], "user", "chào")
+        assert len(cs.get_session_messages(s1["id"], user_id=u1["id"])) == 1
+        with pytest.raises(PermissionError):
+            cs.get_session_messages(s1["id"], user_id=u2["id"])
+
+    def test_update_session_with_cas_version(self):
+        u, s = self._user_and_session()
+        # CAS đúng version
+        cs.update_session_trip_request(s["id"], s["trip_request"], "ready", expected_version=1)
+        updated = cs.get_session_by_id(s["id"])
+        assert updated["version"] == 2
+        assert updated["status"] == "ready"
+
+        # CAS sai version ném StaleSessionError
+        with pytest.raises(cs.StaleSessionError):
+            cs.update_session_trip_request(s["id"], s["trip_request"], "ready", expected_version=1)
+

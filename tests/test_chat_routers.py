@@ -824,3 +824,58 @@ class TestInternals:
                          "/api/chat/sessions/{session_id}/messages"):
             assert expected in paths, f"Missing route: {expected}"
 
+
+class TestConcurrencyAndCAS:
+    def test_parallel_session_creation_yields_single_session(self):
+        """10 thread đồng thời gọi POST /api/chat/sessions cho cùng 1 user phải trả về cùng session_id."""
+        from concurrent.futures import ThreadPoolExecutor
+        app, _ = make_app()
+        client = TestClient(app)
+        token = signup(client, "concurrent1@example.com")
+        h = bearer(token)
+
+        def create(_):
+            c = TestClient(app)
+            r = c.post("/api/chat/sessions", headers=h)
+            return r.status_code, r.json()["session_id"]
+
+        with ThreadPoolExecutor(10) as ex:
+            results = list(ex.map(create, range(10)))
+
+        status_codes = [r[0] for r in results]
+        session_ids = {r[1] for r in results}
+        assert all(code == 200 for code in status_codes)
+        assert len(session_ids) == 1, f"Tạo trùng phiên: {session_ids}"
+
+    def test_parallel_sends_handled_cleanly_without_500(self):
+        """Nhiều request gửi tin nhắn song song vào cùng một phiên: không bao giờ crash 500,
+        mỗi turn thành công tăng version và ghi nhận đúng cặp tin nhắn."""
+        from concurrent.futures import ThreadPoolExecutor
+        app, nlu = make_app()
+        client = TestClient(app)
+        token = signup(client, "concurrent2@example.com")
+        h = bearer(token)
+        sid = start_session(client, token)
+        payloads = [
+            {"type": "text", "content": f"Tin nhắn số {i}"}
+            for i in range(8)
+        ]
+
+        def send(idx):
+            c = TestClient(app)
+            return c.post(f"/api/chat/sessions/{sid}/messages", headers=h, json=payloads[idx]).status_code
+
+        with ThreadPoolExecutor(8) as ex:
+            codes = list(ex.map(send, range(8)))
+
+
+        # Không có request nào bị 500 (chỉ có 200 thành công hoặc 409 conflict nếu CAS bắt được cạnh tranh)
+        assert all(code in (200, 409) for code in codes), f"Mã trạng thái không mong muốn: {codes}"
+        success_count = sum(1 for c in codes if c == 200)
+        assert success_count >= 1
+
+        detail = client.get(f"/api/chat/sessions/{sid}", headers=h).json()
+        assert len(detail["messages"]) == 2 * success_count
+        assert detail["trip_request"]["turn"] == success_count
+
+

@@ -125,9 +125,14 @@ def _load_owned_session(session_id: str, user: UserOut) -> dict:
 def _trip_from_session(session: dict) -> TripRequest:
     try:
         return TripRequest.model_validate(session["trip_request"])
-    except ValueError:
-        logger.exception("trip_request của phiên %s không hợp lệ", session.get("id"))
+    except Exception:
+        logger.exception("trip_request của phiên %s không hợp lệ; đánh dấu 'error'", session.get("id"))
+        try:
+            chat_storage.update_session_trip_request(session["id"], session.get("trip_request", {}), "error")
+        except Exception:
+            pass
         raise HTTPException(status_code=500, detail=SESSION_CORRUPT)
+
 
 
 def _message_out(message: dict) -> ChatMessageOut:
@@ -201,9 +206,10 @@ def create_or_resume_session(current_user: UserOut = Depends(get_current_user)):
 @router.get("/sessions/{session_id}", response_model=SessionDetailResponse)
 def get_session(session_id: str, current_user: UserOut = Depends(get_current_user)):
     session = _load_owned_session(session_id, current_user)
-    messages = [_message_out(m) for m in chat_storage.get_session_messages(session_id)]
+    messages = [_message_out(m) for m in chat_storage.get_session_messages(session_id, user_id=current_user.id)]
     return SessionDetailResponse(session_id=session["id"], status=session["status"],
                                  trip_request=_trip_from_session(session), messages=messages)
+
 
 
 @router.post("/sessions/{session_id}/messages", response_model=SendMessageResponse)
@@ -262,10 +268,23 @@ def send_message(
             bot_text = NLU_FAILED_PREFIX + bot_text
         bot_payload = {"chips": [c.model_dump(mode="json") for c in chips]} if chips else None
 
-        # Trạng thái phiên là nguồn sự thật: ghi trước, rồi tới hai tin nhắn (user trước, bot sau).
-        chat_storage.update_session_trip_request(session_id, trip.model_dump(mode="json"), status)
-        chat_storage.add_chat_message(session_id, "user", user_text, user_payload)
-        chat_storage.add_chat_message(session_id, "assistant", bot_text, bot_payload)
+        # Ghi nguyên tử toàn bộ một lượt (cập nhật phiên với CAS + ghi các tin nhắn)
+        messages = [
+            {"role": "user", "content": user_text, "payload": user_payload},
+            {"role": "assistant", "content": bot_text, "payload": bot_payload},
+        ]
+        try:
+            chat_storage.commit_turn(
+                session_id=session_id,
+                user_id=current_user.id,
+                expected_version=session.get("version", 1),
+                new_status=status,
+                trip_request_json=trip.model_dump(mode="json"),
+                messages=messages,
+            )
+        except chat_storage.StaleSessionError:
+            raise HTTPException(status_code=409, detail=SESSION_CLOSED)
+
 
     return SendMessageResponse(
         session_id=session_id,

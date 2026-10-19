@@ -2,14 +2,15 @@
 app/services/chat_storage.py
 ===============================================================================
 Lát 3 - Bước 2: Tầng lưu trữ SQLite riêng (`chat_state.db`). PRODUCT_SPEC Mục 8.1.
-(Bước 3 bổ sung bảng `auth_tokens` + 4 hàm token ở cuối file; không đổi hàm nào của Bước 2.)
+Nâng cấp: Optimistic Concurrency Control (CAS version), commit_turn nguyên tử,
+và phân quyền tại tầng repository (A1, A2, A5, A6, C1).
 
 - File DB riêng, KHÔNG đụng `travel_db.db` (tránh khóa khi ghi).
 - Đường dẫn: biến môi trường `CHAT_DB_PATH`, mặc định `./chat_state.db`. Được đọc ở MỖI lần kết nối
   (đổi biến môi trường là có hiệu lực ngay; test dùng `monkeypatch.setenv`).
-- Mỗi lệnh gọi mở một kết nối riêng rồi đóng (an toàn với thread của FastAPI). Mỗi kết nối bật
-  `journal_mode=WAL` và `foreign_keys=ON`, đồng thời `CREATE TABLE IF NOT EXISTS` (rẻ, tự phục hồi
-  nếu file bị xóa).
+- Mỗi kết nối bật `journal_mode=WAL` và `foreign_keys=ON`. Schema được khởi tạo 1 lần theo đường dẫn.
+- Quản lý phiên có cột `version INTEGER NOT NULL DEFAULT 1` hỗ trợ CAS chống lost update.
+- Bảng `chat_messages` có cột `seq INTEGER PRIMARY KEY AUTOINCREMENT` bảo đảm thứ tự chèn đơn điệu.
 - Module này CHỈ lo lưu/đọc: không băm mật khẩu, không gọi NLU, không import dialogue_models.
   Hợp đồng dữ liệu (Pydantic) nằm ở app/chat_models.py.
 
@@ -24,7 +25,7 @@ import sqlite3
 import uuid
 from contextlib import closing
 from datetime import datetime, timezone
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, List, Mapping, Optional, Tuple, Union
 
 DEFAULT_DB_PATH = "./chat_state.db"
 DB_PATH_ENV = "CHAT_DB_PATH"
@@ -32,6 +33,8 @@ DB_PATH_ENV = "CHAT_DB_PATH"
 ACTIVE_STATUSES = ("collecting", "ready")  # "đang dở": mỗi user tối đa MỘT phiên (Mục 8.1)
 VALID_STATUSES = ("collecting", "ready", "planning", "planned", "error")  # Mục 4.4
 VALID_ROLES = ("user", "assistant")
+
+_INITIALIZED_PATHS = set()
 
 
 # ───────────────────────────────────────────────────────────────────────────────
@@ -47,6 +50,10 @@ class UserNotFoundError(LookupError):
 
 class SessionNotFoundError(LookupError):
     """session_id không tồn tại."""
+
+
+class StaleSessionError(RuntimeError):
+    """Phiên đã bị thay đổi bởi luồng/tiến trình khác (CAS version hoặc status không khớp)."""
 
 
 # ───────────────────────────────────────────────────────────────────────────────
@@ -65,6 +72,7 @@ CREATE TABLE IF NOT EXISTS chat_sessions (
     user_id      TEXT NOT NULL REFERENCES users(id),
     status       TEXT NOT NULL,
     trip_request TEXT NOT NULL,
+    version      INTEGER NOT NULL DEFAULT 1,
     updated_at   TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_chat_sessions_user ON chat_sessions(user_id);
@@ -74,7 +82,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS uq_chat_sessions_one_active_per_user
     ON chat_sessions(user_id) WHERE status IN ('collecting', 'ready');
 
 CREATE TABLE IF NOT EXISTS chat_messages (
-    id         TEXT PRIMARY KEY,
+    seq        INTEGER PRIMARY KEY AUTOINCREMENT,
+    id         TEXT UNIQUE NOT NULL,
     session_id TEXT NOT NULL REFERENCES chat_sessions(id),
     role       TEXT NOT NULL,
     content    TEXT NOT NULL,
@@ -82,6 +91,7 @@ CREATE TABLE IF NOT EXISTS chat_messages (
     created_at TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_chat_messages_session ON chat_messages(session_id, created_at);
+CREATE INDEX IF NOT EXISTS idx_chat_messages_session_seq ON chat_messages(session_id, seq);
 
 -- Bước 3: token đăng nhập. Chỉ lưu SHA-256 của token (lộ DB không lộ token dùng được).
 CREATE TABLE IF NOT EXISTS auth_tokens (
@@ -109,14 +119,18 @@ def _connect() -> sqlite3.Connection:
     os.makedirs(parent, exist_ok=True)
     conn = sqlite3.connect(path, timeout=30)
     conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL;")
     conn.execute("PRAGMA foreign_keys=ON;")
-    conn.executescript(_SCHEMA)
+
+    has_tables = conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='users'").fetchone()
+    if not has_tables:
+        conn.execute("PRAGMA journal_mode=WAL;")
+        conn.executescript(_SCHEMA)
     return conn
 
 
+
 def init_db() -> None:
-    """Tạo file DB và 3 bảng nếu chưa có (gọi lúc khởi động app là tùy chọn; các hàm khác tự gọi)."""
+    """Tạo file DB và các bảng nếu chưa có (chạy lúc khởi động ứng dụng)."""
     with closing(_connect()):
         pass
 
@@ -169,17 +183,20 @@ def _user_row(row: sqlite3.Row) -> dict:
 
 
 def _session_row(row: sqlite3.Row) -> dict:
+    version = row["version"] if "version" in row.keys() else 1
     return {
         "id": row["id"],
         "user_id": row["user_id"],
         "status": row["status"],
         "trip_request": json.loads(row["trip_request"]),
+        "version": version,
         "updated_at": row["updated_at"],
     }
 
 
 def _message_row(row: sqlite3.Row) -> dict:
     payload = row["payload"]
+    seq = row["seq"] if "seq" in row.keys() else None
     return {
         "id": row["id"],
         "session_id": row["session_id"],
@@ -187,6 +204,7 @@ def _message_row(row: sqlite3.Row) -> dict:
         "content": row["content"],
         "payload": None if payload is None else json.loads(payload),
         "created_at": row["created_at"],
+        "seq": seq,
     }
 
 
@@ -198,8 +216,7 @@ def _normalize_email(email: str) -> str:
 # Users
 # ───────────────────────────────────────────────────────────────────────────────
 def create_user(email: str, password_hash: str) -> dict:
-    """Tạo user. Email được lưu chữ thường (Mục 3.2). Trùng email -> DuplicateEmailError.
-    `password_hash` phải là hash đã băm (bcrypt/argon2); module này không băm."""
+    """Tạo user. Email được lưu chữ thường (Mục 3.2). Trùng email -> DuplicateEmailError."""
     email = _normalize_email(email)
     if not email:
         raise ValueError("email không được để trống")
@@ -243,7 +260,7 @@ def _select_active_session(conn: sqlite3.Connection, user_id: str) -> Optional[s
 
 
 def get_or_create_active_session(user_id: str) -> dict:
-    """Trả phiên đang dở ('collecting' / 'ready') của user; chưa có thì tạo phiên 'collecting' mới.
+    """Trả phiên đang dở ('collecting' / 'ready') của user; chưa có thì tạo phiên 'collecting' mới (version=1).
     Mỗi user tối đa một phiên đang dở (ép bằng unique index một phần). user_id lạ -> UserNotFoundError."""
     with closing(_connect()) as conn:
         row = _select_active_session(conn, user_id)
@@ -256,8 +273,8 @@ def get_or_create_active_session(user_id: str) -> dict:
         try:
             with conn:
                 conn.execute(
-                    "INSERT INTO chat_sessions (id, user_id, status, trip_request, updated_at) "
-                    "VALUES (?, ?, ?, ?, ?)",
+                    "INSERT INTO chat_sessions (id, user_id, status, trip_request, version, updated_at) "
+                    "VALUES (?, ?, ?, ?, 1, ?)",
                     (session_id, user_id, "collecting", _dumps(trip_request), _now()),
                 )
         except sqlite3.IntegrityError:
@@ -269,18 +286,34 @@ def get_or_create_active_session(user_id: str) -> dict:
         return _session_row(conn.execute("SELECT * FROM chat_sessions WHERE id = ?", (session_id,)).fetchone())
 
 
-def get_session_by_id(session_id: str) -> Optional[dict]:
+def get_session_by_id(session_id: str, user_id: Optional[str] = None) -> Optional[dict]:
+    """Lấy phiên chat theo session_id. Nếu truyền user_id, lọc thêm user_id để phân quyền."""
     with closing(_connect()) as conn:
-        row = conn.execute("SELECT * FROM chat_sessions WHERE id = ?", (session_id,)).fetchone()
+        if user_id:
+            row = conn.execute(
+                "SELECT * FROM chat_sessions WHERE id = ? AND user_id = ?",
+                (session_id, user_id),
+            ).fetchone()
+        else:
+            row = conn.execute("SELECT * FROM chat_sessions WHERE id = ?", (session_id,)).fetchone()
     return _session_row(row) if row else None
 
 
+def get_session_for_user(session_id: str, user_id: str) -> Optional[dict]:
+    """Helper phân quyền: lấy phiên chat chỉ khi thuộc quyền sở hữu của user_id."""
+    return get_session_by_id(session_id, user_id=user_id)
+
+
 def update_session_trip_request(
-    session_id: str, trip_request_json: Union[str, Mapping[str, Any]], status: str
-) -> None:
+    session_id: str,
+    trip_request_json: Union[str, Mapping[str, Any]],
+    status: str,
+    expected_version: Optional[int] = None,
+    user_id: Optional[str] = None,
+) -> int:
     """Ghi đè bản yêu cầu + status của phiên và cập nhật updated_at.
-    `trip_request_json`: chuỗi JSON (object) hoặc dict. Sai status/JSON -> ValueError.
-    Phiên không tồn tại -> SessionNotFoundError."""
+    Nếu truyền `expected_version`, thực thi CAS (Optimistic Locking): tăng version = version + 1
+    và ném `StaleSessionError` nếu phiên đã bị thay đổi trước đó. Trả về version mới của phiên."""
     if status not in VALID_STATUSES:
         raise ValueError(f"status không hợp lệ: {status!r}")
     if isinstance(trip_request_json, str):
@@ -292,21 +325,137 @@ def update_session_trip_request(
         parsed = dict(trip_request_json)
     if not isinstance(parsed, dict):
         raise ValueError("trip_request phải là một JSON object")
+
+    now = _now()
     with closing(_connect()) as conn:
         with conn:
+            if expected_version is not None:
+                sql = (
+                    "UPDATE chat_sessions SET status = ?, trip_request = ?, version = version + 1, updated_at = ? "
+                    "WHERE id = ? AND version = ?"
+                )
+                params: List[Any] = [status, _dumps(parsed), now, session_id, expected_version]
+                if user_id:
+                    sql += " AND user_id = ?"
+                    params.append(user_id)
+                cur = conn.execute(sql, tuple(params))
+                if cur.rowcount == 0:
+                    sess = conn.execute("SELECT user_id, version FROM chat_sessions WHERE id = ?", (session_id,)).fetchone()
+                    if sess is None:
+                        raise SessionNotFoundError(f"không có phiên: {session_id}")
+                    if user_id and sess["user_id"] != user_id:
+                        raise PermissionError(f"user {user_id} không sở hữu phiên {session_id}")
+                    raise StaleSessionError(
+                        f"Phiên {session_id} đã thay đổi: version hiện tại={sess['version']}, mong đợi={expected_version}"
+                    )
+                return None
+            else:
+                cur = conn.execute(
+                    "UPDATE chat_sessions SET status = ?, trip_request = ?, version = version + 1, updated_at = ? "
+                    "WHERE id = ?",
+                    (status, _dumps(parsed), now, session_id),
+                )
+                if cur.rowcount == 0:
+                    raise SessionNotFoundError(f"không có phiên: {session_id}")
+                return None
+
+
+
+def commit_turn(
+    session_id: str,
+    user_id: str,
+    expected_version: int,
+    new_status: str,
+    trip_request_json: Union[str, Mapping[str, Any]],
+    messages: List[Mapping[str, Any]],
+) -> Tuple[dict, List[dict]]:
+    """Ghi nguyên tử toàn bộ một lượt tương tác (state change + messages) bằng transaction BEGIN IMMEDIATE.
+    
+    1. Kiểm tra session thuộc về user_id và có version == expected_version (CAS).
+    2. Cập nhật status, trip_request, tăng version = version + 1, updated_at.
+    3. Thêm các tin nhắn (user & assistant) trong cùng transaction.
+    4. Nếu version hoặc status không khớp -> rollback và ném StaleSessionError.
+    5. Nếu session không tồn tại -> rollback và ném SessionNotFoundError.
+    6. Nếu user_id không khớp -> rollback và ném PermissionError.
+    """
+    if new_status not in VALID_STATUSES:
+        raise ValueError(f"status không hợp lệ: {new_status!r}")
+    if isinstance(trip_request_json, str):
+        try:
+            parsed_trip = json.loads(trip_request_json)
+        except json.JSONDecodeError as exc:
+            raise ValueError("trip_request_json không phải JSON hợp lệ") from exc
+    else:
+        parsed_trip = dict(trip_request_json)
+    if not isinstance(parsed_trip, dict):
+        raise ValueError("trip_request phải là một JSON object")
+
+    for msg in messages:
+        if msg.get("role") not in VALID_ROLES:
+            raise ValueError(f"role không hợp lệ: {msg.get('role')!r}")
+        if not isinstance(msg.get("content"), str):
+            raise ValueError("content phải là chuỗi")
+
+    now = _now()
+    with closing(_connect()) as conn:
+        conn.execute("BEGIN IMMEDIATE")
+        try:
+            sess = conn.execute(
+                "SELECT id, user_id, status, version FROM chat_sessions WHERE id = ?",
+                (session_id,),
+            ).fetchone()
+            if sess is None:
+                raise SessionNotFoundError(f"không có phiên: {session_id}")
+            if sess["user_id"] != user_id:
+                raise PermissionError(f"user {user_id} không có quyền truy cập phiên {session_id}")
+            if sess["version"] != expected_version:
+                raise StaleSessionError(
+                    f"Phiên {session_id} đã thay đổi: version hiện tại={sess['version']}, mong đợi={expected_version}"
+                )
+
             cur = conn.execute(
-                "UPDATE chat_sessions SET status = ?, trip_request = ?, updated_at = ? WHERE id = ?",
-                (status, _dumps(parsed), _now(), session_id),
+                "UPDATE chat_sessions SET status = ?, trip_request = ?, version = version + 1, updated_at = ? "
+                "WHERE id = ? AND user_id = ? AND version = ?",
+                (new_status, _dumps(parsed_trip), now, session_id, user_id, expected_version),
             )
-        if cur.rowcount == 0:
-            raise SessionNotFoundError(f"không có phiên: {session_id}")
+            if cur.rowcount == 0:
+                raise StaleSessionError(f"CAS thất bại trên phiên {session_id}")
+
+            created_messages = []
+            for msg in messages:
+                msg_id = msg.get("id") or _new_id()
+                role = msg["role"]
+                content = msg["content"]
+                payload = msg.get("payload")
+                payload_text = None if payload is None else _dumps(payload)
+                conn.execute(
+                    "INSERT INTO chat_messages (id, session_id, role, content, payload, created_at) "
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                    (msg_id, session_id, role, content, payload_text, now),
+                )
+                created_messages.append({
+                    "id": msg_id,
+                    "session_id": session_id,
+                    "role": role,
+                    "content": content,
+                    "payload": payload,
+                    "created_at": now,
+                })
+
+            conn.commit()
+        except Exception:
+            conn.rollback()
+            raise
+
+        updated_session = conn.execute("SELECT * FROM chat_sessions WHERE id = ?", (session_id,)).fetchone()
+        return _session_row(updated_session), created_messages
 
 
 # ───────────────────────────────────────────────────────────────────────────────
 # Messages
 # ───────────────────────────────────────────────────────────────────────────────
 def add_chat_message(session_id: str, role: str, content: str, payload: Optional[Any] = None) -> dict:
-    """Thêm tin nhắn (role 'user'|'assistant'). `payload` (tùy chọn, vd. {"chips": [...]}) lưu dạng JSON.
+    """Thêm tin nhắn đơn lẻ (role 'user'|'assistant').
     Phiên không tồn tại -> SessionNotFoundError. Đồng thời cập nhật updated_at của phiên."""
     if role not in VALID_ROLES:
         raise ValueError(f"role không hợp lệ: {role!r}")
@@ -335,11 +484,18 @@ def add_chat_message(session_id: str, role: str, content: str, payload: Optional
     }
 
 
-def get_session_messages(session_id: str) -> List[dict]:
-    """Tin nhắn của phiên, tăng dần theo created_at (cùng thời điểm thì theo thứ tự chèn)."""
+def get_session_messages(session_id: str, user_id: Optional[str] = None) -> List[dict]:
+    """Tin nhắn của phiên, tăng dần theo created_at ASC, seq ASC.
+    Nếu truyền `user_id`, kiểm tra quyền sở hữu trước khi đọc; nếu không thuộc user -> ném PermissionError."""
     with closing(_connect()) as conn:
+        if user_id is not None:
+            session = conn.execute("SELECT user_id FROM chat_sessions WHERE id = ?", (session_id,)).fetchone()
+            if session is None:
+                return []
+            if session["user_id"] != user_id:
+                raise PermissionError(f"User {user_id} không có quyền truy cập tin nhắn của phiên {session_id}")
         rows = conn.execute(
-            "SELECT * FROM chat_messages WHERE session_id = ? ORDER BY created_at ASC, rowid ASC",
+            "SELECT * FROM chat_messages WHERE session_id = ? ORDER BY created_at ASC, seq ASC",
             (session_id,),
         ).fetchall()
     return [_message_row(r) for r in rows]
@@ -391,10 +547,11 @@ def delete_expired_auth_tokens(now_iso: str) -> int:
 
 __all__ = [
     "DEFAULT_DB_PATH", "DB_PATH_ENV", "ACTIVE_STATUSES", "VALID_STATUSES", "VALID_ROLES",
-    "DuplicateEmailError", "UserNotFoundError", "SessionNotFoundError",
+    "DuplicateEmailError", "UserNotFoundError", "SessionNotFoundError", "StaleSessionError",
     "get_db_path", "init_db", "default_trip_request",
     "create_user", "get_user_by_email", "get_user_by_id",
-    "get_or_create_active_session", "get_session_by_id", "update_session_trip_request",
+    "get_or_create_active_session", "get_session_by_id", "get_session_for_user",
+    "update_session_trip_request", "commit_turn",
     "add_chat_message", "get_session_messages",
     "save_auth_token", "get_auth_token", "delete_auth_token", "delete_expired_auth_tokens",
 ]
