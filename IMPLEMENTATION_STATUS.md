@@ -58,7 +58,19 @@
   - Hỗ trợ đầy đủ 15 trường: `intent`, `destination`, `destination_regions`, `terrain_types`, `excluded_destinations`, `excluded_places`, `origin`, `duration_days`, `group_size`, `vehicle_type`, `budget_total_vnd`, `preferences`, `excluded_activities`, `hard_pinned_locations`, `prefer_flight`.
   - Slot-Level Fusion giữa V2 (khế ước chặt) và V1 (vốn từ du lịch phong phú), tự động loại trừ địa danh thuộc `excluded_destinations` khỏi danh sách tham quan.
   - Giao diện Web hiển thị trực quan badges V3 (Vùng/địa hình, Điểm loại trừ, Ghim vị trí, Ngân sách) và tích hợp các chip thử nghiệm nhanh 1-chạm.
-- [ ] **[KẾ HOẠCH] Conversational Re-planner**: Chat bot tương tác đa lượt hỗ trợ chỉnh sửa lịch trình đã sinh qua hội thoại.
+- [x] **Conversational AI Dialogue & Chat Assistant (Lát 1 - 3 Đã hoàn thành & Hardened 100%)**:
+  - **Lát 1 (NLU Pipeline & State Adapter)**: `prompt_nlu_service.py`, `nlu_adapter.py`, `dialogue_state.py` trích xuất 15 slot, chuẩn hóa ngữ nghĩa và cập nhật state khép kín.
+  - **Lát 2 (Bộ luật Hỏi làm rõ & Sinh Gợi ý)**: `dialogue_engine.py`, `dialogue.json`, `gazetteer.py` sinh câu hỏi làm rõ theo slot thiếu, sinh chips gợi ý ngữ cảnh, bypass NLU với sự kiện chip 1-chạm.
+  - **Lát 3 (Xác thực, Storage & API Chat Độc lập)**:
+    - Kiến trúc Dual-SQLite: `travel_db.db` strictly static geospatial data; `chat_state.db` strictly chat/users/tokens.
+    - Schema Migration v2 (`PRAGMA user_version`) nguyên tử trong `BEGIN IMMEDIATE`.
+    - CAS Optimistic Locking chống race conditions & lost updates giữa chat router và planner worker.
+    - Tự tăng `seq` (AUTOINCREMENT) bảo đảm trật tự tin nhắn tuyệt đối, chống lỗi trôi đồng hồ / clock skew.
+    - Phân quyền đa người dùng (Multi-tenant isolation) triệt để (401 WWW-Authenticate, 403 Forbidden).
+    - Bảo mật xác thực: PBKDF2-HMAC-SHA256 với concurrency limit (`threading.BoundedSemaphore`), dummy hash warm-up chống timing attack, token opaque lưu SHA-256 trong DB.
+    - Phục hồi phiên trọn vẹn qua F5 reload chỉ bằng cookie httpOnly `access_token` (không cần Bearer header).
+    - Toàn bộ test suite dự án đạt **861/861 tests pass 100%**.
+- [ ] **[LÁT 4 - TIẾP THEO] Frontend Aside Chat Drawer**: Giao diện chat trượt cạnh (Drawer) tích hợp vào `frontend/index.html` và `frontend/plan_stream.js` với chips 1-chạm, tự động khôi phục phiên khi tải lại trang.
 - [ ] **[KẾ HOẠCH] LLM Function Calling Pipeline**: Cho phép LLM tự động gọi tool và API con thông qua Function Calling chuẩn.
 
 ---
