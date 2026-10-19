@@ -87,12 +87,22 @@
           <img src="https://flagcdn.com/w20/vn.png" alt="VN" class="w-4 h-3 rounded-sm object-cover">
           <span>VND</span>
         </div>
+        <button id="btn-chat-ai" type="button" class="border border-white/25 hover:bg-white/10 text-white px-3.5 py-2 rounded-xl font-bold transition flex items-center gap-2">
+          <i class="fa-regular fa-comments text-sm"></i><span class="hidden sm:inline">Chat AI</span>
+        </button>
         <button onclick="switchScreen('planner')" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-4 py-2 rounded-xl font-bold shadow-md hover:shadow-orange-500/20 transition flex items-center gap-2">
           <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
           <span>Lên kế hoạch</span>
         </button>
-        <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-slate-200 cursor-pointer">
-          <i class="fa-regular fa-user text-sm"></i>
+        <div class="relative">
+          <button id="btn-account" type="button" aria-label="Tài khoản" aria-haspopup="true" class="w-8 h-8 rounded-full bg-slate-700 hover:bg-slate-600 flex items-center justify-center text-slate-200 transition">
+            <i id="account-icon" class="fa-regular fa-user text-sm"></i><span id="account-initial" class="hidden text-xs font-bold uppercase"></span>
+          </button>
+          <div id="account-menu" class="hidden absolute right-0 mt-2 w-60 bg-white text-slate-800 rounded-xl shadow-xl border border-slate-100 p-3 z-[60]">
+            <p class="text-[11px] text-slate-500">Đăng nhập với</p>
+            <p id="account-email" class="text-sm font-semibold truncate mb-2"></p>
+            <button id="btn-logout" type="button" class="w-full text-left text-sm font-semibold text-red-600 hover:bg-red-50 rounded-lg px-2 py-1.5 transition"><i class="fa-solid fa-arrow-right-from-bracket mr-2 text-xs"></i>Đăng xuất</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1276,6 +1286,57 @@
       </div>
     </div>
   </footer>
+
+  <!-- ========================================================================= -->
+  <!-- LÁT 4: AUTH MODAL + ASIDE CHAT DRAWER -->
+  <!-- ========================================================================= -->
+  <div id="auth-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-brand-deep/70 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <div class="w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
+      <div class="bg-brand-blue text-white px-5 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-brand-orange flex items-center justify-center font-black shadow-md">V</div>
+          <h2 id="auth-title" class="font-extrabold text-lg">Đăng nhập</h2>
+        </div>
+        <button type="button" id="auth-close" aria-label="Đóng" class="w-8 h-8 rounded-lg hover:bg-white/10 transition"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="auth-form" class="p-5 space-y-3.5" novalidate>
+        <p id="auth-note" class="hidden text-xs text-brand-blue bg-orange-50 border border-orange-100 rounded-lg px-3 py-2"></p>
+        <div>
+          <label for="auth-email" class="block text-xs font-semibold text-slate-600 mb-1">Email</label>
+          <input id="auth-email" type="email" autocomplete="username" maxlength="254" placeholder="ban@example.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange/40 focus:border-brand-orange">
+        </div>
+        <div>
+          <label for="auth-password" class="block text-xs font-semibold text-slate-600 mb-1">Mật khẩu</label>
+          <input id="auth-password" type="password" autocomplete="current-password" maxlength="128" placeholder="Mật khẩu" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange/40 focus:border-brand-orange">
+        </div>
+        <p id="auth-error" role="alert" class="hidden text-xs text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2"></p>
+        <button id="auth-submit" type="submit" class="w-full bg-brand-orange hover:bg-brand-orangeHover disabled:opacity-60 disabled:cursor-not-allowed text-white py-2.5 rounded-xl font-bold shadow-md transition flex items-center justify-center gap-2">
+          <i id="auth-spinner" class="hidden fa-solid fa-spinner fa-spin text-xs"></i><span id="auth-submit-label">Đăng nhập</span>
+        </button>
+        <p class="text-center text-xs text-slate-500"><span id="auth-switch-text">Chưa có tài khoản?</span> <button type="button" id="auth-switch" class="font-bold text-brand-orange hover:underline">Đăng ký ngay</button></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="chat-backdrop" class="fixed inset-0 z-[80] bg-black/40 sm:hidden opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <aside id="chat-drawer" role="dialog" aria-label="Chat AI du lịch" aria-hidden="true" class="fixed top-0 right-0 h-full w-full sm:w-[420px] z-[90] bg-white shadow-2xl border-l border-slate-200 flex flex-col translate-x-full invisible transition-[transform,visibility] duration-300 ease-out">
+    <div class="bg-brand-blue text-white px-4 h-16 flex items-center justify-between flex-shrink-0">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-brand-orange flex items-center justify-center shadow-md"><i class="fa-solid fa-wand-magic-sparkles text-sm"></i></div>
+        <div class="leading-tight">
+          <p class="font-extrabold text-sm">Trợ lý du lịch AI</p>
+          <p class="text-[11px] text-slate-300">Hỏi nhanh, tự lên lịch trình</p>
+        </div>
+      </div>
+      <button type="button" id="chat-close" aria-label="Đóng khung chat" class="w-8 h-8 rounded-lg hover:bg-white/10 transition"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="chat-log" class="flex-1 overflow-y-auto p-4 space-y-3 bg-brand-surface" aria-live="polite"></div>
+    <form id="chat-form" class="flex-shrink-0 border-t border-slate-200 bg-white p-3 flex items-center gap-2">
+      <label for="chat-input" class="sr-only">Nhập tin nhắn</label>
+      <input id="chat-input" type="text" maxlength="2000" autocomplete="off" placeholder="Ví dụ: đi Sa Pa 3 ngày từ Hà Nội" class="flex-1 min-w-0 px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange/40 focus:border-brand-orange disabled:bg-slate-50">
+      <button id="chat-send" type="submit" aria-label="Gửi" class="w-10 h-10 rounded-xl bg-brand-orange hover:bg-brand-orangeHover disabled:opacity-50 disabled:cursor-not-allowed text-white shadow-md transition flex-shrink-0"><i class="fa-solid fa-paper-plane text-sm"></i></button>
+    </form>
+  </aside>
 
   <script>
     function switchScreen(screenId) {
@@ -2797,6 +2858,292 @@
       });
     }
 
+  </script>
+  <script>
+  // ==========================================
+  // LÁT 4: AUTH + ASIDE CHAT DRAWER (PRODUCT_SPEC Mục 3, 7, 8)
+  // Mọi nội dung từ server/người dùng chỉ đi vào DOM qua textContent (an toàn XSS).
+  // ==========================================
+  (() => {
+    'use strict';
+    const CFG = Object.assign({
+      // GIẢ ĐỊNH (spec chưa chốt URL tác vụ planner): chỉnh qua window.CHAT_CONFIG nếu backend khác.
+      planTaskUrl: (id) => '/api/plan/tasks/' + encodeURIComponent(id),            // trả plan có `days` khi xong
+      planEventsUrl: (id) => '/api/plan/tasks/' + encodeURIComponent(id) + '/events',
+      planPollUrl: (id) => '/api/plan/tasks/' + encodeURIComponent(id) + '/poll',
+      timeoutMs: 30000, planPollMs: 2000, planMaxTries: 60
+    }, window.CHAT_CONFIG || {});
+    const GREETING = 'Xin chào! Hãy cho mình biết bạn muốn đi đâu, mấy ngày và xuất phát từ đâu nhé. Ví dụ: “du lịch miền núi phía bắc 3 ngày”.';
+
+    const $ = (id) => document.getElementById(id);
+    const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+    const enc = encodeURIComponent;
+    const S = { user: null, token: null, sessionId: null, loaded: false, loading: false, busy: false,
+                afterAuth: null, liveChips: [], planTimer: null, planFor: null, meReady: null };
+    const log = $('chat-log'), input = $('chat-input'), sendBtn = $('chat-send'), drawer = $('chat-drawer');
+
+    // ---------- HTTP ----------
+    async function api(path, opts) {
+      const { method = 'GET', body } = opts || {};
+      const ctrl = new AbortController(); const timer = setTimeout(() => ctrl.abort(), CFG.timeoutMs);
+      const headers = { Accept: 'application/json' };
+      if (body !== undefined) headers['Content-Type'] = 'application/json';
+      if (S.token) headers.Authorization = 'Bearer ' + S.token;
+      let res;
+      try {
+        res = await fetch(path, { method, headers, credentials: 'same-origin', signal: ctrl.signal,
+                                  body: body !== undefined ? JSON.stringify(body) : undefined });
+      } catch (e) {
+        throw Object.assign(new Error(e.name === 'AbortError' ? 'Máy chủ phản hồi quá lâu. Vui lòng thử lại.'
+                                                              : 'Không thể kết nối máy chủ. Hãy kiểm tra mạng rồi thử lại.'), { status: 0 });
+      } finally { clearTimeout(timer); }
+      let data = null; try { data = await res.json(); } catch (_) { /* thân rỗng/không phải JSON */ }
+      if (!res.ok) {
+        const d = data && data.detail; let msg = 'Có lỗi xảy ra (' + res.status + '). Vui lòng thử lại.';
+        if (typeof d === 'string') msg = d;
+        else if (Array.isArray(d) && d[0] && d[0].msg) msg = String(d[0].msg).replace(/^Value error, /, '');
+        throw Object.assign(new Error(msg), { status: res.status });
+      }
+      return data;
+    }
+
+    // ---------- Tài khoản ----------
+    function setUser(u) {
+      S.user = u || null; if (!u) S.token = null;
+      $('account-icon').classList.toggle('hidden', !!u);
+      const ini = $('account-initial'); ini.classList.toggle('hidden', !u);
+      ini.textContent = u ? (u.email || '?').charAt(0) : '';
+      $('account-email').textContent = u ? u.email : '';
+      if (!u) $('account-menu').classList.add('hidden');
+    }
+    function resetChat() {
+      clearTimeout(S.planTimer); S.planFor = null; S.sessionId = null; S.loaded = false; S.liveChips = [];
+      log.replaceChildren(); syncInput();
+    }
+    function handleUnauthorized(retry) {
+      setUser(null); S.afterAuth = retry;
+      openAuth('login', 'Phiên đăng nhập đã hết hạn hoặc chưa đăng nhập. Đăng nhập để tiếp tục — tin nhắn của bạn sẽ được gửi tiếp.');
+    }
+
+    // ---------- Auth modal ----------
+    let authMode = 'login', authBusy = false;
+    function setAuthError(t) { const p = $('auth-error'); p.textContent = t || ''; p.classList.toggle('hidden', !t); }
+    function setAuthMode(m) {
+      authMode = m; const reg = m === 'register';
+      $('auth-title').textContent = reg ? 'Tạo tài khoản' : 'Đăng nhập';
+      $('auth-submit-label').textContent = reg ? 'Đăng ký' : 'Đăng nhập';
+      $('auth-switch-text').textContent = reg ? 'Đã có tài khoản?' : 'Chưa có tài khoản?';
+      $('auth-switch').textContent = reg ? 'Đăng nhập' : 'Đăng ký ngay';
+      $('auth-password').autocomplete = reg ? 'new-password' : 'current-password';
+      $('auth-password').placeholder = reg ? 'Tối thiểu 8 ký tự' : 'Mật khẩu';
+      setAuthError('');
+    }
+    function openAuth(mode, note) {
+      setAuthMode(mode || 'login');
+      const n = $('auth-note'); n.textContent = note || ''; n.classList.toggle('hidden', !note);
+      const m = $('auth-modal'); m.classList.remove('hidden'); m.classList.add('flex');
+      setTimeout(() => $('auth-email').focus(), 30);
+    }
+    function closeAuth() { const m = $('auth-modal'); m.classList.add('hidden'); m.classList.remove('flex'); }
+    function cancelAuth() { closeAuth(); S.afterAuth = null; setAuthError(''); }
+    async function submitAuth(e) {
+      e.preventDefault(); if (authBusy) return;
+      const email = $('auth-email').value.trim(), password = $('auth-password').value;
+      if (!email || !password) return setAuthError('Vui lòng nhập email và mật khẩu.');
+      if (authMode === 'register' && password.length < 8) return setAuthError('Mật khẩu phải có ít nhất 8 ký tự.');
+      authBusy = true; $('auth-submit').disabled = true; $('auth-spinner').classList.remove('hidden'); setAuthError('');
+      try {
+        const r = await api('/api/auth/' + authMode, { method: 'POST', body: { email, password } });
+        S.token = r.access_token || null; setUser(r.user);
+        $('auth-password').value = ''; closeAuth();
+        const next = S.afterAuth; S.afterAuth = null; if (next) next();
+      } catch (err) { setAuthError(err.message); }
+      finally { authBusy = false; $('auth-submit').disabled = false; $('auth-spinner').classList.add('hidden'); }
+    }
+    async function logout() {
+      $('account-menu').classList.add('hidden');
+      try { await api('/api/auth/logout', { method: 'POST' }); } catch (_) { /* vẫn đăng xuất phía giao diện */ }
+      if (window._stopCurrentPlanStream) window._stopCurrentPlanStream();
+      setUser(null); resetChat(); closeDrawer();
+    }
+
+    // ---------- Render chat (chỉ dùng DOM + textContent) ----------
+    const scrollDown = () => { log.scrollTop = log.scrollHeight; };
+    function addBubble(role, text, chips) {
+      const isUser = role === 'user';
+      const row = el('div', 'flex ' + (isUser ? 'justify-end' : 'justify-start items-start gap-2'));
+      if (!isUser) {
+        const av = el('div', 'w-7 h-7 rounded-full bg-brand-orange text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5');
+        av.appendChild(el('i', 'fa-solid fa-robot')); row.appendChild(av);
+      }
+      const col = el('div', 'max-w-[82%] flex flex-col gap-2 ' + (isUser ? 'items-end' : 'items-start'));
+      col.appendChild(el('div', 'px-3.5 py-2 text-sm leading-relaxed whitespace-pre-wrap break-words shadow-sm ' +
+        (isUser ? 'bg-brand-blue text-white rounded-2xl rounded-br-md' : 'bg-white text-slate-800 border border-slate-200 rounded-2xl rounded-bl-md'), String(text == null ? '' : text)));
+      if (!isUser && chips && chips.length) col.appendChild(renderChips(chips));
+      row.appendChild(col); log.appendChild(row); scrollDown(); return row;
+    }
+    function renderChips(chips) {
+      const box = el('div', 'flex flex-wrap gap-1.5'); box.setAttribute('role', 'group'); box.setAttribute('aria-label', 'Gợi ý');
+      chips.forEach((c) => {
+        if (!c || !c.slot || c.value == null) return;
+        const label = String(c.label != null ? c.label : c.value);
+        const b = el('button', 'px-3 py-1.5 rounded-full text-xs font-semibold border border-brand-orange text-brand-orange bg-white hover:bg-brand-orange hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-brand-orange', label);
+        b.type = 'button';
+        b.addEventListener('click', () => sendEvent({ type: 'chip', slot: c.slot, value: c.value }, label));
+        box.appendChild(b);
+      });
+      S.liveChips.push(box); return box;
+    }
+    function lockChips() {
+      S.liveChips.forEach((box) => box.querySelectorAll('button').forEach((b) => { b.disabled = true; }));
+      S.liveChips = [];
+    }
+    function addTyping() {
+      const row = el('div', 'flex items-center gap-1 px-3 py-2 w-fit bg-white border border-slate-200 rounded-2xl'); row.setAttribute('aria-label', 'Trợ lý đang trả lời');
+      [0, 150, 300].forEach((d) => { const dot = el('span', 'w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce'); dot.style.animationDelay = d + 'ms'; row.appendChild(dot); });
+      log.appendChild(row); scrollDown(); return row;
+    }
+    function addError(msg, retry) {
+      const row = el('div', 'flex items-center gap-2 text-xs text-red-700 bg-red-50 border border-red-100 rounded-xl px-3 py-2');
+      row.appendChild(el('i', 'fa-solid fa-triangle-exclamation')); row.appendChild(el('span', 'flex-1', msg));
+      if (retry) {
+        const b = el('button', 'font-bold underline whitespace-nowrap', 'Thử lại'); b.type = 'button';
+        b.addEventListener('click', () => { row.remove(); retry(); }); row.appendChild(b);
+      }
+      log.appendChild(row); scrollDown(); return row;
+    }
+    function addStatus(text) {
+      const row = el('div', 'flex items-center gap-2 text-xs text-slate-700 bg-orange-50 border border-orange-100 rounded-xl px-3 py-2');
+      const icon = el('i', 'fa-solid fa-spinner fa-spin text-brand-orange'); const label = el('span', 'flex-1', text);
+      row.append(icon, label); log.appendChild(row); scrollDown(); return { row, icon, label };
+    }
+    function syncInput() { const off = S.busy || !S.sessionId; input.disabled = off; sendBtn.disabled = off; }
+
+    // ---------- Phiên chat ----------
+    async function initSession(force) {
+      if (S.loading || (S.loaded && !force)) return;
+      S.loading = true; resetChat(); addStatus('Đang tải cuộc trò chuyện…');
+      try {
+        const s = await api('/api/chat/sessions', { method: 'POST' });
+        const d = await api('/api/chat/sessions/' + enc(s.session_id));
+        S.sessionId = s.session_id; S.loaded = true; log.replaceChildren();
+        const msgs = d.messages || [];
+        if (!msgs.length) addBubble('assistant', GREETING);
+        msgs.forEach((m, i) => addBubble(m.role, m.content, (m.role === 'assistant' && i === msgs.length - 1 && d.status === 'collecting') ? m.chips : null));
+        syncInput();
+        const tid = d.trip_request && d.trip_request.plan_task_id;
+        if ((d.status === 'planning' || d.status === 'planned') && tid) onPlanning(tid);
+      } catch (err) {
+        log.replaceChildren();
+        if (err.status === 401) { addError('Bạn cần đăng nhập để dùng Chat AI.', null); handleUnauthorized(() => initSession(true)); }
+        else addError(err.message, () => initSession(true));
+      } finally { S.loading = false; syncInput(); }
+    }
+
+    async function sendEvent(payload, label, bubble) {
+      if (S.busy || !S.sessionId) return;
+      S.busy = true; syncInput(); lockChips();
+      if (!bubble) bubble = addBubble('user', label);
+      const typing = addTyping(); let unauthorized = false;
+      try {
+        const r = await api('/api/chat/sessions/' + enc(S.sessionId) + '/messages', { method: 'POST', body: payload });
+        typing.remove();
+        addBubble('assistant', r.bot_message, r.chips);
+        if ((r.status === 'planning' || r.status === 'planned') && r.plan_task_id) onPlanning(r.plan_task_id);
+      } catch (err) {
+        typing.remove();
+        if (err.status === 401) { unauthorized = true; setTimeout(() => handleUnauthorized(() => sendEvent(payload, label, bubble)), 0); }
+        else if (err.status === 404) addError('Phiên chat không còn tồn tại.', () => initSession(true));
+        else addError(err.message, () => sendEvent(payload, label, bubble));
+      } finally {
+        S.busy = false; syncInput();
+        if (!unauthorized && !input.disabled && !drawer.classList.contains('invisible')) input.focus();
+      }
+    }
+
+    // ---------- Planning + plan_stream.js ----------
+    function onPlanning(taskId) {
+      if (S.planFor === taskId) return;
+      clearTimeout(S.planTimer); S.planFor = taskId;
+      const st = addStatus('Đang lập lịch trình cho bạn…'); let tries = 0;
+      const fail = (msg) => { S.planFor = null; st.row.remove(); addError(msg, () => onPlanning(taskId)); };
+      const tick = async () => {
+        try {
+          const plan = await api(CFG.planTaskUrl(taskId));
+          if (plan && plan.status === 'error') return fail('Không thể lập lịch trình lúc này. Vui lòng thử lại.');
+          if (plan && Array.isArray(plan.days)) return finishPlan(plan, taskId, st);
+        } catch (err) {
+          if (err.status === 401) { S.planFor = null; st.row.remove(); return handleUnauthorized(() => onPlanning(taskId)); }
+          /* lỗi mạng/404 tạm thời: tiếp tục hỏi lại đến hết số lần cho phép */
+        }
+        if (++tries >= CFG.planMaxTries) return fail('Việc lập lịch trình mất quá nhiều thời gian.');
+        S.planTimer = setTimeout(tick, CFG.planPollMs);
+      };
+      tick();
+    }
+    function showItinerary() { switchScreen('itinerary'); if (window.innerWidth < 640) closeDrawer(); }
+    function finishPlan(plan, taskId, st) {
+      st.icon.className = 'fa-solid fa-circle-check text-emerald-500'; st.label.textContent = 'Lịch trình đã sẵn sàng!';
+      const b = el('button', 'font-bold text-brand-orange hover:underline whitespace-nowrap', 'Xem lịch trình'); b.type = 'button';
+      b.addEventListener('click', showItinerary); st.row.appendChild(b);
+      try {
+        window.CURRENT_TRIP_PLAN = plan; window.CURRENT_ACTIVE_DAY = 1;
+        if (typeof renderTripPlan === 'function') renderTripPlan(plan, 1);
+      } catch (err) { console.error('[chat] renderTripPlan', err); addError('Không hiển thị được lịch trình. Vui lòng thử lại.', () => { S.planFor = null; onPlanning(taskId); }); return; }
+      if (!plan.stream) plan.stream = { events_url: CFG.planEventsUrl(taskId), poll_url: CFG.planPollUrl(taskId) };
+      showItinerary();
+      setTimeout(() => {   // chờ bản đồ Leaflet khởi tạo xong rồi mới vẽ tuyến dần
+        if (typeof startPlanStream === 'function' && window.itineraryMap) {
+          if (window._stopCurrentPlanStream) window._stopCurrentPlanStream();
+          window._stopCurrentPlanStream = startPlanStream(plan, window.itineraryMap);
+        }
+      }, 250);
+    }
+
+    // ---------- Drawer ----------
+    function openDrawer() {
+      drawer.classList.remove('translate-x-full', 'invisible'); drawer.setAttribute('aria-hidden', 'false');
+      $('chat-backdrop').classList.remove('opacity-0', 'pointer-events-none');
+      initSession(); setTimeout(() => { if (!input.disabled) input.focus(); }, 320);
+    }
+    function closeDrawer() {
+      drawer.classList.add('translate-x-full', 'invisible'); drawer.setAttribute('aria-hidden', 'true');
+      $('chat-backdrop').classList.add('opacity-0', 'pointer-events-none');
+    }
+    async function onChatClick() {
+      await S.meReady;
+      if (S.user) return openDrawer();
+      S.afterAuth = openDrawer; openAuth('login', 'Đăng nhập để trò chuyện với trợ lý du lịch AI.');
+    }
+
+    // ---------- Sự kiện ----------
+    $('btn-chat-ai').addEventListener('click', onChatClick);
+    $('chat-close').addEventListener('click', closeDrawer);
+    $('chat-backdrop').addEventListener('click', closeDrawer);
+    $('chat-form').addEventListener('submit', (e) => {
+      e.preventDefault(); const text = input.value.trim(); if (!text) return;
+      input.value = ''; sendEvent({ type: 'text', content: text }, text);
+    });
+    $('auth-form').addEventListener('submit', submitAuth);
+    $('auth-switch').addEventListener('click', () => setAuthMode(authMode === 'login' ? 'register' : 'login'));
+    $('auth-close').addEventListener('click', cancelAuth);
+    $('auth-modal').addEventListener('mousedown', (e) => { if (e.target === $('auth-modal')) cancelAuth(); });
+    $('btn-account').addEventListener('click', () => {
+      if (!S.user) { S.afterAuth = null; return openAuth('login'); }
+      $('account-menu').classList.toggle('hidden');
+    });
+    $('btn-logout').addEventListener('click', logout);
+    document.addEventListener('click', (e) => { if (!$('btn-account').parentNode.contains(e.target)) $('account-menu').classList.add('hidden'); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (!$('auth-modal').classList.contains('hidden')) cancelAuth();
+      else if (!drawer.classList.contains('invisible')) closeDrawer();
+    });
+
+    // Khôi phục đăng nhập qua cookie httpOnly khi tải lại trang
+    S.meReady = api('/api/auth/me').then(setUser).catch(() => setUser(null));
+    syncInput();
+  })();
   </script>
 </body>
 </html>
