@@ -70,7 +70,16 @@
     - Bảo mật xác thực: PBKDF2-HMAC-SHA256 với concurrency limit (`threading.BoundedSemaphore`), dummy hash warm-up chống timing attack, token opaque lưu SHA-256 trong DB.
     - Phục hồi phiên trọn vẹn qua F5 reload chỉ bằng cookie httpOnly `access_token` (không cần Bearer header).
     - Toàn bộ test suite dự án đạt **861/861 tests pass 100%**.
-- [ ] **[LÁT 4 - TIẾP THEO] Frontend Aside Chat Drawer**: Giao diện chat trượt cạnh (Drawer) tích hợp vào `frontend/index.html` và `frontend/plan_stream.js` với chips 1-chạm, tự động khôi phục phiên khi tải lại trang.
+- [x] **[LÁT 4 - ĐÃ HOÀN THÀNH] Frontend Aside Chat Drawer & Auth Integration**:
+  - Giao diện Aside Chat Drawer trượt mượt mà từ cạnh phải màn hình với backdrop mờ (`#chat-drawer`).
+  - Nút "Chat AI" trên Header bar (`#btn-chat-ai`) và avatar tài khoản kèm menu thả xuống (`#btn-account`, `#account-menu`).
+  - Modal Đăng ký / Đăng nhập (`#auth-modal`) tự động bật khi chưa đăng nhập, tự động bảo tồn ý định và mở Drawer sau khi đăng nhập thành công.
+  - Tự động gọi `POST /api/chat/sessions` và `GET /api/chat/sessions/{id}` khôi phục đầy đủ phiên và lịch sử tin nhắn khi tải lại trang (F5) qua cookie `httpOnly`.
+  - Render bong bóng chat tự nhiên, khóa chips cũ khi đã tương tác (`lockChips`), gửi sự kiện chip 1-chạm không gọi NLU.
+  - Xử lý mượt mà khi hết phiên đăng nhập (401 giữ lại nội dung đang gõ) và lỗi xung đột (409 conflict).
+  - Kết nối tự động với `plan_stream.js` khi trạng thái đạt `planning` / `planned` để kích hoạt tiến trình vẽ lộ trình trên bản đồ.
+  - An toàn 100% trước XSS: mọi nội dung từ server/người dùng đều đi vào DOM qua `textContent`.
+- [ ] **[LÁT 5 - TIẾP THEO] Planner Adapter**: Kết nối trọn vẹn giữa bản yêu cầu `TripRequest` của Chat Session vào `travel_calculator.py` / `planner_router.py` để tự động kích hoạt tính toán hành trình và trả về `days`.
 - [ ] **[KẾ HOẠCH] LLM Function Calling Pipeline**: Cho phép LLM tự động gọi tool và API con thông qua Function Calling chuẩn.
 
 ---
