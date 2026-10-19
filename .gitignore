@@ -37,3 +37,4 @@ checkpoints*/
 audit_out/
 data/backup*/
 data/*_v4.jsonl
+chat_state.db

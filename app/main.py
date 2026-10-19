@@ -43,3 +43,13 @@ def plan_stream_js():
     if os.path.exists(PLAN_STREAM_PATH):
         return FileResponse(PLAN_STREAM_PATH, media_type="application/javascript")
     return {"error": "plan_stream.js not found"}
+
+
+@app.get("/api/places")
+def get_places_by_province(province: str = "", limit: int = 20):
+    """Lấy danh sách địa danh thực tế từ database cho khay địa danh trực quan."""
+    from app.services.place_index import get_index
+    if not province.strip():
+        return []
+    idx = get_index()
+    return idx.search_keyword(province.strip(), limit=min(limit, 50))
